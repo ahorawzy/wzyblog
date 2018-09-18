@@ -1,0 +1,12 @@
+---
+title: My first blog post
+author: ZhiYuan Wang
+date: '2018-09-18'
+slug: my-first-blog-post
+categories:
+  - blogdown
+tags:
+  - try
+---
+
+This is my first post

@@ -10,7 +10,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     post = "/:year/:month/:day/:slug/"
 
 [[menu.main]]
-    name = "About"
+    name = "关于"
     url = "/about/"
 [[menu.main]]
     name = "GitHub"
@@ -32,5 +32,5 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     url = "logo.png"
     width = 50
     height = 50
-    alt = "Logo"
+    alt = "logo"
 
