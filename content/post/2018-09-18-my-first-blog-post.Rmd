@@ -1,6 +1,6 @@
 ---
-title: My first blog post
-author: ZhiYuan Wang
+title: 第一次博客提交
+author: 王致远
 date: '2018-09-18'
 slug: my-first-blog-post
 categories:
@@ -9,4 +9,4 @@ tags:
   - try
 ---
 
-This is my first post
+为什么写不了中文呢？
