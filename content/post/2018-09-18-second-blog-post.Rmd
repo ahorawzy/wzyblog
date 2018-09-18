@@ -1,0 +1,12 @@
+---
+title: 第二次博客提交
+author: 王致远
+date: '2018-09-18'
+slug: second-blog-post
+categories:
+  - blogdown
+tags:
+  - try
+---
+
+看能不能成功。
