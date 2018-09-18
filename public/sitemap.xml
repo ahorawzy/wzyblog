@@ -3,12 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/2018/09/18/my-first-blog-post/</loc>
-    <lastmod>2018-09-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/2018/09/18/second-blog-post/</loc>
+    <loc>/2018/09/18/first-blog/</loc>
     <lastmod>2018-09-18T00:00:00+00:00</lastmod>
   </url>
   
@@ -18,14 +13,7 @@
   </url>
   
   <url>
-    <loc>/categories/blogdown/</loc>
-    <lastmod>2018-09-18T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/categories/</loc>
-    <lastmod>2018-09-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -41,13 +29,19 @@
   </url>
   
   <url>
-    <loc>/tags/try/</loc>
+    <loc>/</loc>
     <lastmod>2018-09-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/</loc>
+    <loc>/categories/%E4%B8%AA%E4%BA%BA/</loc>
+    <lastmod>2018-09-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/%E6%80%9D%E8%80%83/</loc>
     <lastmod>2018-09-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
