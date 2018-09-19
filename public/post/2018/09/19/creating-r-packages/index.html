@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>创建R包 | Website of ZhiYuan Wang</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">主页</a></li>
+      
+      <li><a href="/categories/">分类</a></li>
+      
+      <li><a href="/tags/">标签</a></li>
+      
+      <li><a href="/about/">关于我</a></li>
+      
+      <li><a href="/index.xml">订阅</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">创建R包</span></h1>
+<h2 class="author">王致远</h2>
+<h2 class="date">2018/09/19</h2>
+</div>
+
+<main>
+<div id="0" class="section level1">
+<h1>第0章：工具汇总</h1>
+<div id="devtools" class="section level2">
+<h2>0.1 devtools工具汇总</h2>
+<ul>
+<li>devtools::has_devel() 检查开发环境是否完整；</li>
+<li>devtools::create(“path//to//package//pkgname”) 创建包；</li>
+<li>devtools::install() 从源码包到安装包；</li>
+<li>devtools::build() 从源码包到压缩包，同时生成使用指南；</li>
+<li>devtools::burld(binary=TRUE) 制作一个二进制包；</li>
+<li>devtools::install_github() 从github上下载源码包，编译，安装，生成安装包；</li>
+<li>devtools::load_all() 从源码包到内存中的附加包；</li>
+<li>devtools::use_build_ignore(“notes”) 忽略特定的文件或目录；</li>
+<li>devtools::use_package(“dplyr”) 添加dplyr到DESCRIPTION中的Imports字段，使用dplyr::fun()引用；</li>
+<li>devtools::use_package(“dplyr”,“Suggests”) 添加dplyr到Suggests字段，使用requirenamespace(“dplyr”,quietly=TRUE)来测试包是否安装，使用dplyr::fun()引用；</li>
+<li>devtools::document() 使用roxygen2创建对象文档；</li>
+<li>devtools::use_vignette(“my-vignette”) 创建使用指南；</li>
+<li>devtools::build_vignettes() 编译所有使用指南；</li>
+<li>devtools::use_testthat() 创建testthat测试相关文件夹和文件;</li>
+<li>devtools::test() 测试包；</li>
+<li>devtools::use_data() 使用导出数据；</li>
+<li>devtools::use_data_raw() 创建原始数据文件夹，用于存放原始数据和预处理数据的代码；</li>
+</ul>
+</div>
+<div id="formatr" class="section level2">
+<h2>0.2 formatR工具</h2>
+<ul>
+<li>formatR::tidy_dir(“R”)</li>
+</ul>
+</div>
+</div>
+<div id="1-" class="section level1">
+<h1>第1章： 简介</h1>
+<div id="r" class="section level2">
+<h2>1.1 为什么开发R包</h2>
+<ul>
+<li>共享R代码</li>
+<li>组织自己的R代码，培养系统性思维</li>
+</ul>
+</div>
+<div class="section level2">
+<h2>1.2 理念</h2>
+<p>任何可以自动化的都应该自动化</p>
+</div>
+<div class="section level2">
+<h2>1.3 入门</h2>
+<pre><code>install.packages(c(&quot;devtools&quot;,&quot;roxgen2&quot;,&quot;testthat&quot;,&quot;knitr&quot;))</code></pre>
+<p>检查是否所有工具都安装了</p>
+<pre class="r"><code>devtools::has_devel()</code></pre>
+<pre><code>## &quot;C:/Program Files/R/R-34~1.4/bin/x64/R&quot; --no-site-file --no-environ  \
+##   --no-save --no-restore --quiet CMD SHLIB foo.c</code></pre>
+<pre><code>## </code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>如果是TRUE，代表已经有了所有工具</p>
+</div>
+</div>
+<div id="2" class="section level1">
+<h1>第2章：包的结构</h1>
+<div class="section level2">
+<h2>2.1 包的命名</h2>
+<ul>
+<li>选择独特的名字，容易被搜索的</li>
+<li>避免同时使用大写和小写字母</li>
+<li>找到一个和问题相关的词，并修改</li>
+<li>使用缩略词</li>
+<li>增加一个额外的r</li>
+</ul>
+</div>
+<div class="section level2">
+<h2>2.2 创建一个包</h2>
+<ol style="list-style-type: decimal">
+<li>使用Rstudio的GUI创建</li>
+<li>命令</li>
+</ol>
+<pre><code>devtools::create(&quot;path/pkgname&quot;)</code></pre>
+<p>创建了一个最小可用的包，包含以下四个内容</p>
+<ul>
+<li>R/目录</li>
+<li>DESCRIPTION</li>
+<li>NAMESPACE</li>
+<li>pkgname.Rproj</li>
+</ul>
+<p>.Rproj文件只是一个文本文件，不需要手动修改，可以通过Project Options来修改</p>
+</div>
+<div class="section level2">
+<h2>2.3 包的生命周期</h2>
+<div class="section level3">
+<h3>2.3.1 源码包</h3>
+<p>包含R/子目录，DESCRIPTION等组件的一个目录</p>
+</div>
+<div class="section level3">
+<h3>2.3.2 压缩包</h3>
+<pre><code>devtools::build()</code></pre>
+<p>很少需要压缩包</p>
+<p>压缩后再解压，以下内容不再存在：</p>
+<ul>
+<li>src/目录下的临时文件</li>
+<li>.Rbuildignore 列出的任何文件</li>
+</ul>
+</div>
+<div class="section level3">
+<h3>2.3.3 二进制包</h3>
+<p>二进制包是平台相关的；</p>
+</div>
+<div class="section level3">
+<h3>2.3.4 已安装包</h3>
+<p>见0.1节devtools工具</p>
+</div>
+<div class="section level3">
+<h3>2.3.5 内存中的包</h3>
+<ul>
+<li>Build &amp; Reload 从源码包到已安装包再到内存中的包；</li>
+<li>load_all() 直接到内存中的包；</li>
+</ul>
+</div>
+</div>
+<div class="section level2">
+<h2>2.4 库</h2>
+<p>库是一个包含已安装包的目录，使用.libPaths()来查看当前使用库。</p>
+<pre class="r"><code>.libPaths()</code></pre>
+<pre><code>## [1] &quot;C:/Program Files/R/R-3.4.4/library&quot;</code></pre>
+<p>library()和require()的区别：</p>
+<ul>
+<li>library() 抛出错误；</li>
+<li>require() 返回FALSE；</li>
+</ul>
+<p>在开发过程中，两个都不使用；</p>
+</div>
+</div>
+<div id="3r" class="section level1">
+<h1>第3章：R代码</h1>
+<div id="r" class="section level2">
+<h2>3.1 R代码的工作流</h2>
+<ol style="list-style-type: decimal">
+<li>编辑一个R文件；</li>
+<li>按Ctrl+Shift+L;</li>
+<li>在控制台中浏览代码；</li>
+<li>修改代码，重复上面过程；</li>
+</ol>
+</div>
+<div class="section level2">
+<h2>3.2 组织函数</h2>
+<p>两种极端行为要避免：</p>
+<ul>
+<li>把所有函数都放在一个文件中；</li>
+<li>把每个函数放在独立的文件中；</li>
+</ul>
+<p>文件名应该是有意义的，并且以.R结尾</p>
+<p>不能在R/下使用子目录</p>
+<p>快速跳转函数：</p>
+<ul>
+<li>在代码中点击函数名并</li>
+<li>Ctrl+.</li>
+</ul>
+</div>
+<div class="section level2">
+<h2>3.3 代码风格</h2>
+<pre><code>install.packages(&quot;formatR&quot;)
+formatR::tidy_dir(&quot;R&quot;)</code></pre>
+</div>
+<div class="section level2">
+<h2>3.4 顶层代码</h2>
+<p>在脚本中，代码在加载时运行。在包中，代码在编译时运行。</p>
+<p>不应该在包的顶层运行代码，包的代码只能创建对象，主要是函数。</p>
+<p>不改变R运行环境的通用做法：<strong>DESCRIPTION中列出需要的包，之后显式使用pkg::fun()</strong></p>
+<p>改变R运行环境的做法：</p>
+<ul>
+<li>library() 加载一个包；</li>
+<li>options() 修改全局设置；</li>
+<li>setwd() 修改工作目录；</li>
+<li>其他函数的行为在运行函数前后发生改变；</li>
+</ul>
+</div>
+</div>
+<div id="4" class="section level1">
+<h1>第4章，包的元数据</h1>
+<p>DESCRIPTION的重要字段</p>
+<pre><code>Package: 包名
+Title: 标题，包的一行描述，不加句点
+Description: 一段，可多行，四个字符缩进
+Version: 主版本号.次版本号.补丁版本[.开发版本]
+Authors: person(&quot;First name&quot;,&quot;Second name&quot;,email=&quot;&quot;,role=c(&quot;aut&quot;,&quot;cre&quot;))
+Imports:
+    dplyr,
+    ggplot
+Suggents:
+Depends:
+URL:
+BugReports: https://github.com/ahorawzy/wzytry/issues
+License:
+LazyData: true</code></pre>
+<p>第一个开发版本号0.0.0.9000</p>
+</div>
+<div id="5" class="section level1">
+<h1>第5章：对象文档</h1>
+<div id="roxygen" class="section level2">
+<h2>5.1 使用roxygen写对象文档的理由</h2>
+<ol style="list-style-type: decimal">
+<li>代码和文档混合在一起，当你修改代码时，提醒你更新文档；</li>
+<li>roxygen2动态检查需要提供文档的对象，自动生成文档模板；</li>
+<li>隐藏了不同类型对象文档之间的区别；</li>
+</ol>
+<p>roxygen2的功能：</p>
+<ol style="list-style-type: decimal">
+<li>生成man/下的.Rd文件；</li>
+<li>管理NAMESPACE和DESCRIPTION中的Collate字段；</li>
+</ol>
+</div>
+<div class="section level2">
+<h2>5.2 文档工作流程</h2>
+<ol style="list-style-type: decimal">
+<li>添加roxygen注释到.R文件；</li>
+<li>运行devtools::document() 或者Ctrl+Shift+D 将roxygen注释转为.Rd文件；</li>
+<li>使用?预览文档；</li>
+<li>修改注释，重复，直到文档是需要的样子；</li>
+</ol>
+</div>
+<div class="section level2">
+<h2>5.3 另一个文档工作流程</h2>
+<ol style="list-style-type: decimal">
+<li>给.R文件添加roxygen注释；</li>
+<li>Build &amp; Reload 重新编译整个包，包括所有文档，然后重启R并重新加载包； 3，用?预览文档；</li>
+<li>修改文档；</li>
+</ol>
+</div>
+<div id="roxygen" class="section level2">
+<h2>5.4 roxygen注释</h2>
+<pre><code>#&#39; Add together two numbers. 标题，首字母大写，句点结束。
+#&#39;
+#&#39; This function add two numbers together, which written by wzy. 描述，简要说明函数的功能。
+#&#39;
+#&#39; 细节描述，较长，详细说明函数是如何工作的。可以使用@section标签在文档中添加任意块，块标题首字母大写，后面跟冒号。
+#&#39;
+#&#39; @section Waining:
+#&#39; Do not operate heavy machinery within 8 hours of using this function.
+#‘
+#&#39; @seealso
+#&#39;
+#&#39; @family
+#&#39;
+#&#39; @param x A number. 大写字母开头，句点结尾，可跨越多行。
+#&#39; @param y A number.
+#&#39; @return The sum of \code{x} and \code{y}.
+#&#39; @examples
+#&#39; add(1, 1)
+#&#39; add(10, 1)
+
+#&#39; @export
+wzyadd &lt;- function(x, y) {
+    x + y
+}</code></pre>
+</div>
+</div>
+<div id="6" class="section level1">
+<h1>第6章：使用指南——长篇文档</h1>
+<div class="section level2">
+<h2>6.1 元数据</h2>
+<pre><code>---
+title: &quot;Guide for wzytry&quot;
+author: &quot;ZhiYuan Wang&quot;
+date: &quot;2018-09-19&quot;
+output: rmarkdown::html_vignette
+vignette: &gt;
+  %\VignetteIndexEntry{Guide for wzytry}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---</code></pre>
+</div>
+<div id="knitr" class="section level2">
+<h2>6.2 knitr的选项</h2>
+<pre><code>knitr::opts_chunk$set(
+  opt1 = val1
+  opt2 = val2
+)</code></pre>
+<ul>
+<li>eval = FALSE 防止代码运行</li>
+</ul>
+<pre class="r"><code>a &lt;- 1+1
+print(a)</code></pre>
+<ul>
+<li>echo = FALSE</li>
+</ul>
+<pre><code>## [1] 2</code></pre>
+<ul>
+<li>results = “hide” 关闭代码输出的打印</li>
+<li>warning = FALSE和message = FALSE将不会显示警告和消息</li>
+<li>collapse = TRUE和comment = “#&gt;” 显示代码输出</li>
+<li>results = “asis”</li>
+</ul>
+<pre class="r"><code>pander::pandoc.table(iris[1:3,1:4])</code></pre>
+<table style="width:82%;">
+<colgroup>
+<col width="20%" />
+<col width="19%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Sepal.Length</th>
+<th align="center">Sepal.Width</th>
+<th align="center">Petal.Length</th>
+<th align="center">Petal.Width</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">5.1</td>
+<td align="center">3.5</td>
+<td align="center">1.4</td>
+<td align="center">0.2</td>
+</tr>
+<tr class="even">
+<td align="center">4.9</td>
+<td align="center">3</td>
+<td align="center">1.4</td>
+<td align="center">0.2</td>
+</tr>
+<tr class="odd">
+<td align="center">4.7</td>
+<td align="center">3.2</td>
+<td align="center">1.3</td>
+<td align="center">0.2</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>fig.show = “hold” 保存所有的图，直到最后的代码快；</li>
+<li>fig.width = 5, fig.height = 5，设置图像高度和宽度（单位是英寸）；</li>
+</ul>
+</div>
+</div>
+<div id="7" class="section level1">
+<h1>第7章：测试</h1>
+<p>问题不在于你没有测试代码，而在于没有自动化测试。</p>
+<div class="section level2">
+<h2>7.1 测试的工作流</h2>
+<pre><code>devtools::use_testhat()</code></pre>
+<ul>
+<li>创建一个tests/testhat目录</li>
+<li>在DESCRIPTION的Suggests字段中增加testthat;</li>
+<li>创建一个文件test/testthat.R，在R CMD check运行时运行所有的测试。</li>
+</ul>
+<p>工作流：</p>
+<ol style="list-style-type: decimal">
+<li>修改你的代码或测试；</li>
+<li>用C+S+T或devtools::test()测试你的包；</li>
+<li>重复，直到所有的测试通过。</li>
+</ol>
+</div>
+<div class="section level2">
+<h2>7.2 测试结构</h2>
+<p>测试文件放在tests/testthat/下，名字必须以test开始。</p>
+<p>测试是分层组织的：期望组成测试，测试组成文件。</p>
+<ul>
+<li>期望是测试的原子单位，期望自动化了本来的视觉检查，期望是以expect_开始的一些函数；</li>
+<li>测试由多个期望组成，用于测试简单函数的输出、复杂函数的某个参数的变化。它们测试一个功能单元，可以用test_that()创建一个测试；</li>
+<li>文件由多个相关测试组成，可利用context()给文件赋予可读的名称。</li>
+</ul>
+<pre><code>context(&quot;String length&quot;)
+library(stringr)
+
+test_that(&quot;str_length is number of characters&quot;, {
+  expect_equal(str_length(&quot;a&quot;), 1)
+  expect_equal(str_length(&quot;ab&quot;), 2)
+  expect_equal(str_length(&quot;abc&quot;), 3)
+})
+
+test_that(&quot;str_length of factor is length of level&quot;, {
+  expect_equal(str_length(factor(&quot;a&quot;)), 1)
+  expect_equal(str_length(factor(&quot;ab&quot;)), 2)
+  expect_equal(str_length(factor(&quot;abc&quot;)), 3)
+})
+
+test_that(&quot;str_length of missing is missing&quot;, {
+  expect_equal(str_length(NA), NA_integer_)
+  expect_equal(str_length(c(NA, 1)), c(NA, 1))
+  expect_equal(str_length(&quot;NA&quot;), 2)
+})</code></pre>
+</div>
+<div class="section level2">
+<h2>7.3 期望</h2>
+<div class="section level3">
+<h3>7.3.1 测试相等</h3>
+<ul>
+<li>expect_equal() 在误差内相等</li>
+<li>expect_identical() 精确相等</li>
+</ul>
+<pre class="r"><code>library(testthat)</code></pre>
+<pre class="r"><code>expect_equal(10,10)</code></pre>
+<pre class="r"><code>expect_equal(10,11)</code></pre>
+</div>
+<div class="section level3">
+<h3>7.3.2 测试字符匹配</h3>
+<ul>
+<li>expect_match() 检查字符向量是否和一个正则表达式匹配</li>
+<li>expect_output() 检查打印输出</li>
+<li>expect_message() 检查消息</li>
+<li>expect_warning() 检查警告</li>
+<li>expect_error() 检查错误</li>
+</ul>
+</div>
+<div class="section level3">
+<h3>7.3.3 测试对象</h3>
+<ul>
+<li>expect_is() 检查对象是否从指定的类继承</li>
+</ul>
+</div>
+<div class="section level3">
+<h3>7.3.4 测试逻辑</h3>
+<ul>
+<li>expect_true()</li>
+<li>expect_false()</li>
+</ul>
+</div>
+</div>
+<div class="section level2">
+<h2>7.4 编写测试</h2>
+<p>与测试相关的消息应该具有提示作用，以便你快速定位问题的来源，避免把太多的期望放在一个测试中，最好是由很多小的测试，而不是几个大的测试。</p>
+<p>每当你想利用打印语句时，请把它写成一个测试。</p>
+<ul>
+<li>把重点放在测试功能的外部接口；</li>
+<li>努力使用仅有的一个测试来测试每个行为；</li>
+<li>避免测试对其有信心的简单代码；</li>
+<li>当发现一个错误时，总是写成一个测试；</li>
+</ul>
+<p><strong>测试第一的哲学：从编写测试开始，然后写代码通过这些测试。这反映了一个解决问题的重要策略：从建立成功标准开始，不然你如何知道是否已经解决了这个问题。</strong></p>
+<p>测试的最高层结构是文件。每个文件应该包含一个单独的context()调用对它内容进行简要说明。</p>
+<p>对每个复杂函数建立一个测试文件。</p>
+</div>
+</div>
+<div class="section level1">
+<h1>8. 命名空间</h1>
+</div>
+<div class="section level1">
+<h1>9. 外部数据</h1>
+<p>在包中包含数据主要有三种方法，取决于要做什么以及谁能够使用它；</p>
+<ul>
+<li>如果想存储二进制数据，并把它提供给用户，就放在data/目录，比如放示例数据；</li>
+<li>如果你想存储解析过的数据，但不提供给用户，就放在R/sysdata.rda。这是存放函数所需数据的最佳场所。</li>
+<li>如果想存储原始数据，放在inst/extdata。</li>
+</ul>
+<div class="section level2">
+<h2>9.1 导出的数据</h2>
+<p>data/</p>
+<p>利用save()创建的.RData文件，其中包含单个对象。</p>
+<p>使用方法是devtools::use_data()</p>
+<p>通常，data/所包含的数据是原始数据的干净版本。强烈建议花时间在源码包中包含处理原始数据的代码。这样很容易更新或复制数据版本。把这些代码放在data-raw/，不需要把它放在压缩包中，所以把它加入到.Rbuildignore。方法是：</p>
+<p>devtools::use_data_raw()</p>
+</div>
+<div class="section level2">
+<h2>9.2 内部数据</h2>
+<p>有些函数需要预先计算的数据表，如果放在data/目录，那么也将提供给用户，这是不恰当的。</p>
+<p>应该放在R/sysdata/rda。</p>
+<p>用devtools::use_data()加上参数internal = TRUE来创建。</p>
+<p>其中的对象不会被导出，所以不需要文档，只是在你的包里可用。</p>
+</div>
+<div class="section level2">
+<h2>9.3 原始数据</h2>
+<p>如果要展示原始数据，将原始文件放在inst/extdata。安装包时，inst/中的所有文件和文件夹都将会移动到顶层目录。</p>
+<p>要引用inst/extdata中的文件，使用system.file()。</p>
+<pre><code>system.file(&quot;extdata&quot;,&quot;2012.csv&quot;,package=&quot;testdata&quot;)</code></pre>
+<p>如果文件不存在，会返回空值。</p>
+</div>
+</div>
+<div id="gitgithub" class="section level1">
+<h1>13. Git和Github</h1>
+<p>在github上安装包</p>
+<pre><code>install.packages(&quot;devtools&quot;)
+devtools.install_github(&quot;username/packagename&quot;)</code></pre>
+<div class="section level2">
+<h2>13.1 初始设置</h2>
+<ol style="list-style-type: decimal">
+<li>安装Git；</li>
+<li>告诉Git你的姓名和电子邮件</li>
+</ol>
+<pre><code>git config --global user.name &quot;YOUR FULL NAME&quot;
+git config --global user.email &quot;YOUR EMAIL ADDRESS&quot;</code></pre>
+<p>可以运行git config –global –list来检查设置是否正确</p>
+<ol start="3" style="list-style-type: decimal">
+<li>在github上创建一个账户，使用相同电子邮件；</li>
+<li>如果需要，生成一个SSH秘钥。</li>
+<li>把SSH公钥给Github。</li>
+</ol>
+</div>
+<div id="git" class="section level2">
+<h2>13.2 创建本地Git仓库</h2>
+<p>在project options中，把git/svn面板从“None”改为“Git”。</p>
+<p>两处变化：</p>
+<ol style="list-style-type: decimal">
+<li>右上方出现Git窗格；</li>
+<li>工具栏出现Git下拉菜单；</li>
+</ol>
+</div>
+<div class="section level2">
+<h2>13.3 查看改变</h2>
+<ul>
+<li>M，被修改的;</li>
+<li>?，没有被跟踪的；</li>
+<li>D，删除的；</li>
+</ul>
+</div>
+<div class="section level2">
+<h2>13.4 记录改变</h2>
+<ol style="list-style-type: decimal">
+<li>保存更改；</li>
+<li>通过点击Commit，或C+A+M打开提交窗格；</li>
+<li>选择文件，点击Stage。</li>
+</ol>
+<ul>
+<li>A，添加一个没有跟踪的文件后，git知道你想把它添加到仓库；</li>
+<li>R，重命名一个文件，Git会看到一个删除和一个添加，如果选择了两个，会认为是重命名；</li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li>编写提交信息；</li>
+<li>点击提交；</li>
+</ol>
+</div>
+<div class="section level2">
+<h2>13.5 提交的最佳实践</h2>
+<ul>
+<li>最小的</li>
+<li>完整的</li>
+</ul>
+<p>提交信息：</p>
+<ul>
+<li>简介，但具有提示性；</li>
+<li>描述为什么，而不是是什么；</li>
+</ul>
+</div>
+<div class="section level2">
+<h2>13.6 忽略文件</h2>
+<p>添加到.gitignore，右键点击该文件，选择Ignore。</p>
+</div>
+<div id="github" class="section level2">
+<h2>13.7 与Github同步</h2>
+<pre><code>git remote add origin git@github.com:username/packagename.git
+git push -u origin master</code></pre>
+<p>只有在通过pull拉取最新版本后，git才会让你推送一个版本。</p>
+<p>当你拉取的时候，Git首先下载所有的改变，然后把这些与你所做的合并。</p>
+<p>当Git窗格出现U，表示合并冲突。</p>
+</div>
+</div>
+
+</main>
+
+  <footer>
+  
+  
+  </footer>
+  </body>
+</html>
+
