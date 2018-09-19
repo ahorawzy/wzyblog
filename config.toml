@@ -1,4 +1,4 @@
-baseurl = "/"
+baseurl = "https://www.wzyblog.top/"
 languageCode = "en-us"
 title = "Website of ZhiYuan Wang"
 theme = "hugo-xmin"
