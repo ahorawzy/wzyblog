@@ -8,6 +8,9 @@ categories:
 tags: 
   - 技术
   - 学习总结
+output:
+  blogdown::html_page:
+    toc: true
 ---
 
 # 第0章：工具汇总
