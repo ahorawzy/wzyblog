@@ -5,7 +5,7 @@ theme = "hugo-xmin"
 googleAnalytics = ""
 disqusShortname = ""
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
-enalbeEmoji = true
+enableEmoji = true
 
 [permalinks]
     post = "/post/:year/:month/:day/:slug/"
