@@ -6,10 +6,25 @@
     <description>Recent content in 思考 on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 18 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 20 Sep 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/%E6%80%9D%E8%80%83/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>因子的顺序</title>
+      <link>/post/2018/09/20/order-of-factor/</link>
+      <pubDate>Thu, 20 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/09/20/order-of-factor/</guid>
+      <description>因子的自然排序今天在工作中，要处理一个之前已经遇到，但一直没有正面解决的问题：当所要分析的时间是（日度）跨月份或（月度）跨年份，该怎样操作。
+比较正统的思路是转换成时间型数据，用时间型的函数操纵。但一来时间型数据操纵我也不够熟悉，二来也不想这样大费周章，所以就想有没有轻便化的方法能够巧妙解决。略加思考后，认为应该将字符串型的日期转换成因子型数据，然后用因子的顺序决定日期的先后。这在理论上是可行的，实际如何操作还需实验。
+读入交调数据
+jdprovince &amp;lt;- read.csv(&amp;quot;D:\\data\\jdprovince.csv&amp;quot;,stringsAsFactors = F)dim(jdprovince)## [1] 55141 24unique(jdprovince$年份)## [1] 2017 2018unique(jdprovince$月份)## [1] &amp;quot;11月&amp;quot; &amp;quot;09月&amp;quot; &amp;quot;08月&amp;quot; &amp;quot;05月&amp;quot; &amp;quot;03月&amp;quot; &amp;quot;02月&amp;quot; &amp;quot;01月&amp;quot; &amp;quot;12月&amp;quot; &amp;quot;10月&amp;quot; &amp;quot;07月&amp;quot;## [11] &amp;quot;06月&amp;quot; &amp;quot;04月&amp;quot;发现有“年份”、“月份”两个字段表示日期。希望是能用一个字段就能表示日期。把这两个拼接起来，命名为“年月”。
+jdprovince$年月 &amp;lt;- paste(jdprovince$年份, jdprovince$月份, sep = &amp;quot;-&amp;quot;)str(jdprovince$年月)## chr [1:55141] &amp;quot;2017-11月&amp;quot; &amp;quot;2017-09月&amp;quot; &amp;quot;2017-08月&amp;quot; &amp;quot;2017-05月&amp;quot; ...但拼接好的结果是字符串，需要转变为因子。
+现在思考：怎样确定因子的顺序，让程序知道“2017-01月”先于“2017-02月”。偶然间我发现：
+sort(as.factor(unique(jdprovince$年月)))## [1] 2017-01月 2017-02月 2017-03月 2017-04月 2017-05月 2017-06月 2017-07月## [8] 2017-08月 2017-09月 2017-10月 2017-11月 2017-12月 2018-01月 2018-02月## [15] 2018-03月 2018-04月 2018-05月 2018-06月 2018-07月 2018-08月 2018-09月## 21 Levels: 2017-01月 2017-02月 2017-03月 2017-04月 2017-05月 .</description>
+    </item>
     
     <item>
       <title>博客！出发！</title>

@@ -1,0 +1,124 @@
+---
+title: 因子的顺序
+author: 王致远
+date: '2018-09-20'
+slug: order-of-factor
+categories:
+  - R语言
+tags:
+  - 技术
+  - 思考
+---
+
+```{r echo=FALSE}
+knitr::opts_chunk$set(message = F,warning = F)
+```
+
+```{r echo=FALSE}
+options(stringsAsFactors = F)
+options(digits = 3)
+rm(list = ls())
+source("D:\\R\\packages\\Mreport\\scripts\\caculate.R", encoding = "utf-8")
+source("D:\\R\\packages\\Mreport\\scripts\\select.R", encoding = "utf-8")
+source("D:\\R\\packages\\Mreport\\scripts\\split.R", encoding = "utf-8")
+```
+
+```{r echo=FALSE}
+library(Mreport)
+library(plyr)
+library(ggplot2)
+library(reshape2)
+library(knitr)
+library(leaflet)
+library(leafletCN)
+```
+
+```{r echo=FALSE}
+load_base()
+load_sample_base()
+```
+
+## 因子的自然排序
+
+今天在工作中，要处理一个之前已经遇到，但一直没有正面解决的问题：**当所要分析的时间是（日度）跨月份或（月度）跨年份，该怎样操作。**
+
+比较正统的思路是转换成时间型数据，用时间型的函数操纵。但一来时间型数据操纵我也不够熟悉，二来也不想这样大费周章，所以就想有没有轻便化的方法能够巧妙解决。略加思考后，认为应该将字符串型的日期转换成因子型数据，然后用因子的顺序决定日期的先后。这在理论上是可行的，实际如何操作还需实验。
+
+读入交调数据
+
+```{r}
+jdprovince <- read.csv("D:\\data\\jdprovince.csv",stringsAsFactors = F)
+dim(jdprovince)
+```
+
+```{r}
+unique(jdprovince$年份)
+unique(jdprovince$月份)
+```
+
+
+发现有“年份”、“月份”两个字段表示日期。希望是能用一个字段就能表示日期。把这两个拼接起来，命名为“年月”。
+
+```{r}
+jdprovince$年月 <- paste(jdprovince$年份, jdprovince$月份, sep = "-")
+str(jdprovince$年月)
+```
+
+但拼接好的结果是字符串，需要转变为因子。
+
+现在思考：怎样确定因子的顺序，让程序知道“2017-01月”先于“2017-02月”。偶然间我发现：
+
+```{r}
+sort(as.factor(unique(jdprovince$年月)))
+```
+
+原来R语言里面的排序是可以像识别字符串一样识别因子的顺序的！太聪明了！
+
+这样的话，直接这样
+
+```{r}
+jdprovince$年月 <- factor(jdprovince$年月,order=T)
+head(jdprovince$年月,10)
+```
+
+月份自然就是有顺序的因子了。然后再做计算画图什么的，自然不在话下。
+
+```{r echo=FALSE}
+jdprovinces <- handle_gather_forym(jdprovince)
+```
+
+```{r echo=FALSE, fig.width = 9}
+jdprovinces <- jdprovinces[jdprovinces$ym != "2018-09月",]
+caculate_frecarsmean(jdprovinces,c("ym","province")) %>%
+  ggplot(aes(ym,Wmean,group=province,colour=province))+geom_point()+geom_line()+
+  theme(axis.text.x = element_text(size = 10, angle = 90))
+```
+
+
+-----
+
+## 指定Level的排序
+
+接着思考一个问题：因子的顺序是怎么确定的呢？
+
+```{r}
+sort(factor(c("2017-01月","2017-03月","2017-02月"),order=T))
+```
+
+它会认为2月先于3月，后于1月。
+
+如果我偏认为2月后于3月呢？
+
+```{r}
+sort(factor(c("2017-01月","2017-03月","2017-02月"),level = c("2017-01月","2017-03月","2017-02月"),order=T))
+```
+
+如果指定level的顺序，就是我想要的结果。
+
+-----
+
+## 总结
+
+R语言中的因子可以像字符串一样自动认定顺序，所以用order或sort加日期拼凑型的因子，很容易做出有时间先后顺序的因子。如果不满意自动的结果，可以通过改变level参数手动调整。
+
+以后再也不用担心（日度）跨月数据和（月度）跨年数据了。

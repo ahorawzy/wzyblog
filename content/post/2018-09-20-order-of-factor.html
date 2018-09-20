@@ -1,0 +1,68 @@
+---
+title: 因子的顺序
+author: 王致远
+date: '2018-09-20'
+slug: order-of-factor
+categories:
+  - R语言
+tags:
+  - 技术
+  - 思考
+---
+
+
+
+<div class="section level2">
+<h2>因子的自然排序</h2>
+<p>今天在工作中，要处理一个之前已经遇到，但一直没有正面解决的问题：<strong>当所要分析的时间是（日度）跨月份或（月度）跨年份，该怎样操作。</strong></p>
+<p>比较正统的思路是转换成时间型数据，用时间型的函数操纵。但一来时间型数据操纵我也不够熟悉，二来也不想这样大费周章，所以就想有没有轻便化的方法能够巧妙解决。略加思考后，认为应该将字符串型的日期转换成因子型数据，然后用因子的顺序决定日期的先后。这在理论上是可行的，实际如何操作还需实验。</p>
+<p>读入交调数据</p>
+<pre class="r"><code>jdprovince &lt;- read.csv(&quot;D:\\data\\jdprovince.csv&quot;,stringsAsFactors = F)
+dim(jdprovince)</code></pre>
+<pre><code>## [1] 55141    24</code></pre>
+<pre class="r"><code>unique(jdprovince$年份)</code></pre>
+<pre><code>## [1] 2017 2018</code></pre>
+<pre class="r"><code>unique(jdprovince$月份)</code></pre>
+<pre><code>##  [1] &quot;11月&quot; &quot;09月&quot; &quot;08月&quot; &quot;05月&quot; &quot;03月&quot; &quot;02月&quot; &quot;01月&quot; &quot;12月&quot; &quot;10月&quot; &quot;07月&quot;
+## [11] &quot;06月&quot; &quot;04月&quot;</code></pre>
+<p>发现有“年份”、“月份”两个字段表示日期。希望是能用一个字段就能表示日期。把这两个拼接起来，命名为“年月”。</p>
+<pre class="r"><code>jdprovince$年月 &lt;- paste(jdprovince$年份, jdprovince$月份, sep = &quot;-&quot;)
+str(jdprovince$年月)</code></pre>
+<pre><code>##  chr [1:55141] &quot;2017-11月&quot; &quot;2017-09月&quot; &quot;2017-08月&quot; &quot;2017-05月&quot; ...</code></pre>
+<p>但拼接好的结果是字符串，需要转变为因子。</p>
+<p>现在思考：怎样确定因子的顺序，让程序知道“2017-01月”先于“2017-02月”。偶然间我发现：</p>
+<pre class="r"><code>sort(as.factor(unique(jdprovince$年月)))</code></pre>
+<pre><code>##  [1] 2017-01月 2017-02月 2017-03月 2017-04月 2017-05月 2017-06月 2017-07月
+##  [8] 2017-08月 2017-09月 2017-10月 2017-11月 2017-12月 2018-01月 2018-02月
+## [15] 2018-03月 2018-04月 2018-05月 2018-06月 2018-07月 2018-08月 2018-09月
+## 21 Levels: 2017-01月 2017-02月 2017-03月 2017-04月 2017-05月 ... 2018-09月</code></pre>
+<p>原来R语言里面的排序是可以像识别字符串一样识别因子的顺序的！太聪明了！</p>
+<p>这样的话，直接这样</p>
+<pre class="r"><code>jdprovince$年月 &lt;- factor(jdprovince$年月,order=T)
+head(jdprovince$年月,10)</code></pre>
+<pre><code>##  [1] 2017-11月 2017-09月 2017-08月 2017-05月 2017-03月 2017-02月 2017-01月
+##  [8] 2017-12月 2017-10月 2017-07月
+## 21 Levels: 2017-01月 &lt; 2017-02月 &lt; 2017-03月 &lt; 2017-04月 &lt; ... &lt; 2018-09月</code></pre>
+<p>月份自然就是有顺序的因子了。然后再做计算画图什么的，自然不在话下。</p>
+<p><img src="/post/2018-09-20-order-of-factor_files/figure-html/unnamed-chunk-11-1.png" width="864" /></p>
+<hr />
+</div>
+<div id="level" class="section level2">
+<h2>指定Level的排序</h2>
+<p>接着思考一个问题：因子的顺序是怎么确定的呢？</p>
+<pre class="r"><code>sort(factor(c(&quot;2017-01月&quot;,&quot;2017-03月&quot;,&quot;2017-02月&quot;),order=T))</code></pre>
+<pre><code>## [1] 2017-01月 2017-02月 2017-03月
+## Levels: 2017-01月 &lt; 2017-02月 &lt; 2017-03月</code></pre>
+<p>它会认为2月先于3月，后于1月。</p>
+<p>如果我偏认为2月后于3月呢？</p>
+<pre class="r"><code>sort(factor(c(&quot;2017-01月&quot;,&quot;2017-03月&quot;,&quot;2017-02月&quot;),level = c(&quot;2017-01月&quot;,&quot;2017-03月&quot;,&quot;2017-02月&quot;),order=T))</code></pre>
+<pre><code>## [1] 2017-01月 2017-03月 2017-02月
+## Levels: 2017-01月 &lt; 2017-03月 &lt; 2017-02月</code></pre>
+<p>如果指定level的顺序，就是我想要的结果。</p>
+<hr />
+</div>
+<div class="section level2">
+<h2>总结</h2>
+<p>R语言中的因子可以像字符串一样自动认定顺序，所以用order或sort加日期拼凑型的因子，很容易做出有时间先后顺序的因子。如果不满意自动的结果，可以通过改变level参数手动调整。</p>
+<p>以后再也不用担心（日度）跨月数据和（月度）跨年数据了。</p>
+</div>
