@@ -6,10 +6,22 @@
     <description>Recent content in R语言 on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 20 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 21 Sep 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/r%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>矩阵乘向量</title>
+      <link>/post/2018/09/21/matrix-multiply-vector/</link>
+      <pubDate>Fri, 21 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/09/21/matrix-multiply-vector/</guid>
+      <description>今天在工作中遇到一个问题：有一个矩阵，有一个向量，列数是相同的，需要矩阵的每行乘以向量。
+例如：
+A &amp;lt;- matrix(1:20,nrow=5)A## [,1] [,2] [,3] [,4]## [1,] 1 6 11 16## [2,] 2 7 12 17## [3,] 3 8 13 18## [4,] 4 9 14 19## [5,] 5 10 15 20b &amp;lt;- c(3,4,5,6)b## [1] 3 4 5 6我一开始是这么做的：
+A*b## [,1] [,2] [,3] [,4]## [1,] 3 24 55 96## [2,] 8 35 72 51## [3,] 15 48 39 72## [4,] 24 27 56 95## [5,] 15 40 75 120但得到错误结果：1*3, 2*4, 3*5, 4*6, 5*3，是按列广播的，没有一行一行来乘。</description>
+    </item>
     
     <item>
       <title>因子的顺序</title>
