@@ -96,4 +96,8 @@
     <priority>0</priority>
   </url>
   
+  <url>
+    <loc>/friendly_links/</loc>
+  </url>
+  
 </urlset>
