@@ -12,7 +12,7 @@ tags:
 ---
 
 ```{r echo=FALSE}
-knitr::opts_chunk$set(echo = F,message = F,warning = F)
+knitr::opts_chunk$set(message = F,warning = F)
 ```
 
 ```{r echo=FALSE}
@@ -80,7 +80,7 @@ head(x,3)
 
 为此我写了个函数如下:
 
-```r
+```{r}
 caculate_travel_volume <- function(section_volume,mileage,atts){
   l <- split(section_volume,section_volume[[atts]])
   m <- split(mileage,mileage[[atts]])
