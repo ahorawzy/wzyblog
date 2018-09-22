@@ -1,0 +1,134 @@
+---
+title: 分而治之的策略(1)
+author: 王致远
+date: '2018-09-22'
+slug: split-and-conquer-1
+categories:
+  - R语言
+tags:
+  - 技术
+  - 思考
+---
+
+```{r echo=FALSE}
+knitr::opts_chunk$set(echo = F,message = F,warning = F)
+```
+
+```{r echo=FALSE}
+options(stringsAsFactors = F)
+options(digits = 3)
+rm(list = ls())
+source("D:\\R\\packages\\Mreport\\scripts\\caculate.R", encoding = "utf-8")
+source("D:\\R\\packages\\Mreport\\scripts\\select.R", encoding = "utf-8")
+source("D:\\R\\packages\\Mreport\\scripts\\split.R", encoding = "utf-8")
+```
+
+```{r echo=FALSE}
+library(Mreport)
+library(plyr)
+library(ggplot2)
+library(reshape2)
+library(knitr)
+library(leaflet)
+library(leafletCN)
+```
+
+```{r echo=FALSE}
+load_base()
+load_sample_base()
+```
+
+```{r echo=FALSE}
+jdcity <- read.csv("D:\\data\\sx_raw\\交调数据\\jdcity.csv",stringsAsFactors = F)
+```
+
+
+```{r echo=FALSE}
+jdcitys <- handle_gather_forym(jdcity)
+jdcitys <- jdcitys[jdcitys$ym != "2018-09月",]
+jdcitys$freight_cars <- rnorm(nrow(jdcitys))
+```
+
+昨天在工作中遇到了这样一个问题：**我希望按年月，按省份，按公路等级计算断面交通量，进而计算总行驶量。**
+
+PS：以下交通量计算数据均用随机数代替。
+
+使用我之前写的caculate_frecarsmean函数，可以调用plyr::ddply函数，这里便使用了plyr的思想：**分而治之**。关于plyr的思想，具体会在之后的《分而治之的策略》系列中详细写。考虑到日期必须是列的形式，公路等级必须是行的形式（因为各省公路里程）是行的形式。
+
+```{r}
+head(mileage,1)
+```
+
+
+如果把省份和公路里程都放在行，那么他们会自动融合，不利于后续分析，如下表。
+
+```{r}
+x <- caculate_frecarsmean(jdcitys,c("ym","province","level")) %>% dcast(ym~level+province)
+head(x,3)
+```
+
+所以只能把省份和年月一样放在列上，如下表。
+
+```{r echo=FALSE}
+x <- caculate_frecarsmean(jdcitys,c("ym","province","level")) %>% dcast(ym+province~level)
+x <- x[,c(1,2,3,4,6,5)]
+head(x,3)
+```
+
+接下来思考：怎样让每个省份的分等级断面交通量乘以自己省份的分等级公路里程。所以必然的选择是：将x分而治之，先分成不同省，各自计算后，再将计算结果合并。
+
+为此我写了个函数如下
+
+```{r eval=FALSE}
+caculate_travel_volume <- function(section_volume,mileage,atts){
+  l <- split(section_volume,section_volume[[atts]])
+  m <- split(mileage,mileage[[atts]])
+  l2 <- lapply(l, `[`, 3:6)
+  m2 <- lapply(m, `[`, 2:5)
+  k2 <- list(length = length(l2))
+  for (i in 1:length(l2)) {
+    k2[[i]] <- l2[[i]] * matrix(as.numeric(m2[[names(l2[i])]]),nrow = nrow(l2[[i]]),ncol = 4,byrow=T)
+  }
+  names(k2) <- names(l2)
+  k3 <- lapply(k2, rowSums, na.rm = T)
+  for(i in 1:length(k3)){
+    names(k3[[i]]) <- l[[1]][[1]]
+  }
+  return(data.frame(k3))
+}
+```
+
+
+1. 将断面交通量和公路里程两个DataFrame用split函数分割成以每个省份为元素的列表，分割的依据是传入的atts参数（其实就是省份），得到l和m。
+2. 使用lapply函数，对l和m取数字的部分（去掉年月列和省份列）。**这里的lapply函数其实也是对列表元素的“分而治之”。**
+3. 使用了个循环，计算每个省的分等级交通量乘里程，得到各省分等级行驶量k2。其实这里按理来说也可以用mapply实现，对l2和m2同时循环，不过要写匿名函数，倒不如循环来的清晰。
+4. 使用lapply对每个省份的数据框rowSums，得到各省总行驶量k3。
+5. 对k3中每个省份的计算结果命名，名字为年月。
+6. 返回将k3合并为数据框的结果，效果如下x2所示。
+
+```{r}
+x2 <- caculate_travel_volume(x,mileage,"province")
+head(x2)
+```
+
+后经检验，原来函数中
+
+```{r}
+k2 <- list(length = 3);
+k2
+```
+
+没有达到分配列表空间的目的;应改为
+
+```{r}
+k2 <- vector(mode = "list",length = 3)
+k2
+```
+
+
+## 总结
+
+这次经验让我更加深刻的体验了“分而治之”的策略。由于本问题背景下，“治”较为复杂，所以整体上没有用plyr包和lapply家族，而是手动版的“分而治之”，并在一些小细节上用lapply简化。
+
+未来的《分而治之的策略》系列还要详细学习plyr包和dplyr包。
+
