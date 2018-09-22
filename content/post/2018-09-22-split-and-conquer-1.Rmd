@@ -8,6 +8,7 @@ categories:
 tags:
   - 技术
   - 思考
+  - 交通
 ---
 
 ```{r echo=FALSE}
@@ -53,7 +54,7 @@ jdcitys$freight_cars <- rnorm(nrow(jdcitys))
 
 PS：以下交通量计算数据均用随机数代替。
 
-使用我之前写的caculate_frecarsmean函数，可以调用plyr::ddply函数，这里便使用了plyr的思想：**分而治之**。关于plyr的思想，具体会在之后的《分而治之的策略》系列中详细写。考虑到日期必须是列的形式，公路等级必须是行的形式（因为各省公路里程）是行的形式。
+使用我之前写的caculate_frecarsmean函数，可以调用plyr::ddply函数，这里便使用了plyr的思想：**分而治之**。关于plyr的思想，具体会在之后的《分而治之的策略》系列中详细写。考虑到日期必须是列的形式，公路等级必须是行的形式（因为各省公路里程是行的形式，如下表）。
 
 ```{r}
 head(mileage,1)
@@ -77,9 +78,9 @@ head(x,3)
 
 接下来思考：怎样让每个省份的分等级断面交通量乘以自己省份的分等级公路里程。所以必然的选择是：将x分而治之，先分成不同省，各自计算后，再将计算结果合并。
 
-为此我写了个函数如下
+为此我写了个函数如下:
 
-```{r eval=FALSE}
+```r
 caculate_travel_volume <- function(section_volume,mileage,atts){
   l <- split(section_volume,section_volume[[atts]])
   m <- split(mileage,mileage[[atts]])
