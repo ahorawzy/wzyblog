@@ -6,7 +6,7 @@ slug: creating-r-packages
 categories:
   - R语言
 tags: 
-  - 技术
+  - R包
   - 学习总结
 output:
   blogdown::html_page:

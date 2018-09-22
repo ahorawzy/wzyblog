@@ -1,28 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>R语言 on Website of ZhiYuan Wang</title>
-    <link>/categories/r%E8%AF%AD%E8%A8%80/</link>
-    <description>Recent content in R语言 on Website of ZhiYuan Wang</description>
+    <title>数据结构 on Website of ZhiYuan Wang</title>
+    <link>/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link>
+    <description>Recent content in 数据结构 on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 21 Sep 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/categories/r%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>分而治之的策略(1)——手动版</title>
-      <link>/post/2018/09/22/split-and-conquer-1/</link>
-      <pubDate>Sat, 22 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/09/22/split-and-conquer-1/</guid>
-      <description>昨天在工作中遇到了这样一个问题：我希望按年月，按省份，按公路等级计算断面交通量，进而计算总行驶量。
-PS：以下交通量计算数据均用随机数代替。
-使用我之前写的caculate_frecarsmean函数，可以调用plyr::ddply函数，这里便使用了plyr的思想：分而治之。关于plyr的思想，具体会在之后的《分而治之的策略》系列中详细写。考虑到日期必须是列的形式，公路等级必须是行的形式（因为各省公路里程是行的形式，如下表）。
-head(mileage,1)## province 国家高速 普通国道 省级高速 普通省道## 1 北京市 615 1236 398 1593如果把省份和公路里程都放在行，那么他们会自动融合，不利于后续分析，如下表。
-x &amp;lt;- caculate_frecarsmean(jdcitys,c(&amp;quot;ym&amp;quot;,&amp;quot;province&amp;quot;,&amp;quot;level&amp;quot;)) %&amp;gt;% dcast(ym~level+province)head(x,3)## ym 国家高速_湖北省 国家高速_上海市 普通国道_湖北省## 1 2017-01月 -0.0675 -0.767 0.2133## 2 2017-02月 0.0436 1.244 0.0801## 3 2017-03月 -0.6377 -1.331 -0.5060## 普通国道_上海市 普通国道_重庆市 普通省道_湖北省 普通省道_上海市## 1 1.004 -0.1115 -0.195 -0.156## 2 -0.203 -0.0229 -0.265 0.267## 3 0.102 0.0822 0.126 -0.825## 普通省道_重庆市 省级高速_湖北省 省级高速_上海市## 1 -0.</description>
-    </item>
     
     <item>
       <title>矩阵乘向量</title>
@@ -49,15 +36,6 @@ jdprovince &amp;lt;- read.csv(&amp;quot;D:\\data\\jdprovince.csv&amp;quot;,strin
 jdprovince$年月 &amp;lt;- paste(jdprovince$年份, jdprovince$月份, sep = &amp;quot;-&amp;quot;)str(jdprovince$年月)## chr [1:55141] &amp;quot;2017-11月&amp;quot; &amp;quot;2017-09月&amp;quot; &amp;quot;2017-08月&amp;quot; &amp;quot;2017-05月&amp;quot; ...但拼接好的结果是字符串，需要转变为因子。
 现在思考：怎样确定因子的顺序，让程序知道“2017-01月”先于“2017-02月”。偶然间我发现：
 sort(as.factor(unique(jdprovince$年月)))## [1] 2017-01月 2017-02月 2017-03月 2017-04月 2017-05月 2017-06月 2017-07月## [8] 2017-08月 2017-09月 2017-10月 2017-11月 2017-12月 2018-01月 2018-02月## [15] 2018-03月 2018-04月 2018-05月 2018-06月 2018-07月 2018-08月 2018-09月## 21 Levels: 2017-01月 2017-02月 2017-03月 2017-04月 2017-05月 .</description>
-    </item>
-    
-    <item>
-      <title>创建R包</title>
-      <link>/post/2018/09/19/creating-r-packages/</link>
-      <pubDate>Wed, 19 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/09/19/creating-r-packages/</guid>
-      <description>第0章：工具汇总0.1 devtools工具汇总0.2 formatR工具第1章： 简介1.1 为什么开发R包1.2 理念1.3 入门第2章：包的结构2.1 包的命名2.2 创建一个包2.3 包的生命周期2.3.1 源码包2.3.2 压缩包2.3.3 二进制包2.3.4 已安装包2.3.5 内存中的包2.4 库第3章：R代码3.1 R代码的工作流3.2 组织函数3.3 代码风格3.4 顶层代码第4章，包的元数据第5章：对象文档5.1 使用roxygen写对象文档的理由5.2 文档工作流程5.3 另一个文档工作流程5.4 roxygen注释第6章：使用指南——长篇文档6.1 元数据6.2 knitr的选项第7章：测试7.1 测试的工作流7.2 测试结构7.3 期望7.</description>
     </item>
     
   </channel>

@@ -1,14 +1,13 @@
 ---
-title: 分而治之的策略(1)
+title: 分而治之的策略(1)——手动版
 author: 王致远
 date: '2018-09-22'
 slug: split-and-conquer-1
 categories:
   - R语言
 tags:
-  - 技术
+  - 分而治之的策略
   - 思考
-  - 交通
 ---
 
 ```{r echo=FALSE}

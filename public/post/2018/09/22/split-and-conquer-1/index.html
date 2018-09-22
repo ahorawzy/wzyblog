@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>分而治之的策略(1) | Website of ZhiYuan Wang</title>
+    <title>分而治之的策略(1)——手动版 | Website of ZhiYuan Wang</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     
@@ -28,7 +28,7 @@
     </nav>
 
 <div class="article-meta">
-<h1><span class="title">分而治之的策略(1)</span></h1>
+<h1><span class="title">分而治之的策略(1)——手动版</span></h1>
 <h2 class="author">王致远</h2>
 <h2 class="date">2018/09/22</h2>
 </div>
@@ -44,25 +44,25 @@
 <pre class="r"><code>x &lt;- caculate_frecarsmean(jdcitys,c(&quot;ym&quot;,&quot;province&quot;,&quot;level&quot;)) %&gt;% dcast(ym~level+province)
 head(x,3)</code></pre>
 <pre><code>##          ym 国家高速_湖北省 国家高速_上海市 普通国道_湖北省
-## 1 2017-01月           0.446           1.341          0.3300
-## 2 2017-02月           0.577           0.325          0.1507
-## 3 2017-03月           0.378           0.548          0.0288
+## 1 2017-01月         -0.0675          -0.767          0.2133
+## 2 2017-02月          0.0436           1.244          0.0801
+## 3 2017-03月         -0.6377          -1.331         -0.5060
 ##   普通国道_上海市 普通国道_重庆市 普通省道_湖北省 普通省道_上海市
-## 1         -0.5613          0.0727          -0.395          -0.147
-## 2          0.0198         -0.1076           0.379           0.271
-## 3          0.2566          0.1490           0.238           1.034
+## 1           1.004         -0.1115          -0.195          -0.156
+## 2          -0.203         -0.0229          -0.265           0.267
+## 3           0.102          0.0822           0.126          -0.825
 ##   普通省道_重庆市 省级高速_湖北省 省级高速_上海市
-## 1          0.1612          -1.153           1.082
-## 2          0.1424          -1.151          -0.774
-## 3          0.0181          -0.721          -0.159</code></pre>
+## 1        -0.00864         -0.0339          -1.114
+## 2        -0.00326         -0.0267          -1.629
+## 3         0.04765         -1.1442           0.536</code></pre>
 <p>所以只能把省份和年月一样放在列上，如下表。</p>
 <pre class="r"><code>x &lt;- caculate_frecarsmean(jdcitys,c(&quot;ym&quot;,&quot;province&quot;,&quot;level&quot;)) %&gt;% dcast(ym+province~level)
 x &lt;- x[,c(1,2,3,4,6,5)]
 head(x,3)</code></pre>
 <pre><code>##          ym province 国家高速 普通国道 省级高速 普通省道
-## 1 2017-01月   湖北省    0.446   0.3300    -1.15   -0.395
-## 2 2017-01月   上海市    1.341  -0.5613     1.08   -0.147
-## 3 2017-01月   重庆市       NA   0.0727       NA    0.161</code></pre>
+## 1 2017-01月   湖北省  -0.0675    0.213  -0.0339 -0.19526
+## 2 2017-01月   上海市  -0.7673    1.004  -1.1142 -0.15612
+## 3 2017-01月   重庆市       NA   -0.112       NA -0.00864</code></pre>
 <p>接下来思考：怎样让每个省份的分等级断面交通量乘以自己省份的分等级公路里程。所以必然的选择是：将x分而治之，先分成不同省，各自计算后，再将计算结果合并。</p>
 <p>为此我写了个函数如下:</p>
 <pre class="r"><code>caculate_travel_volume &lt;- function(section_volume,mileage,atts){
@@ -91,13 +91,13 @@ head(x,3)</code></pre>
 </ol>
 <pre class="r"><code>x2 &lt;- caculate_travel_volume(x,mileage,&quot;province&quot;)
 head(x2)</code></pre>
-<pre><code>##           湖北省 上海市 重庆市
-## 2017-01月  -3512  785.7   1955
-## 2017-02月   9350   74.2    796
-## 2017-03月   5341  982.6    983
-## 2017-04月   8544 1337.7    576
-## 2017-05月  -8895  210.1   1581
-## 2017-06月 -11010 1322.6  -1904</code></pre>
+<pre><code>##           湖北省 上海市  重庆市
+## 2017-01月  -1898 -627.2  -687.9
+## 2017-02月  -3838  156.0  -155.9
+## 2017-03月  -7139 -992.8   906.6
+## 2017-04月  14806  179.3   -93.8
+## 2017-05月  -1193 1151.4 -2019.4
+## 2017-06月 -10490  -14.1   196.6</code></pre>
 <p>后经检验，原来函数中</p>
 <pre class="r"><code>k2 &lt;- list(length = 3);
 k2</code></pre>
