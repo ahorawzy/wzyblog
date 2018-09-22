@@ -85,6 +85,10 @@
   </url>
   
   <url>
+    <loc>/friendly_links/</loc>
+  </url>
+  
+  <url>
     <loc>/tags/%E6%80%9D%E8%80%83/</loc>
     <lastmod>2018-09-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -94,10 +98,6 @@
     <loc>/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
     <lastmod>2018-09-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/friendly_links/</loc>
   </url>
   
 </urlset>
