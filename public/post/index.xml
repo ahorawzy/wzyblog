@@ -17,11 +17,7 @@
       <pubDate>Sat, 22 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/2018/09/22/split-and-conquer-1/</guid>
-      <description>昨天在工作中遇到了这样一个问题：我希望按年月，按省份，按公路等级计算断面交通量，进而计算总行驶量。
-PS：以下交通量计算数据均用随机数代替。
-使用我之前写的caculate_frecarsmean函数，可以调用plyr::ddply函数，这里便使用了plyr的思想：分而治之。关于plyr的思想，具体会在之后的《分而治之的策略》系列中详细写。考虑到日期必须是列的形式，公路等级必须是行的形式（因为各省公路里程是行的形式，如下表）。
-head(mileage,1)## province 国家高速 普通国道 省级高速 普通省道## 1 北京市 615 1236 398 1593如果把省份和公路里程都放在行，那么他们会自动融合，不利于后续分析，如下表。
-x &amp;lt;- caculate_frecarsmean(jdcitys,c(&amp;quot;ym&amp;quot;,&amp;quot;province&amp;quot;,&amp;quot;level&amp;quot;)) %&amp;gt;% dcast(ym~level+province)head(x,3)## ym 国家高速_湖北省 国家高速_上海市 普通国道_湖北省## 1 2017-01月 -0.0675 -0.767 0.2133## 2 2017-02月 0.0436 1.244 0.0801## 3 2017-03月 -0.6377 -1.331 -0.5060## 普通国道_上海市 普通国道_重庆市 普通省道_湖北省 普通省道_上海市## 1 1.004 -0.1115 -0.195 -0.156## 2 -0.203 -0.0229 -0.265 0.267## 3 0.102 0.0822 0.126 -0.825## 普通省道_重庆市 省级高速_湖北省 省级高速_上海市## 1 -0.</description>
+      <description>昨天在工作中遇到了这样一个问题：我希望按年月，按省份，按公路等级计算断面交通量，进而计算总行驶量。 PS：以下交通量计算数据均用随机数代替。 使</description>
     </item>
     
     <item>
@@ -30,10 +26,7 @@ x &amp;lt;- caculate_frecarsmean(jdcitys,c(&amp;quot;ym&amp;quot;,&amp;quot;prov
       <pubDate>Fri, 21 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/2018/09/21/matrix-multiply-vector/</guid>
-      <description>今天在工作中遇到一个问题：有一个矩阵，有一个向量，列数是相同的，需要矩阵的每行乘以向量。
-例如：
-A &amp;lt;- matrix(1:20,nrow=5)A## [,1] [,2] [,3] [,4]## [1,] 1 6 11 16## [2,] 2 7 12 17## [3,] 3 8 13 18## [4,] 4 9 14 19## [5,] 5 10 15 20b &amp;lt;- c(3,4,5,6)b## [1] 3 4 5 6我一开始是这么做的：
-A*b## [,1] [,2] [,3] [,4]## [1,] 3 24 55 96## [2,] 8 35 72 51## [3,] 15 48 39 72## [4,] 24 27 56 95## [5,] 15 40 75 120但得到错误结果：1*3, 2*4, 3*5, 4*6, 5*3，是按列广播的，没有一行一行来乘。</description>
+      <description>今天在工作中遇到一个问题：有一个矩阵，有一个向量，列数是相同的，需要矩阵的每行乘以向量。 例如： A &amp;lt;- matrix(1:20,nrow=5) A ## [,1] [,2] [,3] [,4] ## [1,] 1 6 11 16 ## [2,] 2 7 12 17 ## [3,]</description>
     </item>
     
     <item>
@@ -42,13 +35,7 @@ A*b## [,1] [,2] [,3] [,4]## [1,] 3 24 55 96## [2,] 8 35 72 51## [3,] 15 48 3
       <pubDate>Thu, 20 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/2018/09/20/order-of-factor/</guid>
-      <description>因子的自然排序今天在工作中，要处理一个之前已经遇到，但一直没有正面解决的问题：当所要分析的时间是（日度）跨月份或（月度）跨年份，该怎样操作。
-比较正统的思路是转换成时间型数据，用时间型的函数操纵。但一来时间型数据操纵我也不够熟悉，二来也不想这样大费周章，所以就想有没有轻便化的方法能够巧妙解决。略加思考后，认为应该将字符串型的日期转换成因子型数据，然后用因子的顺序决定日期的先后。这在理论上是可行的，实际如何操作还需实验。
-读入交调数据
-jdprovince &amp;lt;- read.csv(&amp;quot;D:\\data\\jdprovince.csv&amp;quot;,stringsAsFactors = F)dim(jdprovince)## [1] 55141 24unique(jdprovince$年份)## [1] 2017 2018unique(jdprovince$月份)## [1] &amp;quot;11月&amp;quot; &amp;quot;09月&amp;quot; &amp;quot;08月&amp;quot; &amp;quot;05月&amp;quot; &amp;quot;03月&amp;quot; &amp;quot;02月&amp;quot; &amp;quot;01月&amp;quot; &amp;quot;12月&amp;quot; &amp;quot;10月&amp;quot; &amp;quot;07月&amp;quot;## [11] &amp;quot;06月&amp;quot; &amp;quot;04月&amp;quot;发现有“年份”、“月份”两个字段表示日期。希望是能用一个字段就能表示日期。把这两个拼接起来，命名为“年月”。
-jdprovince$年月 &amp;lt;- paste(jdprovince$年份, jdprovince$月份, sep = &amp;quot;-&amp;quot;)str(jdprovince$年月)## chr [1:55141] &amp;quot;2017-11月&amp;quot; &amp;quot;2017-09月&amp;quot; &amp;quot;2017-08月&amp;quot; &amp;quot;2017-05月&amp;quot; ...但拼接好的结果是字符串，需要转变为因子。
-现在思考：怎样确定因子的顺序，让程序知道“2017-01月”先于“2017-02月”。偶然间我发现：
-sort(as.factor(unique(jdprovince$年月)))## [1] 2017-01月 2017-02月 2017-03月 2017-04月 2017-05月 2017-06月 2017-07月## [8] 2017-08月 2017-09月 2017-10月 2017-11月 2017-12月 2018-01月 2018-02月## [15] 2018-03月 2018-04月 2018-05月 2018-06月 2018-07月 2018-08月 2018-09月## 21 Levels: 2017-01月 2017-02月 2017-03月 2017-04月 2017-05月 .</description>
+      <description>因子的自然排序 今天在工作中，要处理一个之前已经遇到，但一直没有正面解决的问题：当所要分析的时间是（日度）跨月份或（月度）跨年份，该怎样操作。</description>
     </item>
     
     <item>
@@ -57,7 +44,7 @@ sort(as.factor(unique(jdprovince$年月)))## [1] 2017-01月 2017-02月 2017-03�
       <pubDate>Wed, 19 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/2018/09/19/creating-r-packages/</guid>
-      <description>第0章：工具汇总0.1 devtools工具汇总0.2 formatR工具第1章： 简介1.1 为什么开发R包1.2 理念1.3 入门第2章：包的结构2.1 包的命名2.2 创建一个包2.3 包的生命周期2.3.1 源码包2.3.2 压缩包2.3.3 二进制包2.3.4 已安装包2.3.5 内存中的包2.4 库第3章：R代码3.1 R代码的工作流3.2 组织函数3.3 代码风格3.4 顶层代码第4章，包的元数据第5章：对象文档5.1 使用roxygen写对象文档的理由5.2 文档工作流程5.3 另一个文档工作流程5.4 roxygen注释第6章：使用指南——长篇文档6.1 元数据6.2 knitr的选项第7章：测试7.1 测试的工作流7.2 测试结构7.3 期望7.</description>
+      <description>第0章：工具汇总 0.1 devtools工具汇总 0.2 formatR工具 第1章： 简介 1.1 为什么开发R包 1.2 理念 1.3 入门 第2章：包的结构 2.1 包的命名 2.2 创建一个包</description>
     </item>
     
     <item>
@@ -66,11 +53,7 @@ sort(as.factor(unique(jdprovince$年月)))## [1] 2017-01月 2017-02月 2017-03�
       <pubDate>Tue, 18 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/2018/09/18/first-blog/</guid>
-      <description>今天开始在这里写博客的契机很偶然，是看到微信公众号“R语言中文网”上关于blogdown的一篇简单介绍。中午用10分钟看完后，觉得用blogdown搭建一个博客非常简单，于是乎，晚上回到宿舍尝试。
-默认的这个模板很简单，并没有category和tag的标题栏，所以博客多了以后不好找。不过好在blogdown的逻辑是博客内容和模板是分开的，所以可以先在这里写，以后再更多地学习blogdown，使用更加好看、丰富的模板，慢慢完善我的个人博客。
-blogdown里引用了一句话“如果你不在网上，那么你不存在。”虽然这句话比较极端，但也反映了现在“连接”特别是“互联网连接”对于每个个体的重要性。根据PageRank算法，每个网页的重要度和与它相连的网页数正相关，对于人也大致如此。
-本博客的目的有三：
- 探寻blogdown，并以此为契机，学习web的各类知识； 作为技术博客，记录自己的学习里程； 作为文字博客，记录自己的所思所感。  博客！出发！</description>
+      <description>今天开始在这里写博客的契机很偶然，是看到微信公众号“R语言中文网”上关于blogdown的一篇简单介绍。中午用10分钟看完后，觉得用blog</description>
     </item>
     
   </channel>
