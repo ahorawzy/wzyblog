@@ -70,7 +70,7 @@ head(x,3)
 
 所以只能把省份和年月一样放在列上，如下表。
 
-```{r echo=FALSE}
+```{r}
 x <- caculate_frecarsmean(jdcitys,c("ym","province","level")) %>% dcast(ym+province~level)
 x <- x[,c(1,2,3,4,6,5)]
 head(x,3)
