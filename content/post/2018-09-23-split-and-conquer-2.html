@@ -1,0 +1,377 @@
+---
+title: 分而治之的策略(2)——plyr包
+author: 王致远
+date: '2018-09-23'
+slug: split-and-conquer-2
+categories:
+  - R语言
+tags:
+  - 分而治之的策略
+  - r包
+  - 学习总结
+---
+
+
+
+<p>plyr包是Hadley Wickham在早期创作的一个R包，创作时间大约是2011年左右。这个包的主题思想是“The Split-Apply-Combine Strategy”，我将它翻译为“分而治之的策略”。它是指将一个大问题切分为若干个相似的、并列的小问题。如果能找到小问题的解决办法，那么将其平行的运用在其他小问题上，就解决了整个大问题。Wickham为阐述plyr的使用方法，写了一篇论文，投在<a href="https://www.jstatsoft.org/index">《Journal of Statistical Software》</a>开源期刊上，论文名为<a href="https://www.jstatsoft.org/article/view/v040i01">《The Split-Apply-Combine Strategy for Data Analysis》</a>。本文便是这篇论文的学习笔记。</p>
+<p><em>PS：通过这一篇论文的学习，我认为叫“化整为零的策略”似乎更贴切。</em></p>
+<div class="section level2">
+<h2>1. 引言</h2>
+<p>分而治之的策略可以应用在数据挖掘的多个阶段中：</p>
+<ol style="list-style-type: decimal">
+<li>在数据预处理阶段，进行分组的排序，标准化，正则化或创建基于组的新变量；</li>
+<li>在数据探索阶段，计算分组的统计量和其他分析与可视化展示；</li>
+<li>在建模阶段，建立分组的模型。这些模型可能本身就很有价值，或者一起构建更加复杂的分层模型。</li>
+</ol>
+<p>分而治之的策略和谷歌提出的map-reduce的策略很像。Map-reduce是应用在大规模计算集群上的。</p>
+<p>这样的分组计算在其他统计软件上也很常见：Excel的透视表，SQL的group by语句等等。plyr就是这样的R包。plyr能够简化循环，并且忽略数据结构上的差异。</p>
+<p>plyr的应用作了如下背景假设：</p>
+<ul>
+<li>数据中的每一小份都只被计算一次，这意味着如果数据是重叠的就没法应用。</li>
+<li>每一次计算独立于其他计算；计算过程不是迭代的。</li>
+</ul>
+<p><strong>注意：</strong></p>
+<p>本文所说的数组（Array）包括了一维数组vectors和二维数组matrices。数组可以是原子的（Logical,character,integer,numeric）；也可以是列表数组（list-array），实际上它是带维度的列表，可以包含不同种类的数据结构。</p>
+</div>
+<div class="section level2">
+<h2>2. 动机</h2>
+<p>本章主要是论述plyr包的函数相比循环和apply家族函数，更加简洁清晰。</p>
+</div>
+<div class="section level2">
+<h2>3, 使用方法</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Input\ Output</th>
+<th>Array</th>
+<th>Data frame</th>
+<th>List</th>
+<th>Discarded</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Array</td>
+<td>aaply</td>
+<td>adply</td>
+<td>alply</td>
+<td>a_ply</td>
+</tr>
+<tr class="even">
+<td>Data Frame</td>
+<td>daply</td>
+<td>ddply</td>
+<td>dlply</td>
+<td>d_ply</td>
+</tr>
+<tr class="odd">
+<td>List</td>
+<td>laply</td>
+<td>ldply</td>
+<td>llply</td>
+<td>l_ply</td>
+</tr>
+</tbody>
+</table>
+<div class="section level3">
+<h3>3.1 输入</h3>
+<p>输入决定了怎样切分数据。</p>
+<div id="aply" class="section level4">
+<h4>a*ply()</h4>
+<p>按维度切分数据，将数据切到更低维度。</p>
+<ul>
+<li>.margins = 1 : 将数据切为行；</li>
+<li>.margins = 2 : 将数据切为列；</li>
+<li>.margins = c(1,2) ：将数据切为单元；</li>
+</ul>
+<pre class="r"><code>A &lt;- matrix(1:20, nrow = 5);A</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    6   11   16
+## [2,]    2    7   12   17
+## [3,]    3    8   13   18
+## [4,]    4    9   14   19
+## [5,]    5   10   15   20</code></pre>
+<p>按行求和</p>
+<pre class="r"><code>aaply(A,1,sum)</code></pre>
+<pre><code>##  1  2  3  4  5 
+## 34 38 42 46 50</code></pre>
+<p>按列求和</p>
+<pre class="r"><code>aaply(A,2,sum)</code></pre>
+<pre><code>##  1  2  3  4 
+## 15 40 65 90</code></pre>
+<p>相当于apply</p>
+<pre class="r"><code>apply(A,1,sum)</code></pre>
+<pre><code>## [1] 34 38 42 46 50</code></pre>
+<pre class="r"><code>apply(A,2,sum)</code></pre>
+<pre><code>## [1] 15 40 65 90</code></pre>
+</div>
+<div id="mply" class="section level4">
+<h4>m*ply()</h4>
+<p>接收多个变量，有点函数工厂的意思</p>
+<pre class="r"><code>p &lt;- data.frame(n = c(10,100,50), mean = c(5,5,10), sd = c(1,2,1))
+p</code></pre>
+<pre><code>##     n mean sd
+## 1  10    5  1
+## 2 100    5  2
+## 3  50   10  1</code></pre>
+<pre class="r"><code>mlply(p,rnorm)</code></pre>
+<pre><code>## $`1`
+##  [1] 5.943565 5.127400 4.220731 6.891064 3.915008 3.886819 4.915659
+##  [8] 3.849585 4.563429 3.713557
+## 
+## $`2`
+##   [1]  6.9193435  6.7347164 -0.7594191  4.3866113  5.0657551  6.7008522
+##   [7]  8.6155786  7.1180160 -0.5435419  8.3448008  2.0401352  5.4595703
+##  [13]  3.0199079  3.4827239  3.5947531  5.9495824  4.3569144  4.5996498
+##  [19]  3.8225180  4.5122316  3.5390163  5.3417775  6.8126295 10.5439578
+##  [25]  2.2385409  2.3338127  6.6924926  6.5414605  3.8915230  5.0318821
+##  [31]  5.6861852  2.6769238  3.7856894  5.5469814  2.1474522  3.8024072
+##  [37]  1.7856490  6.2261462  6.5290219  2.9403225  1.1874260  3.0859843
+##  [43]  2.1931582  5.6964112  3.0734647  3.7116435  1.4975527  6.4438152
+##  [49]  4.3466854  5.7619080  4.8128831  3.8063411  4.1841161  5.9928829
+##  [55]  9.8203657  7.9863950  2.5599884  3.9046377  5.4695398  8.4921595
+##  [61]  5.4894346  7.7371303  6.4065779  0.8842653  3.6671203  3.4610899
+##  [67]  4.8976973  4.1853246  5.2973579  5.6089993  4.3502221  5.1574900
+##  [73]  3.9302378  2.7735994  2.5757834  5.8358135  3.2346588  7.9522643
+##  [79]  6.0754386  6.6217859  6.0230840  8.6086456  6.9050245  3.9411173
+##  [85]  3.5628657  6.9068287  4.5330155  4.9330884  7.4639430  3.8617265
+##  [91]  0.7987829  4.1962504  6.6043132  6.7216328  7.6960527  6.8941570
+##  [97]  6.8016666  4.7809009  4.7926423  7.5509177
+## 
+## $`3`
+##  [1] 11.539003  9.856583 11.702421  9.406823 10.485487 10.870345  7.099275
+##  [8] 11.548756  9.756842  9.134109 11.879212  9.254825  9.805836 10.082098
+## [15]  8.609154  8.881358 10.398448  9.486274  9.046884 11.004433  9.178492
+## [22]  9.210352  9.955604 10.301285 10.410660  9.451998  9.592750 10.006912
+## [29]  9.622354  6.792223  8.587563  9.814674  9.363321  9.517785  9.597000
+## [36]  9.972651  7.774333  9.726131 10.850960 11.683118 10.453622 10.517778
+## [43] 10.420427 10.554483 10.273736 10.483193  9.280030  9.102373  9.927457
+## [50]  9.635198
+## 
+## attr(,&quot;split_type&quot;)
+## [1] &quot;array&quot;
+## attr(,&quot;split_labels&quot;)
+##     n mean sd
+## 1  10    5  1
+## 2 100    5  2
+## 3  50   10  1</code></pre>
+</div>
+<div id="dply" class="section level4">
+<h4>d*ply()</h4>
+<p>按变量或变量的组合切分</p>
+<pre class="r"><code>names(mtcars)</code></pre>
+<pre><code>##  [1] &quot;mpg&quot;  &quot;cyl&quot;  &quot;disp&quot; &quot;hp&quot;   &quot;drat&quot; &quot;wt&quot;   &quot;qsec&quot; &quot;vs&quot;   &quot;am&quot;   &quot;gear&quot;
+## [11] &quot;carb&quot;</code></pre>
+<pre class="r"><code>ddply(mtcars,&quot;cyl&quot;,summarise,MeanMPG = mean(mpg))</code></pre>
+<pre><code>##   cyl  MeanMPG
+## 1   4 26.66364
+## 2   6 19.74286
+## 3   8 15.10000</code></pre>
+<pre class="r"><code>ddply(mtcars,&quot;cyl&quot;,transform,MPGplus1 = mpg+1) %&gt;% head()</code></pre>
+<pre><code>##    mpg cyl  disp hp drat    wt  qsec vs am gear carb MPGplus1
+## 1 22.8   4 108.0 93 3.85 2.320 18.61  1  1    4    1     23.8
+## 2 24.4   4 146.7 62 3.69 3.190 20.00  1  0    4    2     25.4
+## 3 22.8   4 140.8 95 3.92 3.150 22.90  1  0    4    2     23.8
+## 4 32.4   4  78.7 66 4.08 2.200 19.47  1  1    4    1     33.4
+## 5 30.4   4  75.7 52 4.93 1.615 18.52  1  1    4    2     31.4
+## 6 33.9   4  71.1 65 4.22 1.835 19.90  1  1    4    1     34.9</code></pre>
+<p>如果.var不是一个变量，而是多个变量，那么分组就是变量的笛卡尔积。</p>
+<pre class="r"><code>ddply(mtcars,c(&quot;cyl&quot;,&quot;gear&quot;),summarise,MeanMPG = mean(mpg))</code></pre>
+<pre><code>##   cyl gear MeanMPG
+## 1   4    3  21.500
+## 2   4    4  26.925
+## 3   4    5  28.200
+## 4   6    3  19.750
+## 5   6    4  19.750
+## 6   6    5  19.700
+## 7   8    3  15.050
+## 8   8    5  15.400</code></pre>
+</div>
+<div id="lply" class="section level4">
+<h4>l*ply()</h4>
+<p>l*ply()按列表元素切分。</p>
+</div>
+</div>
+<div class="section level3">
+<h3>3.2 输出</h3>
+<p>输出决定了每一部分怎样聚合在一起，并且怎么打标签（名字）。</p>
+<p>不输出_也很重要，比如使用plot或write.table这种不需要返回值的函数。</p>
+<div id="dply-1" class="section level4">
+<h4>*dply()</h4>
+<p>返回值会多一个新列，这样便于和原有数据融合。</p>
+<p>加工函数要么返回一个数据框，要么返回一个原子向量，被解释为数据框的一行。</p>
+</div>
+<div id="lply-1" class="section level4">
+<h4>*lply()</h4>
+<p>每个加工部分都被添加到一个列表中，并且会存储每一部分的标签名。</p>
+<pre class="r"><code>dlply(mtcars,&quot;cyl&quot;,summarise,MeanMPG = mean(mpg)) %&gt;% ldply()</code></pre>
+<pre><code>##   cyl  MeanMPG
+## 1   4 26.66364
+## 2   6 19.74286
+## 3   8 15.10000</code></pre>
+<p>列表适合用来计算复杂对象（比如模型），然后再将感兴趣的部分抽取到array或dataframe中。</p>
+</div>
+<div id="ply" class="section level4">
+<h4>*_ply()</h4>
+<p>不需要返回内容</p>
+<pre class="r"><code>opar &lt;- par()
+par(mfrow=c(2,2))
+d_ply(mtcars,&quot;cyl&quot;,function(x){
+  plot(x[[&quot;wt&quot;]],x[[&quot;mpg&quot;]],xlab = &quot;wt&quot;,ylab=&quot;mpg&quot;,main = paste(&quot;cyl =&quot;,x[[&quot;cyl&quot;]][1]))
+  abline(lm(x[[&quot;mpg&quot;]]~x[[&quot;wt&quot;]]))
+})
+par &lt;- opar</code></pre>
+<p><img src="/post/2018-09-23-split-and-conquer-2_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+</div>
+</div>
+</div>
+<div class="section level2">
+<h2>4. 帮助函数</h2>
+<p>帮助函数都是一些函数运算符，输入函数，包装为另一个函数。</p>
+<div id="splat" class="section level3">
+<h3>4.1 splat()</h3>
+<p>将一个需要多个参数的函数转变为需要一个列表作为单一参数的函数。这在计算数据框时很有用，列名自动匹配函数中的参数名。</p>
+<pre class="r"><code>hp_per_cyl &lt;- function(hp, cyl, ...) hp/cyl
+splat(hp_per_cyl)(mtcars[1,])</code></pre>
+<pre><code>## [1] 18.33333</code></pre>
+<pre class="r"><code>splat(hp_per_cyl)(mtcars)</code></pre>
+<pre><code>##  [1] 18.33333 18.33333 23.25000 18.33333 21.87500 17.50000 30.62500
+##  [8] 15.50000 23.75000 20.50000 20.50000 22.50000 22.50000 22.50000
+## [15] 25.62500 26.87500 28.75000 16.50000 13.00000 16.25000 24.25000
+## [22] 18.75000 18.75000 30.62500 21.87500 16.50000 22.75000 28.25000
+## [29] 33.00000 29.16667 41.87500 27.25000</code></pre>
+<pre class="r"><code>dlply(mtcars,.(round(wt)),function(df) hp_per_cyl(df$hp, df$cyl))</code></pre>
+<pre><code>## $`2`
+## [1] 23.25 16.50 13.00 16.25 24.25 16.50 22.75 28.25
+## 
+## $`3`
+##  [1] 18.33333 18.33333 18.33333 21.87500 17.50000 15.50000 23.75000
+##  [8] 20.50000 20.50000 18.75000 33.00000 29.16667 27.25000
+## 
+## $`4`
+## [1] 30.625 22.500 22.500 22.500 18.750 30.625 21.875 41.875
+## 
+## $`5`
+## [1] 25.625 26.875 28.750
+## 
+## attr(,&quot;split_type&quot;)
+## [1] &quot;data.frame&quot;
+## attr(,&quot;split_labels&quot;)
+##   round(wt)
+## 1         2
+## 2         3
+## 3         4
+## 4         5</code></pre>
+<pre class="r"><code>dlply(mtcars,.(round(wt)),splat(hp_per_cyl))</code></pre>
+<pre><code>## $`2`
+## [1] 23.25 16.50 13.00 16.25 24.25 16.50 22.75 28.25
+## 
+## $`3`
+##  [1] 18.33333 18.33333 18.33333 21.87500 17.50000 15.50000 23.75000
+##  [8] 20.50000 20.50000 18.75000 33.00000 29.16667 27.25000
+## 
+## $`4`
+## [1] 30.625 22.500 22.500 22.500 18.750 30.625 21.875 41.875
+## 
+## $`5`
+## [1] 25.625 26.875 28.750
+## 
+## attr(,&quot;split_type&quot;)
+## [1] &quot;data.frame&quot;
+## attr(,&quot;split_labels&quot;)
+##   round(wt)
+## 1         2
+## 2         3
+## 3         4
+## 4         5</code></pre>
+</div>
+<div id="each" class="section level3">
+<h3>4.2 each()</h3>
+<p>each接收并运算多个函数</p>
+<pre class="r"><code>ddply(mtcars,&quot;cyl&quot;,summarise,MM=each(min,max)(mpg))</code></pre>
+<pre><code>##   cyl   MM
+## 1   4 21.4
+## 2   4 33.9
+## 3   6 17.8
+## 4   6 21.4
+## 5   8 10.4
+## 6   8 19.2</code></pre>
+<pre class="r"><code>ddply(mtcars,&quot;cyl&quot;,summarise,M1=min(mpg),M2=max(mpg))</code></pre>
+<pre><code>##   cyl   M1   M2
+## 1   4 21.4 33.9
+## 2   6 17.8 21.4
+## 3   8 10.4 19.2</code></pre>
+</div>
+<div id="colwise" class="section level3">
+<h3>4.3 colwise()</h3>
+<p>将一个用在vector上的函数转变为按列应用在数据框上的，有参数.if = is.factor或if = is.numeric。</p>
+<pre class="r"><code>mtcars1 &lt;- mtcars
+mtcars1$cyl &lt;- factor(mtcars$cyl)
+mtcars1$vs &lt;- factor(mtcars$vs)
+mtcars1$am &lt;- factor(mtcars$am)
+mtcars1$gear &lt;- factor(mtcars$gear)
+mtcars1$carb &lt;- factor(mtcars$carb)</code></pre>
+<pre class="r"><code>numcolwise(mean)(mtcars1)</code></pre>
+<pre><code>##        mpg     disp       hp     drat      wt     qsec
+## 1 20.09062 230.7219 146.6875 3.596563 3.21725 17.84875</code></pre>
+<pre class="r"><code>colwise(pryr::compose(length,unique))(mtcars[sapply(mtcars1, is.factor)])</code></pre>
+<pre><code>##   cyl vs am gear carb
+## 1   3  2  2    3    6</code></pre>
+</div>
+<div id="failwith" class="section level3">
+<h3>4.4 failwith()</h3>
+<p>将一个函数抛出错误变为返回某值</p>
+<pre class="r"><code>failwith(NA,function(x,y) x+y)(&quot;1&quot;,&quot;2&quot;)</code></pre>
+<pre><code>## [1] NA</code></pre>
+</div>
+<div id="as.data.frame.function" class="section level3">
+<h3>4.5 as.data.frame.function()</h3>
+<p>将一个函数返回值强制转变为DataFrame型</p>
+</div>
+<div id="summarize" class="section level3">
+<h3>4.6 summarize()</h3>
+<ul>
+<li>transform函数返回变更一列或添加新列的原始数据；</li>
+<li>summarise函数返回一个新的数据框，包含更改或新列；</li>
+</ul>
+<pre class="r"><code>ddply(mtcars[1:3],&quot;cyl&quot;,transform, A = mpg+1) %&gt;% nrow()</code></pre>
+<pre><code>## [1] 32</code></pre>
+<pre class="r"><code>ddply(mtcars[1:3],&quot;cyl&quot;,summarise, A = mean(mpg))</code></pre>
+<pre><code>##   cyl        A
+## 1   4 26.66364
+## 2   6 19.74286
+## 3   8 15.10000</code></pre>
+</div>
+<div id="progress" class="section level3">
+<h3>4.7 .progress参数</h3>
+<ul>
+<li>“none”不显示进度</li>
+<li>“text”显示文本进度</li>
+</ul>
+</div>
+</div>
+<div class="section level2">
+<h2>5. 策略</h2>
+<p>通用流程：</p>
+<ol style="list-style-type: decimal">
+<li>抽取数据子集以方便解决问题；</li>
+<li>手动解决子问题，并检验计算结果；</li>
+<li>写一个能解决该子问题的函数；</li>
+<li>在原始数据上使用plyr函数，来应用在每一部分；</li>
+</ol>
+<div class="section level3">
+<h3>5.1 案例一：棒球</h3>
+<pre class="r"><code>dim(baseball)</code></pre>
+<pre><code>## [1] 21699    22</code></pre>
+<pre class="r"><code>names(baseball)</code></pre>
+<pre><code>##  [1] &quot;id&quot;    &quot;year&quot;  &quot;stint&quot; &quot;team&quot;  &quot;lg&quot;    &quot;g&quot;     &quot;ab&quot;    &quot;r&quot;    
+##  [9] &quot;h&quot;     &quot;X2b&quot;   &quot;X3b&quot;   &quot;hr&quot;    &quot;rbi&quot;   &quot;sb&quot;    &quot;cs&quot;    &quot;bb&quot;   
+## [17] &quot;so&quot;    &quot;ibb&quot;   &quot;hbp&quot;   &quot;sh&quot;    &quot;sf&quot;    &quot;gidp&quot;</code></pre>
+<p>取四列</p>
+<pre class="r"><code>baseballs &lt;- baseball[,c(&quot;id&quot;,&quot;year&quot;,&quot;rbi&quot;,&quot;ab&quot;)]</code></pre>
+<p>取某个运动员的数据子集</p>
+<pre class="r"><code>baberuth &lt;- subset(baseball, id == &quot;ruthba01&quot;)</code></pre>
+<p>计算此运动员的从职业生涯开始到那场比赛的年数</p>
+<pre class="r"><code>baberuth &lt;- transform(baberuth, cyear = year - min(year) + 1)</code></pre>
+</div>
+</div>

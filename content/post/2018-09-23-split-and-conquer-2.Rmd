@@ -1,0 +1,392 @@
+---
+title: 分而治之的策略(2)——plyr包
+author: 王致远
+date: '2018-09-23'
+slug: split-and-conquer-2
+categories:
+  - R语言
+tags:
+  - 分而治之的策略
+  - r包
+  - 学习总结
+---
+
+```{r echo=FALSE}
+library(plyr)
+library(magrittr)
+library(ggplot2)
+```
+
+
+plyr包是Hadley Wickham在早期创作的一个R包，创作时间大约是2011年左右。这个包的主题思想是“The Split-Apply-Combine Strategy”，我将它翻译为“分而治之的策略”。它是指将一个大问题切分为若干个相似的、并列的小问题。如果能找到小问题的解决办法，那么将其平行的运用在其他小问题上，就解决了整个大问题。Wickham为阐述plyr的使用方法，写了一篇论文，投在[《Journal of Statistical Software》](https://www.jstatsoft.org/index)开源期刊上，论文名为[《The Split-Apply-Combine Strategy for Data Analysis》](https://www.jstatsoft.org/article/view/v040i01)。本文便是这篇论文的学习笔记。
+
+*PS：通过这一篇论文的学习，我认为叫“化整为零的策略”似乎更贴切。*
+
+## 1. 引言
+
+分而治之的策略可以应用在数据挖掘的多个阶段中：
+
+1. 在数据预处理阶段，进行分组的排序，标准化，正则化或创建基于组的新变量；
+2. 在数据探索阶段，计算分组的统计量和其他分析与可视化展示；
+3. 在建模阶段，建立分组的模型。这些模型可能本身就很有价值，或者一起构建更加复杂的分层模型。
+
+分而治之的策略和谷歌提出的map-reduce的策略很像。Map-reduce是应用在大规模计算集群上的。
+
+这样的分组计算在其他统计软件上也很常见：Excel的透视表，SQL的group by语句等等。plyr就是这样的R包。plyr能够简化循环，并且忽略数据结构上的差异。
+
+plyr的应用作了如下背景假设：
+
+- 数据中的每一小份都只被计算一次，这意味着如果数据是重叠的就没法应用。
+- 每一次计算独立于其他计算；计算过程不是迭代的。
+
+**注意：**
+
+本文所说的数组（Array）包括了一维数组vectors和二维数组matrices。数组可以是原子的（Logical,character,integer,numeric）；也可以是列表数组（list-array），实际上它是带维度的列表，可以包含不同种类的数据结构。
+
+## 2. 动机
+
+本章主要是论述plyr包的函数相比循环和apply家族函数，更加简洁清晰。
+
+## 3, 使用方法
+
+| Input\\ Output | Array | Data frame | List | Discarded |
+| ------ | ------ | ------ | ------ | ------ | 
+| Array | aaply | adply | alply | a_ply |
+| Data Frame | daply | ddply | dlply | d_ply |
+| List | laply | ldply | llply | l_ply |
+
+### 3.1 输入
+
+输入决定了怎样切分数据。
+
+#### a*ply()
+
+按维度切分数据，将数据切到更低维度。
+
+- .margins = 1 : 将数据切为行；
+- .margins = 2 : 将数据切为列；
+- .margins = c(1,2) ：将数据切为单元；
+
+```{r}
+A <- matrix(1:20, nrow = 5);A
+```
+
+按行求和
+
+```{r}
+aaply(A,1,sum)
+```
+
+按列求和
+
+```{r}
+aaply(A,2,sum)
+```
+
+相当于apply
+
+```{r}
+apply(A,1,sum)
+```
+
+```{r}
+apply(A,2,sum)
+```
+
+#### m*ply()
+
+接收多个变量，有点函数工厂的意思
+
+```{r}
+p <- data.frame(n = c(10,100,50), mean = c(5,5,10), sd = c(1,2,1))
+p
+```
+
+```{r}
+mlply(p,rnorm)
+```
+
+
+#### d*ply()
+
+按变量或变量的组合切分
+
+```{r}
+names(mtcars)
+```
+
+
+```{r}
+ddply(mtcars,"cyl",summarise,MeanMPG = mean(mpg))
+```
+
+```{r}
+ddply(mtcars,"cyl",transform,MPGplus1 = mpg+1) %>% head()
+```
+
+如果.var不是一个变量，而是多个变量，那么分组就是变量的笛卡尔积。
+
+```{r}
+ddply(mtcars,c("cyl","gear"),summarise,MeanMPG = mean(mpg))
+```
+
+
+#### l*ply()
+
+l*ply()按列表元素切分。
+
+### 3.2 输出
+
+输出决定了每一部分怎样聚合在一起，并且怎么打标签（名字）。
+
+不输出_也很重要，比如使用plot或write.table这种不需要返回值的函数。
+
+#### *dply()
+
+返回值会多一个新列，这样便于和原有数据融合。
+
+加工函数要么返回一个数据框，要么返回一个原子向量，被解释为数据框的一行。
+
+#### *lply()
+
+每个加工部分都被添加到一个列表中，并且会存储每一部分的标签名。
+
+```{r}
+dlply(mtcars,"cyl",summarise,MeanMPG = mean(mpg)) %>% ldply()
+```
+
+列表适合用来计算复杂对象（比如模型），然后再将感兴趣的部分抽取到array或dataframe中。
+
+#### *_ply()
+
+不需要返回内容
+
+```{r}
+opar <- par()
+par(mfrow=c(2,2))
+d_ply(mtcars,"cyl",function(x){
+  plot(x[["wt"]],x[["mpg"]],xlab = "wt",ylab="mpg",main = paste("cyl =",x[["cyl"]][1]))
+  abline(lm(x[["mpg"]]~x[["wt"]]))
+})
+par <- opar
+```
+
+## 4. 帮助函数
+
+帮助函数都是一些函数运算符，输入函数，包装为另一个函数。
+
+### 4.1 splat()
+
+将一个需要多个参数的函数转变为需要一个列表作为单一参数的函数。这在计算数据框时很有用，列名自动匹配函数中的参数名。
+
+```{r}
+hp_per_cyl <- function(hp, cyl, ...) hp/cyl
+splat(hp_per_cyl)(mtcars[1,])
+```
+
+```{r}
+splat(hp_per_cyl)(mtcars)
+```
+
+```{r}
+dlply(mtcars,.(round(wt)),function(df) hp_per_cyl(df$hp, df$cyl))
+```
+
+```{r}
+dlply(mtcars,.(round(wt)),splat(hp_per_cyl))
+```
+
+### 4.2 each()
+
+each接收并运算多个函数
+
+```{r}
+ddply(mtcars,"cyl",summarise,MM=each(min,max)(mpg))
+```
+
+```{r}
+ddply(mtcars,"cyl",summarise,M1=min(mpg),M2=max(mpg))
+```
+
+### 4.3 colwise()
+
+将一个用在vector上的函数转变为按列应用在数据框上的，有参数.if = is.factor或if = is.numeric。
+
+```{r}
+mtcars1 <- mtcars
+mtcars1$cyl <- factor(mtcars$cyl)
+mtcars1$vs <- factor(mtcars$vs)
+mtcars1$am <- factor(mtcars$am)
+mtcars1$gear <- factor(mtcars$gear)
+mtcars1$carb <- factor(mtcars$carb)
+```
+
+
+```{r}
+numcolwise(mean)(mtcars1)
+```
+
+```{r}
+colwise(pryr::compose(length,unique))(mtcars[sapply(mtcars1, is.factor)])
+```
+
+### 4.4 failwith()
+
+将一个函数抛出错误变为返回某值
+
+```{r}
+failwith(NA,function(x,y) x+y,quiet = T)("1","2")
+```
+
+### 4.5 as.data.frame.function()
+
+将一个函数返回值强制转变为DataFrame型
+
+### 4.6 summarize()
+
+- transform函数返回变更一列或添加新列的原始数据；
+- summarise函数返回一个新的数据框，包含更改或新列；
+
+```{r}
+ddply(mtcars[1:3],"cyl",transform, A = mpg+1) %>% nrow()
+```
+
+```{r}
+ddply(mtcars[1:3],"cyl",summarise, A = mean(mpg))
+```
+
+### 4.7 .progress参数
+
+- "none"不显示进度
+- "text"显示文本进度
+
+## 5. 策略
+
+通用流程：
+
+1. 抽取数据子集以方便解决问题；
+2. 手动解决子问题，并检验计算结果；
+3. 写一个能解决该子问题的函数；
+4. 在原始数据上使用plyr函数，来应用在每一部分；
+
+### 5.1 案例一：棒球
+
+```{r}
+dim(baseball)
+names(baseball)
+```
+
+取四列
+
+```{r}
+baseballs <- baseball[,c("id","year","rbi","ab")]
+```
+
+取某个运动员的数据子集
+
+```{r}
+baberuth <- subset(baseballs, id == "ruthba01")
+```
+
+计算此运动员的从职业生涯开始到那场比赛的年数
+
+```{r}
+baberuth <- transform(baberuth, cyear = year - min(year) + 1)
+```
+
+那么对于所有运动员，可以这么算
+
+```{r}
+baseball <- ddply(baseballs, "id", transform, cyear = year - min(year) + 1)
+names(baseball)
+```
+
+对于每一个投手，计算rbi/ab随cyear变化的规律
+
+```{r}
+plot(baberuth$cyear,baberuth$rbi/baberuth$ab,type = "l")
+```
+
+```{r eval=FALSE}
+baseball <- subset(baseball, ab >= 25)
+xlim <- range(baseball$cyear, na.rm=T)
+ylim <- range(baseball$rbi/baseball$ab,na.rm=T)
+plotpattern <- function(df){
+  qplot(cyear,rbi/ab,data=df,geom="line",
+        xlim=xlim,ylim=ylim)
+}
+pdf("paths.pdf",width = 8,height = 4)
+d_ply(baseball,.(reorder(id, rbi/ab)),failwith(NA,plotpattern),.print=T,.progress = "text")
+dev.off()
+```
+
+图中似乎看不出什么规律
+
+所以考虑用线性回归拟合模型
+
+```{r}
+model <- function(df){
+  lm(rbi / ab ~ cyear,data=df)
+}
+```
+
+```{r}
+model(baberuth)
+```
+
+```{r}
+summary(model(baberuth))$r.squared
+```
+
+拟合所有的运动员，得到1152个模型
+
+```{r}
+bmodels <- dlply(baseball,"id",model)
+length(bmodels)
+```
+
+提取参数和R方项
+
+```{r}
+rsq <- function(x) summary(x)$r.squared
+bcoefs <- ldply(bmodels,function(x) c(coef(x),rsquare=rsq(x)))
+names(bcoefs)[2:3] <- c("intercept","slope")
+head(bcoefs)
+```
+
+```{r}
+qplot(rsquare,data=bcoefs,geom="histogram")
+```
+
+大多数R方都不理想，有少部分接近于1，提取那部分
+
+```{r}
+baseballcoef <- merge(baseball,bcoefs,by="id")
+subset(baseballcoef,rsquare > 0.999)$id %>% table()
+```
+
+
+所有拟合地好的模型都只有两个点
+
+```{r}
+g <- ggplot(bcoefs,aes(slope,intercept))+
+  geom_point(aes(size=rsquare),colour="steelblue",alpha=0.5)+
+  geom_hline(yintercept = 0)+geom_vline(xintercept = 0)
+g
+```
+
+```{r}
+g+xlim(c(-0.01,0.01))+ylim(c(-0.1,0.25))
+```
+
+R方小的模型，斜率靠近0。
+
+### 5.2 案例二：臭氧层
+
+待补充...
+
+## 7. 总结
+
+plyr包是非常精心设计的，速度非常快，内存使用尽可能最小了。未来还将加入foreach包，来实现多核和多机器计算。
+
+怎样识别其他的通用计算模式？能后退一步来识别这些模式非常难，因为我们很容易被计算的细节所迷惑，而通用的理念变得模糊了。认识到“分而治之”的策略花了Wickham四年的时间，但他认为这个工作很有必要，因为让数据分析变简单了。
