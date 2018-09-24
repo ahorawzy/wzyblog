@@ -2,7 +2,7 @@
 title: 《新京报》40书单
 author: 王致远
 date: '2018-09-24'
-slug: 40-books-list
+slug: books-40-list
 categories: 
   - 读书
 tags: 
