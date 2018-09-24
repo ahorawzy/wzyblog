@@ -1,0 +1,171 @@
+---
+title: 分而治之的策略(3)
+author: 王致远
+date: '2018-09-24'
+slug: split-and-conquer-3
+categories:
+  - R语言
+tags:
+  - 分而治之的策略
+  - 思考
+---
+
+```{r echo=FALSE}
+knitr::opts_chunk$set(message = F,warning = F)
+```
+
+```{r echo=FALSE}
+options(stringsAsFactors = F)
+options(digits = 3)
+rm(list = ls())
+source("D:\\R\\packages\\Mreport\\scripts\\caculate.R", encoding = "utf-8")
+source("D:\\R\\packages\\Mreport\\scripts\\select.R", encoding = "utf-8")
+source("D:\\R\\packages\\Mreport\\scripts\\split.R", encoding = "utf-8")
+```
+
+```{r echo=FALSE}
+library(Mreport)
+library(plyr)
+library(ggplot2)
+library(reshape2)
+library(knitr)
+library(leaflet)
+library(leafletCN)
+```
+
+```{r echo=FALSE}
+load_base()
+load_sample_base()
+```
+
+```{r echo=FALSE}
+jdcity <- read.csv("D:\\data\\sx_raw\\交调数据\\jdcity.csv",stringsAsFactors = F)
+```
+
+
+```{r echo=FALSE}
+set.seed(1234)
+jdcitys <- handle_gather_forym(jdcity)
+jdcitys <- jdcitys[jdcitys$ym != "2018-09月",]
+jdcitys$freight_cars <- rnorm(nrow(jdcitys))
+```
+
+在之前的两篇文章中，我首先用手动版的分而治之解决了工作中遇到的问题，之后根据Hadley的论文学习了plyr的应用方法和思想。在本文中，我将探索使用更多方法来解决第一篇中的问题。
+
+首先还是先得到断面交通量计算数据。
+
+```{r}
+x <- caculate_frecarsmean(jdcitys,c("ym","province","level")) %>% dcast(ym+province~level)
+x <- x[,c(1,2,3,4,6,5)]
+head(x)
+```
+
+### 手动版
+
+回顾手动版是怎么算的。先用split拆分两个数据框得到列表，然后取数字部分，然后使用矩阵乘向量的方法对应相乘，然后打标签，最后汇总成数据框。
+
+现在看来该方法有效，但显得笨重，不轻巧，代码不优美。
+
+```{r}
+caculate_travel_volume <- function(section_volume,mileage,atts){
+  l <- split(section_volume,section_volume[[atts]])
+  m <- split(mileage,mileage[[atts]])
+  l2 <- lapply(l, `[`, 3:6)
+  m2 <- lapply(m, `[`, 2:5)
+  k2 <- list(length = length(l2))
+  for (i in 1:length(l2)) {
+    k2[[i]] <- l2[[i]] * matrix(as.numeric(m2[[names(l2[i])]]),nrow = nrow(l2[[i]]),ncol = 4,byrow=T)
+  }
+  names(k2) <- names(l2)
+  k3 <- lapply(k2, rowSums, na.rm = T)
+  for(i in 1:length(k3)){
+    names(k3[[i]]) <- l[[1]][[1]]
+  }
+  return(data.frame(k3))
+}
+```
+
+
+```{r}
+caculate_travel_volume(x,mileage,"province")
+```
+
+### 探索
+
+根据plyr的思想，先切出一小片数据打通路线，然后再应用在全体数据上。先拿湖北省数据探索，再对省使用plyr。
+
+```{r}
+hb <- subset(x,province == "湖北省")
+head(hb)
+```
+
+```{r}
+mhb <- mileage[mileage$province=="湖北省",]
+mhb
+```
+
+这里定义一个矩阵乘向量的中辍函数%**%，以便简化代码。
+
+```{r}
+`%**%` <- function(A,b){
+  b <- as.matrix(b)
+  if(ncol(A) != length(b)){
+    stop("Different length of matrix and vector.")
+  }
+  B <- matrix(rep(b,nrow(A)),nrow=nrow(A),byrow = T)
+  return(A*B)
+}
+```
+
+定义一个提取数字列的函数。
+
+```{r}
+extractnumcol <- function(df){
+  return(df[sapply(df, is.numeric)])
+}
+```
+
+尝试写的这两个函数是否能够正确运行。
+
+```{r}
+extractnumcol(hb) %**% extractnumcol(mileage[mileage$province == hb$province[1],])
+```
+
+结果是可以的。
+
+### 半自动版
+
+半自动版是先手动拆分，再使用mapply对m和l循环。
+
+注意这里m先将l对应的筛选出来了，所以可以轻巧地使用mapply对二者循环。代码简洁、对称、优美。
+
+```{r}
+l <- split(x,x$province)
+m <- split(mileage,mileage$province)
+m <- m[names(l)]
+```
+
+```{r}
+o <- mapply(function(a,b){rowSums(extractnumcol(a) %**% extractnumcol(b),na.rm=T)},l,m)
+rownames(o) <- l[[1]][[1]];o
+```
+
+### 全自动版
+
+全自动版是使用ddply函数，对province进行循环。但得到的结果是横向的，还需要将其变换成纵向的，多一步变换的步骤。
+
+由于ddply是单变量循环，所以没办法像半自动版一样，在循环外先对m筛选，只能在循环中寻找筛选，所以代码略显臃肿冗余，可读性没有半自动版的强。
+
+```{r}
+o1 <- ddply(x,"province",function(l){
+  rowSums(extractnumcol(l) %**% extractnumcol(mileage[mileage$province == l$province[1],]),na.rm = T)
+})
+rownames(o1) <- o1[,1]
+o1 <- t(o1[,-1]);o1
+```
+
+## 总结
+
+“分而治之的策略”是数据处理和建模中经常用到的方法之一，Hadley也是经过多年思考总结出的这个规律，推动了学科的进步。R语言中有多种函数用来实现这个思想，例如aggregate等，最为突出的是lapply家族和plyr。lapply家族更加通用,plyr家族将其从一组函数上升到一种方法论的高度。但并不是说plyr的方法一定比lapply家族更简单好用，例如本例中使用“半自动法”，先用split拆分，之后筛选m，然后用mapply对l和m同时循环，最后利用拆分后的l给结果打标签，代码简洁优美，可读性最强。
+
+所以要**具体问题具体分析，熟练掌握各种方法的适用范围，使用最适用的方法解决具体问题。**代码的整洁性和优美性不妨作为评价方法好坏的一个指标。

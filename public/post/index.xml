@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 23 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 24 Sep 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>分而治之的策略(3)</title>
+      <link>/post/2018/09/24/split-and-conquer-3/</link>
+      <pubDate>Mon, 24 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/09/24/split-and-conquer-3/</guid>
+      <description>在之前的两篇文章中，我首先用手动版的分而治之解决了工作中遇到的问题，之后根据Hadley的论文学习了plyr的应用方法和思想。在本文中，我将</description>
+    </item>
     
     <item>
       <title>分而治之的策略(2)——plyr包</title>

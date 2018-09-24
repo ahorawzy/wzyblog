@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>分而治之的策略(3) | Website of ZhiYuan Wang</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">主页</a></li>
+      
+      <li><a href="/categories/">分类</a></li>
+      
+      <li><a href="/tags/">标签</a></li>
+      
+      <li><a href="/about/">关于我</a></li>
+      
+      <li><a href="/friendly_links/">链接</a></li>
+      
+      <li><a href="/index.xml">订阅</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">分而治之的策略(3)</span></h1>
+<h2 class="author">王致远</h2>
+<h2 class="date">2018/09/24</h2>
+</div>
+
+<main>
+<p>在之前的两篇文章中，我首先用手动版的分而治之解决了工作中遇到的问题，之后根据Hadley的论文学习了plyr的应用方法和思想。在本文中，我将探索使用更多方法来解决第一篇中的问题。</p>
+<p>首先还是先得到断面交通量计算数据。</p>
+<pre class="r"><code>x &lt;- caculate_frecarsmean(jdcitys,c(&quot;ym&quot;,&quot;province&quot;,&quot;level&quot;)) %&gt;% dcast(ym+province~level)
+x &lt;- x[,c(1,2,3,4,6,5)]
+head(x)</code></pre>
+<pre><code>##          ym province 国家高速 普通国道 省级高速 普通省道
+## 1 2017-01月   湖北省   0.3595   0.1351    0.524  -0.4216
+## 2 2017-01月   上海市   2.0703  -0.7339    0.015   0.7275
+## 3 2017-01月   重庆市       NA   0.0256       NA  -0.0219
+## 4 2017-02月   湖北省  -0.0199  -0.4020    0.446   0.2248
+## 5 2017-02月   上海市  -1.3907  -0.3617    0.236  -0.4434
+## 6 2017-02月   重庆市       NA   0.0608       NA   0.0667</code></pre>
+<div class="section level3">
+<h3>手动版</h3>
+<p>回顾手动版是怎么算的。先用split拆分两个数据框得到列表，然后取数字部分，然后使用矩阵乘向量的方法对应相乘，然后打标签，最后汇总成数据框。</p>
+<p>现在看来该方法有效，但显得笨重，不轻巧，代码不优美。</p>
+<pre class="r"><code>caculate_travel_volume &lt;- function(section_volume,mileage,atts){
+  l &lt;- split(section_volume,section_volume[[atts]])
+  m &lt;- split(mileage,mileage[[atts]])
+  l2 &lt;- lapply(l, `[`, 3:6)
+  m2 &lt;- lapply(m, `[`, 2:5)
+  k2 &lt;- list(length = length(l2))
+  for (i in 1:length(l2)) {
+    k2[[i]] &lt;- l2[[i]] * matrix(as.numeric(m2[[names(l2[i])]]),nrow = nrow(l2[[i]]),ncol = 4,byrow=T)
+  }
+  names(k2) &lt;- names(l2)
+  k3 &lt;- lapply(k2, rowSums, na.rm = T)
+  for(i in 1:length(k3)){
+    names(k3[[i]]) &lt;- l[[1]][[1]]
+  }
+  return(data.frame(k3))
+}</code></pre>
+<pre class="r"><code>caculate_travel_volume(x,mileage,&quot;province&quot;)</code></pre>
+<pre><code>##           湖北省 上海市  重庆市
+## 2017-01月  -3830   1321   -73.8
+## 2017-02月    841   -973   975.4
+## 2017-03月   9477    -60  3512.6
+## 2017-04月  -2003    192 -3255.9
+## 2017-05月   7788   -824 -2600.1
+## 2017-06月  -1981    383 -2786.2
+## 2017-07月   4400   -402 -1286.3
+## 2017-08月   5962    303 -1573.4
+## 2017-09月   5730    290  1094.4
+## 2017-10月  -7381    175  2707.6
+## 2017-11月   6400   -805  1480.0
+## 2017-12月   4146    905  1010.5
+## 2018-01月  -3214    855    95.8
+## 2018-02月  -9807   -763   484.6
+## 2018-03月   1494    -63  -706.6
+## 2018-04月  -1895    208  -272.3
+## 2018-05月   6793  -1610 -3326.3
+## 2018-06月   5141  -1242   892.9
+## 2018-07月  15075    633 -1780.1
+## 2018-08月   8465    211 -1092.6</code></pre>
+</div>
+<div class="section level3">
+<h3>探索</h3>
+<p>根据plyr的思想，先切出一小片数据打通路线，然后再应用在全体数据上。先拿湖北省数据探索，再对省使用plyr。</p>
+<pre class="r"><code>hb &lt;- subset(x,province == &quot;湖北省&quot;)
+head(hb)</code></pre>
+<pre><code>##           ym province 国家高速 普通国道 省级高速 普通省道
+## 1  2017-01月   湖北省   0.3595   0.1351    0.524  -0.4216
+## 4  2017-02月   湖北省  -0.0199  -0.4020    0.446   0.2248
+## 7  2017-03月   湖北省   1.0922   0.0455   -0.440   0.2455
+## 10 2017-04月   湖北省   0.2909  -0.3856   -0.271   0.0309
+## 13 2017-05月   湖北省  -0.5546   0.3216   -0.689   0.4717
+## 16 2017-06月   湖北省  -0.0553  -0.7485    0.124   0.2818</code></pre>
+<pre class="r"><code>mhb &lt;- mileage[mileage$province==&quot;湖北省&quot;,]
+mhb</code></pre>
+<pre><code>##    province 国家高速 普通国道 省级高速 普通省道
+## 17   湖北省     4831     9279     1421    17942</code></pre>
+<p>这里定义一个矩阵乘向量的中辍函数%**%，以便简化代码。</p>
+<pre class="r"><code>`%**%` &lt;- function(A,b){
+  b &lt;- as.matrix(b)
+  if(ncol(A) != length(b)){
+    stop(&quot;Different length of matrix and vector.&quot;)
+  }
+  B &lt;- matrix(rep(b,nrow(A)),nrow=nrow(A),byrow = T)
+  return(A*B)
+}</code></pre>
+<p>定义一个提取数字列的函数。</p>
+<pre class="r"><code>extractnumcol &lt;- function(df){
+  return(df[sapply(df, is.numeric)])
+}</code></pre>
+<p>尝试写的这两个函数是否能够正确运行。</p>
+<pre class="r"><code>extractnumcol(hb) %**% extractnumcol(mileage[mileage$province == hb$province[1],])</code></pre>
+<pre><code>##    国家高速 普通国道 省级高速 普通省道
+## 1      1737     1253    744.2    -7564
+## 4       -96    -3730    634.1     4033
+## 7      5276      422   -625.7     4405
+## 10     1405    -3578   -384.9      555
+## 13    -2679     2984   -979.1     8462
+## 16     -267    -6945    175.6     5056
+## 19      321     5114   -187.4     -847
+## 22     -334     3388   -379.0     3288
+## 25     1324     1577    258.4     2570
+## 28      593    -1053    -52.7    -6869
+## 31     1705     1375    -76.1     3396
+## 34      162    -4524   -813.9     9321
+## 37    -1841    -3148   -216.9     1993
+## 40    -1235    -1430  -1135.7    -6007
+## 43     -437      258    360.9     1312
+## 46     -344     3042   2394.6    -6988
+## 49    -1638     -422   -126.8     8980
+## 52    -1844     2515    633.1     3836
+## 55     3218     4852   -367.0     7372
+## 58     -858     -559   2648.4     7233</code></pre>
+<p>结果是可以的。</p>
+</div>
+<div class="section level3">
+<h3>半自动版</h3>
+<p>半自动版是先手动拆分，再使用mapply对m和l循环。</p>
+<p>注意这里m先将l对应的筛选出来了，所以可以轻巧地使用mapply对二者循环。代码简洁、对称、优美。</p>
+<pre class="r"><code>l &lt;- split(x,x$province)
+m &lt;- split(mileage,mileage$province)
+m &lt;- m[names(l)]</code></pre>
+<pre class="r"><code>o &lt;- mapply(function(a,b){rowSums(extractnumcol(a) %**% extractnumcol(b),na.rm=T)},l,m)
+rownames(o) &lt;- l[[1]][[1]];o</code></pre>
+<pre><code>##           湖北省 上海市  重庆市
+## 2017-01月  -3830   1321   -73.8
+## 2017-02月    841   -973   975.4
+## 2017-03月   9477    -60  3512.6
+## 2017-04月  -2003    192 -3255.9
+## 2017-05月   7788   -824 -2600.1
+## 2017-06月  -1981    383 -2786.2
+## 2017-07月   4400   -402 -1286.3
+## 2017-08月   5962    303 -1573.4
+## 2017-09月   5730    290  1094.4
+## 2017-10月  -7381    175  2707.6
+## 2017-11月   6400   -805  1480.0
+## 2017-12月   4146    905  1010.5
+## 2018-01月  -3214    855    95.8
+## 2018-02月  -9807   -763   484.6
+## 2018-03月   1494    -63  -706.6
+## 2018-04月  -1895    208  -272.3
+## 2018-05月   6793  -1610 -3326.3
+## 2018-06月   5141  -1242   892.9
+## 2018-07月  15075    633 -1780.1
+## 2018-08月   8465    211 -1092.6</code></pre>
+</div>
+<div class="section level3">
+<h3>全自动版</h3>
+<p>全自动版是使用ddply函数，对province进行循环。但得到的结果是横向的，还需要将其变换成纵向的，多一步变换的步骤。</p>
+<p>由于ddply是单变量循环，所以没办法像半自动版一样，在循环外先对m筛选，只能在循环中寻找筛选，所以代码略显臃肿冗余，可读性没有半自动版的强。</p>
+<pre class="r"><code>o1 &lt;- ddply(x,&quot;province&quot;,function(l){
+  rowSums(extractnumcol(l) %**% extractnumcol(mileage[mileage$province == l$province[1],]),na.rm = T)
+})
+rownames(o1) &lt;- o1[,1]
+o1 &lt;- t(o1[,-1]);o1</code></pre>
+<pre><code>##     湖北省 上海市  重庆市
+## V1   -3830   1321   -73.8
+## V2     841   -973   975.4
+## V3    9477    -60  3512.6
+## V4   -2003    192 -3255.9
+## V5    7788   -824 -2600.1
+## V6   -1981    383 -2786.2
+## V7    4400   -402 -1286.3
+## V8    5962    303 -1573.4
+## V9    5730    290  1094.4
+## V10  -7381    175  2707.6
+## V11   6400   -805  1480.0
+## V12   4146    905  1010.5
+## V13  -3214    855    95.8
+## V14  -9807   -763   484.6
+## V15   1494    -63  -706.6
+## V16  -1895    208  -272.3
+## V17   6793  -1610 -3326.3
+## V18   5141  -1242   892.9
+## V19  15075    633 -1780.1
+## V20   8465    211 -1092.6</code></pre>
+</div>
+<div class="section level2">
+<h2>总结</h2>
+<p>“分而治之的策略”是数据处理和建模中经常用到的方法之一，Hadley也是经过多年思考总结出的这个规律，推动了学科的进步。R语言中有多种函数用来实现这个思想，例如aggregate等，最为突出的是lapply家族和plyr。lapply家族更加通用,plyr家族将其从一组函数上升到一种方法论的高度。但并不是说plyr的方法一定比lapply家族更简单好用，例如本例中使用“半自动法”，先用split拆分，之后筛选m，然后用mapply对l和m同时循环，最后利用拆分后的l给结果打标签，代码简洁优美，可读性最强。</p>
+<p>所以要<strong>具体问题具体分析，熟练掌握各种方法的适用范围，使用最适用的方法解决具体问题。</strong>代码的整洁性和优美性不妨作为评价方法好坏的一个指标。</p>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+
+<script>
+hljs.configure({languages: []});
+hljs.initHighlightingOnLoad();
+</script>
+  
+  <hr/>
+  &copy; ZhiYuan Wang 2018
+  
+  </footer>
+  </body>
+</html>
+
