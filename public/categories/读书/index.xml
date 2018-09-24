@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>读书 on Website of ZhiYuan Wang</title>
+    <link>/categories/%E8%AF%BB%E4%B9%A6/</link>
+    <description>Recent content in 读书 on Website of ZhiYuan Wang</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 24 Sep 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/%E8%AF%BB%E4%B9%A6/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>《新京报》40书单</title>
+      <link>/post/2018/09/24/40-books-list/</link>
+      <pubDate>Mon, 24 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/09/24/40-books-list/</guid>
+      <description>《新京报》举办了“大民大国40本书”（1978-2018）影响中国的40本书投票活动，希望以40本书来概括40年的精神潮流，呈现国家与私人生</description>
+    </item>
+    
+  </channel>
+</rss>
