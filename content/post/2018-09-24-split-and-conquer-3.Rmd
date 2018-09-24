@@ -1,5 +1,5 @@
 ---
-title: 分而治之的策略(3)
+title: 分而治之的策略(3)——再思考
 author: 王致远
 date: '2018-09-24'
 slug: split-and-conquer-3
