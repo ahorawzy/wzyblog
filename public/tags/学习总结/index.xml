@@ -6,10 +6,19 @@
     <description>Recent content in 学习总结 on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 23 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 27 Sep 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>leaflet for R(1)</title>
+      <link>/post/2018/09/27/leaflet-for-r-1/</link>
+      <pubDate>Thu, 27 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/09/27/leaflet-for-r-1/</guid>
+      <description>library(leaflet) library(leafletCN) 1. 简介 1.1 leaflet的功能 交互地图浏览（缩放、平移） 使用多种底图进行任意组合 加载地图瓦片（WMTS） 点要素定位标记 多边形要素标记 线要素</description>
+    </item>
     
     <item>
       <title>分而治之的策略(2)——plyr包</title>
