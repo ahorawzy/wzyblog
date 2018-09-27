@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gis on Website of ZhiYuan Wang</title>
+    <link>/tags/gis/</link>
+    <description>Recent content in Gis on Website of ZhiYuan Wang</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 27 Sep 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/gis/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>leaflet for R(1)</title>
+      <link>/post/2018/09/27/leaflet-for-r-1/</link>
+      <pubDate>Thu, 27 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/09/27/leaflet-for-r-1/</guid>
+      <description>1. 简介 1.1 leaflet的功能 交互地图浏览（缩放、平移） 使用多种底图进行任意组合 加载地图瓦片（WMTS） 点要素定位标记 多边形要素标记 线要素标记</description>
+    </item>
+    
+  </channel>
+</rss>
