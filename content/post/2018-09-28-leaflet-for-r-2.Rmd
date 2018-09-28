@@ -1,0 +1,191 @@
+---
+title: leaflet for R(2)—— learletCN
+author: 王致远
+date: '2018-09-28'
+slug: leaflet-for-r-2
+categories:
+  - R语言
+tags:
+  - leaflet
+  - 学习总结
+  - r包
+---
+
+```{r}
+library(leaflet)
+library(leafletCN)
+```
+
+# 10. LeafletCN
+
+## 10.1 函数简介
+
+- regionNames：找地名函数，极其方便 
+- demomap：有地名就给你输出一个交互、动态的区域图，真方便 
+- geojsonMap：作用是分区块标色
+
+- amap ()：中国国情，高德地图的象征 
+- read.geoShape：可以将geojson的对象,保存成spdataframe,以方便leaflet调用 
+- leafletGeo：地图+小显示框，用地图名以及一个数据框创建一个sp的对象 
+
+### regionNames
+
+```{r}
+regionNames("河北")
+```
+
+```{r}
+regionNames("承德市")
+```
+
+regionNames的粒度是省级、县级，在细分就没有了。执行regionNames()之后，可以知道包里面存着哪些地方，是否有你要的内容。
+
+### demomap
+
+```{r}
+#install.packages("rgeos")
+demomap("杭州")
+```
+
+### geojsonMap 地图标色函数
+
+```{r}
+dat = data.frame(name = regionNames("china"),
+                 value = runif(34))
+geojsonMap(dat,"china")
+```
+
+### amap
+
+高德地图
+
+### read.geoShape
+
+```{r}
+if(require(sp)){
+  filePath = system.file("geojson/china.json",package = "leafletCN")
+  map = read.geoShape(filePath)
+  plot(map)
+}
+```
+
+
+## 10.2 案例
+
+### 案例一：单点标记
+
+```{r}
+leaflet() %>%
+  amap() %>%  
+  addMarkers(lng=121.48, lat=31.22, popup="企业天地")
+```
+
+### 案例二：多点标注
+
+```r
+#iconList 生成小框框
+iconList = awesomeIconList(
+  "home" = makeAwesomeIcon(icon = "home",markerColor = "skyblue"),
+  "weixin" = makeAwesomeIcon(icon = "cutlery",markerColor = "red"),
+  "bank" = makeAwesomeIcon(icon = "plus-sign",markerColor = "orange"),
+  "automobile" = makeAwesomeIcon(icon = "trash",markerColor = "purple"),
+  "coffee" = makeAwesomeIcon(icon = "book")
+)
+#每个小框框的坐标，经纬度
+geo = data.frame(lon = rep(121.44, 5),
+                 lat = rep(31.22, 5),
+                 city = rep("Shanghai", 5))
+
+#坐标进行微调，使得有差异
+geo$lon = geo$lon+rnorm(5,0,0.003)
+geo$lat = geo$lat+rnorm(5,0,0.003)
+
+#小框框的属性
+geo$type = c("home",
+             "weixin",
+             "bank" ,
+             "automobile", 
+             "coffee" )
+
+#在高德地图上进行绘制
+leaflet(geo) %>% amap() %>%
+  addMiniMap() %>% 
+  addAwesomeMarkers(icon = ~iconList[type])
+```
+
+### 案例三：分区域显示色彩
+
+```{r}
+if(require(leaflet)){
+  region=regionNames("浙江")
+  dat = data.frame(region,runif(length(region)))
+
+  map = leafletGeo("浙江", dat)
+
+  #涂色环节
+  pal <- colorNumeric(
+    palette = "Blues",
+    domain = map$value)
+
+  #载入高德地图amap
+  leaflet(map) %>% amap() %>%
+  #加入框边界及颜色
+    addPolygons(stroke = TRUE,
+                smoothFactor = 1,
+                fillOpacity = 0.7,
+                weight = 1,
+                color = ~pal(value),
+                popup = ~htmltools::htmlEscape(popup)
+    ) %>%
+    #加入右下角边框
+    addLegend("bottomright", pal = pal, values = ~value,
+              title = "legendTitle",
+              labFormat = leaflet::labelFormat(prefix = ""),
+              opacity = 1)
+}
+```
+
+### 案例四：地图+点集区域+复选框+NASA星空图
+
+```{r}
+#数据生成
+geo = data.frame(long = rep(121.44, 1000),
+                 lat = rep(31.22, 1000),
+                 mag=rep(5,1000))
+#mag函数是用来衡量后面，点集范围大小
+
+geo$long = geo$long+rnorm(1000,0,1)
+geo$lat = geo$lat+rnorm(1000,0,1)
+geo$mag = geo$mag+rnorm(1000,0,1)
+outline <- geo[chull(geo$long, geo$lat),]
+
+
+map <- leaflet(geo) %>%
+
+  # 底层阶段
+  # 第一层底图，高德
+  amap(group = "高德") %>%                        
+  # 第二层底图，黑底图NASA
+  addProviderTiles(providers$NASAGIBS.ViirsEarthAtNight2012, group = "黑底") %>%   
+  # 第三层底图，白底层
+  addProviderTiles(providers$Stamen.TonerLite, group = "白底") %>% 
+
+
+  # 点集+区域轮廓阶段
+  addCircles(~long, ~lat, ~7^mag/50, stroke = F, group = "圈点",color="#97FFFF") %>%          
+  # 描点画圈，stroke=T的话，边界包边，丑
+
+  # 绘制轮廓，利用前面的凸集点
+  addPolygons(data = outline, lng = ~long, lat = ~lat,
+              fill = F, weight = 2, color = "#FFFFCC", group = "轮廓") %>% 
+
+  # 复选框       
+  addLayersControl( 
+    baseGroups = c("高德", "黑底", "白底"),                     
+    #显示层
+    overlayGroups = c("圈点", "轮廓"),
+    options = layersControlOptions(collapsed = FALSE)
+  )
+map
+```
+

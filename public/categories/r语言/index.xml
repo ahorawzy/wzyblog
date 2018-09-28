@@ -6,10 +6,19 @@
     <description>Recent content in R语言 on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 27 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 28 Sep 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/r%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>leaflet for R(2)—— learletCN</title>
+      <link>/post/2018/09/28/leaflet-for-r-2/</link>
+      <pubDate>Fri, 28 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/09/28/leaflet-for-r-2/</guid>
+      <description>library(leaflet) library(leafletCN) 10. LeafletCN 10.1 函数简介 regionNames：找地名函数，极其方便 demomap：有地名就给你输出一个交互、动态的区域图，真方便 geojsonM</description>
+    </item>
     
     <item>
       <title>Rstudio的Git崩溃解决方案</title>
