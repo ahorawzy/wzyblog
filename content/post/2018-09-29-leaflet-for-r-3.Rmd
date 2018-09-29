@@ -1,0 +1,155 @@
+---
+title: leaflet for R(3)——leaflet.extras
+author: 王致远
+date: '2018-09-29'
+slug: leaflet-for-r-3
+categories:
+  - R语言
+tags:
+  - leaflet
+  - r包
+  - 学习总结
+---
+
+# 11 leaflet.extras
+
+## 11.1 addHeatmap
+
+```{r}
+library(leaflet)
+library(leafletCN)
+library(leaflet.extras)
+library(magrittr)
+```
+
+```{r}
+leaflet(quakes) %>% addProviderTiles(providers$Esri.WorldImagery) %>%
+  setView( 178, -20, 5 ) %>%
+    addHeatmap(lng = ~long, lat = ~lat, intensity = ~mag,
+               blur = 20, max = 0.05, radius = 15)
+```
+
+```r
+library(sp)
+jsURL <- 'https://rawgit.com/Norkart/Leaflet-MiniMap/master/example/local_pubs_restaurant_norway.js'
+v8 <- V8::v8()
+v8$source(jsURL)
+geoJson <- geojsonio::as.json(v8$get('pubsGeoJSON'))
+spdf <- geojsonio::geojson_sp(geoJson)
+
+leaflet(spdf) %>%
+  addProviderTiles(providers$Thunderforest.TransportDark) %>%
+  addHeatmap(blur = 20, max = 0.05, radius = 15)
+  
+leaflet(spdf) %>%
+  addProviderTiles(providers$Thunderforest.Transport) %>%
+  addHeatmap(blur = 20, max = 0.05, radius = 15, gradient = 'Greys')
+  
+london.crimes.files <- Sys.glob(
+  paste0(system.file('examples/data/London-Crimes', package='leaflet.extras'),
+         '/*/*-city-of-london-street.csv.zip'))
+london.crimes <- suppressMessages(
+  purrr::map(
+    london.crimes.files,
+    ~readr::read_csv(.) %>%
+      dplyr::select(Latitude, Longitude) %>%
+      dplyr::filter(!is.na(Latitude))) %>%
+  magrittr::set_names(basename(Sys.glob(
+    paste0(system.file('examples/data/London-Crimes', package='leaflet.extras'),
+           '/2016*')))))
+
+leaf <- leaflet() %>%
+  addProviderTiles(providers$CartoDB.Positron)
+
+purrr::walk(
+  names(london.crimes),
+  function(month) {
+    leaf <<- leaf %>%
+      addHeatmap(
+        data = london.crimes[[month]],
+        layerId = month, group = month,
+        lng=~Longitude, lat=~Latitude,
+        blur = 20, max = 0.05, radius = 15)
+  })
+
+leaf %>%
+  setView(-0.094106, 51.515, 14) %>%
+  addLayersControl(
+    baseGroups = names(london.crimes),
+    options = layersControlOptions(collapsed = FALSE)
+  )
+```
+
+## 11.2 addWebGLHeatmap
+
+### 案例一
+
+Just by number of quakes
+
+```{r}
+leaflet(quakes) %>% addProviderTiles(providers$Esri.WorldImagery) %>%
+  addWebGLHeatmap(lng=~long, lat=~lat, size = 60000)
+```
+
+By magnitude
+
+```{r}
+leaflet(quakes) %>% addProviderTiles(providers$Esri.WorldImagery) %>%
+  addWebGLHeatmap(lng=~long, lat=~lat, intensity = ~mag, size=60000)
+```
+
+### 案例二
+
+```r
+library(sp)
+jsURL <- 'https://rawgit.com/Norkart/Leaflet-MiniMap/master/example/local_pubs_restaurant_norway.js'
+v8 <- V8::v8()
+v8$source(jsURL)
+geoJson <- geojsonio::as.json(v8$get('pubsGeoJSON'))
+spdf <- geojsonio::geojson_sp(geoJson)
+```
+
+Size in meters
+
+```r
+leaflet(spdf) %>%
+  addProviderTiles(providers$Esri.WorldImagery) %>%
+  addWebGLHeatmap(size=60000)
+```
+
+Size in Pixels
+
+```r
+leaflet(spdf) %>%
+  addProviderTiles(providers$Esri.WorldImagery) %>%
+  addWebGLHeatmap(size=25,units='px')
+```
+
+### 案例三
+
+```{r}
+library(dplyr)
+jsURL <- 'http://leaflet.github.io/Leaflet.markercluster/example/realworld.10000.js'
+v8 <- V8::v8()
+v8$source(jsURL)
+
+df <- data.frame(v8$get('addressPoints')[,c(1,2)], stringsAsFactors = F) %>%
+  dplyr::mutate_each(dplyr::funs(as.numeric))
+colnames(df) <- c('lat','lng')
+```
+
+Size in Meters
+
+```{r}
+leaflet(df) %>%
+  addTiles() %>%
+  addWebGLHeatmap(lng=~lng, lat=~lat,size=1000)
+```
+
+Size in Pixels
+
+```{r}
+leaflet(df) %>%
+  addTiles() %>%
+  addWebGLHeatmap(lng=~lng, lat=~lat,size=20,units='px')
+```
