@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>stringr学习总结 | Website of ZhiYuan Wang</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">主页</a></li>
+      
+      <li><a href="/categories/">分类</a></li>
+      
+      <li><a href="/tags/">标签</a></li>
+      
+      <li><a href="/about/">关于我</a></li>
+      
+      <li><a href="/friendly_links/">链接</a></li>
+      
+      <li><a href="/index.xml">订阅</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">stringr学习总结</span></h1>
+<h2 class="author">王致远</h2>
+<h2 class="date">2018/09/30</h2>
+</div>
+
+<main>
+<div id="TOC">
+<ul>
+<li><a href="#stringr">1. stringr包函数一览</a><ul>
+<li><a>1.1 字符串拼接函数</a></li>
+<li><a>1.2 字符串计算函数</a></li>
+<li><a>1.3 字符串匹配函数</a></li>
+<li><a>1.4 字符串变换函数</a></li>
+<li><a>1.5 参数控制函数，仅用于构造功能的参数，不能独立使用。</a></li>
+</ul></li>
+<li><a>2. 详细函数</a><ul>
+<li><a href="#-1">2.1 字符串拼接函数</a><ul>
+<li><a href="#str_c">2.1.1 str_c</a></li>
+<li><a href="#str_trim-tab">2.1.2 str_trim 去掉字符串空格和TAB</a></li>
+<li><a href="#str_pad-">2.1.3 str_pad 补充字符串长度</a></li>
+<li><a href="#str_dup">2.1.3 str_dup复制字符串</a></li>
+<li><a href="#str_wrap-">2.1.4 str_wrap 控制字符串输出格式</a></li>
+<li><a href="#str_sub-">2.1.5 str_sub 截取字符串</a></li>
+</ul></li>
+<li><a href="#-1">2.2 字符串计算函数</a><ul>
+<li><a href="#str_count-">2.2.1 str_count, 字符串计数</a></li>
+<li><a href="#str_length">2.2.2 str_length，字符串长度</a></li>
+<li><a href="#str_sort">2.2.3 str_sort，字符串排序</a></li>
+</ul></li>
+<li><a href="#-1">2.3 字符串匹配函数</a><ul>
+<li><a href="#str_split">2.3.1 str_split,字符串分割</a></li>
+<li><a href="#str_subset">2.3.2 str_subset:返回的匹配字符串</a></li>
+<li><a href="#word-">2.3.3 word, 从文本中提取单词（适用于英语环境下的使用）</a></li>
+<li><a href="#str_detect">2.3.4 str_detect匹配字符串的字符</a></li>
+<li><a href="#str_match">2.3.5 str_match,从字符串中提取匹配组</a></li>
+<li><a href="#str_replace">2.3.6 str_replace，字符串替换</a></li>
+<li><a href="#str_replace_nanana">2.3.7 str_replace_na把NA替换为NA字符串</a></li>
+<li><a href="#str_locate">2.3.8 str_locate，找到的模式在字符串中的位置</a></li>
+<li><a href="#str_extract">2.3.9 str_extract从字符串中提取匹配模式</a></li>
+</ul></li>
+<li><a href="#-1">2.4 字符串变换函数</a><ul>
+<li><a>2.4.1 字符串编码转换</a></li>
+<li><a href="#str_to_upper">2.4.2 str_to_upper,字符串大写转换</a></li>
+</ul></li>
+</ul></li>
+<li><a>3. 正则表达式</a><ul>
+<li><a>3.1 转义字符</a></li>
+<li><a>3.2 字符类</a></li>
+<li><a>3.3 重复</a></li>
+<li><a>3.4 锚</a></li>
+<li><a>3.5 修饰符</a></li>
+<li><a>3.6 选择、分组、引用</a></li>
+</ul></li>
+</ul>
+</div>
+
+<pre class="r"><code>library(stringr)</code></pre>
+<div id="stringr" class="section level1">
+<h1>1. stringr包函数一览</h1>
+<div class="section level2">
+<h2>1.1 字符串拼接函数</h2>
+<ul>
+<li>str_c: 字符串拼接。</li>
+<li>str_join: 字符串拼接，同str_c。</li>
+<li>str_trim: 去掉字符串的空格和TAB()</li>
+<li>str_pad: 补充字符串的长度</li>
+<li>str_dup: 复制字符串</li>
+<li>str_wrap: 控制字符串输出格式</li>
+<li>str_sub: 截取字符串</li>
+<li>str_sub&lt;- 截取字符串，并赋值，同str_sub</li>
+</ul>
+</div>
+<div class="section level2">
+<h2>1.2 字符串计算函数</h2>
+<ul>
+<li>str_count: 字符串计数</li>
+<li>str_length: 字符串长度</li>
+<li>str_sort: 字符串值排序</li>
+<li>str_order: 字符串索引排序，规则同str_sort</li>
+</ul>
+</div>
+<div class="section level2">
+<h2>1.3 字符串匹配函数</h2>
+<ul>
+<li>str_split: 字符串分割</li>
+<li>str_split_fixed: 字符串分割，同str_split</li>
+<li>str_subset: 返回匹配的字符串</li>
+<li>word: 从文本中提取单词</li>
+<li>str_detect: 检查匹配字符串的字符</li>
+<li>str_match: 从字符串中提取匹配组。</li>
+<li>str_match_all: 从字符串中提取匹配组，同str_match</li>
+<li>str_replace: 字符串替换</li>
+<li>str_replace_all: 字符串替换，同str_replace</li>
+<li>str_replace_na:把NA替换为NA字符串</li>
+<li>str_locate: 找到匹配的字符串的位置。</li>
+<li>str_locate_all: 找到匹配的字符串的位置,同str_locate</li>
+<li>str_extract: 从字符串中提取匹配字符</li>
+<li>str_extract_all: 从字符串中提取匹配字符，同str_extract</li>
+</ul>
+</div>
+<div class="section level2">
+<h2>1.4 字符串变换函数</h2>
+<ul>
+<li>str_conv: 字符编码转换</li>
+<li>str_to_upper: 字符串转成大写</li>
+<li>str_to_lower: 字符串转成小写,规则同str_to_upper</li>
+<li>str_to_title: 字符串转成首字母大写,规则同str_to_upper</li>
+</ul>
+</div>
+<div class="section level2">
+<h2>1.5 参数控制函数，仅用于构造功能的参数，不能独立使用。</h2>
+<ul>
+<li>boundary: 定义使用边界</li>
+<li>coll: 定义字符串标准排序规则。</li>
+<li>fixed: 定义用于匹配的字符，包括正则表达式中的转义符</li>
+<li>regex: 定义正则表达式</li>
+</ul>
+</div>
+</div>
+<div class="section level1">
+<h1>2. 详细函数</h1>
+<div id="-1" class="section level2">
+<h2>2.1 字符串拼接函数</h2>
+<div id="str_c" class="section level3">
+<h3>2.1.1 str_c</h3>
+<p>str_c(…, sep = “”, collapse = NULL)</p>
+<ul>
+<li>sep: 把多个字符串拼接为一个大的字符串，用于字符串的分割符；</li>
+<li>collapse: 把多个向量参数拼接为一个大的字符串，用于字符串的分割符。</li>
+</ul>
+<pre class="r"><code>str_c(c(&#39;a&#39;,&#39;a1&#39;),c(&#39;b&#39;,&#39;b1&#39;),sep=&#39;-&#39;)</code></pre>
+<pre><code>## [1] &quot;a-b&quot;   &quot;a1-b1&quot;</code></pre>
+<pre class="r"><code>str_c(letters[1:5], &quot; is for&quot;, &quot;...&quot;) </code></pre>
+<pre><code>## [1] &quot;a is for...&quot; &quot;b is for...&quot; &quot;c is for...&quot; &quot;d is for...&quot; &quot;e is for...&quot;</code></pre>
+<pre class="r"><code>str_c(&#39;a&#39;,&#39;b&#39;,sep=&#39;-&#39;)#sep可设置连接符</code></pre>
+<pre><code>## [1] &quot;a-b&quot;</code></pre>
+<pre class="r"><code>str_c(&#39;a&#39;,&#39;b&#39;,collapse = &quot;-&quot;) # collapse参数，对多个字符串无效</code></pre>
+<pre><code>## [1] &quot;ab&quot;</code></pre>
+<pre class="r"><code>str_c(c(&#39;a&#39;,&#39;a1&#39;),c(&#39;b&#39;,&#39;b1&#39;),collapse=&#39;-&#39;) </code></pre>
+<pre><code>## [1] &quot;ab-a1b1&quot;</code></pre>
+<pre class="r"><code>str_c(head(letters), collapse = &quot;&quot;) #把多个向量参数拼接为一个大的字符串</code></pre>
+<pre><code>## [1] &quot;abcdef&quot;</code></pre>
+<pre class="r"><code>str_c(head(letters), collapse = &quot;, &quot;)</code></pre>
+<pre><code>## [1] &quot;a, b, c, d, e, f&quot;</code></pre>
+<pre class="r"><code>str_c(letters[-26], &quot; comes before &quot;, letters[-1])</code></pre>
+<pre><code>##  [1] &quot;a comes before b&quot; &quot;b comes before c&quot; &quot;c comes before d&quot;
+##  [4] &quot;d comes before e&quot; &quot;e comes before f&quot; &quot;f comes before g&quot;
+##  [7] &quot;g comes before h&quot; &quot;h comes before i&quot; &quot;i comes before j&quot;
+## [10] &quot;j comes before k&quot; &quot;k comes before l&quot; &quot;l comes before m&quot;
+## [13] &quot;m comes before n&quot; &quot;n comes before o&quot; &quot;o comes before p&quot;
+## [16] &quot;p comes before q&quot; &quot;q comes before r&quot; &quot;r comes before s&quot;
+## [19] &quot;s comes before t&quot; &quot;t comes before u&quot; &quot;u comes before v&quot;
+## [22] &quot;v comes before w&quot; &quot;w comes before x&quot; &quot;x comes before y&quot;
+## [25] &quot;y comes before z&quot;</code></pre>
+<pre class="r"><code>str_c(letters)</code></pre>
+<pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot;
+## [18] &quot;r&quot; &quot;s&quot; &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot; &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
+<div id="str_c-vs.-paste" class="section level4">
+<h4>str_c VS. paste</h4>
+<p>sep行为不一致，str_c无空格</p>
+<pre class="r"><code>str_c(&#39;a&#39;,&#39;b&#39;)</code></pre>
+<pre><code>## [1] &quot;ab&quot;</code></pre>
+<pre class="r"><code>paste(&#39;a&#39;,&#39;b&#39;)</code></pre>
+<pre><code>## [1] &quot;a b&quot;</code></pre>
+<p>collapse行为一致</p>
+<pre class="r"><code>str_c(letters, collapse = &quot;&quot;)</code></pre>
+<pre><code>## [1] &quot;abcdefghijklmnopqrstuvwxyz&quot;</code></pre>
+<pre class="r"><code>paste(letters, collapse = &quot;&quot;)</code></pre>
+<pre><code>## [1] &quot;abcdefghijklmnopqrstuvwxyz&quot;</code></pre>
+<p>对于空值处置不一致</p>
+<pre class="r"><code>str_c(c(&quot;a&quot;, NA, &quot;b&quot;), &quot;-d&quot;)</code></pre>
+<pre><code>## [1] &quot;a-d&quot; NA    &quot;b-d&quot;</code></pre>
+<pre class="r"><code>paste(c(&quot;a&quot;, NA, &quot;b&quot;), &quot;-d&quot;)</code></pre>
+<pre><code>## [1] &quot;a -d&quot;  &quot;NA -d&quot; &quot;b -d&quot;</code></pre>
+</div>
+</div>
+<div id="str_trim-tab" class="section level3">
+<h3>2.1.2 str_trim 去掉字符串空格和TAB</h3>
+<p>str_trim(string, side = c(“both”, “left”, “right”))</p>
+</div>
+<div id="str_pad-" class="section level3">
+<h3>2.1.3 str_pad 补充字符串长度</h3>
+<p>str_pad(string, width, side = c(“left”, “right”, “both”), pad = &quot; “)</p>
+<ul>
+<li>string: 字符串，字符串向量；</li>
+<li>width: 字符串填充后的长度；</li>
+<li>side: 填充方向，both两边都填充，left左边填充，right右边填充；</li>
+<li>pad: 用于填充的字符；</li>
+</ul>
+</div>
+<div id="str_dup" class="section level3">
+<h3>2.1.3 str_dup复制字符串</h3>
+<p>str_dup(string, times)</p>
+<pre class="r"><code>val &lt;- c(&quot;abca4&quot;, 123, &quot;cba2&quot;)
+str_dup(val, 2)</code></pre>
+<pre><code>## [1] &quot;abca4abca4&quot; &quot;123123&quot;     &quot;cba2cba2&quot;</code></pre>
+<p>按位置复制</p>
+<pre class="r"><code>str_dup(val, 1:3)</code></pre>
+<pre><code>## [1] &quot;abca4&quot;        &quot;123123&quot;       &quot;cba2cba2cba2&quot;</code></pre>
+</div>
+<div id="str_wrap-" class="section level3">
+<h3>2.1.4 str_wrap 控制字符串输出格式</h3>
+<ul>
+<li>string: 字符串，字符串向量。</li>
+<li>width: 设置一行所占的宽度。</li>
+<li>indent: 段落首行的缩进值</li>
+<li>exdent: 设置第二行后每行缩进</li>
+</ul>
+</div>
+<div id="str_sub-" class="section level3">
+<h3>2.1.5 str_sub 截取字符串</h3>
+<p>str_sub(string, start = 1L, end = -1L)</p>
+<ul>
+<li>string: 字符串，字符串向量。</li>
+<li>start : 开始位置</li>
+<li>end : 结束位置</li>
+</ul>
+<p>str_sub(string, start = 1L, end = -1L) 提取子字符串</p>
+<p>str_sub(string, start = 1L, end = -1L) &lt;- value 替换子字符串</p>
+<pre class="r"><code>txt &lt;- &quot;I am a little bird&quot;
+str_sub(txt, 1, 4) # 截取1-4的索引位置的字符串</code></pre>
+<pre><code>## [1] &quot;I am&quot;</code></pre>
+<pre class="r"><code>str_sub(txt, end=6) # 截取1-6的索引位置的字符串</code></pre>
+<pre><code>## [1] &quot;I am a&quot;</code></pre>
+<pre class="r"><code>str_sub(txt, 6) # 截取6到结束的索引位置的字符串</code></pre>
+<pre><code>## [1] &quot;a little bird&quot;</code></pre>
+<pre class="r"><code>str_sub(txt, c(1, 4), c(6, 8)) # 分2段截取字符串</code></pre>
+<pre><code>## [1] &quot;I am a&quot; &quot;m a l&quot;</code></pre>
+<pre class="r"><code>str_sub(txt, -3) # 通过负坐标截取字符串</code></pre>
+<pre><code>## [1] &quot;ird&quot;</code></pre>
+<pre class="r"><code>str_sub(txt, end = -3)</code></pre>
+<pre><code>## [1] &quot;I am a little bi&quot;</code></pre>
+<pre class="r"><code>x &lt;- &quot;AAABBBCCC&quot; #对截取的字符串进行赋值。
+str_sub(x, 1, 1) &lt;- 1; x ## 在字符串的1的位置赋值为1</code></pre>
+<pre><code>## [1] &quot;1AABBBCCC&quot;</code></pre>
+<pre class="r"><code>str_sub(x, 2, -2) &lt;- &quot;2345&quot;; x ## 在字符串从2到-2的位置赋值为2345</code></pre>
+<pre><code>## [1] &quot;12345C&quot;</code></pre>
+</div>
+</div>
+<div id="-1" class="section level2">
+<h2>2.2 字符串计算函数</h2>
+<div id="str_count-" class="section level3">
+<h3>2.2.1 str_count, 字符串计数</h3>
+<p>str_count(string, pattern = “”)</p>
+<ul>
+<li>string: 字符串，字符串向量。</li>
+<li>pattern: 匹配的字符。</li>
+</ul>
+<pre class="r"><code>words &lt;- c(&quot;These are some words.&quot;)
+str_count(words)</code></pre>
+<pre><code>## [1] 21</code></pre>
+<p>统计单词个数</p>
+<pre class="r"><code>str_count(words, boundary(&quot;word&quot;))</code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="r"><code>str_split(words, &quot; &quot;)[[1]]</code></pre>
+<pre><code>## [1] &quot;These&quot;  &quot;are&quot;    &quot;some&quot;   &quot;words.&quot;</code></pre>
+<pre class="r"><code>str_split(words, boundary(&quot;word&quot;))[[1]]</code></pre>
+<pre><code>## [1] &quot;These&quot; &quot;are&quot;   &quot;some&quot;  &quot;words&quot;</code></pre>
+<pre class="r"><code>string&lt;-c(&#39;ning xiao li&#39;,&#39;zhang san&#39;,&#39;zhao guo nan&#39;)
+str_count(string,&#39;i&#39;)</code></pre>
+<pre><code>## [1] 3 0 0</code></pre>
+</div>
+<div id="str_length" class="section level3">
+<h3>2.2.2 str_length，字符串长度</h3>
+<pre class="r"><code>str_length(c(&quot;I&quot;, &quot;am&quot;, &quot;宁小丽&quot;, NA))</code></pre>
+<pre><code>## [1]  1  2  3 NA</code></pre>
+</div>
+<div id="str_sort" class="section level3">
+<h3>2.2.3 str_sort，字符串排序</h3>
+<ul>
+<li>str_sort(x, decreasing = FALSE, na_last = TRUE, locale = “”, …)</li>
+<li>str_order(x, decreasing = FALSE, na_last = TRUE, locale = “”, …)</li>
+</ul>
+<p>locale:按哪种语言习惯排序</p>
+<pre class="r"><code>str_order(c(&#39;wo&#39;,&#39;love&#39;,&#39;five&#39;,&#39;stars&#39;,&#39;red&#39;,&#39;flag&#39;),locale = &quot;en&quot;) </code></pre>
+<pre><code>## [1] 3 6 2 5 4 1</code></pre>
+<pre class="r"><code>str_sort(c(&#39;wo&#39;,&#39;love&#39;,&#39;five&#39;,&#39;stars&#39;,&#39;red&#39;,&#39;flag&#39;),locale = &quot;en&quot;) # 按ASCII字母排序</code></pre>
+<pre><code>## [1] &quot;five&quot;  &quot;flag&quot;  &quot;love&quot;  &quot;red&quot;   &quot;stars&quot; &quot;wo&quot;</code></pre>
+<pre class="r"><code>str_sort(c(&#39;wo&#39;,&#39;love&#39;,&#39;five&#39;,&#39;stars&#39;,&#39;red&#39;,&#39;flag&#39;),,decreasing=TRUE) # 倒序排序</code></pre>
+<pre><code>## [1] &quot;wo&quot;    &quot;stars&quot; &quot;red&quot;   &quot;love&quot;  &quot;flag&quot;  &quot;five&quot;</code></pre>
+<pre class="r"><code>str_sort(c(&#39;我&#39;,&#39;爱&#39;,&#39;五&#39;,&#39;星&#39;,&#39;红&#39;,&#39;旗&#39;),locale = &quot;zh&quot;) # 按拼音排序</code></pre>
+<pre><code>## [1] &quot;爱&quot; &quot;红&quot; &quot;旗&quot; &quot;我&quot; &quot;五&quot; &quot;星&quot;</code></pre>
+</div>
+</div>
+<div id="-1" class="section level2">
+<h2>2.3 字符串匹配函数</h2>
+<div id="str_split" class="section level3">
+<h3>2.3.1 str_split,字符串分割</h3>
+<ul>
+<li>str_split(string, pattern, n = Inf)</li>
+<li>str_split_fixed(string, pattern, n)</li>
+</ul>
+<p>参数列表：</p>
+<ul>
+<li>string: 字符串，字符串向量。</li>
+<li>pattern: 匹配的字符。</li>
+<li>n: 分割个数 #最后一组就不会被分割</li>
+</ul>
+<pre class="r"><code>val &lt;- &quot;abc,123,234,iuuu&quot;
+s1&lt;-str_split(val, &quot;,&quot;);s1</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;abc&quot;  &quot;123&quot;  &quot;234&quot;  &quot;iuuu&quot;</code></pre>
+<pre class="r"><code>s2&lt;-str_split(val, &quot;,&quot;,2);s2</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;abc&quot;          &quot;123,234,iuuu&quot;</code></pre>
+<pre class="r"><code>class(s1)</code></pre>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+<pre class="r"><code>s3&lt;-str_split_fixed(val, &quot;,&quot;,2);s3</code></pre>
+<pre><code>##      [,1]  [,2]          
+## [1,] &quot;abc&quot; &quot;123,234,iuuu&quot;</code></pre>
+<pre class="r"><code>class(s3)</code></pre>
+<pre><code>## [1] &quot;matrix&quot;</code></pre>
+</div>
+<div id="str_subset" class="section level3">
+<h3>2.3.2 str_subset:返回的匹配字符串</h3>
+<p>str_subset(string, pattern)</p>
+<p>string: 字符串，字符串向量。 pattern: 匹配的字符。</p>
+<pre class="r"><code>fruit &lt;- c(&quot;apple&quot;, &quot;banana&quot;, &quot;pear&quot;, &quot;pinapple&quot;) 
+str_subset(fruit, &quot;a&quot;) ## 全文匹配</code></pre>
+<pre><code>## [1] &quot;apple&quot;    &quot;banana&quot;   &quot;pear&quot;     &quot;pinapple&quot;</code></pre>
+<pre class="r"><code>str_subset(fruit, &quot;ap&quot;) ##返回含字符&#39;ap&#39;的单词</code></pre>
+<pre><code>## [1] &quot;apple&quot;    &quot;pinapple&quot;</code></pre>
+<pre class="r"><code>str_subset(fruit, &quot;^a&quot;) ## 开头匹配</code></pre>
+<pre><code>## [1] &quot;apple&quot;</code></pre>
+<pre class="r"><code>str_subset(fruit, &quot;a$&quot;) ## 结尾匹配</code></pre>
+<pre><code>## [1] &quot;banana&quot;</code></pre>
+<pre class="r"><code>str_subset(fruit, &quot;b&quot;) ##返回含字符&#39;b&#39;的单词</code></pre>
+<pre><code>## [1] &quot;banana&quot;</code></pre>
+<pre class="r"><code>str_subset(fruit, &quot;[aeiou]&quot;) ##返回含&#39;aeiou&#39;任一个字符的单词</code></pre>
+<pre><code>## [1] &quot;apple&quot;    &quot;banana&quot;   &quot;pear&quot;     &quot;pinapple&quot;</code></pre>
+<pre class="r"><code>str_subset(c(&quot;a&quot;, NA, &quot;b&quot;), &quot;.&quot;) #丢弃空值</code></pre>
+<pre><code>## [1] &quot;a&quot; &quot;b&quot;</code></pre>
+<pre class="r"><code>string &lt;- &#39;My name is ABDATA, I’m 27.&#39;
+str_sub(string, -3,-2) &lt;- 25; string</code></pre>
+<pre><code>## [1] &quot;My name is ABDATA, I’m 25.&quot;</code></pre>
+<p>str_subset()函数与word()函数的区别在于前者提取字符串的子串，后者提取的是单词,而且str_sub也可以其替换的作用。</p>
+</div>
+<div id="word-" class="section level3">
+<h3>2.3.3 word, 从文本中提取单词（适用于英语环境下的使用）</h3>
+<p>函数定义：word(string, start = 1L, end = start, sep = fixed(&quot; “))</p>
+<p>参数列表：</p>
+<ul>
+<li>string: 字符串，字符串向量。</li>
+<li>start: 开始位置。</li>
+<li>end: 结束位置。</li>
+<li>sep: 匹配字符。</li>
+</ul>
+</div>
+<div id="str_detect" class="section level3">
+<h3>2.3.4 str_detect匹配字符串的字符</h3>
+<p>函数定义：str_detect(string, pattern)</p>
+<p>参数列表： - string: 字符串，字符串向量。 - pattern: 匹配字符。</p>
+<pre class="r"><code>val &lt;- c(&quot;abca4&quot;, 123, &quot;cba2&quot;)
+str_detect(val, &quot;a&quot;)</code></pre>
+<pre><code>## [1]  TRUE FALSE  TRUE</code></pre>
+<pre class="r"><code>str_detect(val, &quot;^a&quot;)</code></pre>
+<pre><code>## [1]  TRUE FALSE FALSE</code></pre>
+<pre class="r"><code>str_detect(val, &quot;a$&quot;)</code></pre>
+<pre><code>## [1] FALSE FALSE FALSE</code></pre>
+</div>
+<div id="str_match" class="section level3">
+<h3>2.3.5 str_match,从字符串中提取匹配组</h3>
+<p>函数定义：</p>
+<ul>
+<li>str_match(string, pattern)</li>
+<li>str_match_all(string, pattern)</li>
+</ul>
+<p>参数列表：</p>
+<ul>
+<li>string: 字符串，字符串向量。</li>
+<li>pattern: 匹配字符。</li>
+</ul>
+<pre class="r"><code>val &lt;- c(&quot;abc&quot;, 123, &quot;cba&quot;) # 从字符串中提取匹配组
+str_match(val, &quot;a&quot;)</code></pre>
+<pre><code>##      [,1]
+## [1,] &quot;a&quot; 
+## [2,] NA  
+## [3,] &quot;a&quot;</code></pre>
+<pre class="r"><code>str_match(val, &quot;[0-9]&quot;) # 匹配字符0-9，限1个，并返回对应的字符</code></pre>
+<pre><code>##      [,1]
+## [1,] NA  
+## [2,] &quot;1&quot; 
+## [3,] NA</code></pre>
+<pre class="r"><code>str_match(val, &quot;[0-9]*&quot;) # 匹配字符0-9，不限数量，并返回对应的字符</code></pre>
+<pre><code>##      [,1] 
+## [1,] &quot;&quot;   
+## [2,] &quot;123&quot;
+## [3,] &quot;&quot;</code></pre>
+<pre class="r"><code>str_match_all(val, &quot;a&quot;) #从字符串中提取匹配组，以字符串matrix格式返回</code></pre>
+<pre><code>## [[1]]
+##      [,1]
+## [1,] &quot;a&quot; 
+## 
+## [[2]]
+##      [,1]
+## 
+## [[3]]
+##      [,1]
+## [1,] &quot;a&quot;</code></pre>
+<pre class="r"><code>str_match_all(val, &quot;[0-9]&quot;)</code></pre>
+<pre><code>## [[1]]
+##      [,1]
+## 
+## [[2]]
+##      [,1]
+## [1,] &quot;1&quot; 
+## [2,] &quot;2&quot; 
+## [3,] &quot;3&quot; 
+## 
+## [[3]]
+##      [,1]</code></pre>
+</div>
+<div id="str_replace" class="section level3">
+<h3>2.3.6 str_replace，字符串替换</h3>
+<p>函数定义：str_replace(string, pattern, replacement)</p>
+<p>参数列表：</p>
+<ul>
+<li>string: 字符串，字符串向量。</li>
+<li>pattern: 匹配字符。</li>
+<li>replacement: 用于替换的字符。</li>
+</ul>
+<pre class="r"><code>val &lt;- c(&quot;abc&quot;, 123, &quot;cba&quot;)
+str_replace(val, &quot;[ab]&quot;, &quot;-&quot;) #替换第一个匹配的字符# 把目标字符串第一个出现的a或b，替换为-</code></pre>
+<pre><code>## [1] &quot;-bc&quot; &quot;123&quot; &quot;c-a&quot;</code></pre>
+<pre class="r"><code>str_replace_all(val, &quot;[ab]&quot;, &quot;-&quot;) #替换所有匹配的字符 # 把目标字符串所有出现的a或b，替换为-</code></pre>
+<pre><code>## [1] &quot;--c&quot; &quot;123&quot; &quot;c--&quot;</code></pre>
+<pre class="r"><code>str_replace_all(val, &quot;[a]&quot;, &quot;\1\1&quot;) # 把目标字符串所有出现的a，替换为被转义的字符</code></pre>
+<pre><code>## [1] &quot;\001\001bc&quot; &quot;123&quot;        &quot;cb\001\001&quot;</code></pre>
+</div>
+<div id="str_replace_nanana" class="section level3">
+<h3>2.3.7 str_replace_na把NA替换为NA字符串</h3>
+<p>str_replace_na(string, replacement = “NA”)</p>
+</div>
+<div id="str_locate" class="section level3">
+<h3>2.3.8 str_locate，找到的模式在字符串中的位置</h3>
+<pre class="r"><code>val</code></pre>
+<pre><code>## [1] &quot;abc&quot; &quot;123&quot; &quot;cba&quot;</code></pre>
+<pre class="r"><code>str_locate(val, &quot;a&quot;)</code></pre>
+<pre><code>##      start end
+## [1,]     1   1
+## [2,]    NA  NA
+## [3,]     3   3</code></pre>
+<pre class="r"><code>str_locate(val, c(&quot;a&quot;, 12, &quot;b&quot;))</code></pre>
+<pre><code>##      start end
+## [1,]     1   1
+## [2,]     1   2
+## [3,]     2   2</code></pre>
+<pre class="r"><code>str_locate_all(val, &quot;a&quot;)</code></pre>
+<pre><code>## [[1]]
+##      start end
+## [1,]     1   1
+## 
+## [[2]]
+##      start end
+## 
+## [[3]]
+##      start end
+## [1,]     3   3</code></pre>
+<pre class="r"><code>str_locate_all(val, &quot;[ab]&quot;)</code></pre>
+<pre><code>## [[1]]
+##      start end
+## [1,]     1   1
+## [2,]     2   2
+## 
+## [[2]]
+##      start end
+## 
+## [[3]]
+##      start end
+## [1,]     2   2
+## [2,]     3   3</code></pre>
+</div>
+<div id="str_extract" class="section level3">
+<h3>2.3.9 str_extract从字符串中提取匹配模式</h3>
+<p>函数定义：</p>
+<ul>
+<li>str_extract(string, pattern)</li>
+<li>str_extract_all(string, pattern, simplify = FALSE)</li>
+</ul>
+<p>参数列表：</p>
+<ul>
+<li>string: 字符串，字符串向量;</li>
+<li>pattern: 匹配字符;</li>
+<li>simplify: 返回值，TRUE返回matrix，FALSE返回字符串向量;</li>
+</ul>
+<pre class="r"><code>shopping_list &lt;- c(&quot;apples 4x4&quot;, &quot;bag of flour&quot;, &quot;bag of sugar&quot;, &quot;milk x2&quot;) </code></pre>
+<pre class="r"><code>str_extract(shopping_list, &quot;\\d&quot;) # 提取数字 #提取匹配模式的第一个字符串</code></pre>
+<pre><code>## [1] &quot;4&quot; NA  NA  &quot;2&quot;</code></pre>
+<pre class="r"><code>str_extract(shopping_list, &quot;[a-z]+&quot;) #提取字母</code></pre>
+<pre><code>## [1] &quot;apples&quot; &quot;bag&quot;    &quot;bag&quot;    &quot;milk&quot;</code></pre>
+<pre class="r"><code>str_extract_all(shopping_list, &quot;[a-z]+&quot;) # 提取所有匹配模式的字母，结果返回一个列表</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;apples&quot; &quot;x&quot;     
+## 
+## [[2]]
+## [1] &quot;bag&quot;   &quot;of&quot;    &quot;flour&quot;
+## 
+## [[3]]
+## [1] &quot;bag&quot;   &quot;of&quot;    &quot;sugar&quot;
+## 
+## [[4]]
+## [1] &quot;milk&quot; &quot;x&quot;</code></pre>
+<pre class="r"><code>str_extract_all(shopping_list, &quot;\\d&quot;) # 提取所有匹配模式的数字</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;4&quot; &quot;4&quot;
+## 
+## [[2]]
+## character(0)
+## 
+## [[3]]
+## character(0)
+## 
+## [[4]]
+## [1] &quot;2&quot;</code></pre>
+<pre class="r"><code>str_extract_all(shopping_list, &quot;\\b[a-z]+\\b&quot;, simplify = TRUE) </code></pre>
+<pre><code>##      [,1]     [,2] [,3]   
+## [1,] &quot;apples&quot; &quot;&quot;   &quot;&quot;     
+## [2,] &quot;bag&quot;    &quot;of&quot; &quot;flour&quot;
+## [3,] &quot;bag&quot;    &quot;of&quot; &quot;sugar&quot;
+## [4,] &quot;milk&quot;   &quot;&quot;   &quot;&quot;</code></pre>
+<pre class="r"><code>str_extract_all(shopping_list, &quot;\\d&quot;, simplify = TRUE)</code></pre>
+<pre><code>##      [,1] [,2]
+## [1,] &quot;4&quot;  &quot;4&quot; 
+## [2,] &quot;&quot;   &quot;&quot;  
+## [3,] &quot;&quot;   &quot;&quot;  
+## [4,] &quot;2&quot;  &quot;&quot;</code></pre>
+<p>str_extract(string, pattern) 提取匹配的第一个字符串</p>
+<p>str_extract_all(string, pattern, simplify = FALSE) 提取匹配的所有字符串</p>
+<p>功能与str_match(),str_match_all()函数类似</p>
+</div>
+</div>
+<div id="-1" class="section level2">
+<h2>2.4 字符串变换函数</h2>
+<div class="section level3">
+<h3>2.4.1 字符串编码转换</h3>
+<p>str_conv(string, encoding)</p>
+<p>参数列表：</p>
+<ul>
+<li>string: 字符串，字符串向量。</li>
+<li>encoding: 编码名。</li>
+</ul>
+<pre class="r"><code>x &lt;- charToRaw(&#39;你好&#39;);x</code></pre>
+<pre><code>## [1] c4 e3 ba c3</code></pre>
+<pre class="r"><code>str_conv(x, &quot;GBK&quot;)</code></pre>
+<pre><code>## [1] &quot;你好&quot;</code></pre>
+<pre class="r"><code>str_conv(x, &quot;GB2312&quot;)</code></pre>
+<pre><code>## [1] &quot;你好&quot;</code></pre>
+<pre class="r"><code>str_conv(x, &quot;UTF-8&quot;)</code></pre>
+<pre><code>## Warning in stri_conv(string, encoding, &quot;UTF-8&quot;): input data \xffffffc4 in
+## current source encoding could not be converted to Unicode</code></pre>
+<pre><code>## Warning in stri_conv(string, encoding, &quot;UTF-8&quot;): input data
+## \xffffffe3\xffffffba in current source encoding could not be converted to
+## Unicode</code></pre>
+<pre><code>## Warning in stri_conv(string, encoding, &quot;UTF-8&quot;): input data \xffffffc3 in
+## current source encoding could not be converted to Unicode</code></pre>
+<pre><code>## [1] &quot;&lt;U+FFFD&gt;&lt;U+FFFD&gt;&lt;U+FFFD&gt;&quot;</code></pre>
+<p>Unicode转UTF-8</p>
+<pre class="r"><code>x1 &lt;- &quot;\u5317\u4eac&quot;
+str_conv(x1, &quot;UTF-8&quot;)</code></pre>
+<pre><code>## [1] &quot;北京&quot;</code></pre>
+</div>
+<div id="str_to_upper" class="section level3">
+<h3>2.4.2 str_to_upper,字符串大写转换</h3>
+<ul>
+<li>str_to_upper(string, locale = “”)</li>
+<li>str_to_lower(string, locale = “”)</li>
+<li>str_to_title(string, locale = “”)</li>
+</ul>
+<pre class="r"><code>val &lt;- &quot;I am conan. Welcome to my blog! http://fens.me&quot;
+str_to_upper(val)</code></pre>
+<pre><code>## [1] &quot;I AM CONAN. WELCOME TO MY BLOG! HTTP://FENS.ME&quot;</code></pre>
+<pre class="r"><code>str_to_lower(val)</code></pre>
+<pre><code>## [1] &quot;i am conan. welcome to my blog! http://fens.me&quot;</code></pre>
+<pre class="r"><code>str_to_title(val)</code></pre>
+<pre><code>## [1] &quot;I Am Conan. Welcome To My Blog! Http://Fens.me&quot;</code></pre>
+</div>
+</div>
+</div>
+<div class="section level1">
+<h1>3. 正则表达式</h1>
+<div class="section level2">
+<h2>3.1 转义字符</h2>
+<ul>
+<li>NUL字符（000）</li>
+<li>制表符（009）</li>
+<li>换行符（00A）</li>
+<li>直制表符（00B）</li>
+<li>换页符（00C）</li>
+<li>回车符（00D）</li>
+<li>十六进制拉丁字符</li>
+<li></li>
+<li>控制字符</li>
+</ul>
+</div>
+<div class="section level2">
+<h2>3.2 字符类</h2>
+<ul>
+<li>[…] 方括号内任意字符</li>
+<li>[^...] 不在方括号内任意字符</li>
+<li>. 除换行符和其他unicode行终止符之外的任意字符</li>
+<li>等价于[a-zA-Z0-9]</li>
+<li>等价于[^a-zA-Z0-9]</li>
+<li>任何unicode空白符</li>
+<li>任何非unicode空白符</li>
+<li>等价于[0-9]</li>
+<li>等价于[^0-9]</li>
+<li>[] 退格</li>
+</ul>
+</div>
+<div class="section level2">
+<h2>3.3 重复</h2>
+<ul>
+<li>{n,m} 匹配前一项至少n次，不超过m次</li>
+<li>{n,} 匹配前一项至少n次</li>
+</ul>
+</div>
+<div class="section level2">
+<h2>3.4 锚</h2>
+<ul>
+<li>^ 匹配字符串开头，多行匹配一行的开头</li>
+<li>$ 匹配字符串结尾，多行匹配一行的结尾</li>
+<li>匹配一个单词的边界，位于</li>
+<li>匹配非单词边界</li>
+<li>(?=p) 要求接下来的字符都与p匹配，但不能包括匹配p的那些字符</li>
+<li>(?!p) 要求接下来的字符不与p匹配</li>
+</ul>
+</div>
+<div class="section level2">
+<h2>3.5 修饰符</h2>
+<ul>
+<li>i，忽略大小写</li>
+<li>m，多行匹配模式</li>
+<li>g，全局匹配</li>
+</ul>
+</div>
+<div class="section level2">
+<h2>3.6 选择、分组、引用</h2>
+<p>“|”与逻辑表达式中的或类似，前后两者任意一个匹配。</p>
+<p>圆括号用来分组和引用 - {n} 匹配前一项n次 - ? 等价于{0,1} - + 等价于{1,} - * 等价于{0,}</p>
+</div>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+
+<script>
+hljs.configure({languages: []});
+hljs.initHighlightingOnLoad();
+</script>
+  
+  <hr/>
+  &copy; ZhiYuan Wang 2018
+  
+  </footer>
+  </body>
+</html>
+

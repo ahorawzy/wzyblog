@@ -1,0 +1,611 @@
+---
+title: stringr学习总结
+author: 王致远
+date: '2018-09-30'
+slug: learn-stringr
+categories:
+  - R语言
+tags:
+  - r包
+  - 学习总结
+  - 数据结构
+output:
+  blogdown::html_page:
+    toc: true
+---
+
+
+```{r}
+library(stringr)
+```
+
+# 1. stringr包函数一览
+
+## 1.1 字符串拼接函数
+
+- str_c:	字符串拼接。
+- str_join:	字符串拼接，同str_c。
+- str_trim:	去掉字符串的空格和TAB(\t)
+- str_pad:	补充字符串的长度
+- str_dup:	复制字符串
+- str_wrap:	控制字符串输出格式
+- str_sub:	截取字符串
+- str_sub<-	截取字符串，并赋值，同str_sub
+
+## 1.2 字符串计算函数
+
+- str_count:	字符串计数
+- str_length:	字符串长度
+- str_sort:	字符串值排序
+- str_order:	字符串索引排序，规则同str_sort
+
+## 1.3 字符串匹配函数
+
+- str_split:	字符串分割
+- str_split_fixed: 字符串分割，同str_split
+- str_subset: 返回匹配的字符串
+- word:	从文本中提取单词
+- str_detect: 检查匹配字符串的字符
+- str_match:	从字符串中提取匹配组。
+- str_match_all: 从字符串中提取匹配组，同str_match
+- str_replace: 字符串替换
+- str_replace_all: 字符串替换，同str_replace
+- str_replace_na:把NA替换为NA字符串
+- str_locate: 找到匹配的字符串的位置。
+- str_locate_all: 找到匹配的字符串的位置,同str_locate
+- str_extract: 从字符串中提取匹配字符
+- str_extract_all: 从字符串中提取匹配字符，同str_extract
+
+## 1.4 字符串变换函数
+
+- str_conv:	字符编码转换
+- str_to_upper: 字符串转成大写
+- str_to_lower: 字符串转成小写,规则同str_to_upper
+- str_to_title: 字符串转成首字母大写,规则同str_to_upper
+
+## 1.5 参数控制函数，仅用于构造功能的参数，不能独立使用。
+
+- boundary:	定义使用边界
+- coll:	定义字符串标准排序规则。
+- fixed:	定义用于匹配的字符，包括正则表达式中的转义符
+- regex:	定义正则表达式
+
+# 2. 详细函数
+
+## 2.1 字符串拼接函数
+
+### 2.1.1 str_c
+
+str_c(..., sep = "", collapse = NULL)
+
+- sep: 把多个字符串拼接为一个大的字符串，用于字符串的分割符；
+- collapse: 把多个向量参数拼接为一个大的字符串，用于字符串的分割符。
+
+```{r}
+str_c(c('a','a1'),c('b','b1'),sep='-')
+```
+
+```{r}
+str_c(letters[1:5], " is for", "...") 
+```
+
+```{r}
+str_c('a','b',sep='-')#sep可设置连接符
+```
+
+```{r}
+str_c('a','b',collapse = "-") # collapse参数，对多个字符串无效
+```
+
+```{r}
+str_c(c('a','a1'),c('b','b1'),collapse='-') 
+```
+
+```{r}
+str_c(head(letters), collapse = "") #把多个向量参数拼接为一个大的字符串
+```
+
+```{r}
+str_c(head(letters), collapse = ", ")
+```
+
+```{r}
+str_c(letters[-26], " comes before ", letters[-1])
+```
+
+```{r}
+str_c(letters)
+```
+
+#### str_c VS. paste
+
+sep行为不一致，str_c无空格
+
+```{r}
+str_c('a','b')
+```
+
+```{r}
+paste('a','b')
+```
+
+collapse行为一致
+
+```{r}
+str_c(letters, collapse = "")
+```
+
+```{r}
+paste(letters, collapse = "")
+```
+
+对于空值处置不一致
+
+```{r}
+str_c(c("a", NA, "b"), "-d")
+```
+
+```{r}
+paste(c("a", NA, "b"), "-d")
+```
+
+### 2.1.2 str_trim 去掉字符串空格和TAB
+
+str_trim(string, side = c("both", "left", "right"))
+
+### 2.1.3 str_pad 补充字符串长度
+
+str_pad(string, width, side = c("left", "right", "both"), pad = " ")
+
+- string: 字符串，字符串向量；
+- width: 字符串填充后的长度；
+- side: 填充方向，both两边都填充，left左边填充，right右边填充；
+- pad: 用于填充的字符；
+
+### 2.1.3 str_dup复制字符串
+
+str_dup(string, times)
+
+```{r}
+val <- c("abca4", 123, "cba2")
+str_dup(val, 2)
+```
+
+按位置复制
+
+```{r}
+str_dup(val, 1:3)
+```
+
+### 2.1.4 str_wrap 控制字符串输出格式
+
+- string: 字符串，字符串向量。
+- width: 设置一行所占的宽度。
+- indent: 段落首行的缩进值
+- exdent: 设置第二行后每行缩进 
+
+### 2.1.5 str_sub 截取字符串
+
+str_sub(string, start = 1L, end = -1L)
+
+- string: 字符串，字符串向量。
+- start : 开始位置
+- end : 结束位置
+
+str_sub(string, start = 1L, end = -1L) 提取子字符串
+
+str_sub(string, start = 1L, end = -1L) <- value 替换子字符串
+
+```{r}
+txt <- "I am a little bird"
+str_sub(txt, 1, 4) # 截取1-4的索引位置的字符串
+```
+
+```{r}
+str_sub(txt, end=6) # 截取1-6的索引位置的字符串
+```
+
+```{r}
+str_sub(txt, 6) # 截取6到结束的索引位置的字符串
+```
+
+```{r}
+str_sub(txt, c(1, 4), c(6, 8)) # 分2段截取字符串
+```
+
+```{r}
+str_sub(txt, -3) # 通过负坐标截取字符串
+```
+
+```{r}
+str_sub(txt, end = -3)
+```
+
+```{r}
+x <- "AAABBBCCC" #对截取的字符串进行赋值。
+str_sub(x, 1, 1) <- 1; x ## 在字符串的1的位置赋值为1
+```
+
+```{r}
+str_sub(x, 2, -2) <- "2345"; x ## 在字符串从2到-2的位置赋值为2345
+```
+
+## 2.2 字符串计算函数
+
+### 2.2.1 str_count, 字符串计数 
+
+str_count(string, pattern = "")
+
+- string: 字符串，字符串向量。
+- pattern: 匹配的字符。
+
+```{r}
+words <- c("These are some words.")
+str_count(words)
+```
+
+统计单词个数
+
+```{r}
+str_count(words, boundary("word"))
+```
+
+```{r}
+str_split(words, " ")[[1]]
+```
+
+```{r}
+str_split(words, boundary("word"))[[1]]
+```
+
+```{r}
+string<-c('ning xiao li','zhang san','zhao guo nan')
+str_count(string,'i')
+```
+
+### 2.2.2 str_length，字符串长度
+
+```{r}
+str_length(c("I", "am", "宁小丽", NA))
+```
+
+
+### 2.2.3 str_sort，字符串排序
+
+- str_sort(x, decreasing = FALSE, na_last = TRUE, locale = "", ...)
+- str_order(x, decreasing = FALSE, na_last = TRUE, locale = "", ...)
+
+locale:按哪种语言习惯排序
+
+```{r}
+str_order(c('wo','love','five','stars','red','flag'),locale = "en") 
+str_sort(c('wo','love','five','stars','red','flag'),locale = "en") # 按ASCII字母排序
+str_sort(c('wo','love','five','stars','red','flag'),,decreasing=TRUE) # 倒序排序
+str_sort(c('我','爱','五','星','红','旗'),locale = "zh") # 按拼音排序
+```
+
+## 2.3 字符串匹配函数
+
+### 2.3.1 str_split,字符串分割
+
+- str_split(string, pattern, n = Inf)
+- str_split_fixed(string, pattern, n)
+
+参数列表：
+
+- string: 字符串，字符串向量。
+- pattern: 匹配的字符。
+- n: 分割个数  #最后一组就不会被分割
+
+```{r}
+val <- "abc,123,234,iuuu"
+s1<-str_split(val, ",");s1
+s2<-str_split(val, ",",2);s2
+class(s1)
+s3<-str_split_fixed(val, ",",2);s3
+class(s3)
+```
+
+### 2.3.2 str_subset:返回的匹配字符串
+
+str_subset(string, pattern)
+
+string: 字符串，字符串向量。
+pattern: 匹配的字符。
+
+```{r}
+fruit <- c("apple", "banana", "pear", "pinapple") 
+str_subset(fruit, "a") ## 全文匹配
+```
+
+```{r}
+str_subset(fruit, "ap") ##返回含字符'ap'的单词
+```
+
+```{r}
+str_subset(fruit, "^a") ## 开头匹配
+```
+
+```{r}
+str_subset(fruit, "a$") ## 结尾匹配
+```
+
+```{r}
+str_subset(fruit, "b") ##返回含字符'b'的单词
+```
+
+```{r}
+str_subset(fruit, "[aeiou]") ##返回含'aeiou'任一个字符的单词
+```
+
+```{r}
+str_subset(c("a", NA, "b"), ".") #丢弃空值
+```
+
+```{r}
+string <- 'My name is ABDATA, I’m 27.'
+str_sub(string, -3,-2) <- 25; string
+```
+
+str_subset()函数与word()函数的区别在于前者提取字符串的子串，后者提取的是单词,而且str_sub也可以其替换的作用。
+
+### 2.3.3 word, 从文本中提取单词（适用于英语环境下的使用）
+
+函数定义：word(string, start = 1L, end = start, sep = fixed(" "))
+
+参数列表：
+
+- string: 字符串，字符串向量。
+- start: 开始位置。
+- end: 结束位置。
+- sep: 匹配字符。
+
+### 2.3.4 str_detect匹配字符串的字符
+
+函数定义：str_detect(string, pattern)
+
+参数列表：
+- string: 字符串，字符串向量。
+- pattern: 匹配字符。
+
+```{r}
+val <- c("abca4", 123, "cba2")
+str_detect(val, "a")
+```
+
+```{r}
+str_detect(val, "^a")
+```
+
+```{r}
+str_detect(val, "a$")
+```
+
+### 2.3.5 str_match,从字符串中提取匹配组
+
+函数定义：
+
+- str_match(string, pattern)
+- str_match_all(string, pattern)
+
+参数列表：
+
+- string: 字符串，字符串向量。
+- pattern: 匹配字符。
+
+```{r}
+val <- c("abc", 123, "cba") # 从字符串中提取匹配组
+str_match(val, "a")
+```
+
+```{r}
+str_match(val, "[0-9]") # 匹配字符0-9，限1个，并返回对应的字符
+```
+
+```{r}
+str_match(val, "[0-9]*") # 匹配字符0-9，不限数量，并返回对应的字符
+```
+
+```{r}
+str_match_all(val, "a") #从字符串中提取匹配组，以字符串matrix格式返回
+```
+
+```{r}
+str_match_all(val, "[0-9]")
+```
+
+
+### 2.3.6 str_replace，字符串替换
+
+函数定义：str_replace(string, pattern, replacement)
+
+参数列表：
+
+- string: 字符串，字符串向量。
+- pattern: 匹配字符。
+- replacement: 用于替换的字符。
+
+```{r}
+val <- c("abc", 123, "cba")
+str_replace(val, "[ab]", "-") #替换第一个匹配的字符# 把目标字符串第一个出现的a或b，替换为-
+str_replace_all(val, "[ab]", "-") #替换所有匹配的字符 # 把目标字符串所有出现的a或b，替换为-
+str_replace_all(val, "[a]", "\1\1") # 把目标字符串所有出现的a，替换为被转义的字符
+```
+
+### 2.3.7 str_replace_na把NA替换为NA字符串
+
+str_replace_na(string, replacement = "NA")
+
+### 2.3.8 str_locate，找到的模式在字符串中的位置
+
+```{r}
+val
+```
+
+```{r}
+str_locate(val, "a")
+```
+
+```{r}
+str_locate(val, c("a", 12, "b"))
+```
+
+```{r}
+str_locate_all(val, "a")
+```
+
+```{r}
+str_locate_all(val, "[ab]")
+```
+
+### 2.3.9 str_extract从字符串中提取匹配模式
+
+函数定义：
+
+- str_extract(string, pattern)
+- str_extract_all(string, pattern, simplify = FALSE)
+
+参数列表：
+
+- string: 字符串，字符串向量;
+- pattern: 匹配字符;
+- simplify: 返回值，TRUE返回matrix，FALSE返回字符串向量;
+
+```{r}
+shopping_list <- c("apples 4x4", "bag of flour", "bag of sugar", "milk x2") 
+```
+
+```{r}
+str_extract(shopping_list, "\\d") # 提取数字 #提取匹配模式的第一个字符串
+```
+
+```{r}
+str_extract(shopping_list, "[a-z]+") #提取字母
+```
+
+```{r}
+str_extract_all(shopping_list, "[a-z]+") # 提取所有匹配模式的字母，结果返回一个列表
+```
+
+
+```{r}
+str_extract_all(shopping_list, "\\d") # 提取所有匹配模式的数字
+```
+
+```{r}
+str_extract_all(shopping_list, "\\b[a-z]+\\b", simplify = TRUE) 
+```
+
+```{r}
+str_extract_all(shopping_list, "\\d", simplify = TRUE)
+```
+
+str_extract(string, pattern) 提取匹配的第一个字符串
+
+str_extract_all(string, pattern, simplify = FALSE) 提取匹配的所有字符串
+
+功能与str_match(),str_match_all()函数类似
+
+## 2.4 字符串变换函数
+
+### 2.4.1 字符串编码转换
+
+str_conv(string, encoding)
+
+参数列表：
+
+- string: 字符串，字符串向量。
+- encoding: 编码名。
+
+```{r}
+x <- charToRaw('你好');x
+```
+
+```{r}
+str_conv(x, "GBK")
+```
+
+```{r}
+str_conv(x, "GB2312")
+```
+
+```{r}
+str_conv(x, "UTF-8")
+```
+
+Unicode转UTF-8
+
+```{r}
+x1 <- "\u5317\u4eac"
+str_conv(x1, "UTF-8")
+```
+
+### 2.4.2 str_to_upper,字符串大写转换
+
+- str_to_upper(string, locale = "")
+- str_to_lower(string, locale = "")
+- str_to_title(string, locale = "")
+
+```{r}
+val <- "I am conan. Welcome to my blog! http://fens.me"
+str_to_upper(val)
+str_to_lower(val)
+str_to_title(val)
+```
+
+# 3. 正则表达式
+
+## 3.1 转义字符
+
+- \o NUL字符（\u0000）
+- \t 制表符（\0009）
+- \n 换行符（\000A）
+- \v 垂直制表符（\u000B）
+- \f 换页符（\000C）
+- \r 回车符（\000D）
+- \xnn 十六进制拉丁字符
+- \uxxxx十六进制unicode字符
+- \cX 控制字符
+
+## 3.2 字符类
+
+- [...] 方括号内任意字符
+- [^...] 不在方括号内任意字符
+- . 除换行符和其他unicode行终止符之外的任意字符
+- \w 等价于[a-zA-Z0-9]
+- \W 等价于[^a-zA-Z0-9]
+- \s 任何unicode空白符
+- \S 任何非unicode空白符
+- \d 等价于[0-9]
+- \D 等价于[^0-9]
+- [\b] 退格
+
+## 3.3 重复
+
+- {n,m} 匹配前一项至少n次，不超过m次
+- {n,} 匹配前一项至少n次
+
+## 3.4 锚
+
+- ^ 匹配字符串开头，多行匹配一行的开头
+- $ 匹配字符串结尾，多行匹配一行的结尾
+- \b 匹配一个单词的边界，位于\w和\W之间的位置
+- \B 匹配非单词边界
+- (?=p) 要求接下来的字符都与p匹配，但不能包括匹配p的那些字符
+- (?!p) 要求接下来的字符不与p匹配
+
+## 3.5 修饰符
+
+- i，忽略大小写
+- m，多行匹配模式
+- g，全局匹配
+
+## 3.6 选择、分组、引用
+
+“|”与逻辑表达式中的或类似，前后两者任意一个匹配。
+
+圆括号用来分组和引用
+- {n} 匹配前一项n次
+- ? 等价于{0,1}
+- + 等价于{1,}
+- * 等价于{0,}
