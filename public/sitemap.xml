@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/2018/10/01/quyuanjiasheng-biography/</loc>
+    <lastmod>2018-10-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/2018/09/30/learn-stringr/</loc>
     <lastmod>2018-09-30T00:00:00+00:00</lastmod>
   </url>
@@ -89,7 +94,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-09-30T00:00:00+00:00</lastmod>
+    <lastmod>2018-10-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -100,7 +105,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2018-09-30T00:00:00+00:00</lastmod>
+    <lastmod>2018-10-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -153,6 +158,12 @@
   </url>
   
   <url>
+    <loc>/tags/%E5%8F%B2%E8%AE%B0/</loc>
+    <lastmod>2018-10-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</loc>
     <lastmod>2018-09-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -164,7 +175,7 @@
   
   <url>
     <loc>/tags/%E6%80%9D%E8%80%83/</loc>
-    <lastmod>2018-09-24T00:00:00+00:00</lastmod>
+    <lastmod>2018-10-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -188,13 +199,13 @@
   
   <url>
     <loc>/categories/%E8%AF%BB%E4%B9%A6/</loc>
-    <lastmod>2018-09-26T00:00:00+00:00</lastmod>
+    <lastmod>2018-10-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2018-09-26T00:00:00+00:00</lastmod>
+    <lastmod>2018-10-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
