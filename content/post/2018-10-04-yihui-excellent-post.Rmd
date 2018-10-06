@@ -51,3 +51,14 @@ tags:
 2. 在某方面有天赋不是成功的充分条件，每个人的知识和时间都是有限的。
 3. 学会做好重要的事，而不是自己喜欢的事。自己喜欢的事容易做好，但学习去做重要的事更有必要。
 4. 你需要指出拖延的内在和外在原因，并从根本上解决拖延问题。
+
+[The First Notebook War](https://yihui.name/en/2018/09/notebook-war/)讲了在Python的Jupyter大会上，邀请了一位嘉宾 Joel Grus，此人说他不喜欢Notebook，并列举了很多理由。有人形容这是“第一次Notebook大战”（不是Jupyter和R Notebook之战，而是Notebook和IDE之战）。之后谢根据 Joel Grus 所说的几个论点来一一解释，并将其映射到R世界里，看R是怎么解决问题的。**其核心观点是：R更善于数据分析，Python更善于软件工程。对于软件工程来说，Notebook绝对不是好工具，会培养很多坏习惯；但对数据分析来说，是个好的工具。**
+
+- 新手们往往在以乱序执行Chunk的时候把程序搞乱，但只要培养起经常从头执行一遍的习惯就能避免该问题。
+- Notebook的好处在于，人们能够近距离接触到代码和数据，及时得到反馈；并且程序（组）是可重复的。
+- 在Jupyter里提到的一些问题，在R中能有效避免，因为Rstudio是一个“IDE+Notebook”的组合。
+- Notebook是个临时做数据分析的环境，可能会很乱，不要把它给老板或顾客看。
+- 如果想随时编译文档，那么使用xaringen的“无限月读”功能；
+- 如果你想同时做软件工程和数据分析，那么就开发一个R包，而不是将代码堆在notebook中。
+
+> people are often preoccupied with what they can do and don’t think about whether they should do it.
