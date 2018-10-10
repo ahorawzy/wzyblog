@@ -1,0 +1,59 @@
+---
+title: 合并列表
+author: 王致远
+date: '2018-10-10'
+slug: merge-list
+categories:
+  - R语言
+tags:
+  - 解决方案
+  - 思考
+  - 泛函
+---
+
+今天在工作中遇到一个问题：当我用lapply处理完一个列表后，会得到结果列表。结果列表的某一列都是相同的索引，我需要把列表中每一个元素都根据索引合并到一个DataFrame中，该怎么操作？
+
+比如结果列表是l。
+
+```{r}
+l1 <- replicate(5,round(runif(10),3),simplify = F)
+l2 <- replicate(5,sample(1:10,10),simplify = F)
+l <- vector(mode = "list",length = 5)
+for(i in 1:5){
+  l[[i]][[1]] <- l2[[i]]
+  l[[i]][[2]] <- l1[[i]]
+  l[[i]] <- data.frame(l[[i]])
+  names(l[[i]]) <- c("v1","v2")
+}
+l
+```
+
+比较常规的操作是写一个类似于Reduce的函数，用循环完成。
+
+```{r warning=FALSE}
+merge_reduce <- function(l,atts){
+  num <- length(l)
+  k <- l[[1]]
+  for(i in 2:num){
+    k <- merge(k,l[[i]],by=atts)
+  }
+  return(k)
+}
+merge_reduce(l,"v1")
+```
+
+但是用循环完成，仍不是最优美的方式。
+
+考虑使用泛函，写一个mege_list的闭包，可以提供一个bywhat的参数，然后再用Reduce递归使用merge_list。
+
+```{r warning=FALSE}
+merge_list <- function(bywhat){
+  function(df1,df2){
+    merge(df1,df2,by=bywhat)
+  }
+}
+Reduce(merge_list(bywhat = "v1"),l)
+```
+
+在简单的几行代码中，运用到了闭包和Reduce的泛函，非常简洁优美。
+
