@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>文件的批量处理 | Website of ZhiYuan Wang</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">主页</a></li>
+      
+      <li><a href="/categories/">分类</a></li>
+      
+      <li><a href="/tags/">标签</a></li>
+      
+      <li><a href="/about/">关于我</a></li>
+      
+      <li><a href="/friendly_links/">链接</a></li>
+      
+      <li><a href="/index.xml">订阅</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">文件的批量处理</span></h1>
+<h2 class="author">王致远</h2>
+<h2 class="date">2018/10/11</h2>
+</div>
+
+<main>
+<p>今天我要面对之前一直想正面解决的一个问题：文件的批量操作。但之前对列表这种数据结构认识不深刻，不敢用也不会用，所以一直没能真正解决。</p>
+<p>通过《Advanced R》里关于列表和泛函的操作，我现在已经有信心通过列表来进行文件的批量操作了。这篇文章仅展示批量操作的代码，并不运行。</p>
+<div class="section level3">
+<h3>批量读取</h3>
+<pre class="r"><code>years &lt;- c(2018,2017,2016,2015,2014)
+gqall &lt;- list()
+for(i in 1:length(years)){
+  path &lt;- paste(c(&quot;D:\\jdnational&quot;,years[i],&quot;.csv&quot;),collapse=&quot;&quot;)
+  gqall[[i]] &lt;- read.csv(path)
+}
+names(gqall) &lt;- years</code></pre>
+</div>
+<div class="section level3">
+<h3>批量看维度</h3>
+<pre class="r"><code>sapply(gqall, dim)</code></pre>
+</div>
+<div class="section level3">
+<h3>批量预处理</h3>
+<pre class="r"><code>gqalls &lt;- lapply(gqall, handle_gather_formd)
+gqalls &lt;- lapply(gqalls, guoqing_transform)</code></pre>
+</div>
+<div class="section level3">
+<h3>批量筛数据</h3>
+<pre class="r"><code>usefulstation &lt;- intersect(gqalls[[1]]$index,gqalls[[2]]$index)
+gqalls &lt;- lapply(gqalls,function(x) x[x[[&quot;index&quot;]] %in% usefulstation,] )</code></pre>
+</div>
+<div class="section level3">
+<h3>抽取</h3>
+<pre class="r"><code>gq2018s &lt;- gqalls[[1]]
+gq2017s &lt;- gqalls[[2]]</code></pre>
+</div>
+<div class="section level3">
+<h3>合并列表计算结果</h3>
+<pre class="r"><code>x &lt;- lapply(gqalls, caculate_carsmean, &quot;md&quot;)
+y &lt;- Reduce(merge_list(bywhat=&quot;md&quot;),x)
+names(y)[2:6] &lt;- names(x)
+y
+y &lt;- melt(y)</code></pre>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+
+<script>
+hljs.configure({languages: []});
+hljs.initHighlightingOnLoad();
+</script>
+  
+  <hr/>
+  &copy; ZhiYuan Wang 2018
+  
+  </footer>
+  </body>
+</html>
+
