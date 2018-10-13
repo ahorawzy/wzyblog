@@ -17,9 +17,9 @@ tags:
 - 及时可靠准确的预测 timely, reliably, and accurately 
 - 交通管理和控制应用 traffic management and control applications
 - 动态选择交通管理策略 dynamically apply alternative strategies proactively in response to predicted traffic conditions. 
-- 短时交通流预测的必要性 Short-term traffic forecasting models, therefore, are an integral element of the toolset needed for real-time traffic control and management. Moreover, such tools are important in providing travelers with reliable travel time information, optimizing traffic signals, and deployment of emergency management systems.
+- 短时交通流预测的必要性 Short-term traffic forecasting models, therefore, are **an integral element of the toolset** needed for **real-time traffic control** and management. Moreover, such tools are important in **providing travelers with reliable travel time information, optimizing traffic signals, and deployment of emergency management systems.**
 - 提前预测交通量 **predicting the expected volume of traffic** ahead of time
-- 短时交通流预测的原理 The availability of a vast amount of **spatial and temporal traffic data** coupled with advancements in statistics and data analysis techniques have created an opportunity to **perform** short-term traffic forecast with a reasonable prediction accuracy and **short processing time**.
+- 短时交通流预测的原理 The availability of **a vast amount of spatial and temporal traffic data** coupled with advancements in statistics and data analysis techniques have created an opportunity to **perform** short-term traffic forecast with a reasonable prediction accuracy and **short processing time**.
 - 短时交通流预测的定义 Short-term traffic forecast aims at **predicting the evolution of traffic** over **time horizons ranging from few seconds to few hours**
 
 ## 模型方法
@@ -33,7 +33,7 @@ tags:
 - 缺失值 missing values
 - 算法原理概述 Similar **traffic profiles** are identified using an enhanced K-nearest neighbor algorithm based on **measurements of a sequence of volume of traffic** at **15-min intervals**. 
 - KNN算法原理 For a **given prevailing volume profile**, **K similar profiles** (nearest neighbors or candidates) are identified from a **large collection of a historic traffic database**. The neighboring candidates drawn from the historic database **corresponding to the desired forecast time or horizon** are **aggregated** to provide predictions of future **flow rate measurements**. 
-- 相似性度量方法识别相似交通流  two similarity measures are considered to determine similar traffic patterns
+- 相似性度量方法识别相似交通流  two similarity measures are considered to **determine similar traffic patterns**
 - 流量的滞后项部分  **the lagging volume profiles**
 - 被LOESS技术过滤（平滑） are slightly **filtered** using **locally estimated scatter-plot smoothing (loess) technique.**
 - 该算法的主要优点：
@@ -56,3 +56,12 @@ tags:
 - 随着科技进步 with the advancement in technology and the wide deployment of intelligent transportation systems
 - 该领域已有大量的研究 , considerable amount of research has been focused on the topic
 - 提供方法解决问题 In this paper, we present a methodology for short-term traffic forecast based on learning similar traffic patterns as a reference for providing the predictions on future traffic.
+
+## 文献综述
+
+- 短时交通流预测算法分成四类  the approaches used in short-term traffic forecast can be broadly classified into four categories: Naïve, parametric, non-parametric, and hybrid. 四类模型的内涵以及优缺点见18.
+- 非参数方法 non-parametric approaches are mostly data-driven and apply empirical algorithms to provide the predictions
+- 非参数方法的优点 Such approaches are advantageous as they are **free of any assumptions regarding the underlying model formulation and the uncertainty involved in estimating the model parameters. ** 非参数方法不是模型完全没有参数，而是不涉及公式里需要估计的参数。
+- 过去研究的缺陷 The main limitations of the works of these authors are that the simplest form of K-NN was used. In addition, majority of these authors failed to compare their results with parametric models 
+- 得出结论的困难性 In summary, considering the fact that there are a wide variety of models developed for short-term traffic forecasts, it can be overwhelmingly difficult to identify the one that is most suitable for specific traffic conditions. Moreover, since the studies were conducted under different settings (such as traffic parameters considered, the nature of datasets and their sources, aggregation intervals, forecast step durations, prediction horizons and performance measures considered), it is very difficult to fairly compare one approach over another.
+- 非参数方法更好 suggested that in the context of traffic forecast, nonparametric approach is the first choice as the input and output traffic variables are noisy and the relationship between each other is nonlinear and poorly understood. 
