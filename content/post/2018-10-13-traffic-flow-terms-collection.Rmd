@@ -1,5 +1,5 @@
 ---
-title: 交通流问题相关表达总结
+title: 交通流问题相关表达总结(1)
 author: 王致远
 date: '2018-10-13'
 slug: traffic-flow-terms-collection
@@ -8,6 +8,17 @@ categories:
 tags:
   - 学习总结
 ---
+
+## 套话
+
+- 结论性 This research provides strong evidence suggesting that 
+- 得到良好结果 provides promising results
+- 良好的实用性 it can be easily incorporated with real-time traffic control for proactive freeway traffic management.
+- 最原始的目标 The prime objective of traffic management strategies is to
+- 局限于 has been limited to
+- 随着科技进步 with the advancement in technology and the wide deployment of intelligent transportation systems
+- 该领域已有大量的研究 , considerable amount of research has been focused on the topic
+- 提供方法解决问题 In this paper, we present a methodology for short-term traffic forecast based on learning similar traffic patterns as a reference for providing the predictions on future traffic.
 
 ## 短时交通流预测
 
@@ -22,7 +33,16 @@ tags:
 - 短时交通流预测的原理 The availability of **a vast amount of spatial and temporal traffic data** coupled with advancements in statistics and data analysis techniques have created an opportunity to **perform** short-term traffic forecast with a reasonable prediction accuracy and **short processing time**.
 - 短时交通流预测的定义 Short-term traffic forecast aims at **predicting the evolution of traffic** over **time horizons ranging from few seconds to few hours**
 
-## 模型方法
+## 文献综述
+
+- 短时交通流预测算法分成四类  the approaches used in short-term traffic forecast can be broadly classified into four categories: Naïve, parametric, non-parametric, and hybrid. 四类模型的内涵以及优缺点见18.
+- 非参数方法 non-parametric approaches are mostly data-driven and apply empirical algorithms to provide the predictions
+- 非参数方法的优点 Such approaches are advantageous as they are **free of any assumptions regarding the underlying model formulation and the uncertainty involved in estimating the model parameters. ** 非参数方法不是模型完全没有参数，而是不涉及公式里需要估计的参数。
+- 过去研究的缺陷 The main limitations of the works of these authors are that the simplest form of K-NN was used. In addition, majority of these authors failed to compare their results with parametric models 
+- 得出结论的困难性 In summary, considering the fact that there are a wide variety of models developed for short-term traffic forecasts, it can be overwhelmingly difficult to identify the one that is most suitable for specific traffic conditions. Moreover, since the studies were conducted under different settings (such as traffic parameters considered, the nature of datasets and their sources, aggregation intervals, forecast step durations, prediction horizons and performance measures considered), it is very difficult to fairly compare one approach over another.
+- 非参数方法更好 suggested that in the context of traffic forecast, nonparametric approach is the first choice as the input and output traffic variables are noisy and the relationship between each other is nonlinear and poorly understood. 
+
+## 模型
 
 - non-parametric and data-driven methodology
 - enhanced K-nearest neighbor (K-NN) algorithm
@@ -45,23 +65,38 @@ tags:
 - 模型的效果更好 The proposed methodology is found to **outperform the works of** Guo et al. (2014) in terms of forecast accuracy; provided that enough samples are available in the archived datasets as explained in the paper. 
 - 优化参数和模型的鲁棒性 the level of details presented in terms of **optimizing the parameters** of the enhanced K-NN and testing the robustness of the model under different traffic scenarios corresponding to different datasets **collected from different regions and different proportion of missing values** is unprecedented.
 
+## 算法
 
-## 套话
+### 算法原理 
 
-- 结论性 This research provides strong evidence suggesting that 
-- 得到良好结果 provides promising results
-- 良好的实用性 it can be easily incorporated with real-time traffic control for proactive freeway traffic management.
-- 最原始的目标 The prime objective of traffic management strategies is to
-- 局限于 has been limited to
-- 随着科技进步 with the advancement in technology and the wide deployment of intelligent transportation systems
-- 该领域已有大量的研究 , considerable amount of research has been focused on the topic
-- 提供方法解决问题 In this paper, we present a methodology for short-term traffic forecast based on learning similar traffic patterns as a reference for providing the predictions on future traffic.
+forecasting is performed by exploiting similarities in traffic patterns. In essence, the future is predicted based on similar profiles from the archived data.
 
-## 文献综述
 
-- 短时交通流预测算法分成四类  the approaches used in short-term traffic forecast can be broadly classified into four categories: Naïve, parametric, non-parametric, and hybrid. 四类模型的内涵以及优缺点见18.
-- 非参数方法 non-parametric approaches are mostly data-driven and apply empirical algorithms to provide the predictions
-- 非参数方法的优点 Such approaches are advantageous as they are **free of any assumptions regarding the underlying model formulation and the uncertainty involved in estimating the model parameters. ** 非参数方法不是模型完全没有参数，而是不涉及公式里需要估计的参数。
-- 过去研究的缺陷 The main limitations of the works of these authors are that the simplest form of K-NN was used. In addition, majority of these authors failed to compare their results with parametric models 
-- 得出结论的困难性 In summary, considering the fact that there are a wide variety of models developed for short-term traffic forecasts, it can be overwhelmingly difficult to identify the one that is most suitable for specific traffic conditions. Moreover, since the studies were conducted under different settings (such as traffic parameters considered, the nature of datasets and their sources, aggregation intervals, forecast step durations, prediction horizons and performance measures considered), it is very difficult to fairly compare one approach over another.
-- 非参数方法更好 suggested that in the context of traffic forecast, nonparametric approach is the first choice as the input and output traffic variables are noisy and the relationship between each other is nonlinear and poorly understood. 
+- 图形展示 This is graphically shown in Fig. 1. shown in solid red line in Fig. 1
+
+### 几个名词定义：
+
+- **Subject profile**: The traffic profile corresponding to a specific day for which the forecast is desired to be made
+- **Candidate profiles**: Also called nearest neighbors, these are set of traffic profiles with similar pattern to the subject profile selected from a pool of archived dataset. The number of such candidate profiles considered is referred to as K.
+- **Lag duration**: This is the time window considered to determine similarity between the subject and candidate profiles. The number of the sequence of traffic measurements considered in the lag duration is represented by m. 
+- **Forecast duration**
+- **Lagging part of traffic profile**: This is the part of traffic profile used for determining similarity of traffic patterns. 
+- **Size of historic profile**: This refers to the magnitude of the archived data, or the search space, from which the candidate
+profiles are drawn
+
+### 算法描述：
+
+- The algorithm identifies the K most similar historic sequences with similar pattern to the one being examined. The combination of the nearest values corresponding to the time step where forecast is desired to be made will be the expected future value of the sequence being examined. 
+
+### 算法理念：
+
+-  The notion of K-NN-based forecast is that the pattern of the sequence of observations is repeated over time. Therefore, if a previous pattern can be identified to be similar to the current pattern, then the subsequent values of the previous sequence can be used to predict the future values of the target sequence.
+
+### 算法的几个关键问题：
+
+In the process of K-NN-based identification of similar traffic conditions and using them as a basis for providing traffic predictions, a few questions need to be answered to specify the required K-NN variables so that the prediction errors are minimal. These include: 
+
+1. how to identify similar traffic patterns, 
+2. how large should the lag duration be, 
+3. how many nearest neighbors (candidates) should be considered and what 
+4. mechanism of aggregation should be used to provide an estimate of the future traffic flow rate. 
