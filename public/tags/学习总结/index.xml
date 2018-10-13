@@ -6,10 +6,19 @@
     <description>Recent content in 学习总结 on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 30 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 13 Oct 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>交通流问题相关表达总结</title>
+      <link>/post/2018/10/13/traffic-flow-terms-collection/</link>
+      <pubDate>Sat, 13 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/10/13/traffic-flow-terms-collection/</guid>
+      <description>短时交通流预测 短时交通流预测 short-term traffic flow rate forecasting 短时交通预测 short-term traffic forecasting 识别相似交通模式 identifying similar traffic pattern 及时可靠准确的预测 timely, reliably, and accurately 交通管理和控制应用 traffic management and control applications 动态选</description>
+    </item>
     
     <item>
       <title>stringr学习总结</title>
