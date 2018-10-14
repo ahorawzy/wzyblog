@@ -1,0 +1,19 @@
+---
+title: 28字箴言
+author: ZhiYuan Wang
+date: '2018-10-14'
+slug: 28-characters-maxim-from-deng
+categories:
+  - 个人
+tags:
+  - 思考
+  - 读书笔记
+---
+
+> 冷静观察，  
+稳住阵脚，  
+沉着应付，  
+韬光养晦，  
+善于藏拙，  
+决不当头，  
+有所作为。
