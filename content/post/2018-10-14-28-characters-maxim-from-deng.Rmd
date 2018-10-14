@@ -1,6 +1,6 @@
 ---
 title: 28字箴言
-author: ZhiYuan Wang
+author: 王致远
 date: '2018-10-14'
 slug: 28-characters-maxim-from-deng
 categories:
