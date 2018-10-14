@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>交通流问题相关表达总结(1) | Website of ZhiYuan Wang</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">主页</a></li>
+      
+      <li><a href="/categories/">分类</a></li>
+      
+      <li><a href="/tags/">标签</a></li>
+      
+      <li><a href="/about/">关于我</a></li>
+      
+      <li><a href="/friendly_links/">链接</a></li>
+      
+      <li><a href="/index.xml">订阅</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">交通流问题相关表达总结(1)</span></h1>
+<h2 class="author">王致远</h2>
+<h2 class="date">2018/10/13</h2>
+</div>
+
+<main>
+<div class="section level2">
+<h2>套话</h2>
+<ul>
+<li>结论性 This research provides strong evidence suggesting that</li>
+<li>得到良好结果 provides promising results</li>
+<li>良好的实用性 it can be easily incorporated with real-time traffic control for proactive freeway traffic management.</li>
+<li>最原始的目标 The prime objective of traffic management strategies is to</li>
+<li>局限于 has been limited to</li>
+<li>随着科技进步 with the advancement in technology and the wide deployment of intelligent transportation systems</li>
+<li>该领域已有大量的研究 , considerable amount of research has been focused on the topic</li>
+<li>提供方法解决问题 In this paper, we present a methodology for short-term traffic forecast based on learning similar traffic patterns as a reference for providing the predictions on future traffic.</li>
+</ul>
+</div>
+<div class="section level2">
+<h2>短时交通流预测</h2>
+<ul>
+<li>短时交通流预测 <strong>short-term traffic flow rate forecasting</strong></li>
+<li>短时交通预测 <strong>short-term traffic forecasting</strong></li>
+<li>识别相似交通模式 <strong>identifying similar traffic pattern</strong></li>
+<li>及时可靠准确的预测 timely, reliably, and accurately</li>
+<li>交通管理和控制应用 traffic management and control applications</li>
+<li>动态选择交通管理策略 dynamically apply alternative strategies proactively in response to predicted traffic conditions.</li>
+<li>短时交通流预测的必要性 Short-term traffic forecasting models, therefore, are <strong>an integral element of the toolset</strong> needed for <strong>real-time traffic control</strong> and management. Moreover, such tools are important in <strong>providing travelers with reliable travel time information, optimizing traffic signals, and deployment of emergency management systems.</strong></li>
+<li>提前预测交通量 <strong>predicting the expected volume of traffic</strong> ahead of time</li>
+<li>短时交通流预测的原理 The availability of <strong>a vast amount of spatial and temporal traffic data</strong> coupled with advancements in statistics and data analysis techniques have created an opportunity to <strong>perform</strong> short-term traffic forecast with a reasonable prediction accuracy and <strong>short processing time</strong>.</li>
+<li>短时交通流预测的定义 Short-term traffic forecast aims at <strong>predicting the evolution of traffic</strong> over <strong>time horizons ranging from few seconds to few hours</strong></li>
+</ul>
+</div>
+<div class="section level2">
+<h2>文献综述</h2>
+<ul>
+<li>短时交通流预测算法分成四类 the approaches used in short-term traffic forecast can be broadly classified into four categories: Naïve, parametric, non-parametric, and hybrid. 四类模型的内涵以及优缺点见18.</li>
+<li>非参数方法 non-parametric approaches are mostly data-driven and apply empirical algorithms to provide the predictions</li>
+<li>非参数方法的优点 Such approaches are advantageous as they are <strong>free of any assumptions regarding the underlying model formulation and the uncertainty involved in estimating the model parameters. </strong> 非参数方法不是模型完全没有参数，而是不涉及公式里需要估计的参数。</li>
+<li>过去研究的缺陷 The main limitations of the works of these authors are that the simplest form of K-NN was used. In addition, majority of these authors failed to compare their results with parametric models</li>
+<li>得出结论的困难性 In summary, considering the fact that there are a wide variety of models developed for short-term traffic forecasts, it can be overwhelmingly difficult to identify the one that is most suitable for specific traffic conditions. Moreover, since the studies were conducted under different settings (such as traffic parameters considered, the nature of datasets and their sources, aggregation intervals, forecast step durations, prediction horizons and performance measures considered), it is very difficult to fairly compare one approach over another.</li>
+<li>非参数方法更好 suggested that in the context of traffic forecast, nonparametric approach is the first choice as the input and output traffic variables are noisy and the relationship between each other is nonlinear and poorly understood.</li>
+</ul>
+</div>
+<div class="section level2">
+<h2>模型</h2>
+<ul>
+<li>non-parametric and data-driven methodology</li>
+<li>enhanced K-nearest neighbor (K-NN) algorithm</li>
+<li>相似性度量 similarity measure</li>
+<li>MAE mean absolute percent error</li>
+<li>多步预测 multiple forecast steps</li>
+<li>性能检验 its performance is tested under …</li>
+<li>缺失值 missing values</li>
+<li>算法原理概述 Similar <strong>traffic profiles</strong> are identified using an enhanced K-nearest neighbor algorithm based on <strong>measurements of a sequence of volume of traffic</strong> at <strong>15-min intervals</strong>.</li>
+<li>KNN算法原理 For a <strong>given prevailing volume profile</strong>, <strong>K similar profiles</strong> (nearest neighbors or candidates) are identified from a <strong>large collection of a historic traffic database</strong>. The neighboring candidates drawn from the historic database <strong>corresponding to the desired forecast time or horizon</strong> are <strong>aggregated</strong> to provide predictions of future <strong>flow rate measurements</strong>.</li>
+<li>相似性度量方法识别相似交通流 two similarity measures are considered to <strong>determine similar traffic patterns</strong></li>
+<li>流量的滞后项部分 <strong>the lagging volume profiles</strong></li>
+<li>被LOESS技术过滤（平滑） are slightly <strong>filtered</strong> using <strong>locally estimated scatter-plot smoothing (loess) technique.</strong></li>
+<li>该算法的主要优点：
+<ul>
+<li>The main advantage of this approach is that the predictions are generated based on the <strong>observed historical traffic patterns that are discovered from the historical datasets. </strong></li>
+<li>this approach is capable of providing predictions over <strong>multiple time steps</strong> or a trace forecast over a specified <strong>prediction horizon</strong>（预测时间窗）.</li>
+</ul></li>
+<li>描述时间间隔 <strong>predictions are provided over a 15-min step with a forecast horizon of 6 steps</strong> (i.e., predictions were made for one hour and thirtyminutes at 15-min intervals).</li>
+<li>良好的模型部署能力 Considering the <strong>simplicity of the proposed approach</strong> and a relatively <strong>short computation time</strong>, it can be easily <strong>incorporated with online traffic management strategies</strong> to provide short-term traffic forecasts in real-time.</li>
+<li>被多次验证过并且和其他方法比较过 The performance of the proposed approach <strong>is tested using a wide variety of freeway flow rate datasets collected from different regions</strong> and is compared with the works of Guo et al. (2014) which developed several advanced parametric models based on time series analysis reinforced with an adaptive Kalman filter.</li>
+<li>模型的效果更好 The proposed methodology is found to <strong>outperform the works of</strong> Guo et al. (2014) in terms of forecast accuracy; provided that enough samples are available in the archived datasets as explained in the paper.</li>
+<li>优化参数和模型的鲁棒性 the level of details presented in terms of <strong>optimizing the parameters</strong> of the enhanced K-NN and testing the robustness of the model under different traffic scenarios corresponding to different datasets <strong>collected from different regions and different proportion of missing values</strong> is unprecedented.</li>
+</ul>
+</div>
+<div class="section level2">
+<h2>算法</h2>
+<div class="section level3">
+<h3>算法原理</h3>
+<p>forecasting is performed by exploiting similarities in traffic patterns. In essence, the future is predicted based on similar profiles from the archived data.</p>
+<ul>
+<li>图形展示 This is graphically shown in Fig. 1. shown in solid red line in Fig. 1</li>
+</ul>
+</div>
+<div class="section level3">
+<h3>几个名词定义：</h3>
+<ul>
+<li><strong>Subject profile</strong>: The traffic profile corresponding to a specific day for which the forecast is desired to be made</li>
+<li><strong>Candidate profiles</strong>: Also called nearest neighbors, these are set of traffic profiles with similar pattern to the subject profile selected from a pool of archived dataset. The number of such candidate profiles considered is referred to as K.</li>
+<li><strong>Lag duration</strong>: This is the time window considered to determine similarity between the subject and candidate profiles. The number of the sequence of traffic measurements considered in the lag duration is represented by m.</li>
+<li><strong>Forecast duration</strong></li>
+<li><strong>Lagging part of traffic profile</strong>: This is the part of traffic profile used for determining similarity of traffic patterns.</li>
+<li><strong>Size of historic profile</strong>: This refers to the magnitude of the archived data, or the search space, from which the candidate profiles are drawn</li>
+</ul>
+</div>
+<div class="section level3">
+<h3>算法描述：</h3>
+<ul>
+<li>The algorithm identifies the K most similar historic sequences with similar pattern to the one being examined. The combination of the nearest values corresponding to the time step where forecast is desired to be made will be the expected future value of the sequence being examined.</li>
+</ul>
+</div>
+<div class="section level3">
+<h3>算法理念：</h3>
+<ul>
+<li>The notion of K-NN-based forecast is that the pattern of the sequence of observations is repeated over time. Therefore, if a previous pattern can be identified to be similar to the current pattern, then the subsequent values of the previous sequence can be used to predict the future values of the target sequence.</li>
+</ul>
+</div>
+<div class="section level3">
+<h3>算法的几个关键问题：</h3>
+<p>In the process of K-NN-based identification of similar traffic conditions and using them as a basis for providing traffic predictions, a few questions need to be answered to specify the required K-NN variables so that the prediction errors are minimal. These include:</p>
+<ol style="list-style-type: decimal">
+<li>how to identify similar traffic patterns,</li>
+<li>how large should the lag duration be,</li>
+<li>how many nearest neighbors (candidates) should be considered and what</li>
+<li>mechanism of aggregation should be used to provide an estimate of the future traffic flow rate.</li>
+</ol>
+</div>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+
+<script>
+hljs.configure({languages: []});
+hljs.initHighlightingOnLoad();
+</script>
+  
+  <hr/>
+  &copy; ZhiYuan Wang 2018
+  
+  </footer>
+  </body>
+</html>
+

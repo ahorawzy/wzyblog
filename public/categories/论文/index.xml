@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>论文 on Website of ZhiYuan Wang</title>
+    <link>/categories/%E8%AE%BA%E6%96%87/</link>
+    <description>Recent content in 论文 on Website of ZhiYuan Wang</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 13 Oct 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/%E8%AE%BA%E6%96%87/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>交通流问题相关表达总结(1)</title>
+      <link>/post/2018/10/13/traffic-flow-terms-collection/</link>
+      <pubDate>Sat, 13 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/10/13/traffic-flow-terms-collection/</guid>
+      <description>套话 结论性 This research provides strong evidence suggesting that 得到良好结果 provides promising results 良好的实用性 it can be easily incorporated with real-time traffic control for proactive freeway traffic management. 最原始的目标 The prime objective of traffic management strategies is to 局限于 has been limited to 随着科技进步 with</description>
+    </item>
+    
+  </channel>
+</rss>
