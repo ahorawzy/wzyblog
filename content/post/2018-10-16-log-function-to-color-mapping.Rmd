@@ -1,0 +1,76 @@
+---
+title: log函数在图形映射中的妙用
+author: 王致远
+date: '2018-10-16'
+slug: log-function-to-color-mapping
+categories:
+  - R语言
+tags:
+  - 思考
+  - leaflet
+  - 可视化
+  - 解决方案
+---
+
+```{r}
+library(leaflet)
+library(leafletCN)
+```
+
+
+```{r echo=FALSE}
+load("D:\\data\\post\\jdprovincedistinct.RData")
+```
+
+今天在工作中遇到这样一个问题：将某数值映射到leaflet上点的颜色，比如数值越大红色越深，数值越小红色越浅。
+
+我第一次是这样做的
+
+```{r}
+reg <- leafletCN::leafletGeo("China")
+pal <- colorNumeric("Reds",y$cars)
+leaflet(y) %>% 
+  addProviderTiles("OpenStreetMap.BlackAndWhite") %>% 
+  addPolygons(data = reg, stroke = TRUE, smoothFactor = 1, fillOpacity = 0, weight = 1) %>% 
+  addCircles(lng = ~lng,lat = ~lat,radius = ~cars/5,color = ~pal(y$cars))
+```
+
+操作没啥大问题，但是由于数值差距太大，使得大数值的被映射为正常的红色，而小数值的是浅肉色，接近于底图的颜色，很不好分辨。
+
+突然想起对数函数log能够将数值压缩到较小的区间，尝试之。
+
+```{r}
+reg <- leafletCN::leafletGeo("China")
+try(pal <- colorNumeric("Reds",log(y$cars)))
+```
+
+出现错误，看一看哪里错了
+
+```{r}
+log(y$cars) %>% summary()
+```
+
+原来有负无穷值，也就是说原来的数据里有0值
+
+```{r}
+summary(y$cars)
+```
+
+果然如此，那就好办了，强行加个1！
+
+```{r}
+summary(y$cars+1)
+```
+
+然后
+
+```{r}
+reg <- leafletCN::leafletGeo("China")
+pal <- colorNumeric("Reds",log(y$cars+1))
+leaflet(y) %>% 
+  addProviderTiles("OpenStreetMap.BlackAndWhite") %>% 
+  addPolygons(data = reg, stroke = TRUE, smoothFactor = 1, fillOpacity = 0, weight = 1) %>% 
+  addCircles(lng = ~lng,lat = ~lat,radius = ~cars/5,color = ~pal(log(y$cars+1)))
+```
+
+完美解决~~
