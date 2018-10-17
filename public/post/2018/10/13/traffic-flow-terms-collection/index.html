@@ -37,7 +37,7 @@
 
 <main>
 <div class="section level2">
-<h2>套话</h2>
+<h2>1. 套话</h2>
 <ul>
 <li>结论性 This research provides strong evidence suggesting that</li>
 <li>得到良好结果 provides promising results</li>
@@ -50,7 +50,7 @@
 </ul>
 </div>
 <div class="section level2">
-<h2>短时交通流预测</h2>
+<h2>2. 短时交通流预测</h2>
 <ul>
 <li>短时交通流预测 <strong>short-term traffic flow rate forecasting</strong></li>
 <li>短时交通预测 <strong>short-term traffic forecasting</strong></li>
@@ -62,10 +62,11 @@
 <li>提前预测交通量 <strong>predicting the expected volume of traffic</strong> ahead of time</li>
 <li>短时交通流预测的原理 The availability of <strong>a vast amount of spatial and temporal traffic data</strong> coupled with advancements in statistics and data analysis techniques have created an opportunity to <strong>perform</strong> short-term traffic forecast with a reasonable prediction accuracy and <strong>short processing time</strong>.</li>
 <li>短时交通流预测的定义 Short-term traffic forecast aims at <strong>predicting the evolution of traffic</strong> over <strong>time horizons ranging from few seconds to few hours</strong></li>
+<li>短时交通流预测的应用领域 This interest is the direct result of an increasing need for developing <strong>user friendly applications which can both provide accurate information to drivers and be used for signal optimization</strong>.</li>
 </ul>
 </div>
 <div class="section level2">
-<h2>文献综述</h2>
+<h2>3. 文献综述</h2>
 <ul>
 <li>短时交通流预测算法分成四类 the approaches used in short-term traffic forecast can be broadly classified into four categories: Naïve, parametric, non-parametric, and hybrid. 四类模型的内涵以及优缺点见18.</li>
 <li>非参数方法 non-parametric approaches are mostly data-driven and apply empirical algorithms to provide the predictions</li>
@@ -76,7 +77,7 @@
 </ul>
 </div>
 <div class="section level2">
-<h2>模型</h2>
+<h2>4. 模型</h2>
 <ul>
 <li>non-parametric and data-driven methodology</li>
 <li>enhanced K-nearest neighbor (K-NN) algorithm</li>
@@ -103,16 +104,16 @@
 </ul>
 </div>
 <div class="section level2">
-<h2>算法</h2>
+<h2>5. 算法</h2>
 <div class="section level3">
-<h3>算法原理</h3>
+<h3>5.1 算法原理</h3>
 <p>forecasting is performed by exploiting similarities in traffic patterns. In essence, the future is predicted based on similar profiles from the archived data.</p>
 <ul>
 <li>图形展示 This is graphically shown in Fig. 1. shown in solid red line in Fig. 1</li>
 </ul>
 </div>
 <div class="section level3">
-<h3>几个名词定义：</h3>
+<h3>5.2 几个名词定义：</h3>
 <ul>
 <li><strong>Subject profile</strong>: The traffic profile corresponding to a specific day for which the forecast is desired to be made</li>
 <li><strong>Candidate profiles</strong>: Also called nearest neighbors, these are set of traffic profiles with similar pattern to the subject profile selected from a pool of archived dataset. The number of such candidate profiles considered is referred to as K.</li>
@@ -123,19 +124,19 @@
 </ul>
 </div>
 <div class="section level3">
-<h3>算法描述：</h3>
+<h3>5.3 算法描述：</h3>
 <ul>
 <li>The algorithm identifies the K most similar historic sequences with similar pattern to the one being examined. The combination of the nearest values corresponding to the time step where forecast is desired to be made will be the expected future value of the sequence being examined.</li>
 </ul>
 </div>
 <div class="section level3">
-<h3>算法理念：</h3>
+<h3>5.4 算法理念：</h3>
 <ul>
 <li>The notion of K-NN-based forecast is that the pattern of the sequence of observations is repeated over time. Therefore, if a previous pattern can be identified to be similar to the current pattern, then the subsequent values of the previous sequence can be used to predict the future values of the target sequence.</li>
 </ul>
 </div>
 <div class="section level3">
-<h3>算法的几个关键问题：</h3>
+<h3>5.5 算法的几个关键问题：</h3>
 <p>In the process of K-NN-based identification of similar traffic conditions and using them as a basis for providing traffic predictions, a few questions need to be answered to specify the required K-NN variables so that the prediction errors are minimal. These include:</p>
 <ol style="list-style-type: decimal">
 <li>how to identify similar traffic patterns,</li>

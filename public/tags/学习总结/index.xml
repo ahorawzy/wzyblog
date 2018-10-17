@@ -6,10 +6,19 @@
     <description>Recent content in 学习总结 on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 13 Oct 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 17 Oct 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>交通流问题文献综述(1)</title>
+      <link>/post/2018/10/17/traffic-flow-literature-review-1/</link>
+      <pubDate>Wed, 17 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/10/17/traffic-flow-literature-review-1/</guid>
+      <description>本篇文章服务于我的硕士毕业论文以及与之相关的准备投寄的小论文，也许可能也可以为未来在这方面更多的研究做积累。 英文文献 0. 开篇之作 Analysis of freeway traffic time-series data by</description>
+    </item>
     
     <item>
       <title>交通流问题相关表达总结(1)</title>
@@ -17,7 +26,7 @@
       <pubDate>Sat, 13 Oct 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/2018/10/13/traffic-flow-terms-collection/</guid>
-      <description>套话 结论性 This research provides strong evidence suggesting that 得到良好结果 provides promising results 良好的实用性 it can be easily incorporated with real-time traffic control for proactive freeway traffic management. 最原始的目标 The prime objective of traffic management strategies is to 局限于 has been limited to 随着科技进步 with</description>
+      <description>1. 套话 结论性 This research provides strong evidence suggesting that 得到良好结果 provides promising results 良好的实用性 it can be easily incorporated with real-time traffic control for proactive freeway traffic management. 最原始的目标 The prime objective of traffic management strategies is to 局限于 has been limited to 随着科技进步</description>
     </item>
     
     <item>
