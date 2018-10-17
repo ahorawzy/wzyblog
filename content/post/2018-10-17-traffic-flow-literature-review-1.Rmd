@@ -13,7 +13,60 @@ tags:
 
 # 英文文献
 
+## 0. 开篇之作
 
+### Analysis of freeway traffic time-series data by using Box-Jenkins techniques.
 
+Ahmed, M.S., Cook, A.R., 1979. Analysis of freeway traffic time-series data by using Box-Jenkins techniques. Transportation Research Record 722, 1–9
+
+## 1. Review 类
+
+### 1.1 Short-term traffic forecasting: where we are and where we’re going.
+
+#### 关键词：
+
+- Short-term traffic;
+- Prediction models;
+- Intelligent Transportation System;
+- Responsive alogorithms;
+- Time series Analysis;
+- Computational intelligence;
+
+#### 从基于统计模型到数据驱动式算法的演变
+
+At the same time, a novel research area, based on data driven empirical algorithms, has been systematically growing in parallel to the well-founded mathematical models that are based on macroscopic and microscopic theories of traffic flow (Wang and Papageorgiou, 2005; Yuan et al., 2012; Treiber and Kesting, 2012; Fowe and Chan, 2013; Kerner et al., 2013). This significant leap from analytical to data driven modeling has been marked by an overwhelming increase of Computational Intelligence (CI) – Data Mining (DM) approaches to analyzing the data. Researchers have moved from what can be considered as a classical statistical perspective (the ARIMA Family of models), to Neural and evolutionary computational approaches (Karlaftis and Vlahogianni, 2011)
+
+#### 目前的研究局限
+
+Short-term traffic forecasting based on data driven methods is one of the most dynamic and developing research arenas with enormous published literature. Interestingly, however, **most of the research has concentrated on ‘testing’ alternative modeling approaches on short-term traffic data**, possibly **because of the data’s ready availability and the relative ease of applying many of the available analytical approaches.** This concentration leaves a number of important questions and challenges unaddressed or, relatively to the rest of the literature, under researched.
+
+#### 提出了下一个十年短时交通流领域的10个挑战：
+
+Challenges:
+
+1. Developing responsive algorithms and prediction schemes Transportation;
+2. Freeway, arterial and network traffic predictions;
+3. Short-term predictions: from volume to travel time;
+4. Data resolution, aggregation and quality
+The;
+5. Using new technologies for collecting and fusing data;
+6. Temporal characteristics and spatial dependencies;
+7. Model selection and testing;
+8. Compare models or combine forecasts;
+9. Explanatory power, associations and causality Until;
+10. Realizing the full potential of artificial intelligence Artificial
+
+### 1.2 Short-term traffic forecasting: overview of objectives and methods
+
+到2003年的研究进展
+
+Vlahogianni, E.I., Golias, J.C., Karlaftis, M.G., 2004. Short-term traffic forecasting: overview of objectives and methods. Transportation Reviews 24 (5), 533–
+557.
+
+### 找不到原文
+
+综述性论文：神经网络在短时交通流预测中的应用
+
+Van Lint, J., Van Hinsbergen, C., 2012. Short term traffic and travel time prediction models, in artificial intelligence applications to critical transportation issues. In: Transportation Research Circular. National Academies Press, Washington, DC.
 
 # 中文文献
