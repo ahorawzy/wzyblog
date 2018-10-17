@@ -23,6 +23,8 @@ date: "持续添加中..."
 
 <center>[统计之都](https://cosx.org/)</center>
 
+<center>[w3cschool](https://www.w3cschool.cn/)</center>
+
 <center>[聊斋志异](https://www.sbkk88.com/mingzhu/gudaicn/liaozhaizhiyi/)</center>
 
 <center>[聊斋志异白话版](https://www.sbkk88.com/mingzhu/gudaicn/liaozhaizhiyi2/)</center>
