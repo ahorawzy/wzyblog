@@ -50,11 +50,12 @@
 </ul>
 </div>
 <div class="section level2">
-<h2>2. 短时交通流预测</h2>
+<h2>2. 短时交通流</h2>
+<div class="section level3">
+<h3>2.1 预测</h3>
 <ul>
 <li>短时交通流预测 <strong>short-term traffic flow rate forecasting</strong></li>
 <li>短时交通预测 <strong>short-term traffic forecasting</strong></li>
-<li>识别相似交通模式 <strong>identifying similar traffic pattern</strong></li>
 <li>及时可靠准确的预测 timely, reliably, and accurately</li>
 <li>交通管理和控制应用 traffic management and control applications</li>
 <li>动态选择交通管理策略 dynamically apply alternative strategies proactively in response to predicted traffic conditions.</li>
@@ -63,7 +64,27 @@
 <li>短时交通流预测的原理 The availability of <strong>a vast amount of spatial and temporal traffic data</strong> coupled with advancements in statistics and data analysis techniques have created an opportunity to <strong>perform</strong> short-term traffic forecast with a reasonable prediction accuracy and <strong>short processing time</strong>.</li>
 <li>短时交通流预测的定义 Short-term traffic forecast aims at <strong>predicting the evolution of traffic</strong> over <strong>time horizons ranging from few seconds to few hours</strong></li>
 <li>短时交通流预测的应用领域 This interest is the direct result of an increasing need for developing <strong>user friendly applications which can both provide accurate information to drivers and be used for signal optimization</strong>.</li>
+<li>交通管理部门 transportation agencies</li>
+<li>交通管理与控制 traffic management and control application</li>
+<li>时间粒度 data resolution (e.g. 5mins data)</li>
+<li>交通拥堵 traffic congestion</li>
+<li>在线应用 online implementation</li>
+<li>高速公路 freeway</li>
 </ul>
+</div>
+<div class="section level3">
+<h3>2.2 相似交通流识别</h3>
+<ul>
+<li>识别相似交通模式 <strong>identifying similar traffic pattern</strong></li>
+<li>交通流模式识别 traffic flow pattern analysis</li>
+<li>Identifying spatial and temporal flow patterns has been an important consideration in short-term traffic forecasting research.</li>
+<li>在线交通流状态识别 Online traffic state identification</li>
+</ul>
+<p>聚类：</p>
+<ul>
+<li>An optimal fit of the statistical characteristics is provided by maximizing the intra-cluster data point distances and minimizing inter-cluster data point distances through a joint utilization of the <strong>Bayesian Information Criterion</strong> and the <strong>ratio of change of the dispersion measurements</strong>.</li>
+</ul>
+</div>
 </div>
 <div class="section level2">
 <h2>3. 文献综述</h2>
@@ -78,30 +99,51 @@
 </div>
 <div class="section level2">
 <h2>4. 模型</h2>
+<div class="section level3">
+<h3>4.1 数据描述与预处理</h3>
+<ul>
+<li>缺失值 missing values</li>
+<li>描述时间间隔 <strong>predictions are provided over a 15-min step with a forecast horizon of 6 steps</strong> (i.e., predictions were made for one hour and thirtyminutes at 15-min intervals).</li>
+</ul>
+</div>
+<div class="section level3">
+<h3>4.2 平滑</h3>
+<ul>
+<li>数据粒度越小，数据噪声越大。The higher the data resolution (e.g. 30 s data), the larger the portion of noise of the time series of the traffic variables</li>
+<li>被LOESS技术过滤（平滑） are slightly <strong>filtered</strong> using <strong>locally estimated scatter-plot smoothing (loess) technique.</strong></li>
+<li>Several approaches have been utilized for reducing noise from time series before proceeding with predictions; these range from simple smoothing, to wavelets and fuzzy algorithms (Jiang and Adeli, 2004; Boto-Giralda et al., 2010).</li>
+</ul>
+</div>
+<div id="knn" class="section level3">
+<h3>4.3 KNN</h3>
 <ul>
 <li>non-parametric and data-driven methodology</li>
 <li>enhanced K-nearest neighbor (K-NN) algorithm</li>
 <li>相似性度量 similarity measure</li>
-<li>MAE mean absolute percent error</li>
 <li>多步预测 multiple forecast steps</li>
 <li>性能检验 its performance is tested under …</li>
-<li>缺失值 missing values</li>
 <li>算法原理概述 Similar <strong>traffic profiles</strong> are identified using an enhanced K-nearest neighbor algorithm based on <strong>measurements of a sequence of volume of traffic</strong> at <strong>15-min intervals</strong>.</li>
 <li>KNN算法原理 For a <strong>given prevailing volume profile</strong>, <strong>K similar profiles</strong> (nearest neighbors or candidates) are identified from a <strong>large collection of a historic traffic database</strong>. The neighboring candidates drawn from the historic database <strong>corresponding to the desired forecast time or horizon</strong> are <strong>aggregated</strong> to provide predictions of future <strong>flow rate measurements</strong>.</li>
 <li>相似性度量方法识别相似交通流 two similarity measures are considered to <strong>determine similar traffic patterns</strong></li>
 <li>流量的滞后项部分 <strong>the lagging volume profiles</strong></li>
-<li>被LOESS技术过滤（平滑） are slightly <strong>filtered</strong> using <strong>locally estimated scatter-plot smoothing (loess) technique.</strong></li>
 <li>该算法的主要优点：
 <ul>
 <li>The main advantage of this approach is that the predictions are generated based on the <strong>observed historical traffic patterns that are discovered from the historical datasets. </strong></li>
 <li>this approach is capable of providing predictions over <strong>multiple time steps</strong> or a trace forecast over a specified <strong>prediction horizon</strong>（预测时间窗）.</li>
 </ul></li>
-<li>描述时间间隔 <strong>predictions are provided over a 15-min step with a forecast horizon of 6 steps</strong> (i.e., predictions were made for one hour and thirtyminutes at 15-min intervals).</li>
 <li>良好的模型部署能力 Considering the <strong>simplicity of the proposed approach</strong> and a relatively <strong>short computation time</strong>, it can be easily <strong>incorporated with online traffic management strategies</strong> to provide short-term traffic forecasts in real-time.</li>
+</ul>
+</div>
+<div class="section level3">
+<h3>4.4 预测评价</h3>
+<ul>
+<li>MAE mean absolute percent error</li>
+<li>性能检验 its performance is tested under …</li>
 <li>被多次验证过并且和其他方法比较过 The performance of the proposed approach <strong>is tested using a wide variety of freeway flow rate datasets collected from different regions</strong> and is compared with the works of Guo et al. (2014) which developed several advanced parametric models based on time series analysis reinforced with an adaptive Kalman filter.</li>
 <li>模型的效果更好 The proposed methodology is found to <strong>outperform the works of</strong> Guo et al. (2014) in terms of forecast accuracy; provided that enough samples are available in the archived datasets as explained in the paper.</li>
 <li>优化参数和模型的鲁棒性 the level of details presented in terms of <strong>optimizing the parameters</strong> of the enhanced K-NN and testing the robustness of the model under different traffic scenarios corresponding to different datasets <strong>collected from different regions and different proportion of missing values</strong> is unprecedented.</li>
 </ul>
+</div>
 </div>
 <div class="section level2">
 <h2>5. 算法</h2>

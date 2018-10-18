@@ -20,11 +20,12 @@ tags:
 - 该领域已有大量的研究 , considerable amount of research has been focused on the topic
 - 提供方法解决问题 In this paper, we present a methodology for short-term traffic forecast based on learning similar traffic patterns as a reference for providing the predictions on future traffic.
 
-## 2. 短时交通流预测
+## 2. 短时交通流
+
+### 2.1 预测
 
 - 短时交通流预测 **short-term traffic flow rate forecasting**
 - 短时交通预测 **short-term traffic forecasting**
-- 识别相似交通模式 **identifying similar traffic pattern**
 - 及时可靠准确的预测 timely, reliably, and accurately 
 - 交通管理和控制应用 traffic management and control applications
 - 动态选择交通管理策略 dynamically apply alternative strategies proactively in response to predicted traffic conditions. 
@@ -34,7 +35,23 @@ tags:
 - 短时交通流预测的定义 Short-term traffic forecast aims at **predicting the evolution of traffic** over **time horizons ranging from few seconds to few hours**
 - 短时交通流预测的应用领域 This interest is the direct result of an increasing need for developing **user friendly applications which can
 both provide accurate information to drivers and be used for signal optimization**.
+- 交通管理部门 transportation agencies
+- 交通管理与控制 traffic management and control application
+- 时间粒度 data resolution (e.g. 5mins data)
+- 交通拥堵 traffic congestion
+- 在线应用 online implementation
+- 高速公路 freeway
 
+### 2.2 相似交通流识别
+
+- 识别相似交通模式 **identifying similar traffic pattern**
+- 交通流模式识别 traffic flow pattern analysis
+- Identifying spatial and temporal flow patterns has been an important consideration in short-term traffic forecasting research.
+- 在线交通流状态识别 Online traffic state identification
+
+聚类：
+
+- An optimal fit of the statistical characteristics is provided by maximizing the intra-cluster data point distances and minimizing inter-cluster data point distances through a joint utilization of the **Bayesian Information Criterion** and the **ratio of change of the dispersion measurements**.
 
 ## 3. 文献综述
 
@@ -48,23 +65,37 @@ both provide accurate information to drivers and be used for signal optimization
 
 ## 4. 模型
 
+### 4.1 数据描述与预处理
+
+- 缺失值 missing values
+- 描述时间间隔 **predictions are provided over a 15-min step with a forecast horizon of 6 steps** (i.e., predictions were made for one hour and thirtyminutes at 15-min intervals). 
+
+### 4.2 平滑
+
+- 数据粒度越小，数据噪声越大。The higher the data resolution (e.g. 30 s data), the larger the portion of noise of the time series of the traffic variables
+- 被LOESS技术过滤（平滑） are slightly **filtered** using **locally estimated scatter-plot smoothing (loess) technique.**
+- Several approaches have been utilized for reducing noise from time series before proceeding with predictions; these range from simple smoothing, to wavelets and fuzzy algorithms (Jiang and Adeli, 2004; Boto-Giralda et al., 2010).
+
+### 4.3 KNN
+
 - non-parametric and data-driven methodology
 - enhanced K-nearest neighbor (K-NN) algorithm
 - 相似性度量 similarity measure
-- MAE mean absolute percent error 
 - 多步预测  multiple forecast steps
 - 性能检验 its performance is tested under ...
-- 缺失值 missing values
 - 算法原理概述 Similar **traffic profiles** are identified using an enhanced K-nearest neighbor algorithm based on **measurements of a sequence of volume of traffic** at **15-min intervals**. 
 - KNN算法原理 For a **given prevailing volume profile**, **K similar profiles** (nearest neighbors or candidates) are identified from a **large collection of a historic traffic database**. The neighboring candidates drawn from the historic database **corresponding to the desired forecast time or horizon** are **aggregated** to provide predictions of future **flow rate measurements**. 
 - 相似性度量方法识别相似交通流  two similarity measures are considered to **determine similar traffic patterns**
 - 流量的滞后项部分  **the lagging volume profiles**
-- 被LOESS技术过滤（平滑） are slightly **filtered** using **locally estimated scatter-plot smoothing (loess) technique.**
 - 该算法的主要优点：
     - The main advantage of this approach is that the predictions are generated based on the **observed historical traffic patterns that are discovered from the historical datasets. **
     - this approach is capable of providing predictions over **multiple time steps** or a trace forecast over a specified **prediction horizon**（预测时间窗）.
-- 描述时间间隔 **predictions are provided over a 15-min step with a forecast horizon of 6 steps** (i.e., predictions were made for one hour and thirtyminutes at 15-min intervals). 
 - 良好的模型部署能力 Considering the **simplicity of the proposed approach** and a relatively **short computation time**, it can be easily **incorporated with online traffic management strategies** to provide short-term traffic forecasts in real-time. 
+
+### 4.4 预测评价
+
+- MAE mean absolute percent error 
+- 性能检验 its performance is tested under ...
 - 被多次验证过并且和其他方法比较过 The performance of the proposed approach **is tested using a wide variety of freeway flow rate datasets collected from different regions** and is compared with the works of Guo et al. (2014) which developed several advanced parametric models based on time series analysis reinforced with an adaptive Kalman filter. 
 - 模型的效果更好 The proposed methodology is found to **outperform the works of** Guo et al. (2014) in terms of forecast accuracy; provided that enough samples are available in the archived datasets as explained in the paper. 
 - 优化参数和模型的鲁棒性 the level of details presented in terms of **optimizing the parameters** of the enhanced K-NN and testing the robustness of the model under different traffic scenarios corresponding to different datasets **collected from different regions and different proportion of missing values** is unprecedented.
