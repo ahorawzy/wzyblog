@@ -48,17 +48,25 @@ tags:
 <h4>提出了下一个十年短时交通流领域的10个挑战：</h4>
 <p>Challenges:</p>
 <ol style="list-style-type: decimal">
-<li>Developing responsive algorithms and prediction schemes Transportation;</li>
-<li>Freeway, arterial and network traffic predictions;</li>
-<li>Short-term predictions: from volume to travel time;</li>
-<li>Data resolution, aggregation and quality The;</li>
-<li>Using new technologies for collecting and fusing data;</li>
-<li>Temporal characteristics and spatial dependencies;</li>
+<li>Developing responsive algorithms and prediction schemes Transportation; 响应式算法和预测框架（例如交通拥堵或极端天气）</li>
+<li>Freeway, arterial and network traffic predictions; 路网预测。数据驱动式算法研究时空相关性。</li>
+<li>Short-term predictions: from volume to travel time; 从交通量到旅行时间</li>
+<li>Data resolution, aggregation and quality; 数据粒度与聚合方法问题</li>
+<li>Using new technologies for collecting and fusing data; 数据多源采集与融合问题</li>
+<li>Temporal characteristics and spatial dependencies; 时间特征和空间依存度</li>
 <li>Model selection and testing;</li>
 <li>Compare models or combine forecasts;</li>
-<li>Explanatory power, associations and causality Until;</li>
+<li>Explanatory power, associations and causality Until; 可解释性、关联性和因果关系。随着响应式算法的发展，模型的可解释性越来越重要。特别是天气等外部变量的可解释性。与经典统计学的协同可以增强可解释性。</li>
 <li>Realizing the full potential of artificial intelligence Artificial</li>
 </ol>
+</div>
+<div id="7" class="section level4">
+<h4>关于第7条模型选择和检验的深入</h4>
+<p>模型选择的判别标准：</p>
+<p>The general approach followed in short-term traffic forecasting is to select the model that provides the most accurate predictions based on a collected dataset and <strong>regardless of the traffic’s underlying statistical characteristics</strong> (e.g. non-stationarity, volatility, nonlinearity and so on), or <strong>whether certain modeling assumptions are violated or unrealistic</strong> 关于非平稳性和非线性性：</p>
+<p>The selection of the proper modeling approach should be largely determined by the non-stationary and nonlinear features of the spatiotemporal evolution of traffic (Vlahogianni et al., 2006). Several classical or more advanced tests of non-stationarity and nonlinearity have been applied to traffic flow (Karlaftis and Vlahogianni, 2009 and Vlahogianni and Karlaftis, 2011, 2013). Recent evidence in disciplines such as econometrics and finance, has demonstrated the need to jointly consider non-stationarity and non-linearity in producing consistent short-term forecasting models.</p>
+<p>对模型残差的检验</p>
+<p>Most researchers place larger emphasis on discussing the findings and neglect the need to account for the quality of their model (in terms of <strong>the properties of the error</strong>), using even the most popular statistical diagnostics. This is of outmost importance in classical statistical modeling as a model of adequate structure should have white noise residuals (Washington et al., 2010). This implies that any ‘‘strong’’ properties in the error term – including serial correlation, volatility and so on – may indicate specification bias that can be attributed to omitted variables or misspecification of the functional form (inadequate complexity of the structure). In transportation time series applications, most artificial intelligence approaches (e.g. Neural Networks) rarely incorporate any <strong>testing of the properties of the error and the model specification 模型诊断</strong>. An exception is the work of Chen et al. (2012) that tested the properties of the errors of the autoregressive models developed for traffic flow forecasting. Vlahogianni and Karlaftis (2013) applied popular goodness-of-fit tests for serial dependence（自相关性）, normality（正态性）, homoscedasticity（同方差性） and non-linearity（非线性） on neural network time series models.</p>
 </div>
 </div>
 <div id="short-term-traffic-forecasting-overview-of-objectives-and-methods" class="section level3">
@@ -66,10 +74,42 @@ tags:
 <p>到2003年的研究进展</p>
 <p>Vlahogianni, E.I., Golias, J.C., Karlaftis, M.G., 2004. Short-term traffic forecasting: overview of objectives and methods. Transportation Reviews 24 (5), 533– 557.</p>
 </div>
+</div>
+<div class="section level2">
+<h2>9. 待找原文</h2>
 <div class="section level3">
-<h3>找不到原文</h3>
-<p>综述性论文：神经网络在短时交通流预测中的应用</p>
+<h3>9.1 基于人工智能的短时交通流预测(综述性)</h3>
+<div class="section level4">
+<h4>引用</h4>
 <p>Van Lint, J., Van Hinsbergen, C., 2012. Short term traffic and travel time prediction models, in artificial intelligence applications to critical transportation issues. In: Transportation Research Circular. National Academies Press, Washington, DC.</p>
+</div>
+</div>
+<div class="section level3">
+<h3>9.2 交通流聚类</h3>
+<div class="section level4">
+<h4>链接</h4>
+<p><a href="https://link.springer.com/article/10.1007%2Fs12205-012-1233-1#citeas">springer</a></p>
+</div>
+<div id="-1" class="section level4">
+<h4>引用</h4>
+<p>Xia, J., Huang, W., Guo, J., 2012. A clustering approach to online freeway traffic state identification using ITS data. KSCE Journal of Civil Engineering 16 (3),426–432.</p>
+</div>
+<div class="section level4">
+<h4>摘要</h4>
+<p>Online traffic state identification plays an important role in achieving the potentials promised by Intelligent Transportation Systems (ITS) on various traffic applications, e.g., real time traffic monitoring systems. Traditional approaches have shown the limitations in either obtaining the necessary pre-determined information or having difficulties in their online implementation. This paper introduces an online agglomerative clustering procedure for freeway traffic state identification using ITS data, represented by three traffic condition variables of flow rate, speed, and occupancy. An optimal fit of the statistical characteristics is provided by maximizing the intra-cluster data point distances and minimizing inter-cluster data point distances through a joint utilization of the <strong>Bayesian Information Criterion</strong> and the <strong>ratio of change of the dispersion measurements</strong>. Test results show that the identified freeway traffic states through the proposed procedure are reasonable and consistent with the common understandings on freeway traffic operating conditions.</p>
+</div>
+</div>
+<div id="rbf" class="section level3">
+<h3>9.3 基于RBF神经网络的聚类</h3>
+<p>Park, B. (1998). “Clustering-based RBF neural network model for shortterm freeway traffic volume forecasting.” Proceedings of the 5th International Conference on Applications of Advanced Technologies in Transportation Engineering, Newport Beach, California, pp. 280–287.</p>
+</div>
+<div id="-1" class="section level3">
+<h3>9.4 交通流聚类</h3>
+<p>Xia, J. and Chen, M. (2007). “A nested clustering procedure for traffic condition classification.” Journal of Computed-Aided Civil and Infrastructure Engineering, Vol. 22, No. 6, pp. 430–437.</p>
+</div>
+<div class="section level3">
+<h3>9.5 模型评价指标的适应性</h3>
+<p>Chandra, S.R., Al-Deek, H., 2008. Cross-correlation analysis and multivariate prediction of spatial time series of freeway traffic speeds. Transportation Research Record 2061, 64–76.</p>
 </div>
 </div>
 </div>
