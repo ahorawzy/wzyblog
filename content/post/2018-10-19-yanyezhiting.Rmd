@@ -5,6 +5,7 @@ date: '2018-10-19'
 slug: yanyezhiting
 categories:
   - 电影
+  - 音乐
 tags:
   - 感受
 ---
