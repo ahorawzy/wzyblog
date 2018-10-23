@@ -1,6 +1,6 @@
 ---
 title: 看《超级工程·港珠澳大桥》
-author: ZhiYuan Wang
+author: 王致远
 date: '2018-10-23'
 slug: gangzhuao-bridge
 categories:
