@@ -1,6 +1,6 @@
 ---
 title: 行测(2)——推理题
-author: ZhiYuan Wang
+author: 王致远
 date: '2018-10-23'
 slug: xingce-2
 categories:
@@ -19,4 +19,3 @@ tags:
 - 曲线个数；
 - 直线与曲线位置，交替排列；
 - 九宫格色块叠加，相同为白，不相同为黑；
-- 
