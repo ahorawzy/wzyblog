@@ -12,21 +12,21 @@
     
     
     <item>
-      <title>XingCe(2)</title>
-      <link>/post/2018/10/23/xingce-2/</link>
-      <pubDate>Tue, 23 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/10/23/xingce-2/</guid>
-      <description>九宫格问题一般横着看 对称轴依次旋转一定角度； 点绕九宫格旋转； 封闭区间的个数； 曲线个数； 直线与曲线位置，交替排列； 九宫格色块叠加，相同为白，不</description>
-    </item>
-    
-    <item>
       <title>行测(1)——数量关系题</title>
       <link>/post/2018/10/23/xingce-1/</link>
       <pubDate>Tue, 23 Oct 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/2018/10/23/xingce-1/</guid>
       <description>1. 比值混合问题 售价15元/千克的白糖，取其中一部分加水溶解形成浓度为20%的糖水12kg，然后将剩余白糖全部加入溶解，变为25%，问购买白糖</description>
+    </item>
+    
+    <item>
+      <title>行测(2)——推理题</title>
+      <link>/post/2018/10/23/xingce-2/</link>
+      <pubDate>Tue, 23 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/10/23/xingce-2/</guid>
+      <description>1. 图形推理题 九宫格问题一般横着找规律 对称轴依次旋转一定角度； 点绕九宫格旋转； 封闭区间的个数； 曲线个数； 直线与曲线位置，交替排列； 九宫格色块叠</description>
     </item>
     
   </channel>
