@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>找工作 on Website of ZhiYuan Wang</title>
+    <link>/categories/%E6%89%BE%E5%B7%A5%E4%BD%9C/</link>
+    <description>Recent content in 找工作 on Website of ZhiYuan Wang</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 23 Oct 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/%E6%89%BE%E5%B7%A5%E4%BD%9C/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>行测(1)——数量关系题</title>
+      <link>/post/2018/10/23/xingce-1/</link>
+      <pubDate>Tue, 23 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/10/23/xingce-1/</guid>
+      <description>1. 比值混合问题 售价15元/千克的白糖，取其中一部分加水溶解形成浓度为20%的糖水12kg，然后将剩余白糖全部加入溶解，变为25%，问购买白糖</description>
+    </item>
+    
+  </channel>
+</rss>
