@@ -9,7 +9,7 @@ tags:
   - 学习总结
 ---
 
-```{r}
+```{r warning=FALSE,message=FALSE}
 library(tidyverse)
 ```
 
