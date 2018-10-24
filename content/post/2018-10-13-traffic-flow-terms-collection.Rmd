@@ -69,6 +69,8 @@ both provide accurate information to drivers and be used for signal optimization
 
 - 缺失值 missing values
 - 描述时间间隔 **predictions are provided over a 15-min step with a forecast horizon of 6 steps** (i.e., predictions were made for one hour and thirtyminutes at 15-min intervals). 
+- 12 steps ahead at 15-min intervals
+- 45 steps ahead at 20-s interval.
 
 ### 4.2 平滑
 

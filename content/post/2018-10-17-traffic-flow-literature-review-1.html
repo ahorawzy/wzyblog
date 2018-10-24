@@ -14,19 +14,15 @@ tags:
 <p>本篇文章服务于我的硕士毕业论文以及与之相关的准备投寄的小论文，也许可能也可以为未来在这方面更多的研究做积累。</p>
 <div class="section level1">
 <h1>英文文献</h1>
-<div class="section level2">
-<h2>0. 开篇之作</h2>
-<div id="analysis-of-freeway-traffic-time-series-data-by-using-box-jenkins-techniques." class="section level3">
-<h3>Analysis of freeway traffic time-series data by using Box-Jenkins techniques.</h3>
+<div id="analysis-of-freeway-traffic-time-series-data-by-using-box-jenkins-techniques." class="section level2">
+<h2>0. Analysis of freeway traffic time-series data by using Box-Jenkins techniques.</h2>
+<p>开篇之作</p>
 <p>Ahmed, M.S., Cook, A.R., 1979. Analysis of freeway traffic time-series data by using Box-Jenkins techniques. Transportation Research Record 722, 1–9</p>
 </div>
-</div>
-<div id="review-" class="section level2">
-<h2>1. Review 类</h2>
-<div id="short-term-traffic-forecasting-where-we-are-and-where-were-going." class="section level3">
-<h3>1.1 Short-term traffic forecasting: where we are and where we’re going.</h3>
-<div class="section level4">
-<h4>关键词：</h4>
+<div id="short-term-traffic-forecasting-where-we-are-and-where-were-going." class="section level2">
+<h2>1.1 Short-term traffic forecasting: where we are and where we’re going.</h2>
+<div class="section level3">
+<h3>关键词：</h3>
 <ul>
 <li>Short-term traffic;</li>
 <li>Prediction models;</li>
@@ -36,16 +32,16 @@ tags:
 <li>Computational intelligence;</li>
 </ul>
 </div>
-<div class="section level4">
-<h4>从基于统计模型到数据驱动式算法的演变</h4>
+<div class="section level3">
+<h3>从基于统计模型到数据驱动式算法的演变</h3>
 <p>At the same time, a novel research area, based on data driven empirical algorithms, has been systematically growing in parallel to the well-founded mathematical models that are based on macroscopic and microscopic theories of traffic flow (Wang and Papageorgiou, 2005; Yuan et al., 2012; Treiber and Kesting, 2012; Fowe and Chan, 2013; Kerner et al., 2013). This significant leap from analytical to data driven modeling has been marked by an overwhelming increase of Computational Intelligence (CI) – Data Mining (DM) approaches to analyzing the data. Researchers have moved from what can be considered as a classical statistical perspective (the ARIMA Family of models), to Neural and evolutionary computational approaches (Karlaftis and Vlahogianni, 2011)</p>
 </div>
-<div class="section level4">
-<h4>目前的研究局限</h4>
+<div class="section level3">
+<h3>目前的研究局限</h3>
 <p>Short-term traffic forecasting based on data driven methods is one of the most dynamic and developing research arenas with enormous published literature. Interestingly, however, <strong>most of the research has concentrated on ‘testing’ alternative modeling approaches on short-term traffic data</strong>, possibly <strong>because of the data’s ready availability and the relative ease of applying many of the available analytical approaches.</strong> This concentration leaves a number of important questions and challenges unaddressed or, relatively to the rest of the literature, under researched.</p>
 </div>
-<div id="10" class="section level4">
-<h4>提出了下一个十年短时交通流领域的10个挑战：</h4>
+<div id="10" class="section level3">
+<h3>提出了下一个十年短时交通流领域的10个挑战：</h3>
 <p>Challenges:</p>
 <ol style="list-style-type: decimal">
 <li>Developing responsive algorithms and prediction schemes Transportation; 响应式算法和预测框架（例如交通拥堵或极端天气）</li>
@@ -60,57 +56,155 @@ tags:
 <li>Realizing the full potential of artificial intelligence Artificial</li>
 </ol>
 </div>
-<div id="7" class="section level4">
-<h4>关于第7条模型选择和检验的深入</h4>
+<div id="7" class="section level3">
+<h3>关于第7条模型选择和检验的深入</h3>
 <p>模型选择的判别标准：</p>
 <p>The general approach followed in short-term traffic forecasting is to select the model that provides the most accurate predictions based on a collected dataset and <strong>regardless of the traffic’s underlying statistical characteristics</strong> (e.g. non-stationarity, volatility, nonlinearity and so on), or <strong>whether certain modeling assumptions are violated or unrealistic</strong> 关于非平稳性和非线性性：</p>
 <p>The selection of the proper modeling approach should be largely determined by the non-stationary and nonlinear features of the spatiotemporal evolution of traffic (Vlahogianni et al., 2006). Several classical or more advanced tests of non-stationarity and nonlinearity have been applied to traffic flow (Karlaftis and Vlahogianni, 2009 and Vlahogianni and Karlaftis, 2011, 2013). Recent evidence in disciplines such as econometrics and finance, has demonstrated the need to jointly consider non-stationarity and non-linearity in producing consistent short-term forecasting models.</p>
 <p>对模型残差的检验</p>
 <p>Most researchers place larger emphasis on discussing the findings and neglect the need to account for the quality of their model (in terms of <strong>the properties of the error</strong>), using even the most popular statistical diagnostics. This is of outmost importance in classical statistical modeling as a model of adequate structure should have white noise residuals (Washington et al., 2010). This implies that any ‘‘strong’’ properties in the error term – including serial correlation, volatility and so on – may indicate specification bias that can be attributed to omitted variables or misspecification of the functional form (inadequate complexity of the structure). In transportation time series applications, most artificial intelligence approaches (e.g. Neural Networks) rarely incorporate any <strong>testing of the properties of the error and the model specification 模型诊断</strong>. An exception is the work of Chen et al. (2012) that tested the properties of the errors of the autoregressive models developed for traffic flow forecasting. Vlahogianni and Karlaftis (2013) applied popular goodness-of-fit tests for serial dependence（自相关性）, normality（正态性）, homoscedasticity（同方差性） and non-linearity（非线性） on neural network time series models.</p>
+<hr />
 </div>
 </div>
-<div id="short-term-traffic-forecasting-overview-of-objectives-and-methods" class="section level3">
-<h3>1.2 Short-term traffic forecasting: overview of objectives and methods</h3>
+<div id="short-term-traffic-forecasting-overview-of-objectives-and-methods" class="section level2">
+<h2>1.2 Short-term traffic forecasting: overview of objectives and methods</h2>
 <p>到2003年的研究进展</p>
-<p>Vlahogianni, E.I., Golias, J.C., Karlaftis, M.G., 2004. Short-term traffic forecasting: overview of objectives and methods. Transportation Reviews 24 (5), 533– 557.</p>
+<p>Vlahogianni, E.I., Golias, J.C., Karlaftis, M.G., 2004. Short-term traffic forecasting: overview of objectives and methods. Transportation Reviews 24 (5), 533–557.</p>
+<p>短时交通流预测定义：</p>
+<p>Short-term traffic forecasting is the process of estimating directly the anticipated traffic conditions at a future time, given continuous short-term feedback of traffic information.</p>
+<div id="determination-of-the-scope" class="section level3">
+<h3>Determination of the scope</h3>
+<div id="type-of-implementation" class="section level4">
+<h4>Type of implementation</h4>
+<ul>
+<li>advanced traffic management system (ATMS)</li>
+<li>advanced traveller’s information system (ATIS)</li>
+<li>urban traffic control system (UTCS 1.0,2.0,3.0)</li>
+</ul>
+<p>短时交通流预测和ITS的关系：</p>
+<p>In the overall concept of a fully synchronized ITS, short-term traffic forecasting seems to have a well-established role regarding ATMS and ATIS systems. Both systems depend on accurate real-time information about how traffic conditions evolve over time and must operate in real time. The first implies embedding traffic forecasting algorithms.</p>
+<p>但由于具体路网的复杂性，目前还没有放之四海而皆准的算法。</p>
+</div>
+<div id="area-of-implementation" class="section level4">
+<h4>Area of implementation</h4>
+<ul>
+<li>freeway</li>
+<li>highway</li>
+<li>urban arterials 更加复杂</li>
+</ul>
+</div>
+</div>
+<div id="conceptual-process-of-specifying-the-output" class="section level3">
+<h3>conceptual process of specifying the output</h3>
+<ul>
+<li>data resolution
+<ul>
+<li>horizon</li>
+<li>step</li>
+</ul></li>
+<li>traffic parameter:
+<ul>
+<li>flow, occupancy, speed</li>
+<li>travel time</li>
+<li>other</li>
+<li>single or multiple parameter approach</li>
+</ul></li>
+</ul>
+<p>The forecasting horizon denotes the extent of time ahead to which the forecast is referring. The forecasting step represents the time interval upon which the forecasts are made and indicates the frequency of predictions in the forecasting horizon.</p>
+<p><strong>For example, the larger the forecasting horizon, the less accurate the model becomes. The shorter the forecasting step, the more difficult the prediction gets. </strong></p>
+</div>
+<div id="the-process-of-modelling" class="section level3">
+<h3>the process of modelling</h3>
+<div id="methodologies" class="section level4">
+<h4>Methodologies</h4>
+<ul>
+<li>parametric
+<ul>
+<li>historical average algorithms</li>
+<li>smoothing techniques</li>
+<li>ARIMA</li>
+<li>state-space model. Kalman filter</li>
+</ul></li>
+<li>non-parametric techniques
+<ul>
+<li>non-parametric regression</li>
+<li>artificial nerual network ANN</li>
+</ul></li>
+<li>hybrid</li>
+</ul>
+<p>The main purpose is to identify clusters of data with behaviour similar to current traffic state at a certain forecasting interval.</p>
+<p>非参数回归的优点：</p>
+<ul>
+<li>its intuitive formulation,</li>
+<li>the lack of a need for assumption on the transition of traffic states from one period to another</li>
+<li>the simplicity in modelling multivariate settings</li>
+</ul>
+<p>神经网络的相关研究：</p>
+<p>Neural network applications to short-term traffic forecasting extend from the simple <strong>multilayer perceptrons (MLP)</strong> (Clark et al., 1993; Kwon and Stephanedes, 1994; Smith and Demetsky, 1994; Zhang, 2000) to more complex structures such as <strong>MLP with a learning rule based on a Kalman filter</strong> (Vythoulkas, 1993), <strong>time-delayed recurrent neural networks</strong> (Yun et al., 1997; Abdulhai et al., 1999; Lingras and Mountford, 2001), <strong>Jordan’s sequential network</strong> (Yasdi, 1999), finite impulse response networks (Yun et al., 1997), <strong>multirecurrent neural networks</strong> (Ulbricht, 1994), <strong>a Hopfield network</strong> (Gilmore and Abe, 1995), a spectral basis neural network (Park et al., 1999), <strong>dynamic neural networks</strong> (Ishak and Alescandru, 2003), etc.</p>
+</div>
+<div id="type-of-output-data" class="section level4">
+<h4>type of output data</h4>
+<ul>
+<li>univariate</li>
+<li>multivariate</li>
+<li>multiple steps ahead foreacsting</li>
+</ul>
+<p>多步预测的重要性：</p>
+<p>Multiple steps ahead forecasting is of outmost importance. Single interval prediction algorithms cannot support any operational decisionmaking mechanisms as they cannot provide a reliable representation of the way traffic might evolve in the following minutes.</p>
+</div>
+<div id="type-of-input-data" class="section level4">
+<h4>type of input data</h4>
+<ul>
+<li>multiple parameter inputs 用其他多个变量预测某个变量</li>
+<li>time and space lag relationships</li>
+</ul>
+</div>
+<div id="quality-of-data" class="section level4">
+<h4>Quality of data</h4>
+<hr />
+</div>
 </div>
 </div>
 <div class="section level2">
 <h2>9. 待找原文</h2>
+</div>
+<div class="section level2">
+<h2>9.1 基于人工智能的短时交通流预测(综述性)</h2>
 <div class="section level3">
-<h3>9.1 基于人工智能的短时交通流预测(综述性)</h3>
-<div class="section level4">
-<h4>引用</h4>
+<h3>引用</h3>
 <p>Van Lint, J., Van Hinsbergen, C., 2012. Short term traffic and travel time prediction models, in artificial intelligence applications to critical transportation issues. In: Transportation Research Circular. National Academies Press, Washington, DC.</p>
+<hr />
 </div>
 </div>
+<div class="section level2">
+<h2>9.2 交通流聚类</h2>
 <div class="section level3">
-<h3>9.2 交通流聚类</h3>
-<div class="section level4">
-<h4>链接</h4>
+<h3>链接</h3>
 <p><a href="https://link.springer.com/article/10.1007%2Fs12205-012-1233-1#citeas">springer</a></p>
 </div>
-<div id="-1" class="section level4">
-<h4>引用</h4>
+<div id="-1" class="section level3">
+<h3>引用</h3>
 <p>Xia, J., Huang, W., Guo, J., 2012. A clustering approach to online freeway traffic state identification using ITS data. KSCE Journal of Civil Engineering 16 (3),426–432.</p>
 </div>
-<div class="section level4">
-<h4>摘要</h4>
-<p>Online traffic state identification plays an important role in achieving the potentials promised by Intelligent Transportation Systems (ITS) on various traffic applications, e.g., real time traffic monitoring systems. Traditional approaches have shown the limitations in either obtaining the necessary pre-determined information or having difficulties in their online implementation. This paper introduces an online agglomerative clustering procedure for freeway traffic state identification using ITS data, represented by three traffic condition variables of flow rate, speed, and occupancy. An optimal fit of the statistical characteristics is provided by maximizing the intra-cluster data point distances and minimizing inter-cluster data point distances through a joint utilization of the <strong>Bayesian Information Criterion</strong> and the <strong>ratio of change of the dispersion measurements</strong>. Test results show that the identified freeway traffic states through the proposed procedure are reasonable and consistent with the common understandings on freeway traffic operating conditions.</p>
-</div>
-</div>
-<div id="rbf" class="section level3">
-<h3>9.3 基于RBF神经网络的聚类</h3>
-<p>Park, B. (1998). “Clustering-based RBF neural network model for shortterm freeway traffic volume forecasting.” Proceedings of the 5th International Conference on Applications of Advanced Technologies in Transportation Engineering, Newport Beach, California, pp. 280–287.</p>
-</div>
-<div id="-1" class="section level3">
-<h3>9.4 交通流聚类</h3>
-<p>Xia, J. and Chen, M. (2007). “A nested clustering procedure for traffic condition classification.” Journal of Computed-Aided Civil and Infrastructure Engineering, Vol. 22, No. 6, pp. 430–437.</p>
-</div>
 <div class="section level3">
-<h3>9.5 模型评价指标的适应性</h3>
-<p>Chandra, S.R., Al-Deek, H., 2008. Cross-correlation analysis and multivariate prediction of spatial time series of freeway traffic speeds. Transportation Research Record 2061, 64–76.</p>
+<h3>摘要</h3>
+<p>Online traffic state identification plays an important role in achieving the potentials promised by Intelligent Transportation Systems (ITS) on various traffic applications, e.g., real time traffic monitoring systems. Traditional approaches have shown the limitations in either obtaining the necessary pre-determined information or having difficulties in their online implementation. This paper introduces an online agglomerative clustering procedure for freeway traffic state identification using ITS data, represented by three traffic condition variables of flow rate, speed, and occupancy. An optimal fit of the statistical characteristics is provided by maximizing the intra-cluster data point distances and minimizing inter-cluster data point distances through a joint utilization of the <strong>Bayesian Information Criterion</strong> and the <strong>ratio of change of the dispersion measurements</strong>. Test results show that the identified freeway traffic states through the proposed procedure are reasonable and consistent with the common understandings on freeway traffic operating conditions.</p>
+<hr />
 </div>
+</div>
+<div id="rbf" class="section level2">
+<h2>9.3 基于RBF神经网络的聚类</h2>
+<p>Park, B. (1998). “Clustering-based RBF neural network model for shortterm freeway traffic volume forecasting.” Proceedings of the 5th International Conference on Applications of Advanced Technologies in Transportation Engineering, Newport Beach, California, pp. 280–287.</p>
+<hr />
+</div>
+<div id="-1" class="section level2">
+<h2>9.4 交通流聚类</h2>
+<p>Xia, J. and Chen, M. (2007). “A nested clustering procedure for traffic condition classification.” Journal of Computed-Aided Civil and Infrastructure Engineering, Vol. 22, No. 6, pp. 430–437.</p>
+<hr />
+</div>
+<div class="section level2">
+<h2>9.5 模型评价指标的适应性</h2>
+<p>Chandra, S.R., Al-Deek, H., 2008. Cross-correlation analysis and multivariate prediction of spatial time series of freeway traffic speeds. Transportation Research Record 2061, 64–76.</p>
 </div>
 </div>
 <div class="section level1">
