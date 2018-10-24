@@ -1,0 +1,95 @@
+---
+title: 学习《R for Data Science》
+author: 王致远
+date: '2018-10-24'
+slug: reading-r-for-data-science
+categories:
+  - R语言
+tags:
+  - 学习总结
+---
+
+
+
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## Warning: 程辑包&#39;tidyverse&#39;是用R版本3.5.1 来建造的</code></pre>
+<pre><code>## -- Attaching packages -------------------------------------------------------- tidyverse 1.2.1 --</code></pre>
+<pre><code>## √ ggplot2 2.2.1     √ purrr   0.2.5
+## √ tibble  1.4.2     √ dplyr   0.7.6
+## √ tidyr   0.8.1     √ stringr 1.3.1
+## √ readr   1.1.1     √ forcats 0.3.0</code></pre>
+<pre><code>## Warning: 程辑包&#39;tidyr&#39;是用R版本3.5.1 来建造的</code></pre>
+<pre><code>## Warning: 程辑包&#39;readr&#39;是用R版本3.5.1 来建造的</code></pre>
+<pre><code>## Warning: 程辑包&#39;forcats&#39;是用R版本3.5.1 来建造的</code></pre>
+<pre><code>## -- Conflicts ----------------------------------------------------------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<p>这本书是哈德利的入门之作。虽然对于我来说有点过于简单，不过这本书是以系统的观点阐述数据分析中的各个问题，并且都是用tidyverse工具箱中的包解决的。利用闲暇时间读一遍能够系统学习一边tidyverse，也不算浪费时间。不过这本书过的速度可以稍微快一点，毕竟很多都是太基础的内容。</p>
+<div id="explore" class="section level1">
+<h1>Explore</h1>
+<div id="data-visualisation" class="section level2">
+<h2>3. Data visualisation</h2>
+<p>样例数据：mpg</p>
+<pre class="r"><code>str(mpg)</code></pre>
+<pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    234 obs. of  11 variables:
+##  $ manufacturer: chr  &quot;audi&quot; &quot;audi&quot; &quot;audi&quot; &quot;audi&quot; ...
+##  $ model       : chr  &quot;a4&quot; &quot;a4&quot; &quot;a4&quot; &quot;a4&quot; ...
+##  $ displ       : num  1.8 1.8 2 2 2.8 2.8 3.1 1.8 1.8 2 ...
+##  $ year        : int  1999 1999 2008 2008 1999 1999 2008 1999 1999 2008 ...
+##  $ cyl         : int  4 4 4 4 6 6 6 4 4 4 ...
+##  $ trans       : chr  &quot;auto(l5)&quot; &quot;manual(m5)&quot; &quot;manual(m6)&quot; &quot;auto(av)&quot; ...
+##  $ drv         : chr  &quot;f&quot; &quot;f&quot; &quot;f&quot; &quot;f&quot; ...
+##  $ cty         : int  18 21 20 21 16 18 18 18 16 20 ...
+##  $ hwy         : int  29 29 31 30 26 26 27 26 25 28 ...
+##  $ fl          : chr  &quot;p&quot; &quot;p&quot; &quot;p&quot; &quot;p&quot; ...
+##  $ class       : chr  &quot;compact&quot; &quot;compact&quot; &quot;compact&quot; &quot;compact&quot; ...</code></pre>
+<pre class="r"><code>summary(mpg)</code></pre>
+<pre><code>##  manufacturer          model               displ            year     
+##  Length:234         Length:234         Min.   :1.600   Min.   :1999  
+##  Class :character   Class :character   1st Qu.:2.400   1st Qu.:1999  
+##  Mode  :character   Mode  :character   Median :3.300   Median :2004  
+##                                        Mean   :3.472   Mean   :2004  
+##                                        3rd Qu.:4.600   3rd Qu.:2008  
+##                                        Max.   :7.000   Max.   :2008  
+##       cyl           trans               drv                 cty       
+##  Min.   :4.000   Length:234         Length:234         Min.   : 9.00  
+##  1st Qu.:4.000   Class :character   Class :character   1st Qu.:14.00  
+##  Median :6.000   Mode  :character   Mode  :character   Median :17.00  
+##  Mean   :5.889                                         Mean   :16.86  
+##  3rd Qu.:8.000                                         3rd Qu.:19.00  
+##  Max.   :8.000                                         Max.   :35.00  
+##       hwy             fl               class          
+##  Min.   :12.00   Length:234         Length:234        
+##  1st Qu.:18.00   Class :character   Class :character  
+##  Median :24.00   Mode  :character   Mode  :character  
+##  Mean   :23.44                                        
+##  3rd Qu.:27.00                                        
+##  Max.   :44.00</code></pre>
+<blockquote>
+<p>“The greatest value of a picture is when it forces us to notice what we never expected to see.” — John Tukey</p>
+</blockquote>
+<p>可映射的图形属性：</p>
+<ul>
+<li>color</li>
+<li>size</li>
+<li>shape</li>
+<li>alpha</li>
+</ul>
+<p>+加号必须放在一句的末尾而不是下一句的开始。</p>
+<p>分面：对分类数据很有用</p>
+<p>单一变量的分面：facet_wrap()</p>
+<pre class="r"><code>ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) + 
+  facet_wrap(~ class, nrow = 2)</code></pre>
+<p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>多变量分面：facet_grid()</p>
+<pre class="r"><code>ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) + 
+  facet_grid(drv ~ cyl)</code></pre>
+<p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) + 
+  facet_grid(. ~ cyl)</code></pre>
+<p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+</div>

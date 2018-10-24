@@ -6,10 +6,19 @@
     <description>Recent content in R语言 on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 16 Oct 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 24 Oct 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/r%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>学习《R for Data Science》</title>
+      <link>/post/2018/10/24/reading-r-for-data-science/</link>
+      <pubDate>Wed, 24 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/10/24/reading-r-for-data-science/</guid>
+      <description>library(tidyverse) ## Warning: 程辑包&amp;#39;tidyverse&amp;#39;是用R版本3.5.1 来建造的 ## -- Attaching packages -------------------------------------------------------- tidyverse 1.2.1 -- ## √ ggplot2 2.2.1 √ purrr 0.2.5 ## √ tibble 1.4.2 √ dplyr 0.7.6 ## √ tidyr 0.8.1 √ stringr 1.3.1 ## √</description>
+    </item>
     
     <item>
       <title>log函数在图形映射中的妙用</title>
