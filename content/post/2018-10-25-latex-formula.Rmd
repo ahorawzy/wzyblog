@@ -1,0 +1,28 @@
+---
+title: blogdown中的公式支持
+author: 王致远
+date: '2018-10-25'
+slug: latex-formula
+categories:
+  - R语言
+  - 博客
+tags:
+  - 解决方案
+---
+
+最近在总结行测题时，发现我的xmin主题不支持公式了，加了反双引号也没用。用knit渲染出来是带公式的，但博客里怎么都显示不了公式。所以判断不是rmarkdown的问题，而是blogdown的问题。虽然是个小问题，但如鲠在喉，怎么都解决不了，快把我的强迫症逼出来了。今天实在忍无可忍，下手去解决。
+
+我先看了谢益辉的博客，想看他是怎么做的，发现他的博客都是markdown格式的，这倒让我有点吃惊，他竟然没有Rmarkdown。之后我突然想到，xmin的示例博客是支持公式的（主页上就有一个大大的公式），为什么到我这就不支持了呢？想到自己有可能是在之前学blogdown捣鼓设置时给捣鼓坏了，覆盖掉了对公式的支持。
+
+于是打开之前下的一个示例版xmin，仔细对照有什么不同。发现它多了一个文件夹/layouts/partials/，里面有个foot_custom.html的文件，内容如下：
+
+```{html}
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+```
+
+我把我博客里的目录也照猫画虎建了这么个路径和html文件，用serve_site()一渲染，果然可以了。
+
+$$\sum_{i=0}^{100}x_i$$

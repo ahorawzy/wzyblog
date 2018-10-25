@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>blogdown中的公式支持</title>
+      <link>/post/2018/10/25/latex-formula/</link>
+      <pubDate>Thu, 25 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/10/25/latex-formula/</guid>
+      <description>最近在总结行测题时，发现我的xmin主题不支持公式了，加了反双引号也没用。用knit渲染出来是带公式的，但博客里怎么都显示不了公式。所以判断</description>
+    </item>
+    
+    <item>
       <title>行测(3)——材料分析题</title>
       <link>/post/2018/10/25/xingce-3/</link>
       <pubDate>Thu, 25 Oct 2018 00:00:00 +0000</pubDate>

@@ -6,10 +6,19 @@
     <description>Recent content in R语言 on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 24 Oct 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 25 Oct 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/r%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>blogdown中的公式支持</title>
+      <link>/post/2018/10/25/latex-formula/</link>
+      <pubDate>Thu, 25 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/10/25/latex-formula/</guid>
+      <description>最近在总结行测题时，发现我的xmin主题不支持公式了，加了反双引号也没用。用knit渲染出来是带公式的，但博客里怎么都显示不了公式。所以判断</description>
+    </item>
     
     <item>
       <title>学习《R for Data Science》</title>
