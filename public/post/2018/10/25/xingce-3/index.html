@@ -91,7 +91,12 @@
 <blockquote>
 <p>博物馆占文物机构总数的43.5%，博物馆接待观众占总接待观众的85.2%。问每家博物馆接待观众人次是其他机构的多少倍？</p>
 </blockquote>
-<p><span class="math display">\[\frac{85.2\%/43.5\%}{(1-85.2\%)(1-43.5\%)}\]</span></p>
+<p>分数上下将机构总数x和观众人数y约去了。</p>
+<p><span class="math display">\[\frac{85.2\%/43.5\%}{(1-85.2\%)/(1-43.5\%)}\]</span></p>
+<pre class="r"><code>0.852/0.435</code></pre>
+<pre><code>## [1] 1.958621</code></pre>
+<pre class="r"><code>(1-0.852)/(1-0.435)</code></pre>
+<pre><code>## [1] 0.2619469</code></pre>
 </div>
 </div>
 
