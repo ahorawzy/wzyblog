@@ -6,10 +6,19 @@
     <description>Recent content in 学习总结 on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 24 Oct 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 25 Oct 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>行测(3)——材料分析题</title>
+      <link>/post/2018/10/25/xingce-3/</link>
+      <pubDate>Thu, 25 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/10/25/xingce-3/</guid>
+      <description>注意 注意审题，严格对照清楚问的是谁，别计算错了对象； 例题 1. 已知今年水平，问去年（前年）水平 去年=今年/(1+增长率) 2015年蔬菜产量15.</description>
+    </item>
     
     <item>
       <title>学习《R for Data Science》</title>

@@ -1,0 +1,60 @@
+---
+title: 行测(3)——材料分析题
+author: 王致远
+date: '2018-10-25'
+slug: xingce-3
+categories:
+  - 找工作
+tags:
+  - 学习总结
+---
+
+
+
+<div class="section level2">
+<h2>注意</h2>
+<ul>
+<li>注意审题，严格对照清楚问的是谁，别计算错了对象；</li>
+</ul>
+</div>
+<div class="section level2">
+<h2>例题</h2>
+<div class="section level3">
+<h3>1. 已知今年水平，问去年（前年）水平</h3>
+<p>去年=今年/(1+增长率)</p>
+<blockquote>
+<p>2015年蔬菜产量15.79万吨，下降3.4%；水果产量7.84万吨，增长7.4%；2014年蔬菜比水果约高多少万吨？</p>
+</blockquote>
+<pre class="r"><code>15.79-7.84</code></pre>
+<pre><code>## [1] 7.95</code></pre>
+<p>约等于8，蔬菜是下降了，水果增长了，所以一定比8大，选9</p>
+<pre class="r"><code>15.79/(1-0.034)-7.84/(1+0.074)</code></pre>
+<pre><code>## [1] 9.045942</code></pre>
+<hr />
+<blockquote>
+<p>2015生产时钟完成产值162亿元，同比下降4.7%，降幅扩大1.3个百分点，问2015年产值与2013年相比约？</p>
+</blockquote>
+<p><span class="math display">\[\frac{1-\frac{1}{(1-0.047)(1-0.034)}}{\frac{1}{(1-0.047)(1-0.034)}}\]</span></p>
+<pre class="r"><code>(1-0.047)*(1-0.047+0.013)-1</code></pre>
+<pre><code>## [1] -0.079402</code></pre>
+<p>下降8%</p>
+</div>
+<div class="section level3">
+<h3>2. 平均数估算</h3>
+<blockquote>
+<p>十二五期间，粮食总产量</p>
+</blockquote>
+<p>十二五是指2011~2015的五年。分别是4.34,4.43,4.14,4.21,4.16；选取中位数4.21作为平均数的估计；</p>
+<pre class="r"><code>4.21*5</code></pre>
+<pre><code>## [1] 21.05</code></pre>
+<pre class="r"><code>4.34+4.43+4.14+4.21+4.16</code></pre>
+<pre><code>## [1] 21.28</code></pre>
+</div>
+<div class="section level3">
+<h3>4. 比率相比</h3>
+<p>直接相减，而不是像绝对数那样算</p>
+<p>钟表行业利润率6.5%，轻工业利润率7.57%；</p>
+<pre class="r"><code>6.5-7.57</code></pre>
+<pre><code>## [1] -1.07</code></pre>
+</div>
+</div>
