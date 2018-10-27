@@ -99,6 +99,77 @@
 <pre><code>## [1] 0.2619469</code></pre>
 </div>
 </div>
+<div class="section level2">
+<h2>题型</h2>
+<div class="section level3">
+<h3>1. 直接读数类问题</h3>
+<p>加减运算，或直接比大小、排列顺序等；</p>
+<blockquote>
+<p>2013年，我国国内生产总值568845亿元，第一产业增加量占国内生产总值比重为10.0%，第二产业增加值比重为43.9%，第三产业增加值比重为46.1%。温第三产业增加值占国内生产总值的比重比第二产业？</p>
+</blockquote>
+<p><strong>高2.2个百分点。注意不是高2.2%。</strong></p>
+<p><strong>比率相比，直接相减</strong></p>
+</div>
+<div class="section level3">
+<h3>2. 基期量相关问题</h3>
+<p>0.05以上的特殊分位数对应表</p>
+<p><span class="math display">\[1/15=0.067\\1/14=0.071\\1/13=0.077\\1/12.5=0.08\\1/12=0.083\\1/11=0.091\\1/9=0.111\\1/8=0.125\\1/7=0.143\\1/6=0.167\\2/9=1/4.5=0.22\]</span></p>
+<p><span class="math display">\[基期量=现期量-增长量\]</span></p>
+<p><span class="math display">\[基期量=\frac{现期量}{1+增长率}\]</span></p>
+<p>计算时多用估算法或放缩法解决。</p>
+<div class="section level4">
+<h4>增长率化除为乘</h4>
+<p><strong>如果增长率较小，低于5%，则用化除为乘进行速算。增长率大于5%，小数化分数。</strong></p>
+<blockquote>
+<p>2013年1<sub>10月，进口金额664.72亿美元，同比增长0.18%，问2012年1</sub>10月累计进口额。</p>
+</blockquote>
+<p><span class="math display">\[\frac{664.72}{1+0.18\%}\approx665*(1-0.18\%)\approx665-6.65*0.2\approx663\]</span></p>
+<p>估算</p>
+<p><span class="math display">\[\frac{4572}{0.88*534}\approx\frac{4500^+/0.9^-}{534}\approx\frac{5000^+}{534}\approx0.9^+\]</span></p>
+</div>
+<div class="section level4">
+<h4>基期量求和</h4>
+<blockquote>
+<p>2011年，养殖水产4026万吨，增长5.2%；捕捞水产1572万吨，增长1.9%。问2010年我国水产多少万吨？</p>
+</blockquote>
+<p><span class="math display">\[\frac{4026}{1+5.2\%}+\frac{1574}{1+1.9\%}\approx4000*(1-5.2\%)+1574*(1-1.9\%)\approx3800+1500=5300\]</span></p>
+</div>
+<div class="section level4">
+<h4>间隔基期</h4>
+<blockquote>
+<p>2009年31731，同比增长2.9%，增速同比下降6.4个百分点。问2007年？</p>
+</blockquote>
+<p>2008年增长率为2.9%+6.4%=9.3%。然后求<strong>混合增长率</strong></p>
+<p><span class="math display">\[2.9\%+9.3\%+2.9\%*9.3\%=12.5\%\]</span></p>
+<p><span class="math display">\[\frac{31731}{1+12.5\%}\approx3.2*\frac{8}{9}\approx2.8\]</span></p>
+</div>
+<div class="section level4">
+<h4>基期量的比较</h4>
+<p><span class="math display">\[\frac{100}{1+0.7}\qquad \frac{212}{1+0.45}\qquad \frac{146}{1+0.68}\]</span></p>
+<p><strong>分子大，同时分母小的数值大</strong></p>
+</div>
+</div>
+<div class="section level3">
+<h3>3. 增长量相关问题</h3>
+<p><span class="math display">\[增长量=现期量-基期量=基期量*增长率=\frac{现期量}{1+增长率}*增长率\]</span></p>
+<p><span class="math display">\[若r\%=\frac{1}{n}\quad\frac{A}{1+r\%}*r\%=\frac{A}{1+n}\]</span></p>
+<p>特殊分数放缩法：</p>
+<p><span class="math display">\[若a\%&lt;1/n，则\frac{A}{1+r\%}&lt;\frac{A}{1+n}；若a\%&gt;1/n，则\frac{A}{1+r\%}&gt;\frac{A}{1+n}\]</span></p>
+<p>增长量比较：大大则大，肉A的现期量和增长率均大于B，则A的增长量也应大于B。</p>
+<div class="section level4">
+<h4>放缩法</h4>
+<blockquote>
+<p>当月83.1，同比增长37.37%，问增长量</p>
+</blockquote>
+<p><span class="math display">\[\frac{83.1}{1+37.37\%}*37.37\%\]</span></p>
+<p>其中增长率：<span class="math inline">\(1/3&lt;37.37\%&lt;1/2\)</span>，那么</p>
+<p><span class="math display">\[\frac{83.1}{4}&lt;\frac{83.1}{1+37.37\%}*37.37\%&lt;\frac{83.1}{3}\]</span></p>
+<p>解法二：同时小幅度增大分子分母</p>
+<p><span class="math display">\[\frac{83.1}{1+37.37\%}*37.37\%=22.4;\quad\frac{83}{1+0.4}*0.4=23.7\]</span></p>
+<p>增长率算大了，所以增长量算大了，所以应该稍小些。</p>
+</div>
+</div>
+</div>
 
 </main>
 
