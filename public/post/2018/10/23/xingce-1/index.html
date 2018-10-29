@@ -130,6 +130,7 @@
 <p>200mL沐浴露每箱20瓶，500mL沐浴露每箱12瓶，分别定价14元和25元，货品卖完后收入相同，问200mL最少几箱？</p>
 </blockquote>
 <p><span class="math display">\[20*14=280，12*25=300\]</span></p>
+<p>则找280和300的最小公倍数，他们的最大公约数是20，则200mL应该多乘个15.所以有15箱。</p>
 </div>
 <div class="section level2">
 <h2>5. 概率类问题</h2>
@@ -149,15 +150,20 @@
 </div>
 <div class="section level2">
 <h2>6. 成本利润问题</h2>
+<p><span class="math display">\[成本=售价/(1+利润率)\\折扣=实际售价/定价\]</span></p>
 <blockquote>
-<p>房租每月1万元，重新装修花费10万元。从租下店面到开业经营3个月。开业后第一个月，纯利润3万元 则找280和300的最小公倍数，他们的最大公约数是20，则200mL应该多乘个15.所以有15箱。</p>
+<p>老王投资一件艺术品，上涨50%，为尽快出手，老王按市价8折出售，扣除成交价5%的交易费后，与买进时相比赚了7万元。</p>
 </blockquote>
+<p><strong>题干中出现大量百分数，用赋值法</strong></p>
+<p>假定进价100，利润50，定价150，八折后120，交易费6，实际售价114，净利润14，相当于7万，所以进价100相当于50万。</p>
 </div>
 <div class="section level2">
 <h2>7. 排列组合问题</h2>
 <p><span class="math display">\[C_n^m=\frac{n!}{m!(n-m)!}\]</span></p>
 <p><span class="math display">\[A_n^n=n!\]</span></p>
 <p><span class="math display">\[A_n^m=\frac{n!}{(n-m)!}\]</span></p>
+<div class="section level4">
+<h4>错位重排</h4>
 <blockquote>
 <p>某集团5个分公司分别派出1个人去总部培训参加培训，培训后再将5人随机分配到5个分公司，每个分公司只分配1人。问有且仅有一人在培训后返回原公司概率</p>
 </blockquote>
@@ -167,6 +173,23 @@
 <p><strong>错位重排：将n各元素重新排列，使每个元素都不在原来位置上。</strong></p>
 <p>D1=0，D2=1，D3=2，D4=9，D5=44</p>
 <p><span class="math display">\[D_n=(n-1)(D_{n-2}+D_{n-1})\]</span></p>
+</div>
+<div class="section level4">
+<h4>捆绑法</h4>
+<p>先将相邻元素视作整体参与排序，然后考虑这个整体内部各元素间顺序</p>
+<blockquote>
+<p>4对青旅排成对买演唱会门票，每对情侣必须在一起，共有多少种不同的排队顺序。</p>
+</blockquote>
+<p>每对情侣捆绑在一起，全排列为24.每对情侣都有2种可能。所以为</p>
+<p><span class="math display">\[24*2^4=384\]</span></p>
+</div>
+<div class="section level4">
+<h4>插板法</h4>
+<blockquote>
+<p>把12棵同样的松树和6棵同样的柏树重载道路两侧，每侧种9棵，妖气每侧的柏树数量相等且不相邻，且道路起点和重点两侧种植的都必须是松树。问多少种种植方法。</p>
+</blockquote>
+<p>6棵松树，起点和终点都是松树，只考虑中间5个空，从5个空中选出3个种柏树。每一遍的种植方式为<span class="math inline">\(C_5^3=10\)</span>，总种植方式为100.</p>
+</div>
 </div>
 <div class="section level2">
 <h2>8. 图形面积计算问题</h2>
@@ -180,6 +203,9 @@
 </div>
 <div class="section level2">
 <h2>9. 生产线问题</h2>
+<p>三要素：时间，效率，工作量</p>
+<p>当题目中值给出时间时，赋值总工作量，根据总量和时间求出效率，然后研究效率的分配方法。总工作量赋值成时间的最小公倍数。</p>
+<p>当效率成倍数时，赋值效率。</p>
 <blockquote>
 <p>甲组单独做需要10小时，乙组单独做需要15小时，现两组一起做，期间乙组休息了1小时40分钟，完成时甲组比乙组多做300个，问一共多少个？</p>
 </blockquote>
@@ -198,6 +224,119 @@
 <p>某次军事演习中，一架无人机对三个地面目标侦查。一直三目标点在地面上的连线为直角三角形，两个点之间最远距离为600.问无人机同时与三个点保持500米距离时，其飞行高度为多少米？</p>
 </blockquote>
 <p>空间中到平面上三点距离都相等的点在三角形的外接圆圆心。直角三角形外接圆圆心在斜边中点。所以飞行高度为400。</p>
+</div>
+<div class="section level2">
+<h2>11. 尾数计算问题</h2>
+<p>乘方尾数：底数只留个位数，指数除以4留余数，余数为0换成4.所得新数的位数即为原数的位数。</p>
+<blockquote>
+<p>2012的2012次方尾数</p>
+</blockquote>
+<p>底数末尾数字为2，指数2012能被4整除，只需计算2的4次方，尾数是6.</p>
+</div>
+<div class="section level2">
+<h2>12. 因子分析</h2>
+<p>所谓因子，即是公约数。<strong>加减法或乘法计算结果一定包含每部分的公共因子。除法计算时公共因子被消掉以降低计算难度。</strong></p>
+<p>常见的因子分析是3因子或9因子判定</p>
+<blockquote>
+<p>1005*10061006-1006*10051005=0</p>
+</blockquote>
+<p>1005与10051005都是3的倍数，结果也一定是3的倍数。</p>
+</div>
+<div class="section level2">
+<h2>13. 基本公式</h2>
+<p>平方差公式：</p>
+<p><span class="math display">\[a^2-b^2=(a+b)(a-b)\]</span></p>
+<p>裂项公式：</p>
+<p><span class="math display">\[\frac{b}{m*(m+a)}=\frac{b}{a}(\frac{1}{m}-\frac{1}{m+a})\]</span></p>
+<p>分母有理化：</p>
+<p><span class="math display">\[\frac{1}{\sqrt{n+1}+\sqrt{n}}=\sqrt{n+1}-\sqrt{n}\]</span></p>
+</div>
+<div class="section level2">
+<h2>14. 整体代换法</h2>
+<p>重复出现的部分看作一个整体，用字母代替；先不计算整体内部的细节，而是采用整体计算的方法</p>
+</div>
+<div class="section level2">
+<h2>15. 定义新运算</h2>
+</div>
+<div class="section level2">
+<h2>16. 集合类问题</h2>
+<p><span class="math display">\[|A\cup B| = |A| + |B| + |A\cap B|\]</span></p>
+<p><span class="math display">\[|A\cup B \cup C| = |A| + |B| + |C| - |A\cap B|-|B \cap C|-|A\cap C| + |A\cap B\cap C|\]</span></p>
+<blockquote>
+<p>某班60人，参加物理竞赛30人，数学竞赛32人，两科都没参加20人。问同时参加物流和数学竞赛多少人。</p>
+</blockquote>
+<p>设两科都参加x人。</p>
+<p><span class="math display">\[32+30-x=60-20\]</span> &gt; 某公司招聘员工，按规定每人至多报考两个职位，共42人报名。甲乙丙三个职位报考人数分别是22,16,25.其中同时报甲乙人数为8，同时报甲丙人数为6，问同时报乙丙人数为多少。</p>
+<p>设同时报乙丙人数为x</p>
+<p><span class="math display">\[42=22+16+25-8-6-x+0\]</span></p>
+<div class="section level4">
+<h4>三集合概念型</h4>
+<p><span class="math display">\[满足集合总数=满足一个+满足两个+满足三个\]</span></p>
+<p><span class="math display">\[满足两个=A\cap B+A\cap C+B\cap C-3A\cap B \cap C\]</span></p>
+<p><span class="math display">\[满足三个=A\cap B \cap C\]</span></p>
+<p><span class="math display">\[总数=A+B+C-满足两个 -2*满足三个\]</span></p>
+<blockquote>
+<p>调查对象中179使用搜索引擎，146从官方网站，246人从社交网络获取，同时使用三种有115人，使用其中两种24人，另有52人三种都不使用，问共发出多少问卷。</p>
+</blockquote>
+<p><span class="math display">\[179+146+246-24-2*115=总人数-52\]</span></p>
+</div>
+</div>
+<div class="section level2">
+<h2>17. 行程问题</h2>
+<p><span class="math display">\[路程=速度*时间\]</span></p>
+<p><span class="math display">\[路程比例=速度比例*时间比例\]</span></p>
+<ul>
+<li>时间相同，路程比等于速度比；</li>
+<li>速度相同，路程比等于时间比；</li>
+<li>路程相同，速度比等于时间反比。</li>
+</ul>
+<p>等距离平均速度公式：</p>
+<p><span class="math display">\[v=\frac{2v_1v_2}{v_1+v_2}\]</span></p>
+<p>以不同速度两次通过某特定路程</p>
+<p>等间隔发车时间公式，t1与t2经历路程相同</p>
+<p><span class="math display">\[发车时间间隔=\frac{2t_1t_2}{t_1+t_2}\]</span></p>
+<div class="section level4">
+<h4>火车过桥公式：</h4>
+<p><span class="math display">\[桥长+车长=火车速度*过桥时间\]</span></p>
+</div>
+<div class="section level4">
+<h4>相遇问题：</h4>
+<blockquote>
+<p>客车与货车分别从东西两站相向而行，客货车速度比为4:3，两车相遇后，客车速度减少10%，货车速度增加20%。当客车到达西站时，货车离东站还有17公里。问东西站相距多少公里？</p>
+</blockquote>
+<p><strong>题干中出现比例特征，用赋值法简化计算</strong></p>
+<p>V客=4，V货=3.相遇时客车路程为4份，货车为3份，总路程7份。相遇后，V客=3.6，V货=3.6.当客车到达西站时，路程为3份，此时货车距离车站还有1份距离，为17km，所以总路程为7*17.</p>
+</div>
+<div class="section level4">
+<h4>追及问题：</h4>
+<p><span class="math display">\[追及距离=(V_1-V_2)*追及时间\]</span></p>
+</div>
+<div class="section level4">
+<h4>队伍行进模型</h4>
+<p>队首到队尾：</p>
+<p><span class="math display">\[队伍长度=(人速+队伍速度)*时间\]</span></p>
+<p>队尾到队首：</p>
+<p><span class="math display">\[队伍长度=(人速-队伍速度)*时间\]</span></p>
+<blockquote>
+<p>一支600米长的行军队伍，队尾通信员用3分钟跑到队首，又在队伍休息时间以同样速度跑回队尾用2分24秒，如队伍和同心圆匀速前进，则同心圆从队首跑回队尾需要多久？</p>
+</blockquote>
+<p>设通信员速度为v1，队伍速度为v2.</p>
+<p><span class="math display">\[600=(v_1-v_2)*3\\600=v_1*2.4\]</span></p>
+<p>解得v1为250，v2为50.则返回队尾时间维600/(250+50)=2分钟。</p>
+</div>
+<div class="section level4">
+<h4>直线型往返相遇</h4>
+<p>相遇n次，路程和为(2n-1)个全程</p>
+</div>
+<div class="section level4">
+<h4>流水行船问题</h4>
+<p><span class="math display">\[顺流航程=(船速+水速)*顺流时间\\逆流航程=(船速-水速)*逆流时间\]</span></p>
+<blockquote>
+<p>一支装有动力桨的船，其单靠人工划船顺流而下的速度是水速3被。先船靠人工从A顺流到B，原路返回时只开动力桨，用时比来时少2/5.问在静水中动力桨是人工划船速度多少倍。</p>
+</blockquote>
+<p><strong>涉及倍数关系，用赋值法</strong>。设水速为1，则顺水速度为3，人工划船速度为2.</p>
+<p>逆流时，顺水时间:逆水时间=1:(1-2/5)=5:3，则顺水速度:逆水速度=3:5，所以逆水速度为5，动力桨为6.比为6:2即3倍。</p>
+</div>
 </div>
 </div>
 
