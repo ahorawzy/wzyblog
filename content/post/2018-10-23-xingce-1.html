@@ -39,7 +39,7 @@ tags:
 <li>修正项与数列前项相关</li>
 </ul></li>
 </ul>
-<p>数列中间出现一个莫名其妙的负数，可考虑递推做和。</p>
+<p>数列中间出现一个莫名其妙的负数，可考虑递推做和或者分组作和。</p>
 </div>
 <div class="section level2">
 <h2>4. 幂次数列</h2>
@@ -153,7 +153,7 @@ tags:
 <h4>捆绑法</h4>
 <p>先将相邻元素视作整体参与排序，然后考虑这个整体内部各元素间顺序</p>
 <blockquote>
-<p>4对青旅排成对买演唱会门票，每对情侣必须在一起，共有多少种不同的排队顺序。</p>
+<p>4对情侣排成对买演唱会门票，每对情侣必须在一起，共有多少种不同的排队顺序。</p>
 </blockquote>
 <p>每对情侣捆绑在一起，全排列为24.每对情侣都有2种可能。所以为</p>
 <p><span class="math display">\[24*2^4=384\]</span></p>
@@ -235,13 +235,16 @@ tags:
 </div>
 <div class="section level2">
 <h2>16. 集合类问题</h2>
-<p><span class="math display">\[|A\cup B| = |A| + |B| + |A\cap B|\]</span></p>
+<p><span class="math display">\[|A\cup B| = |A| + |B| - |A\cap B|\]</span></p>
 <p><span class="math display">\[|A\cup B \cup C| = |A| + |B| + |C| - |A\cap B|-|B \cap C|-|A\cap C| + |A\cap B\cap C|\]</span></p>
 <blockquote>
 <p>某班60人，参加物理竞赛30人，数学竞赛32人，两科都没参加20人。问同时参加物流和数学竞赛多少人。</p>
 </blockquote>
 <p>设两科都参加x人。</p>
-<p><span class="math display">\[32+30-x=60-20\]</span> &gt; 某公司招聘员工，按规定每人至多报考两个职位，共42人报名。甲乙丙三个职位报考人数分别是22,16,25.其中同时报甲乙人数为8，同时报甲丙人数为6，问同时报乙丙人数为多少。</p>
+<p><span class="math display">\[32+30-x=60-20\]</span></p>
+<blockquote>
+<p>某公司招聘员工，按规定每人至多报考两个职位，共42人报名。甲乙丙三个职位报考人数分别是22,16,25.其中同时报甲乙人数为8，同时报甲丙人数为6，问同时报乙丙人数为多少。</p>
+</blockquote>
 <p>设同时报乙丙人数为x</p>
 <p><span class="math display">\[42=22+16+25-8-6-x+0\]</span></p>
 <div class="section level4">
