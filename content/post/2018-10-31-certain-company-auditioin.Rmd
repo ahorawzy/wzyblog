@@ -1,0 +1,77 @@
+---
+title: 面试
+author: 王致远
+date: '2018-10-31'
+slug: certain-company-auditioin
+categories:
+  - 找工作
+tags:
+  - 解决方案
+---
+
+# 无领导小组
+
+注意要点：
+
+1. 询问结果呈现形式的要求；
+2. 服务组员；
+3. 征求大家的讨论方式，是直接讨论还是先个人思考（5 min）后再讨论；
+4. 选出时间控制者；
+5. 每个人的结论呈现方式；
+6. 用纸笔记录每个人所陈述的意见和理由；
+7. 按顺序陈述，根据之前陈述人的观点调整自己观点中的不足；
+8. 分析题目中的判别标准；
+9. 先求同，再存异；
+10. 细化他人意见；
+11. 跳出原有思维框架，进行补充；
+12. 最后陈述者先向小组成员陈述一遍，查漏补缺，取得大家的共同同意；
+13. 共同鼓励；
+14. 最后陈述时要有对讨论过程的总结；
+15. 哪位组员贡献最大？集体智慧，从不同角度给出建议，并最终统一形成答案。
+16. 认为讨论环节哪些是做的好的，哪些是无效的？
+17. 结束后有头有尾，收拾好桌面细节。
+18. 在自己取得优势后对其他人的关怀。
+19. 做有把握的事情、做无争议的事情、出现争议时给出理由、陈述清楚即可，不要纠缠讨论。
+20. 在组内有人获得领导力，得到多人支持时，如果不是只有一人可以胜出的测试，此人又是一个懂“规则”的人，尽量更换跟随策略，做好一个“可合作”者，同时将自己不擅长展现的内容都尽量让此人来展现。
+
+--------
+
+# 英文单面
+
+## 自我介绍
+
+Good afternoon. Nice to meet you. My name is WangZhiyuan. I was born in LanZhou GanSu province. I graduated from Southwest JiaoTong University in 2016 and was recommended for postgraduate of BeiJing JiaoTong University. 
+If I use three words to describe myself, they are conscientious, creative and technical. My tutor in school and leader during internship and frinds always describ me a conscientious man because I always treat my work seriously and finish my task efficiently. But I'm not conservative. I'm good at solve challenging problem, which can inspire my creation. And I desire to undertake such kind of job in the future. I am also a technical enthusiast. I love to search and learn new tools and skills for example programming language in my field.
+I am very skilled at data science and data mining, although my major discipline is traffic management. I love to handle bunch of data and search unknown information from data. I spend a lot of my spare time in learning statistics and data manipulation skills and I have undertaken 5 traffic data mining reaserch projects in last two years. Especially, I really good at R languange programming. I have wriiten 4 R packages to support data mining research projects during internship and support my thesis of master degree. Now, i have the sufficient ability to handle 10 million rows dataset.
+I wish I can go further in this field and i will sincerely appreciate Research Institue of China Mobile if I pass this interview and get this job. Thank you very much for your listening.
+
+--------
+
+# 具体企业面试
+
+## 1. 移动研究院
+
+一面：
+
+- 群面：无领导小组；
+    - 看问题的角度；
+    - 对团队任务完成的贡献度；
+    - 语言逻辑表达能力；
+- 英语面试：
+    - 英文自我介绍；
+    - 科研、学习内容；
+
+二面：
+
+- 自我介绍
+- 技术面：研究生期间的科研项目；
+
+三面：
+
+- PPT演讲：介绍做过的课题及工作内容；
+
+
+
+
+
+

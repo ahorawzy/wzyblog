@@ -6,10 +6,19 @@
     <description>Recent content in 解决方案 on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 25 Oct 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 31 Oct 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>面试</title>
+      <link>/post/2018/10/31/certain-company-auditioin/</link>
+      <pubDate>Wed, 31 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/10/31/certain-company-auditioin/</guid>
+      <description>无领导小组 注意要点： 询问结果呈现形式的要求； 服务组员； 征求大家的讨论方式，是直接讨论还是先个人思考（5 min）后再讨论； 选出时间控制者； 每个</description>
+    </item>
     
     <item>
       <title>blogdown中的公式支持</title>
