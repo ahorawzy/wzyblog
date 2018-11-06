@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ggplot2一页多图的解决方案 | Website of ZhiYuan Wang</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">主页</a></li>
+      
+      <li><a href="/categories/">分类</a></li>
+      
+      <li><a href="/tags/">标签</a></li>
+      
+      <li><a href="/about/">关于我</a></li>
+      
+      <li><a href="/friendly_links/">链接</a></li>
+      
+      <li><a href="/index.xml">订阅</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">ggplot2一页多图的解决方案</span></h1>
+<h2 class="author">王致远</h2>
+<h2 class="date">2018/11/06</h2>
+</div>
+
+<main>
+<p>在网上找到一个函数，能够很好地解决ggplot2一页多图，函数如下：</p>
+<pre class="r"><code># Multiple plot function
+#
+# ggplot objects can be passed in ..., or to plotlist (as a list of ggplot objects)
+# - cols:   Number of columns in layout
+# - layout: A matrix specifying the layout. If present, &#39;cols&#39; is ignored.
+#
+# If the layout is something like matrix(c(1,2,3,3), nrow=2, byrow=TRUE),
+# then plot 1 will go in the upper left, 2 will go in the upper right, and
+# 3 will go all the way across the bottom.
+#
+multiplot &lt;- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
+  library(grid)
+ 
+  # Make a list from the ... arguments and plotlist
+  plots &lt;- c(list(...), plotlist)
+ 
+  numPlots = length(plots)
+ 
+  # If layout is NULL, then use &#39;cols&#39; to determine layout
+  if (is.null(layout)) {
+    # Make the panel
+    # ncol: Number of columns of plots
+    # nrow: Number of rows needed, calculated from # of cols
+    layout &lt;- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                    ncol = cols, nrow = ceiling(numPlots/cols))
+  }
+ 
+ if (numPlots==1) {
+    print(plots[[1]])
+ 
+  } else {
+    # Set up the page
+    grid.newpage()
+    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+ 
+    # Make each plot, in the correct location
+    for (i in 1:numPlots) {
+      # Get the i,j matrix positions of the regions that contain this subplot
+      matchidx &lt;- as.data.frame(which(layout == i, arr.ind = TRUE))
+ 
+      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                      layout.pos.col = matchidx$col))
+    }
+  }
+}</code></pre>
+<p>我已将其收藏到usefulr里。</p>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+  
+  <hr/>
+  &copy; ZhiYuan Wang 2018
+  
+  </footer>
+  </body>
+</html>
+
