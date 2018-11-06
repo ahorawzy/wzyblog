@@ -81,7 +81,8 @@
 <blockquote>
 <p>“The greatest value of a picture is when it forces us to notice what we never expected to see.” — John Tukey</p>
 </blockquote>
-<p>可映射的图形属性：</p>
+<div class="section level3">
+<h3>可映射的图形属性</h3>
 <ul>
 <li>color</li>
 <li>size</li>
@@ -89,7 +90,10 @@
 <li>alpha</li>
 </ul>
 <p>+加号必须放在一句的末尾而不是下一句的开始。</p>
-<p>分面：对分类数据很有用</p>
+</div>
+<div class="section level3">
+<h3>分面</h3>
+<p>对分类数据很有用</p>
 <p>单一变量的分面：facet_wrap()</p>
 <pre class="r"><code>ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy)) + 
@@ -104,6 +108,65 @@
   geom_point(mapping = aes(x = displ, y = hwy)) + 
   facet_grid(. ~ cyl)</code></pre>
 <p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(drv ~ .)</code></pre>
+<p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div class="section level3">
+<h3>图形类型</h3>
+<pre class="r"><code>ggplot(data = mpg) + 
+  geom_smooth(mapping = aes(x = displ, y = hwy, linetype = drv))</code></pre>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div class="section level3">
+<h3>多个图形元素</h3>
+<pre class="r"><code>ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  geom_smooth(mapping = aes(x = displ, y = hwy))</code></pre>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>避免重复的写法：</p>
+<pre class="r"><code>ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  geom_smooth()</code></pre>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>映射的重写</p>
+<pre class="r"><code>ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point(mapping = aes(color = class)) + 
+  geom_smooth()</code></pre>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>甚至数据也能重写</p>
+<pre class="r"><code>ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point(mapping = aes(color = class)) + 
+  geom_smooth(data = filter(mpg, class == &quot;subcompact&quot;), se = FALSE)</code></pre>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<pre class="r"><code>p1 &lt;- ggplot(mpg,aes(x=displ,y=hwy))+
+  geom_point()+
+  geom_smooth()
+p2 &lt;- ggplot(mpg,aes(x=displ,y=hwy))+
+  geom_point()+
+  geom_smooth(aes(group=drv))
+usefulr::multiplot(p1,p2,cols = 2)</code></pre>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;
+## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+</div>
+<div class="section level3">
+<h3>数学变换</h3>
+<pre class="r"><code>ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut))</code></pre>
+<p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<ul>
+<li><p>bar charts, histograms, and frequency polygons bin your data and then plot bin counts, the number of points that fall in each bin.</p></li>
+<li><p>smoothers fit a model to your data and then plot predictions from the model.</p></li>
+<li><p>boxplots compute a robust summary of the distribution and then display a specially formatted box.</p></li>
+</ul>
+</div>
 </div>
 </div>
 
