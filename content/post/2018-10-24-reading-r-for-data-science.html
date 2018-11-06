@@ -13,10 +13,19 @@ tags:
 
 <pre class="r"><code>library(tidyverse)</code></pre>
 <p>这本书是哈德利的入门之作。虽然对于我来说有点过于简单，不过这本书是以系统的观点阐述数据分析中的各个问题，并且都是用tidyverse工具箱中的包解决的。利用闲暇时间读一遍能够系统学习一边tidyverse，也不算浪费时间。不过这本书过的速度可以稍微快一点，毕竟很多都是太基础的内容。</p>
-<div id="explore" class="section level1">
-<h1>Explore</h1>
-<div id="data-visualisation" class="section level2">
-<h2>3. Data visualisation</h2>
+<div class="section level1">
+<h1>数据探索</h1>
+<div class="section level2">
+<h2>3. 数据可视化</h2>
+<p>ggplot2的基础语法</p>
+<pre><code>ggplot(data = &lt;DATA&gt;) + 
+  &lt;GEOM_FUNCTION&gt;(
+     mapping = aes(&lt;MAPPINGS&gt;),
+     stat = &lt;STAT&gt;, 
+     position = &lt;POSITION&gt;
+  ) +
+  &lt;COORDINATE_FUNCTION&gt; +
+  &lt;FACET_FUNCTION&gt;</code></pre>
 <p>样例数据：mpg</p>
 <pre class="r"><code>str(mpg)</code></pre>
 <pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    234 obs. of  11 variables:
@@ -96,7 +105,7 @@ tags:
 <p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <div class="section level3">
-<h3>多个图形元素</h3>
+<h3>多个图形</h3>
 <pre class="r"><code>ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy)) +
   geom_smooth(mapping = aes(x = displ, y = hwy))</code></pre>
@@ -137,10 +146,96 @@ usefulr::multiplot(p1,p2,cols = 2)</code></pre>
   geom_bar(mapping = aes(x = cut))</code></pre>
 <p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <ul>
-<li><p>bar charts, histograms, and frequency polygons bin your data and then plot bin counts, the number of points that fall in each bin.</p></li>
-<li><p>smoothers fit a model to your data and then plot predictions from the model.</p></li>
-<li><p>boxplots compute a robust summary of the distribution and then display a specially formatted box.</p></li>
+<li>bar charts, histograms, and frequency polygons bin your data and then plot bin counts, the number of points that fall in each bin.</li>
+<li>smoothers fit a model to your data and then plot predictions from the model.</li>
+<li>boxplots compute a robust summary of the distribution and then display a specially formatted box.</li>
 </ul>
+<p>数学变换和图形的关系：</p>
+<p>Every geom has a default stat; and every stat has a default geom.</p>
+<p>更改图形对应的数学变换：</p>
+<pre class="r"><code>demo &lt;- tribble(
+  ~cut,         ~freq,
+  &quot;Fair&quot;,       1610,
+  &quot;Good&quot;,       4906,
+  &quot;Very Good&quot;,  12082,
+  &quot;Premium&quot;,    13791,
+  &quot;Ideal&quot;,      21551
+)
+
+ggplot(data = demo) +
+  geom_bar(mapping = aes(x = cut, y = freq), stat = &quot;identity&quot;)</code></pre>
+<p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, y = ..prop.., group = 1))</code></pre>
+<p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = diamonds) + 
+  stat_summary(
+    mapping = aes(x = cut, y = depth),
+    fun.ymin = min,
+    fun.ymax = max,
+    fun.y = median
+  )</code></pre>
+<p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+</div>
+<div class="section level3">
+<h3>位置调整</h3>
+<pre class="r"><code>ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, colour = cut))</code></pre>
+<p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = cut))</code></pre>
+<p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-18-2.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = clarity))</code></pre>
+<p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>位置调整的四种选择：</p>
+<ul>
+<li>stacked</li>
+<li>identity</li>
+<li>dodge</li>
+<li>fill</li>
+<li>jitter</li>
+</ul>
+<p>identity适合展现二维数据</p>
+<pre class="r"><code>ggplot(data = diamonds, mapping = aes(x = cut, colour = clarity)) + 
+  geom_bar(fill = NA, position = &quot;identity&quot;)</code></pre>
+<p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>fill适合展现百分比</p>
+<pre class="r"><code>ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = clarity), position = &quot;fill&quot;)</code></pre>
+<p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>dodge适合展现个体差异</p>
+<pre class="r"><code>ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = clarity), position = &quot;dodge&quot;)</code></pre>
+<p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p>jitter适合展现重叠在一起的大量点，增加扰动</p>
+<pre class="r"><code>ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy), position = &quot;jitter&quot;)</code></pre>
+<p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+</div>
+<div class="section level3">
+<h3>坐标系统</h3>
+<p>翻转坐标</p>
+<pre class="r"><code>p1 &lt;- ggplot(data = mpg, mapping = aes(x = class, y = hwy)) + 
+  geom_boxplot()
+p2 &lt;- ggplot(data = mpg, mapping = aes(x = class, y = hwy)) + 
+  geom_boxplot() +
+  coord_flip()
+usefulr::multiplot(p1,p2,cols=2)</code></pre>
+<p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p>极坐标</p>
+<pre class="r"><code>bar &lt;- ggplot(data = diamonds) + 
+  geom_bar(
+    mapping = aes(x = cut, fill = cut), 
+    show.legend = FALSE,
+    width = 1
+  ) + 
+  theme(aspect.ratio = 1) +
+  labs(x = NULL, y = NULL)
+p1 &lt;- bar + coord_flip()
+p2 &lt;- bar + coord_polar()
+usefulr::multiplot(p1,p2,cols=2)</code></pre>
+<p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 </div>
 </div>
 </div>
