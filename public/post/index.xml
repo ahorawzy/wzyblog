@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 06 Nov 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 07 Nov 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>习近平论互联网摘抄</title>
+      <link>/post/2018/11/07/xitalkaboutinternet/</link>
+      <pubDate>Wed, 07 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/11/07/xitalkaboutinternet/</guid>
+      <description>信息化为中华民族带来了千载难逢的机遇。我们必须敏锐抓住信息化发展的历史机遇。 要从国际国内大势出发，总体布局，统筹各方，创新发展，努力把我国建</description>
+    </item>
     
     <item>
       <title>ggplot2一页多图的解决方案</title>

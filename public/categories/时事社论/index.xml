@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>转载 on Website of ZhiYuan Wang</title>
-    <link>/tags/%E8%BD%AC%E8%BD%BD/</link>
-    <description>Recent content in 转载 on Website of ZhiYuan Wang</description>
+    <title>时事社论 on Website of ZhiYuan Wang</title>
+    <link>/categories/%E6%97%B6%E4%BA%8B%E7%A4%BE%E8%AE%BA/</link>
+    <description>Recent content in 时事社论 on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 07 Nov 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/%E8%BD%AC%E8%BD%BD/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/%E6%97%B6%E4%BA%8B%E7%A4%BE%E8%AE%BA/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>/post/2018/11/07/xitalkaboutinternet/</guid>
       <description>信息化为中华民族带来了千载难逢的机遇。我们必须敏锐抓住信息化发展的历史机遇。 要从国际国内大势出发，总体布局，统筹各方，创新发展，努力把我国建</description>
-    </item>
-    
-    <item>
-      <title>【转载】阿里云的这群疯子</title>
-      <link>/post/2018/10/17/ali-cloud-crazy-people/</link>
-      <pubDate>Wed, 17 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/10/17/ali-cloud-crazy-people/</guid>
-      <description>链接《阿里云的这群疯子》 这篇文章很长，不过我是一口气读完的。也许是故事本身很坎坷，也许是作者描写得过于精彩。读完后，我为阿里云创造出这样的奇</description>
     </item>
     
   </channel>
