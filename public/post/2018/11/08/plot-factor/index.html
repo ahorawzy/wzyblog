@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>画因子型日期的点画线时存在的问题 | Website of ZhiYuan Wang</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">主页</a></li>
+      
+      <li><a href="/categories/">分类</a></li>
+      
+      <li><a href="/tags/">标签</a></li>
+      
+      <li><a href="/about/">关于我</a></li>
+      
+      <li><a href="/friendly_links/">链接</a></li>
+      
+      <li><a href="/index.xml">订阅</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">画因子型日期的点画线时存在的问题</span></h1>
+<h2 class="author">王致远</h2>
+<h2 class="date">2018/11/08</h2>
+</div>
+
+<main>
+<p>今天在画因子型日期的点画线时遇到了两个问题。</p>
+<p>数据如下：</p>
+<pre class="r"><code>head(xzyk_mds[c(&quot;md&quot;,&quot;cars&quot;)],10)</code></pre>
+<pre><code>##       md  cars
+## 1   10-1 52356
+## 2   10-2 53108
+## 3   10-3 53738
+## 4   10-4 50594
+## 5   10-5 50012
+## 6   10-6 49111
+## 7   10-7 49118
+## 8   10-8 49744
+## 9   10-9 49855
+## 10 10-10 48507</code></pre>
+<p>其中md为有序因子</p>
+<pre class="r"><code>str(xzyk_mds$md)</code></pre>
+<pre><code>##  Ord.factor w/ 37 levels &quot;10-1&quot;&lt;&quot;10-10&quot;&lt;..: 1 12 23 26 27 28 29 30 31 2 ...</code></pre>
+<p>第一个问题是画点化线时，线画不出来。</p>
+<pre class="r"><code>ggplot(data = xzyk_mds,aes(x=md,y=cars))+
+  geom_point(color=&quot;steelblue&quot;)+
+  geom_line(color=&quot;steelblue&quot;)</code></pre>
+<pre><code>## geom_path: Each group consists of only one observation. Do you need to
+## adjust the group aesthetic?</code></pre>
+<p><img src="/post/2018-11-08-plot-factor_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>提示信息说是在调用geom_path函数时，指定group有问题，每一个group里只有一个观测，需要调整group的映射。我就奇了怪了，以前从来没遇到这个问题。我查了之前的博客<a href="https://www.wzyblog.top/post/2018/09/20/order-of-factor/">因子的顺序</a>，发现之前是指定了特定的group的。难道是如果不指定，就会认为每个因子是一个分组？</p>
+<p>我做了如下尝试，将一个无关变量（全部相同的）指定给group，果然能画出点画线了。</p>
+<pre class="r"><code>ggplot(data = xzyk_mds,aes(x=md,y=cars))+
+  geom_point(color=&quot;steelblue&quot;)+
+  geom_line(group=xzyk_mds$province,color=&quot;steelblue&quot;)</code></pre>
+<p><img src="/post/2018-11-08-plot-factor_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>又进行了尝试，给group随便赋值，也是可以的。</p>
+<pre class="r"><code>ggplot(data = xzyk_mds,aes(x=md,y=cars))+
+  geom_point(color=&quot;steelblue&quot;)+
+  geom_line(group=1,color=&quot;steelblue&quot;)</code></pre>
+<p><img src="/post/2018-11-08-plot-factor_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>第二个问题是银子的顺序是乱的，可以看到10-2排在了10-10,10-11等等之后。</p>
+<pre class="r"><code>attributes(xzyk_mds$md)</code></pre>
+<pre><code>## $levels
+##  [1] &quot;10-1&quot;  &quot;10-10&quot; &quot;10-11&quot; &quot;10-12&quot; &quot;10-13&quot; &quot;10-14&quot; &quot;10-15&quot; &quot;10-16&quot;
+##  [9] &quot;10-17&quot; &quot;10-18&quot; &quot;10-19&quot; &quot;10-2&quot;  &quot;10-20&quot; &quot;10-21&quot; &quot;10-22&quot; &quot;10-23&quot;
+## [17] &quot;10-24&quot; &quot;10-25&quot; &quot;10-26&quot; &quot;10-27&quot; &quot;10-28&quot; &quot;10-29&quot; &quot;10-3&quot;  &quot;10-30&quot;
+## [25] &quot;10-31&quot; &quot;10-4&quot;  &quot;10-5&quot;  &quot;10-6&quot;  &quot;10-7&quot;  &quot;10-8&quot;  &quot;10-9&quot;  &quot;11-1&quot; 
+## [33] &quot;11-2&quot;  &quot;11-3&quot;  &quot;11-4&quot;  &quot;11-5&quot;  &quot;11-6&quot; 
+## 
+## $class
+## [1] &quot;ordered&quot; &quot;factor&quot;</code></pre>
+<pre class="r"><code>ggplot(data = xzyk_mds,aes(x=md,y=cars))+
+  geom_point(color=&quot;steelblue&quot;)+
+  geom_line(group=1,color=&quot;steelblue&quot;)+
+  scale_x_discrete(breaks=xzyk_mds$md[seq(1,37,3)])+
+  labs()</code></pre>
+<p><img src="/post/2018-11-08-plot-factor_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>画出的图自然也是乱的</p>
+<p>考虑到如果将其化为字符串型，顺序就对了</p>
+<pre class="r"><code>as.character(xzyk_mds$md)</code></pre>
+<pre><code>##  [1] &quot;10-1&quot;  &quot;10-2&quot;  &quot;10-3&quot;  &quot;10-4&quot;  &quot;10-5&quot;  &quot;10-6&quot;  &quot;10-7&quot;  &quot;10-8&quot; 
+##  [9] &quot;10-9&quot;  &quot;10-10&quot; &quot;10-11&quot; &quot;10-12&quot; &quot;10-13&quot; &quot;10-14&quot; &quot;10-15&quot; &quot;10-16&quot;
+## [17] &quot;10-17&quot; &quot;10-18&quot; &quot;10-19&quot; &quot;10-20&quot; &quot;10-21&quot; &quot;10-22&quot; &quot;10-23&quot; &quot;10-24&quot;
+## [25] &quot;10-25&quot; &quot;10-26&quot; &quot;10-27&quot; &quot;10-28&quot; &quot;10-29&quot; &quot;10-30&quot; &quot;10-31&quot; &quot;11-1&quot; 
+## [33] &quot;11-2&quot;  &quot;11-3&quot;  &quot;11-4&quot;  &quot;11-5&quot;  &quot;11-6&quot;</code></pre>
+<p>所以对原因子做如下处理：</p>
+<pre class="r"><code>xzyk_mds$md &lt;- factor(xzyk_mds$md,level=as.character(xzyk_mds$md),order=T)</code></pre>
+<p>再画图，顺序就对了</p>
+<pre class="r"><code>ggplot(data = xzyk_mds,aes(x=md,y=cars))+
+  geom_point(color=&quot;steelblue&quot;)+
+  geom_line(group=1,color=&quot;steelblue&quot;)+
+  scale_x_discrete(breaks=xzyk_mds$md[seq(1,37,3)])+
+  labs()</code></pre>
+<p><img src="/post/2018-11-08-plot-factor_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+  
+  <hr/>
+  &copy; ZhiYuan Wang 2018
+  
+  </footer>
+  </body>
+</html>
+

@@ -1,0 +1,122 @@
+---
+title: 画因子型日期的点画线时存在的问题
+author: 王致远
+date: '2018-11-08'
+slug: plot-factor
+categories:
+  - R语言
+tags:
+  - 解决方案
+---
+
+```{r echo=FALSE}
+options(stringsAsFactors = F)
+options(digits = 3)
+rm(list = ls())
+source("D:\\R\\packages\\Mreport\\scripts\\caculate.R", encoding = "utf-8")
+source("D:\\R\\packages\\Mreport\\scripts\\select.R", encoding = "utf-8")
+source("D:\\R\\packages\\Mreport\\scripts\\split.R", encoding = "utf-8")
+```
+
+```{r echo=FALSE,message=FALSE}
+library(Mreport)
+library(plyr)
+library(ggplot2)
+library(reshape2)
+library(knitr)
+library(leaflet)
+library(leafletCN)
+```
+
+```{r echo=FALSE}
+load_base()
+load_sample_base()
+```
+
+```{r echo=FALSE}
+xzyk_day <- read.csv("D:\\data\\sx_raw\\交调数据\\10月重点\\XZYK_day.csv",stringsAsFactor=F)
+```
+
+```{r echo=FALSE}
+xzyk_mds <- handle_gather_formd(xzyk_day)
+```
+
+今天在画因子型日期的点画线时遇到了两个问题。
+
+数据如下：
+
+```{r}
+head(xzyk_mds[c("md","cars")],10)
+```
+
+其中md为有序因子
+
+```{r}
+str(xzyk_mds$md)
+```
+
+
+第一个问题是画点化线时，线画不出来。
+
+```{r}
+ggplot(data = xzyk_mds,aes(x=md,y=cars))+
+  geom_point(color="steelblue")+
+  geom_line(color="steelblue")
+```
+
+提示信息说是在调用geom_path函数时，指定group有问题，每一个group里只有一个观测，需要调整group的映射。我就奇了怪了，以前从来没遇到这个问题。我查了之前的博客[因子的顺序](https://www.wzyblog.top/post/2018/09/20/order-of-factor/)，发现之前是指定了特定的group的。难道是如果不指定，就会认为每个因子是一个分组？
+
+我做了如下尝试，将一个无关变量（全部相同的）指定给group，果然能画出点画线了。
+
+```{r}
+ggplot(data = xzyk_mds,aes(x=md,y=cars))+
+  geom_point(color="steelblue")+
+  geom_line(group=xzyk_mds$province,color="steelblue")
+```
+
+又进行了尝试，给group随便赋值，也是可以的。
+
+```{r}
+ggplot(data = xzyk_mds,aes(x=md,y=cars))+
+  geom_point(color="steelblue")+
+  geom_line(group=1,color="steelblue")
+```
+
+第二个问题是银子的顺序是乱的，可以看到10-2排在了10-10,10-11等等之后。
+
+```{r}
+attributes(xzyk_mds$md)
+```
+
+```{r}
+ggplot(data = xzyk_mds,aes(x=md,y=cars))+
+  geom_point(color="steelblue")+
+  geom_line(group=1,color="steelblue")+
+  scale_x_discrete(breaks=xzyk_mds$md[seq(1,37,3)])+
+  labs()
+```
+
+画出的图自然也是乱的
+
+考虑到如果将其化为字符串型，顺序就对了
+
+```{r}
+as.character(xzyk_mds$md)
+```
+
+所以对原因子做如下处理：
+
+```{r}
+xzyk_mds$md <- factor(xzyk_mds$md,level=as.character(xzyk_mds$md),order=T)
+```
+
+再画图，顺序就对了
+
+```{r}
+ggplot(data = xzyk_mds,aes(x=md,y=cars))+
+  geom_point(color="steelblue")+
+  geom_line(group=1,color="steelblue")+
+  scale_x_discrete(breaks=xzyk_mds$md[seq(1,37,3)])+
+  labs()
+```
+
