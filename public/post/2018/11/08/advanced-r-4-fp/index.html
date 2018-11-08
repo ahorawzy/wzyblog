@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Advanced R(4)——FP | Website of ZhiYuan Wang</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">主页</a></li>
+      
+      <li><a href="/categories/">分类</a></li>
+      
+      <li><a href="/tags/">标签</a></li>
+      
+      <li><a href="/about/">关于我</a></li>
+      
+      <li><a href="/friendly_links/">链接</a></li>
+      
+      <li><a href="/index.xml">订阅</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Advanced R(4)——FP</span></h1>
+<h2 class="author">ZhiYuan Wang</h2>
+<h2 class="date">2018/11/08</h2>
+</div>
+
+<main>
+<pre class="r"><code>library(magrittr)</code></pre>
+<pre class="r"><code>rm(list=ls())</code></pre>
+<div id="10" class="section level1">
+<h1>第10章：函数式编程</h1>
+<p>函数式编程：创建和操作函数的工具。</p>
+<p>适用于向量的所有操作也都适用于函数：</p>
+<ol style="list-style-type: decimal">
+<li>将函数赋值给变量；</li>
+<li>将函数存储在列表；</li>
+<li>函数作为参数传递给其他函数；</li>
+<li>函数内创建函数；</li>
+<li>把函数作为函数的结果返回；</li>
+</ol>
+<div class="section level2">
+<h2>10.1 动机</h2>
+<p>DRY: Do Not Repeat Yourself</p>
+<div class="section level3">
+<h3>函数组合</h3>
+<p>将两个简单函数组合起来；</p>
+<p>lapply以函数作为输入，所以它是泛函functional。</p>
+<pre class="r"><code>df &lt;- data.frame(replicate(6,sample(c(1:10,-99),6,replace = T)))
+df</code></pre>
+<pre><code>##    X1 X2 X3 X4 X5  X6
+## 1   2  4  3 10  2   9
+## 2   4  1  2  6  6   3
+## 3   3 10  9  4 10  10
+## 4   1  2  1  8  7   6
+## 5 -99  6  7  4  9 -99
+## 6   6  5  2  9 10   8</code></pre>
+<pre class="r"><code>fix_missing &lt;- function(x) {
+  x[x == -99] &lt;- NA
+  x
+}
+df[] &lt;- lapply(df, fix_missing)
+df</code></pre>
+<pre><code>##   X1 X2 X3 X4 X5 X6
+## 1  2  4  3 10  2  9
+## 2  4  1  2  6  6  3
+## 3  3 10  9  4 10 10
+## 4  1  2  1  8  7  6
+## 5 NA  6  7  4  9 NA
+## 6  6  5  2  9 10  8</code></pre>
+</div>
+<div class="section level3">
+<h3>函数工厂</h3>
+<p>基于模板来创建函数</p>
+<pre class="r"><code>missing_fixer &lt;- function(na_value) {
+  function(x) {
+    x[x == na_value] &lt;- NA
+    x
+  }
+}
+fix_missing_99 &lt;- missing_fixer(-99)
+fix_missing_999 &lt;- missing_fixer(-999)
+fix_missing_99(c(-99,-999))</code></pre>
+<pre><code>## [1]   NA -999</code></pre>
+<pre class="r"><code>fix_missing_999(c(-99,-999))</code></pre>
+<pre><code>## [1] -99  NA</code></pre>
+</div>
+<div class="section level3">
+<h3>函数列表</h3>
+<p>多个相似函数的同时使用</p>
+<pre class="r"><code>summary_new &lt;- function(x) {
+  funs &lt;- c(mean, median, sd, mad, IQR)
+  lapply(funs, function(f) f(x, na.rm = T))
+}
+sapply(mtcars, summary_new)</code></pre>
+<pre><code>##      mpg      cyl      disp     hp       drat      wt        qsec    
+## [1,] 20.09062 6.1875   230.7219 146.6875 3.596563  3.21725   17.84875
+## [2,] 19.2     6        196.3    123      3.695     3.325     17.71   
+## [3,] 6.026948 1.785922 123.9387 68.56287 0.5346787 0.9784574 1.786943
+## [4,] 5.41149  2.9652   140.4764 77.0952  0.704235  0.7672455 1.415883
+## [5,] 7.375    4        205.175  83.5     0.84      1.02875   2.0075  
+##      vs        am        gear      carb  
+## [1,] 0.4375    0.40625   3.6875    2.8125
+## [2,] 0         0         4         2     
+## [3,] 0.5040161 0.4989909 0.7378041 1.6152
+## [4,] 0         0         1.4826    1.4826
+## [5,] 1         1         1         2</code></pre>
+</div>
+</div>
+<div class="section level2">
+<h2>10.2 匿名函数</h2>
+<p>函数本身就是对象，不会自带函数名。使用常规赋值运算符命名，得到匿名函数。</p>
+<p>当觉得没有必要给函数命名时，使用匿名函数。</p>
+<ol style="list-style-type: decimal">
+<li>创建小函数；</li>
+<li>创建闭包；</li>
+</ol>
+</div>
+<div class="section level2">
+<h2>10.3 闭包</h2>
+<p>闭包：将父函数的环境封装并可以访问它所有变量。</p>
+<p>两个层次的参数：</p>
+<ol style="list-style-type: decimal">
+<li>父层次控制运算；</li>
+<li>子层次进行工作；</li>
+</ol>
+<pre class="r"><code>power &lt;- function(exponent) {
+  function(x) {
+    x ^ exponent
+  }
+}</code></pre>
+<pre class="r"><code>square &lt;- power(2)
+square(2)</code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="r"><code>square(4)</code></pre>
+<pre><code>## [1] 16</code></pre>
+<pre class="r"><code>cube &lt;- power(3)
+cube(2)</code></pre>
+<pre><code>## [1] 8</code></pre>
+<pre class="r"><code>cube(4)</code></pre>
+<pre><code>## [1] 64</code></pre>
+</div>
+<div id="-1" class="section level2">
+<h2>10.4 函数列表</h2>
+<p>函数可以更容易地与一组相关函数一起运行</p>
+<p>比较算法时间</p>
+<pre class="r"><code>compute_mean &lt;- list(
+  base = function(x) mean(x),
+  sum = function(x) sum(x) / length(x),
+  manual = function(x) {
+    total &lt;- 0
+    n &lt;- length(x)
+    for(i in seq_along(x)) {
+      total &lt;- total + x[i] / n
+    }
+    total
+  }
+)</code></pre>
+<pre class="r"><code>x &lt;- runif(1e5)
+system.time(compute_mean$base(x))</code></pre>
+<pre><code>## 用户 系统 流逝 
+##    0    0    0</code></pre>
+<pre class="r"><code>system.time(compute_mean[[2]](x))</code></pre>
+<pre><code>## 用户 系统 流逝 
+##    0    0    0</code></pre>
+<pre class="r"><code>system.time(compute_mean[[&quot;manual&quot;]](x))</code></pre>
+<pre><code>## 用户 系统 流逝 
+## 0.01 0.00 0.02</code></pre>
+<pre class="r"><code>lapply(compute_mean, function(f) system.time(f(x)))</code></pre>
+<pre><code>## $base
+## 用户 系统 流逝 
+##    0    0    0 
+## 
+## $sum
+## 用户 系统 流逝 
+##    0    0    0 
+## 
+## $manual
+## 用户 系统 流逝 
+##    0    0    0</code></pre>
+<p>对一个对象进行多方面汇总</p>
+<pre class="r"><code>x &lt;- 1:10
+funs &lt;- list(
+  sum = sum,
+  mean = mean,
+  median = median
+)
+lapply(funs, function(f) f(x))</code></pre>
+<pre><code>## $sum
+## [1] 55
+## 
+## $mean
+## [1] 5.5
+## 
+## $median
+## [1] 5.5</code></pre>
+<pre class="r"><code>lapply(funs, function(f) f(x, na.rm = T))</code></pre>
+<pre><code>## $sum
+## [1] 55
+## 
+## $mean
+## [1] 5.5
+## 
+## $median
+## [1] 5.5</code></pre>
+</div>
+<div class="section level2">
+<h2>10.5 案例研究：数值积分</h2>
+<div id="1" class="section level3">
+<h3>函数名作为参数1</h3>
+<pre class="r"><code>midpoint &lt;- function(f,a,b){
+  (b-a) * f((a+b)/2)
+}
+trapezoid &lt;- function(f,a,b){
+  (b-a)/2 * (f(a)+f(b))
+}</code></pre>
+<pre class="r"><code>midpoint(sin,0,pi)</code></pre>
+<pre><code>## [1] 3.141593</code></pre>
+<pre class="r"><code>trapezoid(sin,0,pi)</code></pre>
+<pre><code>## [1] 1.923607e-16</code></pre>
+<p>两个函数都没有给出正确答案。</p>
+<p>为了使答案更加准确，先将整个积分区间分成小区间，再对小区间积分。<strong>组合积分</strong></p>
+<pre class="r"><code>midpoint_composite &lt;- function(f,a,b,n=10){
+  points &lt;- seq(a,b,length = n+1)
+  h &lt;- (b-a)/n
+  
+  area &lt;- 0
+  for(i in seq_len(n)) {
+    area &lt;- area+ h * f((points[i]+points[i+1])/2)
+  }
+  area
+}</code></pre>
+<pre class="r"><code>trapezoid_composite &lt;- function(f,a,b,n=10){
+  points &lt;- seq(a,b,length = n+1)
+  h &lt;- (b-a)/n
+  
+  area &lt;- 0
+  for(i in seq_len(n)) {
+    area &lt;- area+ h/2* (f(points[i])+f(points[i+1]))
+  }
+  area
+}</code></pre>
+<pre class="r"><code>midpoint_composite(sin,0,pi,n=10)</code></pre>
+<pre><code>## [1] 2.008248</code></pre>
+<pre class="r"><code>trapezoid_composite(sin,0,pi,n=10)</code></pre>
+<pre><code>## [1] 1.983524</code></pre>
+<p>两个函数有大量相似，考虑提取更通用的组合积分函数</p>
+</div>
+<div id="2" class="section level3">
+<h3>函数名作为参数2</h3>
+<pre class="r"><code>composite &lt;- function(f, a, b, n=10, rule) {
+  points &lt;- seq(a, b, length = n+1)
+  
+  area &lt;- 0
+  for(i in seq_len(n)){
+    area &lt;- area + rule(f, points[i], points[i+1])
+  }
+  area
+}</code></pre>
+<pre class="r"><code>composite(sin,0,pi,n=10,rule=midpoint)</code></pre>
+<pre><code>## [1] 2.008248</code></pre>
+<pre class="r"><code>composite(sin,0,pi,n=10,rule=trapezoid)</code></pre>
+<pre><code>## [1] 1.983524</code></pre>
+<p>这个函数以两个函数作为参数：要积分的函数和积分规则。</p>
+<p>现在可以在小区间内添加更好的积分规则</p>
+<pre class="r"><code>simpson &lt;- function(f,a,b){
+  (b-a)/6*(f(a)+4*f((a+b)/2)+f(b))
+}
+
+boole &lt;- function(f,a,b){
+  pos &lt;- function(i) a+i*(b-a)/4
+  fi &lt;- function(i) f(pos(i))
+  
+  (b-a)/90*
+    (7*fi(0)+32*fi(1)+12*fi(2)+32*fi(3)+7*fi(4))
+}</code></pre>
+<pre class="r"><code>composite(sin,0,pi,n=10,rule=simpson)</code></pre>
+<pre><code>## [1] 2.000007</code></pre>
+<pre class="r"><code>composite(sin,0,pi,n=10,rule=boole)</code></pre>
+<pre><code>## [1] 2</code></pre>
+<p>更普遍的牛顿科特斯规则</p>
+</div>
+<div class="section level3">
+<h3>函数工厂：闭包</h3>
+<pre class="r"><code>newton_cotes &lt;- function(coef,open=FALSE){
+  n &lt;- length(coef)+open
+  
+  function(f,a,b){
+    pos &lt;- function(i) a+i*(b-a)/n
+    points &lt;- pos(seq.int(0,length(coef)-1))
+    
+    (b-a)/sum(coef)*sum(f(points)*coef)
+  }
+}</code></pre>
+<pre class="r"><code>milne &lt;- newton_cotes(c(2,-1,2),open=T)
+composite(sin,0,pi,n=10,rule=milne)</code></pre>
+<pre><code>## [1] 1.993829</code></pre>
+</div>
+<div id="1" class="section level3">
+<h3>问题1：函数列表</h3>
+<pre class="r"><code>funs &lt;- list(
+  midpoint,
+  trapezoid,
+  simpson,
+  boole
+)
+lapply(funs,function(f) f(sin,0,pi))</code></pre>
+<pre><code>## [[1]]
+## [1] 3.141593
+## 
+## [[2]]
+## [1] 1.923607e-16
+## 
+## [[3]]
+## [1] 2.094395
+## 
+## [[4]]
+## [1] 1.998571</code></pre>
+<pre class="r"><code>lapply(funs, composite, f=sin, a=0, b=pi, n=10)</code></pre>
+<pre><code>## [[1]]
+## [1] 2.008248
+## 
+## [[2]]
+## [1] 1.983524
+## 
+## [[3]]
+## [1] 2.000007
+## 
+## [[4]]
+## [1] 2</code></pre>
+</div>
+<div id="2" class="section level3">
+<h3>问题2：根据系数列表产生函数列表</h3>
+<pre class="r"><code>arglist &lt;- list(
+  boole = c(7,32,12,32,7),
+  milne = c(2, -1, 2)
+)
+arglist</code></pre>
+<pre><code>## $boole
+## [1]  7 32 12 32  7
+## 
+## $milne
+## [1]  2 -1  2</code></pre>
+<pre class="r"><code>funs &lt;- lapply(arglist, newton_cotes)
+funs</code></pre>
+<pre><code>## $boole
+## function (f, a, b) 
+## {
+##     pos &lt;- function(i) a + i * (b - a)/n
+##     points &lt;- pos(seq.int(0, length(coef) - 1))
+##     (b - a)/sum(coef) * sum(f(points) * coef)
+## }
+## &lt;bytecode: 0x0000000008783868&gt;
+## &lt;environment: 0x000000000ac81878&gt;
+## 
+## $milne
+## function (f, a, b) 
+## {
+##     pos &lt;- function(i) a + i * (b - a)/n
+##     points &lt;- pos(seq.int(0, length(coef) - 1))
+##     (b - a)/sum(coef) * sum(f(points) * coef)
+## }
+## &lt;bytecode: 0x0000000008783868&gt;
+## &lt;environment: 0x000000000877ff08&gt;</code></pre>
+<pre class="r"><code>lapply(funs, composite, f=sin,a=0, b=pi, n=10)</code></pre>
+<pre><code>## $boole
+## [1] 2.001979
+## 
+## $milne
+## [1] 1.990848</code></pre>
+</div>
+</div>
+</div>
+<div id="11" class="section level1">
+<h1>第11章：泛函</h1>
+<p>泛函functional，以函数作为输入并返回一个向量的函数。</p>
+<pre class="r"><code>randomise &lt;- function(f) f(runif(1e3))</code></pre>
+<pre class="r"><code>randomise(mean)</code></pre>
+<pre><code>## [1] 0.4844264</code></pre>
+<pre class="r"><code>randomise(mean)</code></pre>
+<pre><code>## [1] 0.5140983</code></pre>
+<pre class="r"><code>randomise(sum)</code></pre>
+<pre><code>## [1] 492.6028</code></pre>
+<p>3个最常用的泛函：lapply/apply/tapply。</p>
+<p>循环最大的缺点：表达不够清晰，不能表达更高层次的目的。</p>
+<p>每个泛函都是为特殊任务量身定做，认识了泛函之后也就知道了为什么使用它。</p>
+<p>以函数的方式思考并处理函数。清晰的表达我们的想法，并创建解决问题的工具。</p>
+<p>闭包频繁地与泛函联合使用。</p>
+<div id="lapply" class="section level2">
+<h2>11.1 lapply</h2>
+<p>lapply是常见for循环的包装器，更容易地处理列表，将注意力集中在要应用的函数上。</p>
+<pre class="r"><code>l &lt;- replicate(20,runif(sample(1:10,1)),simplify = F)</code></pre>
+<pre class="r"><code>unlist(lapply(l, length))</code></pre>
+<pre><code>##  [1]  8  2  8  6  6  8  7  3  4  8  7 10  5  9  8  7  1  2  9  1</code></pre>
+<p>lapply(x,f)中，x总是作为f的第一个参数，如果想改变，可以使用匿名函数</p>
+<pre class="r"><code>trims &lt;- c(0,0.1,0.2,0.5)
+x &lt;- rcauchy(1000)
+unlist(lapply(trims, function(trim) mean(x,trim=trim)))</code></pre>
+<pre><code>## [1]  1.08999465 -0.01621282 -0.02831401 -0.04607358</code></pre>
+<div class="section level3">
+<h3>11.1.1 循环模式</h3>
+<p>有三种方法对向量循环：</p>
+<ol style="list-style-type: decimal">
+<li>对每个元素循环 for(x in xs);</li>
+<li>根据元素的数值索引循环 for(i in seq_along(xs));</li>
+<li>根据元素的名字进行循环 for(nm in names(xs))；</li>
+</ol>
+<p>方法一存储效率低，每次对向量扩展时，R不得不复制所有的现有元素</p>
+<pre class="r"><code>xs &lt;- runif(1e3)
+res &lt;- c()
+for(x in xs){
+  res &lt;- c(res,sqrt(x))
+}</code></pre>
+<p>最好先为输出创建一个空向量，再向其中添加元素。即方法二。</p>
+<pre class="r"><code>res &lt;- numeric(length(xs))
+for(i in seq_along(xs)){
+  res[i] &lt;- sqrt(xs[i])
+}</code></pre>
+<p>lapply的三种循环方法：</p>
+<ol style="list-style-type: decimal">
+<li>lapply(xs, function(x) {})</li>
+<li>lapply(seq_along(xs), function(i) {})</li>
+<li>lapply(names(xs), function(nm) {})</li>
+</ol>
+<p>通常使用第一种方法，如果需要知道元素的位置或名字，应该使用第二种或第三种方法。</p>
+</div>
+<div class="section level3">
+<h3>11.1.2 练习</h3>
+<div class="section level4">
+<h4>第一题</h4>
+<p>使用匿名函数</p>
+<pre class="r"><code>trims &lt;- c(0,0.1,0.2,0.5)
+x &lt;- rcauchy(100)
+
+lapply(trims,function(trim) mean(x, trim = trim))</code></pre>
+<pre><code>## [[1]]
+## [1] -0.07787933
+## 
+## [[2]]
+## [1] 0.02905711
+## 
+## [[3]]
+## [1] 0.04665869
+## 
+## [[4]]
+## [1] 0.0435092</code></pre>
+<p>指定了参数名x，只能对trim参数循环。</p>
+<pre class="r"><code>lapply(trims,mean,x=x)</code></pre>
+<pre><code>## [[1]]
+## [1] -0.07787933
+## 
+## [[2]]
+## [1] 0.02905711
+## 
+## [[3]]
+## [1] 0.04665869
+## 
+## [[4]]
+## [1] 0.0435092</code></pre>
+</div>
+<div class="section level4">
+<h4>第二题</h4>
+<pre class="r"><code>scale01 &lt;- function(x) {
+  rng &lt;- range(x, na.rm = TRUE)
+  (x - rng[1])/ (rng[2] - rng[1])
+}</code></pre>
+<pre class="r"><code>m &lt;- lapply(mtcars, scale01)
+as.data.frame(m) %&gt;% head()</code></pre>
+<pre><code>##         mpg cyl      disp        hp      drat        wt      qsec vs am
+## 1 0.4510638 0.5 0.2217511 0.2049470 0.5253456 0.2830478 0.2333333  0  1
+## 2 0.4510638 0.5 0.2217511 0.2049470 0.5253456 0.3482485 0.3000000  0  1
+## 3 0.5276596 0.0 0.0920429 0.1448763 0.5023041 0.2063411 0.4892857  1  1
+## 4 0.4680851 0.5 0.4662010 0.2049470 0.1474654 0.4351828 0.5880952  1  0
+## 5 0.3531915 1.0 0.7206286 0.4346290 0.1797235 0.4927129 0.3000000  0  0
+## 6 0.3276596 0.5 0.3838863 0.1872792 0.0000000 0.4978266 0.6809524  1  0
+##   gear      carb
+## 1  0.5 0.4285714
+## 2  0.5 0.4285714
+## 3  0.5 0.0000000
+## 4  0.0 0.0000000
+## 5  0.0 0.1428571
+## 6  0.0 0.0000000</code></pre>
+<pre class="r"><code>head(CO2)</code></pre>
+<pre><code>##   Plant   Type  Treatment conc uptake
+## 1   Qn1 Quebec nonchilled   95   16.0
+## 2   Qn1 Quebec nonchilled  175   30.4
+## 3   Qn1 Quebec nonchilled  250   34.8
+## 4   Qn1 Quebec nonchilled  350   37.2
+## 5   Qn1 Quebec nonchilled  500   35.3
+## 6   Qn1 Quebec nonchilled  675   39.2</code></pre>
+<pre class="r"><code>c &lt;- lapply(CO2, function(x) if(is.numeric(x)) scale01(x) else x)
+as.data.frame(c) %&gt;% head()</code></pre>
+<pre><code>##   Plant   Type  Treatment       conc    uptake
+## 1   Qn1 Quebec nonchilled 0.00000000 0.2195767
+## 2   Qn1 Quebec nonchilled 0.08839779 0.6005291
+## 3   Qn1 Quebec nonchilled 0.17127072 0.7169312
+## 4   Qn1 Quebec nonchilled 0.28176796 0.7804233
+## 5   Qn1 Quebec nonchilled 0.44751381 0.7301587
+## 6   Qn1 Quebec nonchilled 0.64088398 0.8333333</code></pre>
+</div>
+<div class="section level4">
+<h4>第三题</h4>
+<pre class="r"><code>formulas &lt;- list(
+  mpg ~ disp,
+  mpg ~ I(1 / disp),
+  mpg ~ disp + wt,
+  mpg ~ I(1 / disp) +wt
+)</code></pre>
+<pre class="r"><code>(res1 &lt;- lapply(formulas, lm, mtcars))</code></pre>
+<pre><code>## [[1]]
+## 
+## Call:
+## FUN(formula = X[[i]], data = ..1)
+## 
+## Coefficients:
+## (Intercept)         disp  
+##    29.59985     -0.04122  
+## 
+## 
+## [[2]]
+## 
+## Call:
+## FUN(formula = X[[i]], data = ..1)
+## 
+## Coefficients:
+## (Intercept)    I(1/disp)  
+##       10.75      1557.67  
+## 
+## 
+## [[3]]
+## 
+## Call:
+## FUN(formula = X[[i]], data = ..1)
+## 
+## Coefficients:
+## (Intercept)         disp           wt  
+##    34.96055     -0.01772     -3.35083  
+## 
+## 
+## [[4]]
+## 
+## Call:
+## FUN(formula = X[[i]], data = ..1)
+## 
+## Coefficients:
+## (Intercept)    I(1/disp)           wt  
+##      19.024     1142.560       -1.798</code></pre>
+</div>
+<div class="section level4">
+<h4>第四题</h4>
+<pre class="r"><code>bootstraps &lt;- lapply(1:10, function(i) {
+  rows &lt;- sample(1:nrow(mtcars),rep=T)
+  mtcars[rows,]
+})</code></pre>
+<pre class="r"><code>(res2 &lt;- lapply(bootstraps, lm, formula = mpg~disp))</code></pre>
+<pre><code>## [[1]]
+## 
+## Call:
+## FUN(formula = ..1, data = X[[i]])
+## 
+## Coefficients:
+## (Intercept)         disp  
+##    30.22549     -0.04199  
+## 
+## 
+## [[2]]
+## 
+## Call:
+## FUN(formula = ..1, data = X[[i]])
+## 
+## Coefficients:
+## (Intercept)         disp  
+##    32.00998     -0.04744  
+## 
+## 
+## [[3]]
+## 
+## Call:
+## FUN(formula = ..1, data = X[[i]])
+## 
+## Coefficients:
+## (Intercept)         disp  
+##    28.81025     -0.03968  
+## 
+## 
+## [[4]]
+## 
+## Call:
+## FUN(formula = ..1, data = X[[i]])
+## 
+## Coefficients:
+## (Intercept)         disp  
+##    30.81237     -0.04381  
+## 
+## 
+## [[5]]
+## 
+## Call:
+## FUN(formula = ..1, data = X[[i]])
+## 
+## Coefficients:
+## (Intercept)         disp  
+##    28.10920     -0.03607  
+## 
+## 
+## [[6]]
+## 
+## Call:
+## FUN(formula = ..1, data = X[[i]])
+## 
+## Coefficients:
+## (Intercept)         disp  
+##    29.77142     -0.04229  
+## 
+## 
+## [[7]]
+## 
+## Call:
+## FUN(formula = ..1, data = X[[i]])
+## 
+## Coefficients:
+## (Intercept)         disp  
+##    29.02102     -0.04103  
+## 
+## 
+## [[8]]
+## 
+## Call:
+## FUN(formula = ..1, data = X[[i]])
+## 
+## Coefficients:
+## (Intercept)         disp  
+##      30.985       -0.047  
+## 
+## 
+## [[9]]
+## 
+## Call:
+## FUN(formula = ..1, data = X[[i]])
+## 
+## Coefficients:
+## (Intercept)         disp  
+##     30.6842      -0.0475  
+## 
+## 
+## [[10]]
+## 
+## Call:
+## FUN(formula = ..1, data = X[[i]])
+## 
+## Coefficients:
+## (Intercept)         disp  
+##    29.94205     -0.04309</code></pre>
+</div>
+<div class="section level4">
+<h4>第五题</h4>
+<pre class="r"><code>rsq &lt;- function(mod) summary(mod)$r.squared</code></pre>
+<pre class="r"><code>lapply(res1,rsq)</code></pre>
+<pre><code>## [[1]]
+## [1] 0.7183433
+## 
+## [[2]]
+## [1] 0.8596865
+## 
+## [[3]]
+## [1] 0.7809306
+## 
+## [[4]]
+## [1] 0.8838038</code></pre>
+<pre class="r"><code>lapply(res2, rsq)</code></pre>
+<pre><code>## [[1]]
+## [1] 0.7044791
+## 
+## [[2]]
+## [1] 0.7707638
+## 
+## [[3]]
+## [1] 0.5978648
+## 
+## [[4]]
+## [1] 0.6325821
+## 
+## [[5]]
+## [1] 0.7424659
+## 
+## [[6]]
+## [1] 0.7413616
+## 
+## [[7]]
+## [1] 0.7956857
+## 
+## [[8]]
+## [1] 0.785494
+## 
+## [[9]]
+## [1] 0.6139113
+## 
+## [[10]]
+## [1] 0.7630576</code></pre>
+</div>
+</div>
+</div>
+<div id="lapply" class="section level2">
+<h2>11.2 lapply的相似函数</h2>
+<p>常见的循环模式已经在现有的基本泛函中实现了。</p>
+<p>一旦已经掌握现有的泛函，下一步就是编写自己的泛函，将代码中出现了相同的循环模式提取出来，使用泛函来替代。</p>
+<div id="-sapplyvapply" class="section level3">
+<h3>11.2.1 向量输出 sapply和vapply</h3>
+<ul>
+<li>sapply通过猜测设定输出类型；</li>
+<li>vapply通过附加参数来设定输出类型。</li>
+</ul>
+<pre class="r"><code>sapply(mtcars,is.numeric)</code></pre>
+<pre><code>##  mpg  cyl disp   hp drat   wt qsec   vs   am gear carb 
+## TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE</code></pre>
+<pre class="r"><code>vapply(mtcars, is.numeric, FUN.VALUE = logical(1))</code></pre>
+<pre><code>##  mpg  cyl disp   hp drat   wt qsec   vs   am gear carb 
+## TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE</code></pre>
+<p>如果函数返回不同类型或不同长度的结果，sapply返回列表，vapply抛出错误。</p>
+<p>sapply更适合在交互式分析中。</p>
+<pre class="r"><code>df &lt;- data.frame(x=1:10,y=letters[1:10])
+sapply(df, class)</code></pre>
+<pre><code>##         x         y 
+## &quot;integer&quot;  &quot;factor&quot;</code></pre>
+<pre class="r"><code>vapply(df, class, FUN.VALUE = character(1))</code></pre>
+<pre><code>##         x         y 
+## &quot;integer&quot;  &quot;factor&quot;</code></pre>
+<pre class="r"><code>df &lt;- data.frame(x=1:10,y=Sys.time()+1:10)
+sapply(df, class)</code></pre>
+<pre><code>## $x
+## [1] &quot;integer&quot;
+## 
+## $y
+## [1] &quot;POSIXct&quot; &quot;POSIXt&quot;</code></pre>
+<pre class="r"><code>#vapply(df, class, FUN.VALUE = character(1))</code></pre>
+<ul>
+<li>sapply是对lapply的简单包装；</li>
+<li>vapply是将结果赋值给适当类型的向量（矩阵）；</li>
+</ul>
+<p>两者与lapply的输出不同。</p>
+</div>
+<div id="mapmapply" class="section level3">
+<h3>11.2.2 多重输入Map和mapply</h3>
+<p>lapply只有一个参数可以改变，其他参数固定。</p>
+<p>如果要用lapply实现加权平均，看起来有些笨拙</p>
+<pre class="r"><code>xs &lt;- replicate(5,runif(10),simplify = F)
+ws &lt;- replicate(5,rpois(10,5)+1,simplify = F)
+lapply(seq_along(xs), function(i) {
+  weighted.mean(xs[[i]], ws[[i]])
+})</code></pre>
+<pre><code>## [[1]]
+## [1] 0.5909633
+## 
+## [[2]]
+## [1] 0.5104818
+## 
+## [[3]]
+## [1] 0.4697772
+## 
+## [[4]]
+## [1] 0.3998523
+## 
+## [[5]]
+## [1] 0.3409802</code></pre>
+<p>Map是lapply的变体，其中所有参数都可以改变</p>
+<pre class="r"><code>Map(weighted.mean,xs,ws)</code></pre>
+<pre><code>## [[1]]
+## [1] 0.5909633
+## 
+## [[2]]
+## [1] 0.5104818
+## 
+## [[3]]
+## [1] 0.4697772
+## 
+## [[4]]
+## [1] 0.3998523
+## 
+## [[5]]
+## [1] 0.3409802</code></pre>
+<p>函数是Map的第一个参数</p>
+<p>当需要对两个列表进行同时处理时，Map很有用。</p>
+<p>Map是simplify=FALSE的mapply，总能给出想要结果。</p>
+</div>
+<div class="section level3">
+<h3>11.2.4 并行化</h3>
+<p>lapply的顺序可以是任意的，所以可以分配给多个CPU实现并行计算。</p>
+<p>parallel::mclapply和parallel::mcMap （不能在windows上运行）</p>
+</div>
+<div id="-1" class="section level3">
+<h3>11.2.5 练习</h3>
+<div id="-1" class="section level4">
+<h4>第一题</h4>
+<pre class="r"><code>vapply(mtcars,sd,numeric(1))</code></pre>
+<pre><code>##         mpg         cyl        disp          hp        drat          wt 
+##   6.0269481   1.7859216 123.9386938  68.5628685   0.5346787   0.9784574 
+##        qsec          vs          am        gear        carb 
+##   1.7869432   0.5040161   0.4989909   0.7378041   1.6152000</code></pre>
+<pre class="r"><code>vapply(CO2,function(x) if(is.numeric(x)) sd(x) else NA,numeric(1))</code></pre>
+<pre><code>##     Plant      Type Treatment      conc    uptake 
+##        NA        NA        NA 295.92412  10.81441</code></pre>
+</div>
+<div id="-1" class="section level4">
+<h4>第三题</h4>
+<pre class="r"><code>trials &lt;- replicate(
+  100,
+  t.test(rpois(10,10),rpois(7,10)),
+  simplify = F
+)</code></pre>
+<pre class="r"><code>sapply(trials,function(x) x[[&quot;p.value&quot;]])</code></pre>
+<pre><code>##   [1] 0.650643251 0.153491856 0.544047667 0.908921663 0.110744868
+##   [6] 0.895083844 0.217034617 0.212959030 0.368265969 0.704764482
+##  [11] 0.733391414 0.691808232 0.776493427 0.842816718 0.963672637
+##  [16] 0.183047665 0.653482561 0.850390177 0.811199913 0.252423907
+##  [21] 0.631798644 0.441093217 0.751151984 0.235394291 0.483803662
+##  [26] 0.480660933 0.041528097 0.357001731 0.161541833 0.800836078
+##  [31] 0.705894815 0.678569832 0.110825635 0.580227306 0.302214486
+##  [36] 0.087091388 0.836519894 0.016202557 0.569533890 0.541240680
+##  [41] 0.698658596 0.212445590 0.204742195 0.531493571 0.356480695
+##  [46] 0.290108237 0.555742575 0.368632904 0.337285669 0.095670439
+##  [51] 0.254081244 0.378855296 0.051037009 0.306723163 0.077182628
+##  [56] 0.797770515 0.857599194 0.077140840 0.920514799 0.163912430
+##  [61] 0.897718466 0.143666217 0.885375975 0.794168206 0.406766517
+##  [66] 0.822398592 0.488747043 0.878946703 0.182315725 0.203060059
+##  [71] 0.455040038 0.436871145 0.970322414 0.019242829 0.163338035
+##  [76] 0.571548256 0.377801368 0.001135937 0.782087669 0.382289087
+##  [81] 0.057595977 0.555084647 0.433972765 0.195674923 0.864260609
+##  [86] 0.114759543 0.386882574 0.873645937 0.526725879 0.749292688
+##  [91] 0.011965459 0.077420362 0.952657664 0.263079820 0.681106119
+##  [96] 0.094403630 0.670419821 0.293979046 0.774170389 0.822929043</code></pre>
+<pre class="r"><code>sapply(trials,&#39;[[&#39;,&quot;p.value&quot;)</code></pre>
+<pre><code>##   [1] 0.650643251 0.153491856 0.544047667 0.908921663 0.110744868
+##   [6] 0.895083844 0.217034617 0.212959030 0.368265969 0.704764482
+##  [11] 0.733391414 0.691808232 0.776493427 0.842816718 0.963672637
+##  [16] 0.183047665 0.653482561 0.850390177 0.811199913 0.252423907
+##  [21] 0.631798644 0.441093217 0.751151984 0.235394291 0.483803662
+##  [26] 0.480660933 0.041528097 0.357001731 0.161541833 0.800836078
+##  [31] 0.705894815 0.678569832 0.110825635 0.580227306 0.302214486
+##  [36] 0.087091388 0.836519894 0.016202557 0.569533890 0.541240680
+##  [41] 0.698658596 0.212445590 0.204742195 0.531493571 0.356480695
+##  [46] 0.290108237 0.555742575 0.368632904 0.337285669 0.095670439
+##  [51] 0.254081244 0.378855296 0.051037009 0.306723163 0.077182628
+##  [56] 0.797770515 0.857599194 0.077140840 0.920514799 0.163912430
+##  [61] 0.897718466 0.143666217 0.885375975 0.794168206 0.406766517
+##  [66] 0.822398592 0.488747043 0.878946703 0.182315725 0.203060059
+##  [71] 0.455040038 0.436871145 0.970322414 0.019242829 0.163338035
+##  [76] 0.571548256 0.377801368 0.001135937 0.782087669 0.382289087
+##  [81] 0.057595977 0.555084647 0.433972765 0.195674923 0.864260609
+##  [86] 0.114759543 0.386882574 0.873645937 0.526725879 0.749292688
+##  [91] 0.011965459 0.077420362 0.952657664 0.263079820 0.681106119
+##  [96] 0.094403630 0.670419821 0.293979046 0.774170389 0.822929043</code></pre>
+</div>
+</div>
+</div>
+<div class="section level2">
+<h2>11.3 操作矩阵和数据框</h2>
+<div class="section level3">
+<h3>11.3.1 矩阵和数组运算</h3>
+<p>apply是sapply的变体，用一个数来描述矩阵或数组的每一列或每一行的汇总操作。</p>
+<p>sweep对统计汇总值扫描，下例将量纲调整到0~1之间</p>
+<pre class="r"><code>x &lt;- matrix(rnorm(20,0,10),nrow = 4)
+x1 &lt;- sweep(x,1,apply(x, 1, min),`-`)
+x2 &lt;- sweep(x1,1,apply(x1, 1, max),`/`)</code></pre>
+<p>outer接受多个向量输入，并创建一个矩阵或数组输出，其中输入函数对输入的所有可能组合。</p>
+<pre class="r"><code>outer(1:3,1:10,&quot;*&quot;)</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+## [1,]    1    2    3    4    5    6    7    8    9    10
+## [2,]    2    4    6    8   10   12   14   16   18    20
+## [3,]    3    6    9   12   15   18   21   24   27    30</code></pre>
+<pre class="r"><code>outer(1:5,1:5,FUN=&quot;paste&quot;,sep=&quot;,&quot;)</code></pre>
+<pre><code>##      [,1]  [,2]  [,3]  [,4]  [,5] 
+## [1,] &quot;1,1&quot; &quot;1,2&quot; &quot;1,3&quot; &quot;1,4&quot; &quot;1,5&quot;
+## [2,] &quot;2,1&quot; &quot;2,2&quot; &quot;2,3&quot; &quot;2,4&quot; &quot;2,5&quot;
+## [3,] &quot;3,1&quot; &quot;3,2&quot; &quot;3,3&quot; &quot;3,4&quot; &quot;3,5&quot;
+## [4,] &quot;4,1&quot; &quot;4,2&quot; &quot;4,3&quot; &quot;4,4&quot; &quot;4,5&quot;
+## [5,] &quot;5,1&quot; &quot;5,2&quot; &quot;5,3&quot; &quot;5,4&quot; &quot;5,5&quot;</code></pre>
+</div>
+<div id="tapply" class="section level3">
+<h3>11.3.2 组应用tapply</h3>
+<p>tapply实际上是split+sapply</p>
+<pre class="r"><code>tapply(mtcars$mpg,mtcars$cyl,length)</code></pre>
+<pre><code>##  4  6  8 
+## 11  7 14</code></pre>
+<pre class="r"><code>split(mtcars$mpg,mtcars$cyl)</code></pre>
+<pre><code>## $`4`
+##  [1] 22.8 24.4 22.8 32.4 30.4 33.9 21.5 27.3 26.0 30.4 21.4
+## 
+## $`6`
+## [1] 21.0 21.0 21.4 18.1 19.2 17.8 19.7
+## 
+## $`8`
+##  [1] 18.7 14.3 16.4 17.3 15.2 10.4 10.4 14.7 15.5 15.2 13.3 19.2 15.8 15.0</code></pre>
+<pre class="r"><code>split(mtcars$mpg,mtcars$cyl) %&gt;% 
+  sapply(length)</code></pre>
+<pre><code>##  4  6  8 
+## 11  7 14</code></pre>
+</div>
+<div id="plyr" class="section level3">
+<h3>11.3.3 plyr包</h3>
+<p>《The Split-Apply-Combine Strategy for Data Analysis》</p>
+</div>
+</div>
+<div class="section level2">
+<h2>11.4 列表操作</h2>
+<div id="reduce" class="section level3">
+<h3>11.4.1 Reduce</h3>
+<p>Reduce通过地柜调用函数f，每次有两个参数，首先使用f对x中前两个元素计算，得到结果，再使用结果和x第三个元素进行计算。</p>
+<ul>
+<li>Map是对循环的简化；</li>
+<li>Reduce是对地柜的简化；</li>
+</ul>
+<pre class="r"><code>l &lt;- replicate(5,sample(1:10,15,replace = T),simplify = F)
+str(l)</code></pre>
+<pre><code>## List of 5
+##  $ : int [1:15] 2 7 2 3 4 4 3 5 7 7 ...
+##  $ : int [1:15] 1 9 3 1 2 5 4 7 3 4 ...
+##  $ : int [1:15] 2 8 2 3 7 8 5 9 1 6 ...
+##  $ : int [1:15] 9 4 5 7 3 2 2 7 3 6 ...
+##  $ : int [1:15] 6 5 10 8 9 4 8 8 1 1 ...</code></pre>
+<pre class="r"><code>Reduce(intersect,l)</code></pre>
+<pre><code>## [1] 2 7 4 5 6</code></pre>
+</div>
+<div class="section level3">
+<h3>11.4.2 判断泛函</h3>
+<ul>
+<li>Filter 只选择满足判断条件的元素；</li>
+<li>Find 返回满足判断条件的第一个元素；</li>
+<li>Position 返回满足判断条件的第一个元素位置；</li>
+<li>where 根据列表返回一个逻辑向量；</li>
+</ul>
+<pre class="r"><code>where &lt;- function(f,x) {
+  vapply(x, f, FUN.VALUE = logical(1))
+}</code></pre>
+<pre class="r"><code>df &lt;- data.frame(x=1:3,y=letters[1:3])</code></pre>
+<pre class="r"><code>where(is.factor,df)</code></pre>
+<pre><code>##     x     y 
+## FALSE  TRUE</code></pre>
+<pre class="r"><code>Filter(is.factor,df)</code></pre>
+<pre><code>##   y
+## 1 a
+## 2 b
+## 3 c</code></pre>
+<pre class="r"><code>Find(is.factor,df)</code></pre>
+<pre><code>## [1] a b c
+## Levels: a b c</code></pre>
+<pre class="r"><code>Position(is.factor,df)</code></pre>
+<pre><code>## [1] 2</code></pre>
+</div>
+<div id="-2" class="section level3">
+<h3>11.4.3 练习</h3>
+<div id="-2" class="section level4">
+<h4>第一题</h4>
+<pre class="r"><code>complete.cases(mtcars)</code></pre>
+<pre><code>##  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+## [15] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+## [29] TRUE TRUE TRUE TRUE</code></pre>
+<pre class="r"><code>where(function(x) sum(is.na(x))==0,mtcars)</code></pre>
+<pre><code>##  mpg  cyl disp   hp drat   wt qsec   vs   am gear carb 
+## TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE</code></pre>
+</div>
+<div id="-1" class="section level4">
+<h4>第二题</h4>
+<pre class="r"><code>numsummary &lt;- function(df){
+  f &lt;- Filter(is.numeric,df)
+  vapply(f, summary, FUN.VALUE = numeric(6))
+}</code></pre>
+<pre class="r"><code>numsummary(CO2)</code></pre>
+<pre><code>##         conc  uptake
+## Min.      95  7.7000
+## 1st Qu.  175 17.9000
+## Median   350 28.3000
+## Mean     435 27.2131
+## 3rd Qu.  675 37.1250
+## Max.    1000 45.5000</code></pre>
+</div>
+<div id="-2" class="section level4">
+<h4>第三题</h4>
+<pre class="r"><code>head(CO2)</code></pre>
+<pre><code>##   Plant   Type  Treatment conc uptake
+## 1   Qn1 Quebec nonchilled   95   16.0
+## 2   Qn1 Quebec nonchilled  175   30.4
+## 3   Qn1 Quebec nonchilled  250   34.8
+## 4   Qn1 Quebec nonchilled  350   37.2
+## 5   Qn1 Quebec nonchilled  500   35.3
+## 6   Qn1 Quebec nonchilled  675   39.2</code></pre>
+<pre class="r"><code>Position(is.numeric,CO2)</code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="r"><code>where(is.numeric,CO2) %&gt;% which()</code></pre>
+<pre><code>##   conc uptake 
+##      4      5</code></pre>
+<pre class="r"><code>which(c(F,F,F,T,T))</code></pre>
+<pre><code>## [1] 4 5</code></pre>
+<p>Position是which的泛函版本</p>
+<pre class="r"><code>CO2[where(is.numeric,CO2)] %&gt;% head()</code></pre>
+<pre><code>##   conc uptake
+## 1   95   16.0
+## 2  175   30.4
+## 3  250   34.8
+## 4  350   37.2
+## 5  500   35.3
+## 6  675   39.2</code></pre>
+<pre class="r"><code>Filter(is.numeric,CO2) %&gt;% head()</code></pre>
+<pre><code>##   conc uptake
+## 1   95   16.0
+## 2  175   30.4
+## 3  250   34.8
+## 4  350   37.2
+## 5  500   35.3
+## 6  675   39.2</code></pre>
+<p>where得到T,F；Filter直接选择子集</p>
+</div>
+<div id="-1" class="section level4">
+<h4>第四题</h4>
+<pre class="r"><code>Any &lt;- function(f,l){
+  sum(where(f,l))!=0
+}</code></pre>
+<pre class="r"><code>Any(is.numeric,mtcars)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>Any(is.numeric,CO2)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>All &lt;- function(f,l) {
+  sum(where(f,l))==length(l)
+}</code></pre>
+<pre class="r"><code>All(is.numeric,mtcars)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>All(is.numeric,CO2)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+</div>
+</div>
+</div>
+<div class="section level2">
+<h2>11.5 数学泛函</h2>
+<ul>
+<li>integrate 计算曲线下面积</li>
+<li>uniroot 计算根集</li>
+<li>optimise 计算最高点和最低点位置</li>
+</ul>
+<pre class="r"><code>integrate(sin,0,pi)</code></pre>
+<pre><code>## 2 with absolute error &lt; 2.2e-14</code></pre>
+<pre class="r"><code>uniroot(sin,pi*c(1/2,3/2))</code></pre>
+<pre><code>## $root
+## [1] 3.141593
+## 
+## $f.root
+## [1] 1.224606e-16
+## 
+## $iter
+## [1] 2
+## 
+## $init.it
+## [1] NA
+## 
+## $estim.prec
+## [1] 6.103516e-05</code></pre>
+<pre class="r"><code>optimise(sin,c(0,2*pi))</code></pre>
+<pre><code>## $minimum
+## [1] 4.712391
+## 
+## $objective
+## [1] -1</code></pre>
+<pre class="r"><code>optimise(sin,c(0,pi),maximum = T)</code></pre>
+<pre><code>## $maximum
+## [1] 1.570796
+## 
+## $objective
+## [1] 1</code></pre>
+</div>
+<div class="section level2">
+<h2>11.6 应该保留的循环</h2>
+<ul>
+<li>原位修改</li>
+<li>递归函数</li>
+<li>while循环</li>
+</ul>
+</div>
+</div>
+<div id="12-" class="section level1">
+<h1>第12章 函数运算符</h1>
+<ul>
+<li>泛函：提取循环使用的通用模式；</li>
+<li>函数运算符，提取匿名函数使用的通用模式；</li>
+</ul>
+<p>四种重要类型的函数运算符：</p>
+<ul>
+<li>行为；</li>
+<li>输入；</li>
+<li>输出；</li>
+<li>组合；</li>
+</ul>
+<p>对多个函数进行组合而不是对参数进行组合</p>
+<div class="section level2">
+<h2>12.1 行为函数运算符</h2>
+<p>行为函数运算符不会改变函数的输入和输出，但给函数添加一些附加行为。</p>
+<p>学习三个：</p>
+<p>1，增加延迟来避免服务器被请求淹没； 2. 每n次调用将信息输出到控制台，帮助检查长时间运行的进程； 3. 缓存上一步计算结果来改善性能。</p>
+<pre class="r"><code>urls &lt;- list(
+  a1 &lt;- &quot;https://cran.r-project.org/doc/manuals/r-patched/R-intro.pdf&quot;,
+  a2 &lt;- &quot;https://cran.r-project.org/doc/manuals/r-patched/R-data.pdf&quot;,
+  a3 &lt;- &quot;https://cran.r-project.org/doc/manuals/r-release/R-lang.pdf&quot;,
+  a4 &lt;- &quot;https://cran.r-project.org/doc/manuals/r-release/R-ints.pdf&quot;
+)</code></pre>
+<pre class="r"><code>download_file &lt;- function(url,...) {
+  download.file(url, basename(url), ...)
+}
+lapply(urls, download_file)</code></pre>
+<p>想要添加行为：</p>
+<ol style="list-style-type: decimal">
+<li>每10个URL输出一个点，知道程序还在运行；</li>
+<li>两个请求之间增加一个小延迟；</li>
+</ol>
+<p>如果用for循环写</p>
+<pre class="r"><code>i &lt;- 1
+for(url in urls) {
+  i &lt;- i+1
+  if (i %% 10 == 0) cat(&quot;.&quot;)
+  Sys.delay(1)
+  download_file(url)
+}</code></pre>
+<p>创建函数运算符，对行为封装</p>
+<pre class="r"><code>lapply(urls, dot_every(10, delay_by(1, download_file)))</code></pre>
+<p>可以很直接的实现delay_by</p>
+<pre class="r"><code>delay_by &lt;- function(delay, f){
+  function(...) {
+    Sys.sleep(delay)
+    f(...)
+  }
+}</code></pre>
+<pre class="r"><code>system.time(runif(100))</code></pre>
+<pre><code>## 用户 系统 流逝 
+##    0    0    0</code></pre>
+<pre class="r"><code>system.time(delay_by(1, runif)(100))</code></pre>
+<pre><code>## 用户 系统 流逝 
+## 0.00 0.00 1.02</code></pre>
+<p>dot_every()需要一个计数器</p>
+<pre class="r"><code>dot_every &lt;- function(n, f) {
+  i &lt;- 1
+  function(...) {
+    if (i %% n == 0) cat(&quot;.&quot;)
+    i &lt;&lt;- i+1
+    f(...)
+  }
+}</code></pre>
+<pre class="r"><code>x &lt;- lapply(1:100,runif)</code></pre>
+<pre class="r"><code>x &lt;- lapply(1:100,dot_every(4,runif))</code></pre>
+<pre><code>## .........................</code></pre>
+<p>在每个函数运算符中，都把函数设置为最后一个参数，这样在组合多个函数运算符时，使得代码更容易读。</p>
+<div class="section level3">
+<h3>12.1.1 缓存</h3>
+<pre class="r"><code>library(memoise)</code></pre>
+<pre class="r"><code>slow_function &lt;- function(x) {
+  Sys.sleep(1)
+  10
+}
+system.time(slow_function())</code></pre>
+<pre><code>## 用户 系统 流逝 
+## 0.00 0.00 1.02</code></pre>
+<pre class="r"><code>system.time(slow_function())</code></pre>
+<pre><code>## 用户 系统 流逝 
+## 0.00 0.00 1.01</code></pre>
+<pre class="r"><code>fast_function &lt;- memoise(slow_function)
+system.time(fast_function())</code></pre>
+<pre><code>## 用户 系统 流逝 
+## 0.00 0.00 1.17</code></pre>
+<pre class="r"><code>system.time(fast_function())</code></pre>
+<pre><code>## 用户 系统 流逝 
+## 0.06 0.00 0.06</code></pre>
+<p>缓存是用内存换速度。一个被缓存的函数可以运行的非常快，因为它存储以前的输入和输出，使用更多的内存。</p>
+<pre class="r"><code>fib &lt;- function(n) {
+  if (n&lt;2) return(1)
+  fib(n-2)+fib(n-1)
+}</code></pre>
+<pre class="r"><code>system.time(fib(33))</code></pre>
+<pre><code>## 用户 系统 流逝 
+## 6.49 0.00 6.49</code></pre>
+<pre class="r"><code>system.time(fib(34))</code></pre>
+<pre><code>##  用户  系统  流逝 
+## 10.42  0.00 10.47</code></pre>
+<pre class="r"><code>fib2 &lt;- memoise(fib)
+system.time(fib2(33))</code></pre>
+<pre><code>## 用户 系统 流逝 
+## 6.49 0.00 6.51</code></pre>
+<pre class="r"><code>system.time(fib2(34))</code></pre>
+<pre><code>##  用户  系统  流逝 
+## 10.39  0.02 10.44</code></pre>
+</div>
+<div class="section level3">
+<h3>12.1.2 捕获函数调用</h3>
+<pre class="r"><code>ignore &lt;- function(...) NULL
+tee &lt;- function(f, on_input = ignore, on_output = ignore){
+  function(...) {
+    on_input(...)
+    output &lt;- f(...)
+    on_output(output)
+    output
+  }
+}</code></pre>
+<p>可以使用tee来查看泛函uniroot的内部，如何通过迭代得到结果。</p>
+<pre class="r"><code>g &lt;- function(x) cos(x) - x
+zero &lt;- uniroot(g, c(-5,5))
+zero</code></pre>
+<pre><code>## $root
+## [1] 0.7390853
+## 
+## $f.root
+## [1] -2.603993e-07
+## 
+## $iter
+## [1] 6
+## 
+## $init.it
+## [1] NA
+## 
+## $estim.prec
+## [1] 6.103516e-05</code></pre>
+<pre class="r"><code>show_x &lt;- function(x, ... ) cat(sprintf(&quot;%+.08f&quot;,x),&quot;\n&quot;)
+zero &lt;- uniroot(tee(g, on_input = show_x), c(-5,5))</code></pre>
+<pre><code>## -5.00000000 
+## +5.00000000 
+## +0.28366219 
+## +0.87520341 
+## +0.72298040 
+## +0.73863091 
+## +0.73908529 
+## +0.73902425 
+## +0.73908529</code></pre>
+<pre class="r"><code>zero &lt;- uniroot(tee(g, on_output = show_x), c(-5,5))</code></pre>
+<pre><code>## +5.28366219 
+## -4.71633781 
+## +0.67637474 
+## -0.23436269 
+## +0.02685676 
+## +0.00076012 
+## -0.00000026 
+## +0.00010189 
+## -0.00000026</code></pre>
+</div>
+<div class="section level3">
+<h3>12.2.3 惰性</h3>
+<pre class="r"><code>funs &lt;- list(mean=mean,sum=sum)
+funs_m &lt;- lapply(funs, delay_by, delay=0.1)</code></pre>
+<pre class="r"><code>funs_m$mean(1:10)</code></pre>
+<pre><code>## [1] 5.5</code></pre>
+<pre class="r"><code>funs_m$sum(1:10)</code></pre>
+<pre><code>## [1] 55</code></pre>
+<p>惰性问题好像不存在了，不用刻意使用force了。</p>
+</div>
+<div id="-3" class="section level3">
+<h3>12.1.4 练习</h3>
+<pre class="r"><code>ftimestep &lt;- function(f){
+  function(...){
+    cat(as.character(Sys.time()))
+    cat(&quot;\n&quot;)
+    res &lt;- f(...)
+    res
+  }
+}</code></pre>
+<pre class="r"><code>ftimestep(sum)(1:10)</code></pre>
+<pre><code>## 2018-11-08 11:32:21</code></pre>
+<pre><code>## [1] 55</code></pre>
+<pre class="r"><code>ftimestep(mean)(1:100)</code></pre>
+<pre><code>## 2018-11-08 11:32:21</code></pre>
+<pre><code>## [1] 50.5</code></pre>
+</div>
+</div>
+<div class="section level2">
+<h2>12.2 输出函数运算符</h2>
+<pre class="r"><code>Negate &lt;- function(f) {
+  force(f)
+  function(...) !f(...)
+}</code></pre>
+<pre class="r"><code>Negate(is.null)(NULL)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>failwith &lt;- function(default = NULL, f, quiet = FALSE) {
+  force(f)
+  function(...) {
+    out &lt;- default
+    try(out &lt;- f(...), silent = quiet)
+    out
+  }
+}</code></pre>
+<pre class="r"><code>failwith(f=log)(&quot;a&quot;)</code></pre>
+<pre><code>## NULL</code></pre>
+</div>
+<div class="section level2">
+<h2>12.3 输入函数运算符</h2>
+<div class="section level3">
+<h3>12.3.1 预填充函数参数：拒不函数应用</h3>
+<pre class="r"><code>library(pryr)</code></pre>
+<pre><code>## 
+## 载入程辑包：&#39;pryr&#39;</code></pre>
+<pre><code>## The following object is masked _by_ &#39;.GlobalEnv&#39;:
+## 
+##     where</code></pre>
+<pre class="r"><code>f &lt;- function(a) g(a, b=1)
+compact &lt;- function(x) Filter(Negate(is.null), x)
+Map(function(x,y) f(x, y, zs), xs, ys)</code></pre>
+<pre class="r"><code>f &lt;- partial(g, b=1)
+compact &lt;- partial(Filter, Negate(is.null))
+Map(partial(f, zs = zs), xs, ys)</code></pre>
+<p>对于函数列表</p>
+<pre class="r"><code>funs2 &lt;- list(
+  sum = function(...) sum(..., na.rm = T),
+  mean = function(...) mean(..., na.rm = T),
+  median = function(...) median(..., na.rm = T)
+)</code></pre>
+<p>改写成</p>
+<pre class="r"><code>funs2 &lt;- list(
+  sum = partial(sum, na.rm = T),
+  mean = partial(mean, na.rm = T),
+  median= partial(median, na.rm = T)
+)</code></pre>
+</div>
+<div class="section level3">
+<h3>12.3.2 改变输入类型</h3>
+<ul>
+<li>base::Vectorize() 可以将一个标量函数转换成一个向量函数；</li>
+<li>splat将接收多个参数的函数转换成只接收一个参数列表的函数；</li>
+<li>plyr::colwise() 将向量函数转换成处理数据框的函数；</li>
+</ul>
+</div>
+</div>
+<div class="section level2">
+<h2>12.4 组合函数运算符</h2>
+<p>plyr::each接收一个向量化函数的列表并将它们组合为一个函数</p>
+<pre class="r"><code>summarise &lt;- plyr::each(mean,sd,median)
+summarise(1:10)</code></pre>
+<pre><code>##    mean      sd  median 
+## 5.50000 3.02765 5.50000</code></pre>
+<div class="section level3">
+<h3>12.4.1 函数复合</h3>
+<pre class="r"><code>sapply(mtcars, function(x) length(unique(x)))</code></pre>
+<pre><code>##  mpg  cyl disp   hp drat   wt qsec   vs   am gear carb 
+##   25    3   27   22   22   29   30    2    2    3    6</code></pre>
+<pre class="r"><code>compose &lt;- function(f,g) {
+  function(...) f(g(...))
+}</code></pre>
+<pre class="r"><code>library(pryr)
+sapply(mtcars,compose(length,unique))</code></pre>
+<pre><code>##  mpg  cyl disp   hp drat   wt qsec   vs   am gear carb 
+##   25    3   27   22   22   29   30    2    2    3    6</code></pre>
+<pre class="r"><code>&quot;%o%&quot; &lt;- compose
+sapply(mtcars, length %o% unique)</code></pre>
+<pre><code>##  mpg  cyl disp   hp drat   wt qsec   vs   am gear carb 
+##   25    3   27   22   22   29   30    2    2    3    6</code></pre>
+<pre class="r"><code>sqrt(1+8)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<pre class="r"><code>compose(sqrt, `+`)(1+8)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<pre class="r"><code>(sqrt %o% `+`)(1+8)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<pre class="r"><code>`+`(1,8) %&gt;% sqrt</code></pre>
+<pre><code>## [1] 3</code></pre>
+<pre class="r"><code>square &lt;- function(x) x^2
+deviation &lt;- function(x) x - mean(x)
+sd2 &lt;- sqrt %o% mean %o% square%o% deviation
+sd2(1:10)</code></pre>
+<pre><code>## [1] 2.872281</code></pre>
+</div>
+<div class="section level3">
+<h3>12.4.2 逻辑判断和布尔代数</h3>
+<pre class="r"><code>and &lt;- function(f1, f2) {
+  force(f1); force(f2)
+  function(...) {
+    f1(...) &amp;&amp; f2(...)
+  }
+}
+
+
+or &lt;- function(f1, f2) {
+  force(f1); force(f2)
+  function(...) {
+    f1(...) || f2(...)
+  }
+}
+
+not &lt;- function(f) {
+  force(f)
+  function(...) {
+    !f(...)
+  }
+}</code></pre>
+<pre class="r"><code>Filter(or(is.character,is.factor),iris) %&gt;% head()</code></pre>
+<pre><code>##   Species
+## 1  setosa
+## 2  setosa
+## 3  setosa
+## 4  setosa
+## 5  setosa
+## 6  setosa</code></pre>
+</div>
+</div>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+  
+  <hr/>
+  &copy; ZhiYuan Wang 2018
+  
+  </footer>
+  </body>
+</html>
+

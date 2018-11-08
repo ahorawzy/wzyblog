@@ -1,0 +1,265 @@
+---
+title: Advanced R(3)——OO
+author: ZhiYuan Wang
+date: '2018-11-08'
+slug: advanced-r-3-oo
+categories:
+  - R语言
+tags:
+  - 学习总结
+---
+
+
+
+<div class="section level1">
+<h1>面向对象</h1>
+<p>A class defines the behaviour of objects by describing their attributes and their relationship to other classes.</p>
+<p>The class is also used when selecting methods, functions that behave differently depending on the class of their input.</p>
+<ul>
+<li>基于消息传递的OO系统：With message-passing, messages (methods) are sent to objects and the object determines which function to call.</li>
+<li>基于泛型函数的OO系统：a special type of function called a generic function decides which method to call.</li>
+</ul>
+<pre class="r"><code>library(pryr)</code></pre>
+<div id="base-types" class="section level2">
+<h2>Base types</h2>
+<ul>
+<li>functions</li>
+<li>environments</li>
+<li>names</li>
+<li>calls</li>
+<li>promises</li>
+</ul>
+<pre class="r"><code>f &lt;- function() {}
+typeof(f)</code></pre>
+<pre><code>## [1] &quot;closure&quot;</code></pre>
+<pre class="r"><code>is.function(f)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>typeof(sum)</code></pre>
+<pre><code>## [1] &quot;builtin&quot;</code></pre>
+<pre class="r"><code>is.primitive(sum)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+</div>
+<div id="s3" class="section level2">
+<h2>S3对象</h2>
+<p>S对象统是最普遍使用的对象系统。是非正式的并且简洁的。</p>
+<div class="section level3">
+<h3>识别对象，泛型函数和方法</h3>
+<p>大多数对象都是S3对象。</p>
+<pre class="r"><code>library(pryr)
+df &lt;- data.frame(x = 1:10, y = letters[1:10])
+otype(df) </code></pre>
+<pre><code>## [1] &quot;S3&quot;</code></pre>
+<p>df是S3对象</p>
+<pre class="r"><code>otype(df$x)</code></pre>
+<pre><code>## [1] &quot;base&quot;</code></pre>
+<p>numeric vector不是S3</p>
+<pre class="r"><code>otype(df$y)</code></pre>
+<pre><code>## [1] &quot;S3&quot;</code></pre>
+<p>在S3中，方法属于函数，称为泛型函数，或泛型。</p>
+<p>S3 methods do not belong to objects or classes.</p>
+<p>查看一个函数是否是泛型，可以看是否有UseMethod，或ftype()</p>
+<pre class="r"><code>mean</code></pre>
+<pre><code>## function (x, ...) 
+## UseMethod(&quot;mean&quot;)
+## &lt;bytecode: 0x000000000af17700&gt;
+## &lt;environment: namespace:base&gt;</code></pre>
+<pre class="r"><code>ftype(mean)</code></pre>
+<pre><code>## [1] &quot;s3&quot;      &quot;generic&quot;</code></pre>
+<pre class="r"><code>library(Mreport)</code></pre>
+<pre><code>## 载入需要的程辑包：leafletCN</code></pre>
+<pre class="r"><code>ftype(geo_pointplot)</code></pre>
+<pre><code>## [1] &quot;function&quot;</code></pre>
+<pre class="r"><code>ftype(caculate_carsmean)</code></pre>
+<pre><code>## [1] &quot;function&quot;</code></pre>
+<pre class="r"><code>ftype(sum)</code></pre>
+<pre><code>## [1] &quot;primitive&quot; &quot;generic&quot;</code></pre>
+<pre class="r"><code>ftype(`[`)</code></pre>
+<pre><code>## [1] &quot;primitive&quot; &quot;generic&quot;</code></pre>
+<p>Given a class, the job of an S3 generic is to call the right S3 method. You can recognise S3 methods by their names, which look like generic.class(). For example, the Date method for the mean() generic is called mean.Date(), and the factor method for print() is called print.factor().</p>
+<pre class="r"><code>ftype(t.data.frame)</code></pre>
+<pre><code>## [1] &quot;s3&quot;     &quot;method&quot;</code></pre>
+<pre class="r"><code>ftype(t.test)</code></pre>
+<pre><code>## [1] &quot;s3&quot;      &quot;generic&quot;</code></pre>
+<p>You can see all the methods that belong to a generic with methods()</p>
+<pre class="r"><code>methods(&quot;mean&quot;)</code></pre>
+<pre><code>## [1] mean.Date     mean.default  mean.difftime mean.POSIXct  mean.POSIXlt 
+## see &#39;?methods&#39; for accessing help and source code</code></pre>
+<pre class="r"><code>methods(&quot;t.test&quot;)</code></pre>
+<pre><code>## [1] t.test.default* t.test.formula*
+## see &#39;?methods&#39; for accessing help and source code</code></pre>
+<p>You can also list all generics that have a method for a given class:</p>
+<pre class="r"><code>methods(class = &quot;ts&quot;)</code></pre>
+<pre><code>##  [1] [             [&lt;-           aggregate     as.data.frame cbind        
+##  [6] coerce        cycle         diff          diffinv       initialize   
+## [11] kernapply     lines         Math          Math2         monthplot    
+## [16] na.omit       Ops           plot          print         show         
+## [21] slotsFromS3   t             time          window        window&lt;-     
+## see &#39;?methods&#39; for accessing help and source code</code></pre>
+</div>
+<div class="section level3">
+<h3>定义类和创建对象</h3>
+<p>To make an object an instance of a class, you just take an existing base object and set the class attribute. You can do that during creation with structure(), or after the fact with class&lt;-():</p>
+<pre class="r"><code>foo &lt;- list()
+class(foo) &lt;- &quot;foo&quot;
+class(foo)</code></pre>
+<pre><code>## [1] &quot;foo&quot;</code></pre>
+<p>S3 objects are usually built on top of lists, or atomic vectors with attributes.</p>
+<pre class="r"><code>class(foo)</code></pre>
+<pre><code>## [1] &quot;foo&quot;</code></pre>
+<pre class="r"><code>inherits(foo, &quot;foo&quot;)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>Most S3 classes provide a constructor function:</p>
+<pre class="r"><code>foo &lt;- function(x) {
+  if (!is.numeric(x)) stop(&quot;X must be numeric&quot;)
+  structure(list(x), class = &quot;foo&quot;)
+}</code></pre>
+<pre class="r"><code>a &lt;- 1:3
+a &lt;- foo(a)
+class(a)</code></pre>
+<pre><code>## [1] &quot;foo&quot;</code></pre>
+<p>you can change the class of existing objects:</p>
+<pre class="r"><code>mod &lt;- lm(log(mpg) ~ log(disp), data = mtcars)
+class(mod)</code></pre>
+<pre><code>## [1] &quot;lm&quot;</code></pre>
+<pre class="r"><code>print(mod)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = log(mpg) ~ log(disp), data = mtcars)
+## 
+## Coefficients:
+## (Intercept)    log(disp)  
+##      5.3810      -0.4586</code></pre>
+<pre class="r"><code>class(mod) &lt;- &quot;data.frame&quot;
+print(mod)</code></pre>
+<pre><code>##  [1] coefficients  residuals     effects       rank          fitted.values
+##  [6] assign        qr            df.residual   xlevels       call         
+## [11] terms         model        
+## &lt;0 行&gt; (或0-长度的row.names)</code></pre>
+<pre class="r"><code>mod$coefficients</code></pre>
+<pre><code>## (Intercept)   log(disp) 
+##   5.3809725  -0.4585683</code></pre>
+</div>
+<div class="section level3">
+<h3>创建方法和泛型</h3>
+<p>To add a new generic, create a function that calls UseMethod(). UseMethod() takes two arguments: the name of the generic function, and the argument to use for method dispatch.</p>
+<p>There’s no need to pass any of the arguments of the generic to UseMethod() and you shouldn’t do so.</p>
+<pre class="r"><code>f &lt;- function(x) UseMethod(&quot;f&quot;)
+ftype(f)</code></pre>
+<pre><code>## [1] &quot;s3&quot;      &quot;generic&quot;</code></pre>
+<p>A generic isn’t useful without some methods. To add a method, you just create a regular function with the correct (generic.class) name:</p>
+<pre class="r"><code>f.a &lt;- function(x) &quot;Class a&quot;
+
+a &lt;- structure(list(), class = &quot;a&quot;)
+class(a)</code></pre>
+<pre><code>## [1] &quot;a&quot;</code></pre>
+<pre class="r"><code>f(a)</code></pre>
+<pre><code>## [1] &quot;Class a&quot;</code></pre>
+<p>Adding a method to an existing generic works in the same way:</p>
+<pre class="r"><code>mean.a &lt;- function(x) &quot;hello a&quot;
+mean(a)</code></pre>
+<pre><code>## [1] &quot;hello a&quot;</code></pre>
+</div>
+<div class="section level3">
+<h3>方法分配</h3>
+<pre class="r"><code>f &lt;- function(x) UseMethod(&quot;f&quot;)
+f.a &lt;- function(x) &quot;Class a&quot;
+f.default &lt;- function(x) &quot;Unknown class&quot;</code></pre>
+<pre class="r"><code>f(structure(list(), class = &quot;a&quot;))</code></pre>
+<pre><code>## [1] &quot;Class a&quot;</code></pre>
+<pre class="r"><code>f(structure(list(), class = c(&quot;b&quot;, &quot;a&quot;)))</code></pre>
+<pre><code>## [1] &quot;Class a&quot;</code></pre>
+<pre class="r"><code>f(structure(list(), class = &quot;c&quot;))</code></pre>
+<pre><code>## [1] &quot;Unknown class&quot;</code></pre>
+<p>Because methods are normal R functions, you can call them directly:</p>
+<pre class="r"><code>c &lt;- structure(list(), class = &quot;c&quot;)
+f(c)</code></pre>
+<pre><code>## [1] &quot;Unknown class&quot;</code></pre>
+<pre class="r"><code>f.default(c)</code></pre>
+<pre><code>## [1] &quot;Unknown class&quot;</code></pre>
+<pre class="r"><code>f.a(c)</code></pre>
+<pre><code>## [1] &quot;Class a&quot;</code></pre>
+<p>However, this is just as dangerous as changing the class of an object, so you shouldn’t do it.</p>
+</div>
+<div class="section level3">
+<h3>练习</h3>
+<div id="1" class="section level4">
+<h4>练习1</h4>
+<pre class="r"><code>ftype(t.test)</code></pre>
+<pre><code>## [1] &quot;s3&quot;      &quot;generic&quot;</code></pre>
+<pre class="r"><code>body(t.test)</code></pre>
+<pre><code>## UseMethod(&quot;t.test&quot;)</code></pre>
+<pre class="r"><code>methods(t.test)</code></pre>
+<pre><code>## [1] t.test.default* t.test.formula*
+## see &#39;?methods&#39; for accessing help and source code</code></pre>
+<pre class="r"><code>a &lt;- structure(list(),class=&quot;test&quot;)
+class(a)</code></pre>
+<pre><code>## [1] &quot;test&quot;</code></pre>
+<pre class="r"><code>try(t(a))</code></pre>
+<pre><code>## Warning in mean.default(x): 参数不是数值也不是逻辑值：回覆NA</code></pre>
+<p>调用了t.default</p>
+<pre class="r"><code>body(t.default)</code></pre>
+<pre><code>## .Internal(t.default(x))</code></pre>
+</div>
+<div id="3" class="section level4">
+<h4>练习3</h4>
+<pre class="r"><code>methods(class = &quot;POSIXt&quot;)</code></pre>
+<pre><code>##  [1] -            +            all.equal    as.character Axis        
+##  [6] coerce       cut          diff         hist         initialize  
+## [11] is.numeric   julian       Math         months       Ops         
+## [16] pretty       quantile     quarters     round        seq         
+## [21] show         slotsFromS3  str          trunc        weekdays    
+## see &#39;?methods&#39; for accessing help and source code</code></pre>
+<pre class="r"><code>methods(class = &quot;POSIXct&quot;)</code></pre>
+<pre><code>##  [1] [             [[            [&lt;-           as.data.frame as.Date      
+##  [6] as.list       as.POSIXlt    c             coerce        format       
+## [11] initialize    mean          print         rep           show         
+## [16] slotsFromS3   split         summary       Summary       weighted.mean
+## [21] xtfrm        
+## see &#39;?methods&#39; for accessing help and source code</code></pre>
+<pre class="r"><code>methods(class = &quot;POSIXlt&quot;)</code></pre>
+<pre><code>##  [1] [             [&lt;-           anyNA         as.data.frame as.Date      
+##  [6] as.double     as.matrix     as.POSIXct    c             coerce       
+## [11] duplicated    format        initialize    is.na         length       
+## [16] mean          names         names&lt;-       print         rep          
+## [21] show          slotsFromS3   sort          summary       Summary      
+## [26] unique        weighted.mean xtfrm        
+## see &#39;?methods&#39; for accessing help and source code</code></pre>
+<pre class="r"><code>all3 &lt;- list(methods(class = &quot;POSIXct&quot;),methods(class = &quot;POSIXlt&quot;),methods(class = &quot;POSIXt&quot;))
+all3 &lt;- lapply(all3, function(x) attr(x,&quot;info&quot;)$generic)
+(allgen &lt;- Reduce(union,all3))</code></pre>
+<pre><code>##  [1] &quot;[&quot;             &quot;[[&quot;            &quot;[&lt;-&quot;           &quot;as.data.frame&quot;
+##  [5] &quot;as.Date&quot;       &quot;as.list&quot;       &quot;as.POSIXlt&quot;    &quot;c&quot;            
+##  [9] &quot;coerce&quot;        &quot;format&quot;        &quot;initialize&quot;    &quot;mean&quot;         
+## [13] &quot;print&quot;         &quot;rep&quot;           &quot;show&quot;          &quot;slotsFromS3&quot;  
+## [17] &quot;split&quot;         &quot;summary&quot;       &quot;Summary&quot;       &quot;weighted.mean&quot;
+## [21] &quot;xtfrm&quot;         &quot;anyNA&quot;         &quot;as.double&quot;     &quot;as.matrix&quot;    
+## [25] &quot;as.POSIXct&quot;    &quot;duplicated&quot;    &quot;is.na&quot;         &quot;length&quot;       
+## [29] &quot;names&quot;         &quot;names&lt;-&quot;       &quot;sort&quot;          &quot;unique&quot;       
+## [33] &quot;-&quot;             &quot;+&quot;             &quot;all.equal&quot;     &quot;as.character&quot; 
+## [37] &quot;Axis&quot;          &quot;cut&quot;           &quot;diff&quot;          &quot;hist&quot;         
+## [41] &quot;is.numeric&quot;    &quot;julian&quot;        &quot;Math&quot;          &quot;months&quot;       
+## [45] &quot;Ops&quot;           &quot;pretty&quot;        &quot;quantile&quot;      &quot;quarters&quot;     
+## [49] &quot;round&quot;         &quot;seq&quot;           &quot;str&quot;           &quot;trunc&quot;        
+## [53] &quot;weekdays&quot;</code></pre>
+</div>
+<div id="4" class="section level4">
+<h4>练习4</h4>
+<p>那个基础泛型函数拥有最多的方法？</p>
+<pre class="r"><code>objs &lt;- mget(ls(&quot;package:base&quot;),inherits=T)
+funs &lt;- Filter(is.function,objs)</code></pre>
+<pre class="r"><code>funsl2 &lt;- Filter(function(x) &quot;generic&quot; %in% ftype(x),funs)
+length(funsl2)</code></pre>
+<pre><code>## [1] 176</code></pre>
+<pre class="r"><code>len &lt;- vapply(names(funsl2), compose(length,methods),FUN.VALUE = numeric(1))
+names(funsl2)[len==max(len)]</code></pre>
+<pre><code>## [1] &quot;print&quot;</code></pre>
+<pre class="r"><code>funsl2[len==max(len)]</code></pre>
+<pre><code>## $print
+## function (x, ...) 
+## UseMethod(&quot;print&quot;)
+## &lt;bytecode: 0x0000000008770bb8&gt;
+## &lt;environment: namespace:base&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>

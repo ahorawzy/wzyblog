@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Advanced R(2)——debug | Website of ZhiYuan Wang</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">主页</a></li>
+      
+      <li><a href="/categories/">分类</a></li>
+      
+      <li><a href="/tags/">标签</a></li>
+      
+      <li><a href="/about/">关于我</a></li>
+      
+      <li><a href="/friendly_links/">链接</a></li>
+      
+      <li><a href="/index.xml">订阅</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Advanced R(2)——debug</span></h1>
+<h2 class="author">ZhiYuan Wang</h2>
+<h2 class="date">2018/11/08</h2>
+</div>
+
+<main>
+<p>调试是一门用来解决代码中意想不到的错误的艺术和科学。</p>
+<ul>
+<li>致命错误由stop()引起</li>
+<li>警告由warning()产生</li>
+<li>消息由message()产生</li>
+</ul>
+<div class="section level2">
+<h2>9.1 调试技巧</h2>
+<p>确认那些你认为对的的确是对的，知道找到一个错的（本来你认为是对的）。</p>
+<p>自动化测试套件。</p>
+<p>从知道问题原因的大代码块开始，然后逐渐缩小范围。</p>
+<p>错误产生的越快，找到漏洞的速度越快。</p>
+<p>产生一个假设，设计实验来测试这个假设，记录你的结果。</p>
+</div>
+<div class="section level2">
+<h2>9.2 调试工具</h2>
+<p>不要尝试一开始就编写一个具有所有功能的大函数，可以将所有功能分成很多小的部分分别实现。</p>
+<div class="section level3">
+<h3>9.2.1 确定调用顺序</h3>
+<p>使用调用栈 show traceback，或者traceback()函数</p>
+<p>从下往上阅读调用栈。</p>
+<p>traceback()只显示问题发生在哪里，不会告诉你为什么出错。</p>
+</div>
+<div class="section level3">
+<h3>9.2.2 查看错误</h3>
+<p>打开交互式调试器的最简单方法是 Rerun with Debug。</p>
+<p>下一个将被执行的语句会高亮显示。</p>
+<ul>
+<li>Next (n)执行下一步；</li>
+<li>Stop into（s）如果下一步是函数，那么单步执行这个函数，通过函数的每一行(进入到函数内)；</li>
+<li>Finish 结束当前循环或函数的执行；</li>
+<li>Conrtinue 离开交互式调试并继续函数的正常执行；如果已经解决了问题，并检查函数能否正确运行，可以使用。</li>
+<li>Stop Q 停止调试，终止函数。当你找到了问题在哪，准备修复这个漏洞并重载代码时，可以使用。</li>
+<li>Enter 重复前一个命令</li>
+<li>where 输出调用的栈追踪</li>
+</ul>
+</div>
+<div class="section level3">
+<h3>9.2.3 查看任意代码</h3>
+<p>使用browser()函数或Rstudio断电。</p>
+<p>debug()在指定函数第一行插入一个语句，undebug()去除，使用debugonce()只浏览下一次运行。</p>
+</div>
+<div class="section level3">
+<h3>9.2.5 其他故障类型</h3>
+<p>让你的R彻底崩溃，漏洞可能出现在C中</p>
+</div>
+</div>
+<div class="section level2">
+<h2>9.3 条件处理</h2>
+<p>意想不到的错误需要交互式调试来确定问题的根源，有些错误是可以预期到的，希望自动化处理这些错误。</p>
+<ul>
+<li>try()允许我们在错误发生时继续执行代码；</li>
+<li>tryCatch()可以让我们设置一个handler函数，控制在条件发生时应该做什么；</li>
+</ul>
+<div id="try" class="section level3">
+<h3>9.3.1 使用try来忽略错误</h3>
+<p>如果把可能出错的函数放在try()中，错误消息将被输出，但程序继续执行。</p>
+<p>如果要在try()中放置长代码，需要用{}将它们括起来。</p>
+<p>可以捕获try()的输出，如果执行成果，返回最后结果；如果失败，返回一个try-error类对象。</p>
+<pre class="r"><code>elements &lt;- list(1:10,c(-1,10),c(T,F),letters)</code></pre>
+<pre class="r"><code>results &lt;- lapply(elements,log)</code></pre>
+<pre class="r"><code>results &lt;- lapply(elements,function(x) try(log(x)))</code></pre>
+<pre><code>## Warning in log(x): 产生了NaNs</code></pre>
+<pre class="r"><code>results</code></pre>
+<pre><code>## [[1]]
+##  [1] 0.0000000 0.6931472 1.0986123 1.3862944 1.6094379 1.7917595 1.9459101
+##  [8] 2.0794415 2.1972246 2.3025851
+## 
+## [[2]]
+## [1]      NaN 2.302585
+## 
+## [[3]]
+## [1]    0 -Inf
+## 
+## [[4]]
+## [1] &quot;Error in log(x) : 数学函数中用了非数值参数\n&quot;
+## attr(,&quot;class&quot;)
+## [1] &quot;try-error&quot;
+## attr(,&quot;condition&quot;)
+## &lt;simpleError in log(x): 数学函数中用了非数值参数&gt;</code></pre>
+<pre class="r"><code>is.error &lt;- function(x) inherits(x,&quot;try-error&quot;)
+succeeded &lt;- !sapply(results,is.error)
+str(results[succeeded])</code></pre>
+<pre><code>## List of 3
+##  $ : num [1:10] 0 0.693 1.099 1.386 1.609 ...
+##  $ : num [1:2] NaN 2.3
+##  $ : num [1:2] 0 -Inf</code></pre>
+<pre class="r"><code>str(elements[!succeeded])</code></pre>
+<pre><code>## List of 1
+##  $ : chr [1:26] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</code></pre>
+<p>try()另一种常用用法是在表达式失败时使用默认值，只需要在try代码块外进行简单的赋值。</p>
+</div>
+</div>
+<div class="section level2">
+<h2>9.4 防御性编程</h2>
+<p>防御性编程就是当有意想不到的错误发生时，程序仍然能够按照预定义的方式出错。</p>
+<p>防御性编程的原则就是快速失败，如果出现问题就尽量快的发出错误信息。</p>
+<p>3种实现方式：</p>
+<ul>
+<li>更严格的输入控制；</li>
+<li>避免使用非标准计算函数；</li>
+<li>避免根据输入返回不同类型输出的函数。永远不要在函数内部使用sapply()。</li>
+</ul>
+</div>
+<div class="section level1">
+<h1>7. 测试</h1>
+<p>测试是包开发的重要部分，确保你的代码做了你想做的事情。测试在包开发路程中增加了一个额外的步骤。</p>
+<p>之所以开始使用自动化测试，是因为花了太多时间重新修改以前修改过的错误。问题不在于你没有测试代码，而在于没有自动化测试。</p>
+<p>自动化测试的优势：</p>
+<ol style="list-style-type: decimal">
+<li>更少的错误；</li>
+<li>更好的代码结构；编写测试迫使你把复杂的代码分解成单独的功能，各个功能可以独立工作；</li>
+<li>容易重新启动；</li>
+<li>可靠的代码；</li>
+</ol>
+<div class="section level2">
+<h2>7.1 测试工作流程</h2>
+<p>使用devtools::use_testthat()，这将：</p>
+<ol style="list-style-type: decimal">
+<li>创建一个tests/testthat目录；</li>
+<li>在DESCRIPTION的Suggests域中增加testthat；</li>
+<li>创建一个文件tests/testthat.R，在check是运行所有的测试。</li>
+</ol>
+<p>一旦建好，工作流程很简单：</p>
+<ol style="list-style-type: decimal">
+<li>修改代码或测试；</li>
+<li>使用C+S+T或devtools::test()来测试包；</li>
+<li>重复，直到通过所有的测试。</li>
+</ol>
+<p>输出测试，每一行代表一个测试文件，每个.表示一个通过的测试，每个数字都代表一个失败的测试。数字是失败测试列表的索引。</p>
+</div>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+  
+  <hr/>
+  &copy; ZhiYuan Wang 2018
+  
+  </footer>
+  </body>
+</html>
+

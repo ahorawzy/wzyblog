@@ -1,0 +1,1167 @@
+---
+title: Advanced R(4)——FP
+author: ZhiYuan Wang
+date: '2018-11-08'
+slug: advanced-r-4-fp
+categories:
+  - R语言
+tags:
+  - 学习总结
+---
+
+```{r}
+library(magrittr)
+```
+
+
+```{r}
+rm(list=ls())
+```
+
+
+# 第10章：函数式编程
+
+函数式编程：创建和操作函数的工具。
+
+适用于向量的所有操作也都适用于函数：
+
+1. 将函数赋值给变量；
+2. 将函数存储在列表；
+3. 函数作为参数传递给其他函数；
+4. 函数内创建函数；
+5. 把函数作为函数的结果返回；
+
+## 10.1 动机
+
+DRY: Do Not Repeat Yourself
+
+### 函数组合
+
+将两个简单函数组合起来；
+
+lapply以函数作为输入，所以它是泛函functional。
+
+```{r}
+df <- data.frame(replicate(6,sample(c(1:10,-99),6,replace = T)))
+df
+fix_missing <- function(x) {
+  x[x == -99] <- NA
+  x
+}
+df[] <- lapply(df, fix_missing)
+df
+```
+
+### 函数工厂
+
+基于模板来创建函数
+
+```{r}
+missing_fixer <- function(na_value) {
+  function(x) {
+    x[x == na_value] <- NA
+    x
+  }
+}
+fix_missing_99 <- missing_fixer(-99)
+fix_missing_999 <- missing_fixer(-999)
+fix_missing_99(c(-99,-999))
+fix_missing_999(c(-99,-999))
+```
+
+### 函数列表
+
+多个相似函数的同时使用
+
+```{r}
+summary_new <- function(x) {
+  funs <- c(mean, median, sd, mad, IQR)
+  lapply(funs, function(f) f(x, na.rm = T))
+}
+sapply(mtcars, summary_new)
+```
+
+## 10.2 匿名函数
+
+函数本身就是对象，不会自带函数名。使用常规赋值运算符命名，得到匿名函数。
+
+当觉得没有必要给函数命名时，使用匿名函数。
+
+1. 创建小函数；
+2. 创建闭包；
+
+## 10.3 闭包
+
+闭包：将父函数的环境封装并可以访问它所有变量。
+
+两个层次的参数：
+
+1. 父层次控制运算；
+2. 子层次进行工作；
+
+```{r}
+power <- function(exponent) {
+  function(x) {
+    x ^ exponent
+  }
+}
+```
+
+```{r}
+square <- power(2)
+square(2)
+square(4)
+```
+
+```{r}
+cube <- power(3)
+cube(2)
+cube(4)
+```
+
+
+## 10.4 函数列表
+
+函数可以更容易地与一组相关函数一起运行
+
+比较算法时间
+
+```{r}
+compute_mean <- list(
+  base = function(x) mean(x),
+  sum = function(x) sum(x) / length(x),
+  manual = function(x) {
+    total <- 0
+    n <- length(x)
+    for(i in seq_along(x)) {
+      total <- total + x[i] / n
+    }
+    total
+  }
+)
+```
+
+```{r}
+x <- runif(1e5)
+system.time(compute_mean$base(x))
+system.time(compute_mean[[2]](x))
+system.time(compute_mean[["manual"]](x))
+```
+
+```{r}
+lapply(compute_mean, function(f) system.time(f(x)))
+```
+
+对一个对象进行多方面汇总
+
+```{r}
+x <- 1:10
+funs <- list(
+  sum = sum,
+  mean = mean,
+  median = median
+)
+lapply(funs, function(f) f(x))
+```
+
+```{r}
+lapply(funs, function(f) f(x, na.rm = T))
+```
+
+## 10.5 案例研究：数值积分
+
+### 函数名作为参数1
+
+```{r}
+midpoint <- function(f,a,b){
+  (b-a) * f((a+b)/2)
+}
+trapezoid <- function(f,a,b){
+  (b-a)/2 * (f(a)+f(b))
+}
+```
+
+```{r}
+midpoint(sin,0,pi)
+trapezoid(sin,0,pi)
+```
+
+两个函数都没有给出正确答案。
+
+为了使答案更加准确，先将整个积分区间分成小区间，再对小区间积分。**组合积分**
+
+```{r}
+midpoint_composite <- function(f,a,b,n=10){
+  points <- seq(a,b,length = n+1)
+  h <- (b-a)/n
+  
+  area <- 0
+  for(i in seq_len(n)) {
+    area <- area+ h * f((points[i]+points[i+1])/2)
+  }
+  area
+}
+```
+
+```{r}
+trapezoid_composite <- function(f,a,b,n=10){
+  points <- seq(a,b,length = n+1)
+  h <- (b-a)/n
+  
+  area <- 0
+  for(i in seq_len(n)) {
+    area <- area+ h/2* (f(points[i])+f(points[i+1]))
+  }
+  area
+}
+```
+
+```{r}
+midpoint_composite(sin,0,pi,n=10)
+trapezoid_composite(sin,0,pi,n=10)
+```
+
+两个函数有大量相似，考虑提取更通用的组合积分函数
+
+### 函数名作为参数2
+
+```{r}
+composite <- function(f, a, b, n=10, rule) {
+  points <- seq(a, b, length = n+1)
+  
+  area <- 0
+  for(i in seq_len(n)){
+    area <- area + rule(f, points[i], points[i+1])
+  }
+  area
+}
+```
+
+```{r}
+composite(sin,0,pi,n=10,rule=midpoint)
+composite(sin,0,pi,n=10,rule=trapezoid)
+```
+
+这个函数以两个函数作为参数：要积分的函数和积分规则。
+
+现在可以在小区间内添加更好的积分规则
+
+```{r}
+simpson <- function(f,a,b){
+  (b-a)/6*(f(a)+4*f((a+b)/2)+f(b))
+}
+
+boole <- function(f,a,b){
+  pos <- function(i) a+i*(b-a)/4
+  fi <- function(i) f(pos(i))
+  
+  (b-a)/90*
+    (7*fi(0)+32*fi(1)+12*fi(2)+32*fi(3)+7*fi(4))
+}
+```
+
+```{r}
+composite(sin,0,pi,n=10,rule=simpson)
+composite(sin,0,pi,n=10,rule=boole)
+```
+
+更普遍的牛顿科特斯规则
+
+### 函数工厂：闭包
+
+```{r}
+newton_cotes <- function(coef,open=FALSE){
+  n <- length(coef)+open
+  
+  function(f,a,b){
+    pos <- function(i) a+i*(b-a)/n
+    points <- pos(seq.int(0,length(coef)-1))
+    
+    (b-a)/sum(coef)*sum(f(points)*coef)
+  }
+}
+```
+
+```{r}
+milne <- newton_cotes(c(2,-1,2),open=T)
+composite(sin,0,pi,n=10,rule=milne)
+```
+
+### 问题1：函数列表
+
+```{r}
+funs <- list(
+  midpoint,
+  trapezoid,
+  simpson,
+  boole
+)
+lapply(funs,function(f) f(sin,0,pi))
+```
+
+```{r}
+lapply(funs, composite, f=sin, a=0, b=pi, n=10)
+```
+
+### 问题2：根据系数列表产生函数列表
+
+```{r}
+arglist <- list(
+  boole = c(7,32,12,32,7),
+  milne = c(2, -1, 2)
+)
+arglist
+```
+
+```{r}
+funs <- lapply(arglist, newton_cotes)
+funs
+```
+
+```{r}
+lapply(funs, composite, f=sin,a=0, b=pi, n=10)
+```
+
+# 第11章：泛函
+
+泛函functional，以函数作为输入并返回一个向量的函数。
+
+```{r}
+randomise <- function(f) f(runif(1e3))
+```
+
+```{r}
+randomise(mean)
+randomise(mean)
+randomise(sum)
+```
+
+3个最常用的泛函：lapply/apply/tapply。
+
+循环最大的缺点：表达不够清晰，不能表达更高层次的目的。
+
+每个泛函都是为特殊任务量身定做，认识了泛函之后也就知道了为什么使用它。
+
+以函数的方式思考并处理函数。清晰的表达我们的想法，并创建解决问题的工具。
+
+闭包频繁地与泛函联合使用。
+
+## 11.1 lapply
+
+lapply是常见for循环的包装器，更容易地处理列表，将注意力集中在要应用的函数上。
+
+```{r}
+l <- replicate(20,runif(sample(1:10,1)),simplify = F)
+```
+
+```{r}
+unlist(lapply(l, length))
+```
+
+lapply(x,f)中，x总是作为f的第一个参数，如果想改变，可以使用匿名函数
+
+```{r}
+trims <- c(0,0.1,0.2,0.5)
+x <- rcauchy(1000)
+unlist(lapply(trims, function(trim) mean(x,trim=trim)))
+```
+
+### 11.1.1 循环模式
+
+有三种方法对向量循环：
+
+1. 对每个元素循环 for(x in xs);
+2. 根据元素的数值索引循环 for(i in seq_along(xs));
+3. 根据元素的名字进行循环 for(nm in names(xs))；
+
+方法一存储效率低，每次对向量扩展时，R不得不复制所有的现有元素
+
+```{r}
+xs <- runif(1e3)
+res <- c()
+for(x in xs){
+  res <- c(res,sqrt(x))
+}
+```
+
+最好先为输出创建一个空向量，再向其中添加元素。即方法二。
+
+```{r}
+res <- numeric(length(xs))
+for(i in seq_along(xs)){
+  res[i] <- sqrt(xs[i])
+}
+```
+
+lapply的三种循环方法：
+
+1. lapply(xs, function(x) {})
+2. lapply(seq_along(xs), function(i) {})
+3. lapply(names(xs), function(nm) {})
+
+通常使用第一种方法，如果需要知道元素的位置或名字，应该使用第二种或第三种方法。
+
+### 11.1.2 练习
+
+#### 第一题
+
+使用匿名函数
+
+```{r}
+trims <- c(0,0.1,0.2,0.5)
+x <- rcauchy(100)
+
+lapply(trims,function(trim) mean(x, trim = trim))
+```
+
+指定了参数名x，只能对trim参数循环。
+
+```{r}
+lapply(trims,mean,x=x)
+```
+
+#### 第二题
+
+```{r}
+scale01 <- function(x) {
+  rng <- range(x, na.rm = TRUE)
+  (x - rng[1])/ (rng[2] - rng[1])
+}
+```
+
+```{r}
+m <- lapply(mtcars, scale01)
+as.data.frame(m) %>% head()
+```
+
+```{r}
+head(CO2)
+```
+
+```{r}
+c <- lapply(CO2, function(x) if(is.numeric(x)) scale01(x) else x)
+as.data.frame(c) %>% head()
+```
+
+#### 第三题
+
+```{r}
+formulas <- list(
+  mpg ~ disp,
+  mpg ~ I(1 / disp),
+  mpg ~ disp + wt,
+  mpg ~ I(1 / disp) +wt
+)
+```
+
+```{r}
+(res1 <- lapply(formulas, lm, mtcars))
+```
+
+#### 第四题
+
+```{r}
+bootstraps <- lapply(1:10, function(i) {
+  rows <- sample(1:nrow(mtcars),rep=T)
+  mtcars[rows,]
+})
+```
+
+```{r}
+(res2 <- lapply(bootstraps, lm, formula = mpg~disp))
+```
+
+#### 第五题
+
+```{r}
+rsq <- function(mod) summary(mod)$r.squared
+```
+
+```{r}
+lapply(res1,rsq)
+```
+
+```{r}
+lapply(res2, rsq)
+```
+
+## 11.2 lapply的相似函数
+
+常见的循环模式已经在现有的基本泛函中实现了。
+
+一旦已经掌握现有的泛函，下一步就是编写自己的泛函，将代码中出现了相同的循环模式提取出来，使用泛函来替代。
+
+### 11.2.1 向量输出 sapply和vapply
+
+- sapply通过猜测设定输出类型；
+- vapply通过附加参数来设定输出类型。
+
+```{r}
+sapply(mtcars,is.numeric)
+vapply(mtcars, is.numeric, FUN.VALUE = logical(1))
+```
+
+如果函数返回不同类型或不同长度的结果，sapply返回列表，vapply抛出错误。
+
+sapply更适合在交互式分析中。
+
+```{r}
+df <- data.frame(x=1:10,y=letters[1:10])
+sapply(df, class)
+vapply(df, class, FUN.VALUE = character(1))
+```
+
+```{r}
+df <- data.frame(x=1:10,y=Sys.time()+1:10)
+sapply(df, class)
+#vapply(df, class, FUN.VALUE = character(1))
+```
+
+- sapply是对lapply的简单包装；
+- vapply是将结果赋值给适当类型的向量（矩阵）；
+
+两者与lapply的输出不同。
+
+### 11.2.2 多重输入Map和mapply
+
+lapply只有一个参数可以改变，其他参数固定。
+
+如果要用lapply实现加权平均，看起来有些笨拙
+
+```{r}
+xs <- replicate(5,runif(10),simplify = F)
+ws <- replicate(5,rpois(10,5)+1,simplify = F)
+lapply(seq_along(xs), function(i) {
+  weighted.mean(xs[[i]], ws[[i]])
+})
+```
+
+Map是lapply的变体，其中所有参数都可以改变
+
+```{r}
+Map(weighted.mean,xs,ws)
+```
+
+函数是Map的第一个参数
+
+当需要对两个列表进行同时处理时，Map很有用。
+
+Map是simplify=FALSE的mapply，总能给出想要结果。
+
+### 11.2.4 并行化
+
+lapply的顺序可以是任意的，所以可以分配给多个CPU实现并行计算。
+
+parallel::mclapply和parallel::mcMap （不能在windows上运行）
+
+### 11.2.5 练习
+
+#### 第一题
+
+```{r}
+vapply(mtcars,sd,numeric(1))
+```
+
+```{r}
+vapply(CO2,function(x) if(is.numeric(x)) sd(x) else NA,numeric(1))
+```
+
+#### 第三题
+
+```{r}
+trials <- replicate(
+  100,
+  t.test(rpois(10,10),rpois(7,10)),
+  simplify = F
+)
+```
+
+```{r}
+sapply(trials,function(x) x[["p.value"]])
+```
+
+```{r}
+sapply(trials,'[[',"p.value")
+```
+
+## 11.3 操作矩阵和数据框
+
+### 11.3.1 矩阵和数组运算
+
+apply是sapply的变体，用一个数来描述矩阵或数组的每一列或每一行的汇总操作。
+
+sweep对统计汇总值扫描，下例将量纲调整到0~1之间
+
+```{r}
+x <- matrix(rnorm(20,0,10),nrow = 4)
+x1 <- sweep(x,1,apply(x, 1, min),`-`)
+x2 <- sweep(x1,1,apply(x1, 1, max),`/`)
+```
+
+outer接受多个向量输入，并创建一个矩阵或数组输出，其中输入函数对输入的所有可能组合。
+
+```{r}
+outer(1:3,1:10,"*")
+```
+
+```{r}
+outer(1:5,1:5,FUN="paste",sep=",")
+```
+
+### 11.3.2 组应用tapply
+
+tapply实际上是split+sapply
+
+```{r}
+tapply(mtcars$mpg,mtcars$cyl,length)
+```
+
+```{r}
+split(mtcars$mpg,mtcars$cyl)
+```
+
+```{r}
+split(mtcars$mpg,mtcars$cyl) %>% 
+  sapply(length)
+```
+
+### 11.3.3 plyr包
+
+《The Split-Apply-Combine Strategy for Data Analysis》
+
+## 11.4 列表操作
+
+### 11.4.1 Reduce
+
+Reduce通过地柜调用函数f，每次有两个参数，首先使用f对x中前两个元素计算，得到结果，再使用结果和x第三个元素进行计算。
+
+- Map是对循环的简化；
+- Reduce是对地柜的简化；
+
+```{r}
+l <- replicate(5,sample(1:10,15,replace = T),simplify = F)
+str(l)
+```
+
+```{r}
+Reduce(intersect,l)
+```
+
+### 11.4.2 判断泛函
+
+- Filter 只选择满足判断条件的元素；
+- Find 返回满足判断条件的第一个元素；
+- Position 返回满足判断条件的第一个元素位置；
+- where 根据列表返回一个逻辑向量；
+
+```{r}
+where <- function(f,x) {
+  vapply(x, f, FUN.VALUE = logical(1))
+}
+```
+
+```{r}
+df <- data.frame(x=1:3,y=letters[1:3])
+```
+
+```{r}
+where(is.factor,df)
+```
+
+```{r}
+Filter(is.factor,df)
+```
+
+```{r}
+Find(is.factor,df)
+```
+
+```{r}
+Position(is.factor,df)
+```
+
+### 11.4.3 练习
+
+#### 第一题
+
+```{r}
+complete.cases(mtcars)
+```
+
+```{r}
+where(function(x) sum(is.na(x))==0,mtcars)
+```
+
+#### 第二题
+
+```{r}
+numsummary <- function(df){
+  f <- Filter(is.numeric,df)
+  vapply(f, summary, FUN.VALUE = numeric(6))
+}
+```
+
+```{r}
+numsummary(CO2)
+```
+
+#### 第三题
+
+```{r}
+head(CO2)
+```
+
+```{r}
+Position(is.numeric,CO2)
+```
+
+```{r}
+where(is.numeric,CO2) %>% which()
+```
+
+
+```{r}
+which(c(F,F,F,T,T))
+```
+
+Position是which的泛函版本
+
+```{r}
+CO2[where(is.numeric,CO2)] %>% head()
+```
+
+```{r}
+Filter(is.numeric,CO2) %>% head()
+```
+
+where得到T,F；Filter直接选择子集
+
+#### 第四题
+
+```{r}
+Any <- function(f,l){
+  sum(where(f,l))!=0
+}
+```
+
+```{r}
+Any(is.numeric,mtcars)
+```
+
+```{r}
+Any(is.numeric,CO2)
+```
+
+```{r}
+All <- function(f,l) {
+  sum(where(f,l))==length(l)
+}
+```
+
+```{r}
+All(is.numeric,mtcars)
+```
+
+```{r}
+All(is.numeric,CO2)
+```
+
+## 11.5 数学泛函
+
+- integrate 计算曲线下面积
+- uniroot 计算根集
+- optimise 计算最高点和最低点位置
+
+```{r}
+integrate(sin,0,pi)
+```
+
+```{r}
+uniroot(sin,pi*c(1/2,3/2))
+```
+
+```{r}
+optimise(sin,c(0,2*pi))
+```
+
+```{r}
+optimise(sin,c(0,pi),maximum = T)
+```
+
+## 11.6 应该保留的循环
+
+- 原位修改
+- 递归函数
+- while循环
+
+# 第12章 函数运算符
+
+- 泛函：提取循环使用的通用模式；
+- 函数运算符，提取匿名函数使用的通用模式；
+
+四种重要类型的函数运算符：
+
+- 行为；
+- 输入；
+- 输出；
+- 组合；
+
+对多个函数进行组合而不是对参数进行组合
+
+## 12.1 行为函数运算符
+
+行为函数运算符不会改变函数的输入和输出，但给函数添加一些附加行为。
+
+学习三个：
+
+1，增加延迟来避免服务器被请求淹没；
+2. 每n次调用将信息输出到控制台，帮助检查长时间运行的进程；
+3. 缓存上一步计算结果来改善性能。
+
+```{r}
+urls <- list(
+  a1 <- "https://cran.r-project.org/doc/manuals/r-patched/R-intro.pdf",
+  a2 <- "https://cran.r-project.org/doc/manuals/r-patched/R-data.pdf",
+  a3 <- "https://cran.r-project.org/doc/manuals/r-release/R-lang.pdf",
+  a4 <- "https://cran.r-project.org/doc/manuals/r-release/R-ints.pdf"
+)
+```
+
+
+```{r eval=FALSE}
+download_file <- function(url,...) {
+  download.file(url, basename(url), ...)
+}
+lapply(urls, download_file)
+```
+
+想要添加行为：
+
+1. 每10个URL输出一个点，知道程序还在运行；
+2. 两个请求之间增加一个小延迟；
+
+如果用for循环写
+
+```{r eval=FALSE}
+i <- 1
+for(url in urls) {
+  i <- i+1
+  if (i %% 10 == 0) cat(".")
+  Sys.delay(1)
+  download_file(url)
+}
+```
+
+创建函数运算符，对行为封装
+
+```{r eval=FALSE}
+lapply(urls, dot_every(10, delay_by(1, download_file)))
+```
+
+可以很直接的实现delay_by
+
+```{r}
+delay_by <- function(delay, f){
+  function(...) {
+    Sys.sleep(delay)
+    f(...)
+  }
+}
+```
+
+```{r}
+system.time(runif(100))
+```
+
+```{r}
+system.time(delay_by(1, runif)(100))
+```
+
+dot_every()需要一个计数器
+
+```{r}
+dot_every <- function(n, f) {
+  i <- 1
+  function(...) {
+    if (i %% n == 0) cat(".")
+    i <<- i+1
+    f(...)
+  }
+}
+```
+
+```{r}
+x <- lapply(1:100,runif)
+```
+
+```{r}
+x <- lapply(1:100,dot_every(4,runif))
+```
+
+在每个函数运算符中，都把函数设置为最后一个参数，这样在组合多个函数运算符时，使得代码更容易读。
+
+### 12.1.1 缓存
+
+```{r}
+library(memoise)
+```
+
+```{r}
+slow_function <- function(x) {
+  Sys.sleep(1)
+  10
+}
+system.time(slow_function())
+system.time(slow_function())
+```
+
+```{r}
+fast_function <- memoise(slow_function)
+system.time(fast_function())
+system.time(fast_function())
+```
+
+缓存是用内存换速度。一个被缓存的函数可以运行的非常快，因为它存储以前的输入和输出，使用更多的内存。
+
+```{r}
+fib <- function(n) {
+  if (n<2) return(1)
+  fib(n-2)+fib(n-1)
+}
+```
+
+```{r}
+system.time(fib(33))
+```
+
+```{r}
+system.time(fib(34))
+```
+
+```{r}
+fib2 <- memoise(fib)
+system.time(fib2(33))
+```
+
+```{r}
+system.time(fib2(34))
+```
+
+### 12.1.2 捕获函数调用
+
+```{r}
+ignore <- function(...) NULL
+tee <- function(f, on_input = ignore, on_output = ignore){
+  function(...) {
+    on_input(...)
+    output <- f(...)
+    on_output(output)
+    output
+  }
+}
+```
+
+可以使用tee来查看泛函uniroot的内部，如何通过迭代得到结果。
+
+```{r}
+g <- function(x) cos(x) - x
+zero <- uniroot(g, c(-5,5))
+zero
+```
+
+```{r}
+show_x <- function(x, ... ) cat(sprintf("%+.08f",x),"\n")
+zero <- uniroot(tee(g, on_input = show_x), c(-5,5))
+```
+
+```{r}
+zero <- uniroot(tee(g, on_output = show_x), c(-5,5))
+```
+
+### 12.2.3 惰性
+
+```{r}
+funs <- list(mean=mean,sum=sum)
+funs_m <- lapply(funs, delay_by, delay=0.1)
+```
+
+```{r}
+funs_m$mean(1:10)
+```
+
+```{r}
+funs_m$sum(1:10)
+```
+
+惰性问题好像不存在了，不用刻意使用force了。
+
+### 12.1.4 练习
+
+```{r}
+ftimestep <- function(f){
+  function(...){
+    cat(as.character(Sys.time()))
+    cat("\n")
+    res <- f(...)
+    res
+  }
+}
+```
+
+```{r}
+ftimestep(sum)(1:10)
+```
+
+```{r}
+ftimestep(mean)(1:100)
+```
+
+## 12.2 输出函数运算符
+
+```{r}
+Negate <- function(f) {
+  force(f)
+  function(...) !f(...)
+}
+```
+
+```{r}
+Negate(is.null)(NULL)
+```
+
+```{r}
+failwith <- function(default = NULL, f, quiet = FALSE) {
+  force(f)
+  function(...) {
+    out <- default
+    try(out <- f(...), silent = quiet)
+    out
+  }
+}
+```
+
+```{r}
+failwith(f=log)("a")
+```
+
+## 12.3 输入函数运算符
+
+### 12.3.1 预填充函数参数：拒不函数应用
+
+```{r}
+library(pryr)
+```
+
+
+```{r eval=FALSE}
+f <- function(a) g(a, b=1)
+compact <- function(x) Filter(Negate(is.null), x)
+Map(function(x,y) f(x, y, zs), xs, ys)
+```
+
+```{r eval=FALSE}
+f <- partial(g, b=1)
+compact <- partial(Filter, Negate(is.null))
+Map(partial(f, zs = zs), xs, ys)
+```
+
+对于函数列表
+
+```{r}
+funs2 <- list(
+  sum = function(...) sum(..., na.rm = T),
+  mean = function(...) mean(..., na.rm = T),
+  median = function(...) median(..., na.rm = T)
+)
+```
+
+改写成
+
+```{r}
+funs2 <- list(
+  sum = partial(sum, na.rm = T),
+  mean = partial(mean, na.rm = T),
+  median= partial(median, na.rm = T)
+)
+```
+
+### 12.3.2 改变输入类型
+
+- base::Vectorize() 可以将一个标量函数转换成一个向量函数；
+- splat将接收多个参数的函数转换成只接收一个参数列表的函数；
+- plyr::colwise() 将向量函数转换成处理数据框的函数；
+
+## 12.4 组合函数运算符
+
+plyr::each接收一个向量化函数的列表并将它们组合为一个函数
+
+```{r}
+summarise <- plyr::each(mean,sd,median)
+summarise(1:10)
+```
+
+### 12.4.1 函数复合
+
+```{r}
+sapply(mtcars, function(x) length(unique(x)))
+```
+
+```{r eval=FALSE} 
+compose <- function(f,g) {
+  function(...) f(g(...))
+}
+```
+
+```{r}
+library(pryr)
+sapply(mtcars,compose(length,unique))
+```
+
+```{r}
+"%o%" <- compose
+sapply(mtcars, length %o% unique)
+```
+
+```{r}
+sqrt(1+8)
+compose(sqrt, `+`)(1+8)
+(sqrt %o% `+`)(1+8)
+`+`(1,8) %>% sqrt
+```
+
+```{r}
+square <- function(x) x^2
+deviation <- function(x) x - mean(x)
+sd2 <- sqrt %o% mean %o% square%o% deviation
+sd2(1:10)
+```
+
+### 12.4.2 逻辑判断和布尔代数
+
+```{r}
+and <- function(f1, f2) {
+  force(f1); force(f2)
+  function(...) {
+    f1(...) && f2(...)
+  }
+}
+
+
+or <- function(f1, f2) {
+  force(f1); force(f2)
+  function(...) {
+    f1(...) || f2(...)
+  }
+}
+
+not <- function(f) {
+  force(f)
+  function(...) {
+    !f(...)
+  }
+}
+```
+
+```{r}
+Filter(or(is.character,is.factor),iris) %>% head()
+```

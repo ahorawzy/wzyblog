@@ -1,0 +1,312 @@
+---
+title: Advanced R(3)——OO
+author: ZhiYuan Wang
+date: '2018-11-08'
+slug: advanced-r-3-oo
+categories:
+  - R语言
+tags:
+  - 学习总结
+---
+
+# 面向对象
+
+ A class defines the behaviour of objects by describing their attributes and their relationship to other classes. 
+
+The class is also used when selecting methods, functions that behave differently depending on the class of their input.
+
+- 基于消息传递的OO系统：With message-passing, messages (methods) are sent to objects and the object determines which function to call. 
+- 基于泛型函数的OO系统：a special type of function called a generic function decides which method to call.
+
+```{r}
+library(pryr)
+```
+
+## Base types
+
+- functions
+- environments
+- names
+- calls
+- promises
+
+```{r}
+f <- function() {}
+typeof(f)
+is.function(f)
+```
+
+```{r}
+typeof(sum)
+is.primitive(sum)
+```
+
+## S3对象
+
+S对象统是最普遍使用的对象系统。是非正式的并且简洁的。
+
+### 识别对象，泛型函数和方法
+
+大多数对象都是S3对象。
+
+```{r}
+library(pryr)
+df <- data.frame(x = 1:10, y = letters[1:10])
+otype(df) 
+```
+
+df是S3对象
+
+```{r}
+otype(df$x)
+```
+
+numeric vector不是S3
+
+```{r}
+otype(df$y)
+```
+
+在S3中，方法属于函数，称为泛型函数，或泛型。
+
+S3 methods do not belong to objects or classes. 
+
+查看一个函数是否是泛型，可以看是否有UseMethod，或ftype()
+
+```{r}
+mean
+```
+
+```{r}
+ftype(mean)
+```
+
+```{r}
+library(Mreport)
+ftype(geo_pointplot)
+ftype(caculate_carsmean)
+```
+
+```{r}
+ftype(sum)
+ftype(`[`)
+```
+
+Given a class, the job of an S3 generic is to call the right S3 method. You can recognise S3 methods by their names, which look like generic.class(). For example, the Date method for the mean() generic is called mean.Date(), and the factor method for print() is called print.factor().
+
+```{r}
+ftype(t.data.frame)
+ftype(t.test)
+```
+
+You can see all the methods that belong to a generic with methods()
+
+```{r}
+methods("mean")
+```
+
+```{r}
+methods("t.test")
+```
+
+You can also list all generics that have a method for a given class:
+
+```{r}
+methods(class = "ts")
+```
+
+### 定义类和创建对象
+
+To make an object an instance of a class, you just take an existing base object and set the class attribute. You can do that during creation with structure(), or after the fact with class<-():
+
+```{r}
+foo <- list()
+class(foo) <- "foo"
+class(foo)
+```
+
+S3 objects are usually built on top of lists, or atomic vectors with attributes. 
+
+```{r}
+class(foo)
+inherits(foo, "foo")
+```
+
+Most S3 classes provide a constructor function:
+
+```{r}
+foo <- function(x) {
+  if (!is.numeric(x)) stop("X must be numeric")
+  structure(list(x), class = "foo")
+}
+```
+
+```{r}
+a <- 1:3
+a <- foo(a)
+class(a)
+```
+
+you can change the class of existing objects:
+
+```{r}
+mod <- lm(log(mpg) ~ log(disp), data = mtcars)
+class(mod)
+```
+
+```{r}
+print(mod)
+```
+
+```{r}
+class(mod) <- "data.frame"
+print(mod)
+```
+
+```{r}
+mod$coefficients
+```
+
+### 创建方法和泛型
+
+To add a new generic, create a function that calls UseMethod(). UseMethod() takes two arguments: the name of the generic function, and the argument to use for method dispatch. 
+
+There’s no need to pass any of the arguments of the generic to UseMethod() and you shouldn’t do so.
+
+```{r}
+f <- function(x) UseMethod("f")
+ftype(f)
+```
+
+A generic isn’t useful without some methods. To add a method, you just create a regular function with the correct (generic.class) name:
+
+```{r}
+f.a <- function(x) "Class a"
+
+a <- structure(list(), class = "a")
+class(a)
+```
+
+```{r}
+f(a)
+```
+
+Adding a method to an existing generic works in the same way:
+
+```{r}
+mean.a <- function(x) "hello a"
+mean(a)
+```
+
+### 方法分配
+
+```{r}
+f <- function(x) UseMethod("f")
+f.a <- function(x) "Class a"
+f.default <- function(x) "Unknown class"
+```
+
+```{r}
+f(structure(list(), class = "a"))
+```
+
+```{r}
+f(structure(list(), class = c("b", "a")))
+```
+
+```{r}
+f(structure(list(), class = "c"))
+```
+
+Because methods are normal R functions, you can call them directly:
+
+```{r}
+c <- structure(list(), class = "c")
+f(c)
+f.default(c)
+```
+
+```{r}
+f.a(c)
+```
+
+However, this is just as dangerous as changing the class of an object, so you shouldn’t do it.
+
+### 练习
+
+#### 练习1
+
+```{r}
+ftype(t.test)
+```
+
+```{r}
+body(t.test)
+```
+
+```{r}
+methods(t.test)
+```
+
+```{r}
+a <- structure(list(),class="test")
+class(a)
+```
+
+```{r}
+try(t(a))
+```
+
+调用了t.default
+
+```{r}
+body(t.default)
+```
+
+
+#### 练习3
+
+```{r}
+methods(class = "POSIXt")
+```
+
+```{r}
+methods(class = "POSIXct")
+```
+
+```{r}
+methods(class = "POSIXlt")
+```
+
+```{r}
+all3 <- list(methods(class = "POSIXct"),methods(class = "POSIXlt"),methods(class = "POSIXt"))
+all3 <- lapply(all3, function(x) attr(x,"info")$generic)
+(allgen <- Reduce(union,all3))
+```
+
+
+
+#### 练习4
+
+那个基础泛型函数拥有最多的方法？
+
+```{r}
+objs <- mget(ls("package:base"),inherits=T)
+funs <- Filter(is.function,objs)
+```
+
+```{r}
+funsl2 <- Filter(function(x) "generic" %in% ftype(x),funs)
+length(funsl2)
+```
+
+
+```{r}
+len <- vapply(names(funsl2), compose(length,methods),FUN.VALUE = numeric(1))
+names(funsl2)[len==max(len)]
+```
+
+
+```{r}
+funsl2[len==max(len)]
+```
