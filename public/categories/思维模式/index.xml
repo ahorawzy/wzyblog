@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>思维模式 on Website of ZhiYuan Wang</title>
+    <link>/categories/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%BC%8F/</link>
+    <description>Recent content in 思维模式 on Website of ZhiYuan Wang</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 08 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>思维模式(0)——序</title>
+      <link>/post/2018/11/08/thinking-method-0-preface/</link>
+      <pubDate>Thu, 08 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/11/08/thinking-method-0-preface/</guid>
+      <description>一直以来我都有一种隐隐的思考，但直到今天我才能较为清楚地表达出来。那就是我发现，一个人通过书本学习或实践经历，将理论或方法抽象并提升到更高的</description>
+    </item>
+    
+  </channel>
+</rss>
