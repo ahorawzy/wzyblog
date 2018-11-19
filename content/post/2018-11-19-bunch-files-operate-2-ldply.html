@@ -1,0 +1,243 @@
+---
+title: 文件的批量处理(2)——ldply
+author: 王致远
+date: '2018-11-19'
+slug: bunch-files-operate-2-ldply
+categories:
+  - R语言
+tags:
+  - 解决方案
+---
+
+
+
+<p>(本博客中使用的数据已全部替换为随机数)</p>
+<p>在上一次的工作中，我将文件的批量处理执行地更加彻底，基本上驾轻就熟了。并且发现了plyr里很有用的工具：ldply来配合我的文件批处理。</p>
+<p>批量读取文件</p>
+<pre class="r"><code>months &lt;- 201801:201810
+jdall &lt;- list()
+for(i in 1:length(months)){
+  path &lt;- paste(c(&quot;D:\\data\\sx_raw\\交调数据\\jd&quot;,months[i],&quot;.csv&quot;),collapse = &quot;&quot;)
+  jdall[[i]] &lt;- read.csv(path)
+}
+names(jdall) &lt;- months</code></pre>
+<p>批量查看维度</p>
+<pre class="r"><code>sapply(jdall, dim)</code></pre>
+<pre><code>##      201801 201802 201803 201804 201805 201806 201807 201808 201809 201810
+## [1,]   6512   6487   6599   6641  30691  35358  28035   6500   6284  33154
+## [2,]     24     24     24     24     24     24     24     24     24     24</code></pre>
+<p>批量预处理</p>
+<pre class="r"><code>jdalls &lt;- lapply(jdall, handle_gather)</code></pre>
+<p>在这一步，我想让01~10各月的index取交集，达到数据统一口径的目的。所以我先将取得交集的index存到变量usefulstation里，然后用它过滤数据。</p>
+<ol style="list-style-type: decimal">
+<li>首先提取各DF中的index列，存在一个列表里，叫l；</li>
+<li>使用Reduce函数，递归地求交集，将交集存在usefulstation里；</li>
+<li>检验递归交集的长度，看此过程是否出错；</li>
+<li>对各DF进行过滤，这是一个分而治之的问题，首先找到一个解决方案，然后再扩充到所有DF中；</li>
+<li>使用dplyr的filter函数进行过滤；</li>
+<li>使用一个匿名函数，以便方便应用lapply；</li>
+<li>检验过滤后的结果；</li>
+</ol>
+<pre class="r"><code>l &lt;- lapply(jdalls,`[[`,&quot;index&quot;)
+usefulstation &lt;- Reduce(intersect,l)
+length(usefulstation)</code></pre>
+<pre><code>## [1] 4691</code></pre>
+<pre class="r"><code>jdalls &lt;- lapply(jdalls, function(x) filter(x,index %in% usefulstation))</code></pre>
+<pre class="r"><code>sapply(jdalls, dim)</code></pre>
+<pre><code>##      201801 201802 201803 201804 201805 201806 201807 201808 201809 201810
+## [1,]   4691   4691   4691   4691   4691   4691   4691   4691   4691   4691
+## [2,]     29     29     29     29     29     29     29     29     29     29</code></pre>
+<div class="section level3">
+<h3>1. 总体情况</h3>
+<div class="section level4">
+<h4>总量分析</h4>
+<pre class="r"><code>sapply(jdalls,caculate_all_frecars)</code></pre>
+<pre><code>## 201801 201802 201803 201804 201805 201806 201807 201808 201809 201810 
+##   6838   4841   7281   7855   7695   7418   7445   7562   7813   7849</code></pre>
+</div>
+<div class="section level4">
+<h4>分等级分析</h4>
+<p>这里我想对每个DF使用caculate_frecarsmean函数，如果用lapply结果依旧储存在列表里，而我想让它储存在DF里，尝试用sapply，结果如下，sapply并不知道我想干什么。</p>
+<pre class="r"><code>sapply(jdalls, caculate_frecarsmean, &quot;level&quot;)</code></pre>
+<pre><code>##       201801      201802      201803      201804      201805     
+## level Character,4 Character,4 Character,4 Character,4 Character,4
+## Wmean Numeric,4   Numeric,4   Numeric,4   Numeric,4   Numeric,4  
+##       201806      201807      201808      201809      201810     
+## level Character,4 Character,4 Character,4 Character,4 Character,4
+## Wmean Numeric,4   Numeric,4   Numeric,4   Numeric,4   Numeric,4</code></pre>
+<p>尝试使用plyr里的ldpply，l表示按列表元素切分，d表示返回数据框，得到新列.id，便于和原有数据融合。</p>
+<p>ldpply实际上是将lapply的计算结果rbind到一起。</p>
+<pre class="r"><code>ldply(jdalls, caculate_frecarsmean, &quot;level&quot;) %&gt;% head(12) %&gt;% kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">.id</th>
+<th align="left">level</th>
+<th align="right">Wmean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">201801</td>
+<td align="left">普通国道</td>
+<td align="right">0.492</td>
+</tr>
+<tr class="even">
+<td align="left">201801</td>
+<td align="left">国家高速</td>
+<td align="right">0.496</td>
+</tr>
+<tr class="odd">
+<td align="left">201801</td>
+<td align="left">普通省道</td>
+<td align="right">0.503</td>
+</tr>
+<tr class="even">
+<td align="left">201801</td>
+<td align="left">省级高速</td>
+<td align="right">0.511</td>
+</tr>
+<tr class="odd">
+<td align="left">201802</td>
+<td align="left">国家高速</td>
+<td align="right">0.494</td>
+</tr>
+<tr class="even">
+<td align="left">201802</td>
+<td align="left">普通国道</td>
+<td align="right">0.498</td>
+</tr>
+<tr class="odd">
+<td align="left">201802</td>
+<td align="left">普通省道</td>
+<td align="right">0.499</td>
+</tr>
+<tr class="even">
+<td align="left">201802</td>
+<td align="left">省级高速</td>
+<td align="right">0.505</td>
+</tr>
+<tr class="odd">
+<td align="left">201803</td>
+<td align="left">普通省道</td>
+<td align="right">0.488</td>
+</tr>
+<tr class="even">
+<td align="left">201803</td>
+<td align="left">普通国道</td>
+<td align="right">0.491</td>
+</tr>
+<tr class="odd">
+<td align="left">201803</td>
+<td align="left">国家高速</td>
+<td align="right">0.501</td>
+</tr>
+<tr class="even">
+<td align="left">201803</td>
+<td align="left">省级高速</td>
+<td align="right">0.537</td>
+</tr>
+</tbody>
+</table>
+<p>不过结果是长形的，如果需要可以整型成宽型的。</p>
+<pre class="r"><code>ldply(jdalls, caculate_frecarsmean, &quot;level&quot;) %&gt;% dcast(.id~level) %&gt;% kable()</code></pre>
+<pre><code>## Using Wmean as value column: use value.var to override.</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">.id</th>
+<th align="center">国家高速</th>
+<th align="center">普通国道</th>
+<th align="center">普通省道</th>
+<th align="center">省级高速</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">201801</td>
+<td align="center">0.496</td>
+<td align="center">0.492</td>
+<td align="center">0.503</td>
+<td align="center">0.511</td>
+</tr>
+<tr class="even">
+<td align="left">201802</td>
+<td align="center">0.494</td>
+<td align="center">0.498</td>
+<td align="center">0.499</td>
+<td align="center">0.505</td>
+</tr>
+<tr class="odd">
+<td align="left">201803</td>
+<td align="center">0.501</td>
+<td align="center">0.491</td>
+<td align="center">0.488</td>
+<td align="center">0.537</td>
+</tr>
+<tr class="even">
+<td align="left">201804</td>
+<td align="center">0.492</td>
+<td align="center">0.490</td>
+<td align="center">0.509</td>
+<td align="center">0.483</td>
+</tr>
+<tr class="odd">
+<td align="left">201805</td>
+<td align="center">0.511</td>
+<td align="center">0.500</td>
+<td align="center">0.500</td>
+<td align="center">0.511</td>
+</tr>
+<tr class="even">
+<td align="left">201806</td>
+<td align="center">0.473</td>
+<td align="center">0.504</td>
+<td align="center">0.506</td>
+<td align="center">0.493</td>
+</tr>
+<tr class="odd">
+<td align="left">201807</td>
+<td align="center">0.497</td>
+<td align="center">0.487</td>
+<td align="center">0.483</td>
+<td align="center">0.514</td>
+</tr>
+<tr class="even">
+<td align="left">201808</td>
+<td align="center">0.477</td>
+<td align="center">0.511</td>
+<td align="center">0.501</td>
+<td align="center">0.443</td>
+</tr>
+<tr class="odd">
+<td align="left">201809</td>
+<td align="center">0.504</td>
+<td align="center">0.501</td>
+<td align="center">0.522</td>
+<td align="center">0.503</td>
+</tr>
+<tr class="even">
+<td align="left">201810</td>
+<td align="center">0.527</td>
+<td align="center">0.496</td>
+<td align="center">0.482</td>
+<td align="center">0.508</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section level3">
+<h3>2. 面</h3>
+<div class="section level4">
+<h4>分区域分析</h4>
+<ul>
+<li>base::transform是改变原DF的某一列；</li>
+<li>dplyr::mutate是增加一个新列；</li>
+</ul>
+<p>用ggplot画平行坐标图时，不需要整型成宽型；</p>
+<pre class="r"><code>ldply(jdalls, caculate_frecarsmean, &quot;roadhub&quot;) %&gt;% mutate(month=str_sub(.id,-2,-1)) %&gt;% 
+  ggplot(aes(x=month,y=Wmean,group=roadhub,color=roadhub))+geom_point()+geom_line()</code></pre>
+<p><img src="/post/2018-11-19-bunch-files-operate-2-ldply_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+</div>
+</div>

@@ -1,0 +1,141 @@
+---
+title: 文件的批量处理(2)——ldply
+author: 王致远
+date: '2018-11-19'
+slug: bunch-files-operate-2-ldply
+categories:
+  - R语言
+tags:
+  - 解决方案
+---
+
+(本博客中使用的数据已全部替换为随机数)
+
+在上一次的工作中，我将文件的批量处理执行地更加彻底，基本上驾轻就熟了。并且发现了plyr里很有用的工具：ldply来配合我的文件批处理。
+
+```{r echo=FALSE}
+options(stringsAsFactors = F)
+options(digits = 3)
+rm(list = ls())
+source("D:\\R\\packages\\Mreport\\scripts\\caculate.R", encoding = "utf-8")
+source("D:\\R\\packages\\Mreport\\scripts\\select.R", encoding = "utf-8")
+source("D:\\R\\packages\\Mreport\\scripts\\split.R", encoding = "utf-8")
+```
+
+```{r echo=FALSE,message=FALSE,warning=FALSE}
+library(Mreport)
+library(plyr)
+library(ggplot2)
+library(reshape2)
+library(knitr)
+library(leaflet)
+library(leafletCN)
+library(dplyr)
+library(stringr)
+library(RColorBrewer)
+```
+
+```{r echo=FALSE}
+load_base()
+load_sample_base()
+```
+
+批量读取文件
+
+```{r}
+months <- 201801:201810
+jdall <- list()
+for(i in 1:length(months)){
+  path <- paste(c("D:\\data\\sx_raw\\交调数据\\jd",months[i],".csv"),collapse = "")
+  jdall[[i]] <- read.csv(path)
+}
+names(jdall) <- months
+```
+
+批量查看维度
+
+```{r}
+sapply(jdall, dim)
+```
+
+批量预处理
+
+```{r}
+jdalls <- lapply(jdall, handle_gather)
+```
+
+在这一步，我想让01~10各月的index取交集，达到数据统一口径的目的。所以我先将取得交集的index存到变量usefulstation里，然后用它过滤数据。
+
+1. 首先提取各DF中的index列，存在一个列表里，叫l；
+2. 使用Reduce函数，递归地求交集，将交集存在usefulstation里；
+3. 检验递归交集的长度，看此过程是否出错；
+4. 对各DF进行过滤，这是一个分而治之的问题，首先找到一个解决方案，然后再扩充到所有DF中；
+5. 使用dplyr的filter函数进行过滤；
+6. 使用一个匿名函数，以便方便应用lapply；
+7. 检验过滤后的结果；
+
+```{r}
+l <- lapply(jdalls,`[[`,"index")
+usefulstation <- Reduce(intersect,l)
+length(usefulstation)
+```
+
+
+```{r}
+jdalls <- lapply(jdalls, function(x) filter(x,index %in% usefulstation))
+```
+
+```{r}
+sapply(jdalls, dim)
+```
+
+
+### 1. 总体情况
+
+#### 总量分析
+
+```{r}
+sapply(jdalls,caculate_all_frecars)
+```
+
+#### 分等级分析
+
+这里我想对每个DF使用caculate_frecarsmean函数，如果用lapply结果依旧储存在列表里，而我想让它储存在DF里，尝试用sapply，结果如下，sapply并不知道我想干什么。
+
+```{r}
+sapply(jdalls, caculate_frecarsmean, "level")
+```
+
+```{r echo=FALSE}
+jdalls <- lapply(jdalls, function(x) transform(x,freight_cars=runif(4691)))
+```
+
+
+尝试使用plyr里的ldpply，l表示按列表元素切分，d表示返回数据框，得到新列.id，便于和原有数据融合。
+
+ldpply实际上是将lapply的计算结果rbind到一起。
+
+```{r}
+ldply(jdalls, caculate_frecarsmean, "level") %>% head(12) %>% kable()
+```
+
+不过结果是长形的，如果需要可以整型成宽型的。
+
+```{r}
+ldply(jdalls, caculate_frecarsmean, "level") %>% dcast(.id~level) %>% kable()
+```
+
+### 2. 面
+
+#### 分区域分析
+
+- base::transform是改变原DF的某一列；
+- dplyr::mutate是增加一个新列；
+
+用ggplot画平行坐标图时，不需要整型成宽型；
+
+```{r}
+ldply(jdalls, caculate_frecarsmean, "roadhub") %>% mutate(month=str_sub(.id,-2,-1)) %>% 
+  ggplot(aes(x=month,y=Wmean,group=roadhub,color=roadhub))+geom_point()+geom_line()
+```
+
