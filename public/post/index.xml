@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 19 Nov 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 20 Nov 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>leaflet for R(4)——leafletCN色块图</title>
+      <link>/post/2018/11/20/leaflet-for-r-4-leafletcn-bug/</link>
+      <pubDate>Tue, 20 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/11/20/leaflet-for-r-4-leafletcn-bug/</guid>
+      <description>(本博客中的数据已替换为随机数) 之前发现了一个leafletCN中的一个bug，就是geojsonMap函数的颜色映射有问题。 ## Using Wmean as value column: use</description>
+    </item>
     
     <item>
       <title>文件的批量处理(2)——ldply</title>

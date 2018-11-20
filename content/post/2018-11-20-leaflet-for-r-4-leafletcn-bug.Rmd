@@ -1,0 +1,111 @@
+---
+title: leaflet for R(4)——leafletCN色块图
+author: 王致远
+date: '2018-11-20'
+slug: leaflet-for-r-4-leafletcn-bug
+categories:
+  - R语言
+tags:
+  - 解决方案
+---
+
+(本博客中的数据已替换为随机数)
+
+之前发现了一个leafletCN中的一个bug，就是geojsonMap函数的颜色映射有问题。
+
+```{r echo=FALSE}
+options(stringsAsFactors = F)
+options(digits = 3)
+rm(list = ls())
+source("D:\\R\\packages\\Mreport\\scripts\\caculate.R", encoding = "utf-8")
+source("D:\\R\\packages\\Mreport\\scripts\\select.R", encoding = "utf-8")
+source("D:\\R\\packages\\Mreport\\scripts\\split.R", encoding = "utf-8")
+```
+
+```{r echo=FALSE,message=FALSE,warning=FALSE}
+library(Mreport)
+library(plyr)
+library(ggplot2)
+library(reshape2)
+library(knitr)
+library(leaflet)
+library(leafletCN)
+library(dplyr)
+library(stringr)
+library(RColorBrewer)
+```
+
+```{r echo=FALSE}
+load_base()
+load_sample_base()
+```
+
+```{r echo=FALSE}
+months <- 201801:201810
+jdall <- list()
+for(i in 1:length(months)){
+  path <- paste(c("D:\\data\\sx_raw\\交调数据\\jd",months[i],".csv"),collapse = "")
+  jdall[[i]] <- read.csv(path)
+}
+names(jdall) <- months
+```
+
+```{r echo=FALSE}
+jdalls <- lapply(jdall, handle_gather)
+l <- lapply(jdalls,`[[`,"index")
+usefulstation <- Reduce(intersect,l)
+jdalls <- lapply(jdalls, function(x) filter(x,index %in% usefulstation))
+jdalls <- lapply(jdalls, function(x) transform(x,freight_cars=runif(4691)))
+```
+
+```{r echo=FALSE}
+t <- ldply(jdalls, caculate_frecarsmean, "province") %>% dcast(province~.id)
+t <- cbind(t[1],rowMeans(cbind(t[7],t[8],t[9],t[10],t[11]))-rowMeans(cbind(t[2],t[3],t[4],t[5],t[6])))
+names(t) <- c("province","diff")
+t <- t[t$province!="上海市",]
+t %>% kable()
+```
+
+如果用默认的“Blues”，“Reds”这类颜色，是没有问题的
+
+```{r}
+geojsonMap(t,"China",palette = "Reds")
+```
+
+如果用自创的调色盘
+
+```{r}
+pal <- colorNumeric(palette = rev(brewer.pal(n=9,name = "RdYlBu")),domain = t$diff)
+geojsonMap(t,"China",palette = pal(t$diff))
+```
+
+就会出现调色盘循环用的问题，不知道怎么回事，也不知道怎么解决。
+
+所以只能用最原始的方式，用addPolygons添加色块。
+
+这里的rev是倒叙一个向量的意思，用于将颜色映射反过来。
+
+```{r}
+x <- c(4,1,5,2,6,3,7);x
+rev(x)
+```
+
+
+```{r}
+pal <- colorBin(palette = rev(brewer.pal(n=9,name = "RdYlBu")),domain = t$diff)
+map <- leafletGeo("China",t)
+leaflet(map) %>% amap() %>%
+  addPolygons(stroke = TRUE,
+                smoothFactor = 1,
+                fillOpacity = 0.7,
+                weight = 1,
+                color = ~pal(value),
+                popup = ~htmltools::htmlEscape(popup)
+    ) %>%
+    #加入右下角边框
+    addLegend("bottomright", pal = pal, values = ~value,
+              title = "货车交通量变化量",
+              labFormat = leaflet::labelFormat(prefix = ""),
+              opacity = 1)
+```
+
