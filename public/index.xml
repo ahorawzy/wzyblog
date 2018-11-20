@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>线性代数的本质</title>
+      <link>/post/2018/11/20/essence-of-linear-algebra/</link>
+      <pubDate>Tue, 20 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/11/20/essence-of-linear-algebra/</guid>
+      <description>在知乎看矩阵乘法的意义时，无意间发现B站上讲线性代数本质的系列视频，看了几集后觉得很好。重新看一遍，把重要观点记录下来。 0. 序言 一般课堂上讲线</description>
+    </item>
+    
+    <item>
       <title>文件的批量处理(2)——ldply</title>
       <link>/post/2018/11/19/bunch-files-operate-2-ldply/</link>
       <pubDate>Mon, 19 Nov 2018 00:00:00 +0000</pubDate>
