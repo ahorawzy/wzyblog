@@ -1,0 +1,92 @@
+---
+title: 交通流问题文献综述(2)
+author: ZhiYuan Wang
+date: '2018-11-21'
+slug: traffic-flow-literature-review-2
+categories:
+  - 论文
+tags:
+  - 学习总结
+---
+
+
+
+<div class="section level2">
+<h2>参考文献引用</h2>
+<ul>
+<li>Ahmed, M. S. and Cook, A. R. (1979) Analysis of freeway traffic time-series data by using Box–Jenkins techniques, Transportation Research Board, 722, pp. 1–9.</li>
+<li>Vlahogianni E , Golias J , Karlaftis M . Short-term traffic forecasting: Overview of objectives and methods[J]. Transport Reviews, 2004, 24(5):533-557.</li>
+<li>Vlahogianni E I , Karlaftis M G , Golias J C . Short-term traffic forecasting: Where we are and where we’re going[J]. Transportation Research Part C Emerging Technologies, 2014, 43:3-19.</li>
+<li>Van Lint H , Van Hinsbergen C . Short-Term Traffic and Travel Time Prediction Models[J]. Transportation Research E-Circular, 2012.</li>
+<li>Smith, B. L. and Demetsky, M. J. (1996) Multiple-interval freeway traffic flow forecasting, Transportation Research Record, 1554, pp. 136–141.</li>
+<li>Habtemichael F G , Cetin M . Short-term traffic flow rate forecasting based on identifying similar traffic patterns[J]. Transportation Research Part C, 2016, 66:61-78.</li>
+<li>Aghabozorgi S , Shirkhorshidi A S , Wah T Y . Time-series clustering - A decade review[M]. Elsevier Science Ltd. 2015.</li>
+<li>Xia J , Chen M . A Nested Clustering Technique for Freeway Operating Condition Classification[J]. Computer-Aided Civil and Infrastructure Engineering, 2010, 22(6):430-437.</li>
+<li>Xia J , Huang W , Guo J . A clustering approach to online freeway traffic state identification using ITS data[J]. KSCE Journal of Civil Engineering, 2012, 16(3):426-432.</li>
+<li>Cheslow M , Hatcher S G , Patel V M . AN INITIAL EVALUATION OF ALTERNATIVE INTELLIGENT VEHICLE HIGHWAY SYSTEMS ARCHITECTURES[J]. System Architecture, 1992.</li>
+</ul>
+</div>
+<div class="section level2">
+<h2>综述性论文中所提到的论文</h2>
+<div id="vlahogianni-2004" class="section level3">
+<h3>Vlahogianni 2004</h3>
+<div id="its" class="section level4">
+<h4>关于短时交通流预测和ITS关系：</h4>
+<p>Cheslow et al. (1992) underlined the relation of dynamic traffic control to the ability to make and continuously update traffic predictions.</p>
+<ul>
+<li>Cheslow M , Hatcher S G , Patel V M . AN INITIAL EVALUATION OF ALTERNATIVE INTELLIGENT VEHICLE HIGHWAY SYSTEMS ARCHITECTURES[J]. System Architecture, 1992.</li>
+</ul>
+</div>
+<div class="section level4">
+<h4>关于时间粒度：</h4>
+<p>Ishak and Al-Deek (2002) concluded that the prediction accuracy degrades as the forecasting horizon increases.</p>
+<ul>
+<li>Ishak, S. and Al-Deek, H. (2002) Performance of short-term time series traffic prediction model, Journal of Transportation Engineering, 128(6), pp. 490–498.</li>
+</ul>
+</div>
+<div class="section level4">
+<h4>关于方法：</h4>
+<p>历史平均法：</p>
+<ul>
+<li>Smith, B. L. and Demetsky, M. J. (1997) Traffic flow forecasting: comparison of modelling approaches, Journal of Transportation Engineering, 123(4), pp. 261–266.</li>
+</ul>
+<p>平滑方法：</p>
+<p>Smith and Demetsky, 1997; Williams et al., 1998</p>
+<ul>
+<li>Smith, B. L. and Demetsky, M. J. (1997) Traffic flow forecasting: comparison of modelling approaches, Journal of Transportation Engineering, 123(4), pp. 261–266.</li>
+<li>Williams, B. M., Durvasula, P. K. and Brown, D. E. (1998) Urban traffic flow prediction: application of seasonal autoregressive integrated moving average and exponential smoothing models, Transportation Research Record, 1644, pp. 132–144.</li>
+</ul>
+<p>卡尔曼滤波：</p>
+<p>The potential of this was first demonstrated by Okutani and Stephanedes (1984) who used Kalman filtering in urban traffic volume prediction and then developed an extended Kalman filter to predict traffic diversion in freeway entrance ramp areas.</p>
+<ul>
+<li>Okutani, I. and Stephanedes, Y. J. (1984) Dynamic prediction of traffic volume through Kalman filtering theory, Transportation Research, Part B, 18(1), pp. 1–11</li>
+</ul>
+<p>ARIMA家族：</p>
+<p>In the early 1990s, autoregressive linear processes such as the auto-regressive integrated moving average (ARIMA) family of models, which were first introduced in traffic forecasting by Ahmed and Cook (1979) and Levin and Tsao (1980), provided an alternative approach based on the stochastic nature of traffic. Davis et al. (1991) applied a single auto-regressive integrated moving average (ARIMA) model to forecast the bottleneck formulation in a freeway. Later, Hamed et al. (1995) applied an ARIMA model to forecast urban traffic volume.</p>
+<ul>
+<li>Levin, M. and Tsao, Y.-D. (1980) On forecasting freeway occupancies and volumes, Transportation Research Record, 773, pp. 47–49.</li>
+<li>Davis, G. A., Niham, N. L., Hamed, M. M. and Jacobson, L. N. (1991) Adaptive forecasting of freeway traffic congestion. Transportation Research Record, 1287, pp. 29–33.</li>
+</ul>
+<p>非参数方法优于参数方法：</p>
+<p>Non-parametric regression is based on the principles of pattern recognition and chaotic systems (Smith et al., 2002). Smith et al. suggested that although traffic conditions are considered as stochastic processes, the chaotic behaviour of traffic conditions near congestion can be modelled by non-parametric regression. The main purpose is to identify clusters of data with behaviour similar to current traffic state at a certain forecasting interval. Non-parametric regression possesses a number of advantages such as its intuitive formulation, the lack of a need for assumption on the transition of traffic states from one period to another, and, finally, the simplicity in modelling multivariate settings (Clark, 2003).</p>
+<ul>
+<li>Smith, B. L., Williams, B. M. and Oswald, K. R. (2002) Comparison of parametric and non-parametric models for traffic flow forecasting, Transportation Research Part C: Emerging Technologies, 10(4), pp. 303–321.</li>
+<li>Clark, S. (2003) Traffic prediction using multivariate nonparametric regression. Journal of Transportation Engineering, 129(2), pp. 161–168.</li>
+</ul>
+<p>KNN方法：</p>
+<p>In general, the literature shows promising results when using non-parametric regression. First, Smith and Demetsky (1996) tested the performance of nearest neighbour non-parametric regression compared with neural networks, a historical average and the ARIMA model and concluded that the first was superior in the field of transferability and robustness compared with different data sets. Smith et al. (2000) used kernel neighbourhoods and suggested that the method produced predictions with an accuracy comparable with that of the seasonal version of an ARIMA model. Finally, Smith et al. (2002) tested the performance of non-parametric regression based on heuristically improved forecast generation methods and found that this approach did not produce better predictions than seasonal ARIMA. Nevertheless, they supported the fact that a combined model could be used in cases where the requirements of the seasonal ARIMA could not be met. More recently, Clark (2003) found that non-parametric regression was more accurate when predicting flow and occupancy in motorways than speed.</p>
+<ul>
+<li>Smith, B. L., Williams, B. M. and Oswald, K. R. (2000) Parametric and nonparametric traffic volume forecasting, in: Proceedings of the 80th TRB Annual Meeting, Washington, DC.</li>
+</ul>
+</div>
+</div>
+<div id="time-series-clustering" class="section level3">
+<h3>Time series clustering</h3>
+<p>欧式距离最好</p>
+<ul>
+<li>Xiao-Ying L , Yi-Ming Z . Fast Subsequence Matching in Time-series Database[J]. Journal of Chinese Computer Systems, 2008.</li>
+<li>J. Aach, G.M. Church, Aligning gene expression time series with time warping algorithms, Bioinformatics 17 (6) (2001) 495.</li>
+<li>S. Chu, E. Keogh, D. Hart, M. Pazzani, et al., Iterative deepening dynamic time warping for time series, in: Proceedings of the Second SIAM International Conference on Data Mining, 2002, pp. 195–212.</li>
+</ul>
+</div>
+</div>
