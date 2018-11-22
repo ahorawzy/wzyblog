@@ -22,7 +22,7 @@ tags:
 - Xia J , Huang W , Guo J . A clustering approach to online freeway traffic state identification using ITS data[J]. KSCE Journal of Civil Engineering, 2012, 16(3):426-432.
 - Cheslow M , Hatcher S G , Patel V M . AN INITIAL EVALUATION OF ALTERNATIVE INTELLIGENT VEHICLE HIGHWAY SYSTEMS ARCHITECTURES[J]. System Architecture, 1992.
 
-## 综述性论文中所提到的论文
+## 待补充论文
 
 ### Vlahogianni 2004
 
@@ -82,10 +82,23 @@ In general, the literature shows promising results when using non-parametric reg
 - Smith, B. L., Williams, B. M. and Oswald, K. R. (2000) Parametric and nonparametric traffic volume
 forecasting, in: Proceedings of the 80th TRB Annual Meeting, Washington, DC.
 
-### Time series clustering
+### 时序聚类
 
 欧式距离最好
 
 - Xiao-Ying L , Yi-Ming Z . Fast Subsequence Matching in Time-series Database[J]. Journal of Chinese Computer Systems, 2008.
 - J. Aach, G.M. Church, Aligning gene expression time series with time warping algorithms, Bioinformatics 17 (6) (2001) 495.
 - S. Chu, E. Keogh, D. Hart, M. Pazzani, et al., Iterative deepening dynamic time warping for time series, in: Proceedings of the Second SIAM International Conference on Data Mining, 2002, pp. 195–212.
+
+### 非对称损失预测
+
+理论
+
+- Granger C W J . Prediction with a Generalized Cost of Error Function[J]. Journal of the Operational Research Society, 1969, 20(2):199-207.
+
+经济领域应用
+
+- Ahn Y B , Tsuchiya Y . Asymmetric Loss and the Rationality of Inflation Forecasts: Evidence from South Korea[J]. Pacific Economic Review, 2017.
+- Tsuchiya, Yoichi. Asymmetric loss and rationality of Chinese renminbi forecasts: An implication for the trade between China and the US[J]. Journal of International Financial Markets, Institutions and Money, 2016:S1042443116300403.
+- Pierdzioch C , Rülke, Jan-Christoph, Stadtmann G . A note on forecasting the prices of gold and silver: Asymmetric loss and forecast rationality[J]. The Quarterly Review of Economics and Finance, 2013, 53(3):294-301.
+- Tsuchiya Y . Assessing macroeconomic forecasts for Japan under an asymmetric loss function[J]. International Journal of Forecasting, 2016, 32(2):233-242.
