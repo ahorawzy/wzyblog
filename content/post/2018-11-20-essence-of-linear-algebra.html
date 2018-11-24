@@ -83,3 +83,25 @@ tags:
 <p><span class="math display">\[\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}\begin{bmatrix} x \\ y \end{bmatrix}=x\begin{bmatrix} a \\ c \end{bmatrix}+y\begin{bmatrix} b \\ d \end{bmatrix}=\begin{bmatrix} ax+by \\ cx+dy \end{bmatrix}\]</span></p>
 <p>矩阵都能解读为对空间的特定变换。</p>
 </div>
+<div class="section level2">
+<h2>4. 矩阵乘法与线性变换复合</h2>
+<p>变换之后，再变换一次。两次变换的复合变换和某次一次変换有相同效果。所以诞生了矩阵乘法。</p>
+<p><span class="math display">\[\begin{bmatrix} 1 &amp; 1 \\ 0 &amp; 1 \end{bmatrix}\begin{bmatrix} 0 &amp; -1  \\ 1 &amp; 0\end{bmatrix}\begin{bmatrix} x  \\ y\end{bmatrix}=\begin{bmatrix} 1 &amp; -1  \\ 1 &amp; 0\end{bmatrix}\begin{bmatrix} x  \\ y\end{bmatrix}\]</span></p>
+<p>矩阵乘积要从右往左读，起源于函数的记号。</p>
+<p>矩阵乘法</p>
+<p><span class="math display">\[\begin{bmatrix} 0 &amp; 2 \\ 1 &amp; 0 \end{bmatrix}\begin{bmatrix} 1 &amp; -2  \\ 1 &amp; 0\end{bmatrix}=？\]</span></p>
+<p><span class="math display">\[\begin{bmatrix} 0 &amp; 2 \\ 1 &amp; 0 \end{bmatrix}\begin{bmatrix} 1 \\ 1\end{bmatrix}=\begin{bmatrix} 2 \\ 1\end{bmatrix}\]</span></p>
+<p><span class="math display">\[\begin{bmatrix} 0 &amp; 2 \\ 1 &amp; 0 \end{bmatrix}\begin{bmatrix} -2 \\ 0\end{bmatrix}=\begin{bmatrix} 0 \\ -2 \end{bmatrix}\]</span></p>
+<p>所以</p>
+<p><span class="math display">\[\begin{bmatrix} 0 &amp; 2 \\ 1 &amp; 0 \end{bmatrix}\begin{bmatrix} 1 &amp; -2  \\ 1 &amp; 0\end{bmatrix}=\begin{bmatrix} 2 &amp; 0  \\ 1 &amp; -2\end{bmatrix}\]</span></p>
+</div>
+<div class="section level2">
+<h2>5. 行列式</h2>
+<p>测量变换对空间有多少拉伸或挤压。也就是测量一个给定区域面积增大或减小的比例。知道单位面积的变化，就知道了任意面积的变化。</p>
+<p>行列式就是缩放比例，即线性变换改变面积的比例。</p>
+<p>如果行列式为0，说明该变换将整个平面压缩到一条线，甚至一个点上。只需要检验行列式是否为0，就能检验矩阵所代表的变换是否将空间压缩到更小的维度上。</p>
+<p>而行列式是允许是负数的，像是将空间翻转了。如果变换后，j变到i的右边，说明行列式是负的。而绝对值还是缩放比例。</p>
+<p>对于三维空间，指的是体积的变化。行列式为0，说明整个空间被压缩为0体积，也就是平面或直线或点。</p>
+<p><strong>行列式为0的矩阵，其列必定线性相关。</strong></p>
+<p><span class="math display">\[det(M_1M_2)=det(M_1)det(M_2)\]</span></p>
+</div>
