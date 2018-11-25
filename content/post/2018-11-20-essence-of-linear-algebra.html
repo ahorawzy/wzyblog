@@ -1,5 +1,5 @@
 ---
-title: 线性代数的本质
+title: 线性代数的本质（更新中）
 author: ZhiYuan Wang
 date: '2018-11-20'
 slug: essence-of-linear-algebra
@@ -104,4 +104,22 @@ tags:
 <p>对于三维空间，指的是体积的变化。行列式为0，说明整个空间被压缩为0体积，也就是平面或直线或点。</p>
 <p><strong>行列式为0的矩阵，其列必定线性相关。</strong></p>
 <p><span class="math display">\[det(M_1M_2)=det(M_1)det(M_2)\]</span></p>
+</div>
+<div class="section level2">
+<h2>6. 逆矩阵、列空间、秩、零向量</h2>
+<p>线性代数的用处：</p>
+<ul>
+<li>用来描述对空间的操纵，计算机图形学和机器人学；</li>
+<li>求解线性方程组；</li>
+</ul>
+<p><span class="math display">\[\begin{bmatrix} 2 &amp; 5 &amp; 3 \\ 4 &amp; 0 &amp; 8 \\ 1 &amp; 3 &amp; 0 \end{bmatrix}\begin{bmatrix} x \\ y \\ z \end{bmatrix}=\begin{bmatrix}  -3 \\ 0 \\ 2 \end{bmatrix}\]</span></p>
+<p><span class="math display">\[Ax=b\]</span></p>
+<p>需要用到逆矩阵，也就是逆变换。</p>
+<p><span class="math display">\[A^{-1}A=E\]</span></p>
+<p>而如果det(A)=0，也就是说A将空间压低一个维度，那么没有逆运算，不能将一条线“解压缩”为一个平面。</p>
+<p>而如果v恰好在A压缩的直线上，那么就有任意解。</p>
+<p><strong>秩：变换后空间的维数。</strong></p>
+<p><strong>列空间：所有可能的输出向量<span class="math inline">\(Av\)</span>构成的集合，也就是矩阵的列所张成的空间。</strong></p>
+<p>当秩达到最大值时，也就是秩与列数相等时，也就是“满秩”。</p>
+<p>零向量一定会包含在列空间中。对于一个满秩变换来说，唯一能在变换后落在原点的就是零向量自身。对于非满秩变换，会有一系列向量在变换后成为零向量。<strong>变换后落在原点的向量的集合，成为矩阵的“零空间Null space”或“核Kernel”。</strong></p>
 </div>
