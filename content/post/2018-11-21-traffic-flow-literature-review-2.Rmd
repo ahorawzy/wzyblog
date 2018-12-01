@@ -81,6 +81,16 @@ In general, the literature shows promising results when using non-parametric reg
 
 - Smith, B. L., Williams, B. M. and Oswald, K. R. (2000) Parametric and nonparametric traffic volume
 forecasting, in: Proceedings of the 80th TRB Annual Meeting, Washington, DC.
+- Cheng S , Lu F , Peng P , et al. Short-term traffic forecasting: An adaptive ST-KNN model that considers spatial heterogeneity[J]. Computers Environment & Urban Systems, 2018.
+- Guo F , Polak J W , Krishnan R . Predictor fusion for short-term traffic forecasting[J]. Transportation Research Part C: Emerging Technologies, 2018, 92:90-100.
+
+SVM方法
+
+- Sun Z , Fox G . Traffic Flow Forecasting Based on Combination of Multidimensional Scaling and SVM[J]. International Journal of Intelligent Transportation Systems Research, 2014, 12(1):20-25.
+
+RF方法
+
+- Hamner B . Predicting Travel Times with Context-Dependent Random Forests by Modeling Local and Aggregate Traffic Flow[C]// IEEE International Conference on Data Mining Workshops. IEEE Computer Society, 2010.
 
 ### 时序聚类
 
@@ -89,6 +99,10 @@ forecasting, in: Proceedings of the 80th TRB Annual Meeting, Washington, DC.
 - Xiao-Ying L , Yi-Ming Z . Fast Subsequence Matching in Time-series Database[J]. Journal of Chinese Computer Systems, 2008.
 - J. Aach, G.M. Church, Aligning gene expression time series with time warping algorithms, Bioinformatics 17 (6) (2001) 495.
 - S. Chu, E. Keogh, D. Hart, M. Pazzani, et al., Iterative deepening dynamic time warping for time series, in: Proceedings of the Second SIAM International Conference on Data Mining, 2002, pp. 195–212.
+
+LOESS
+
+- Cleveland W , Devlin S . Locally Weighted Regression: An Approach to Regression Analysis by Local Fitting[J]. Publications of the American Statistical Association, 1988, 83(403):15.
 
 ### 非对称损失预测
 
