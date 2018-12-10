@@ -73,7 +73,7 @@ I wish I can go further in this field and i will sincerely appreciate Research I
 Good afternoon. My name is WangZhiyuan. I was born in LanZhou GanSu province. I graduated from Southwest JiaoTong University in 2016 with double-major transportation and finance. Then I was recommended for postgraduate of BeiJing JiaoTong University majored in traffic and transportation planing and management. 
 If I use three words to describe myself. The first word is conscientious. My tutor in school and leader during my internship always describ me a conscientious man because I always treat my work seriously and finish my task efficiently. The second word is creation. I'm good at solve challenging problems, which can inspire my creation. The third word is good learner. I can learn the framework and knowledge in a new field quickly even if I am not fimilar about that before. Besides these three characteristics, I am very skilled at data manipulation and data analysis. During the last three years, I have undertaken 4 data mining research and accumulate rich skills and experience in data science. 
 
-I want to join The Export-Import Bank of China for three reasons. The first reason is I worship the Belt and Road Initiative and want to join in this magnificent project. I believe it's one of the essential part of Great Rejuvenation of Chinese Nation. I know this bank conducts many finance service and investment oversea to support B & R Initiative. If I have chance to devote myself in this project, I will feel a great honor and passion for my career. The second reason is I have cross-backgroud of transportation and finance not only about knowledge but also thinking methods of engineering and economy. This Bank is a great platform for me to use this cross-domain knowledge and solve complex problems in specific projects. The third reason is here I can learn a lot not only about industry but also about business and trade. I like to work hard and learn a lot.
+I want to join China Development Bank for three reasons. The first reason is the mission of China Development Bank is to support the top economic strategy and improve people's livelihood. I totally accept this mission. I believe it's a great honor to devote myself into this kind of great career. The second reason is I have cross-backgroud of transportation engineering and finance not only about knowledge but also the methods of thinking. This Bank is a great platform for me to use this cross-domain knowledge and solve complex problems in specific projects. The third reason is here I can learn a lot not only about the frontier of industry but also about management and finance. I like to work hard and learn a lot.
 
 ### 2.2 进出口银行概况
 
@@ -362,3 +362,30 @@ C929中国首款宽体大型客机，载客300人左右，中俄合作研制。�
 1. 一带一路战略：设施联通（成都新机场，国际空港新城，成兰铁路、成贵铁路），贸易畅通（蓉欧班列），资金融通（支持企业走出去），民意相通（巴蜀文化交流，国外游客旅游便利化）。
 2. 长江经济带战略（成渝城市群）：国家级城市群。城镇体系形成；交通互联互通；公共服务共建共享；生态环境联防联控；创新资源高效配置。先进制造业和现代服务业，优势产业集聚。天府新区建设。
 3. 新型城镇化：大中小城市、小城镇、新型农村社区协调发展、互促共进的城镇化。新型城镇化的核心在于不以牺牲农业和粮食、生态和环境为代价，着眼农民，涵盖农村，实现城乡基础设施一体化和公共服务均等化，促进经济社会发展，实现共同富裕。
+
+### 3.3 一带一路表述
+
+The Belt and Road Initiative is the abbreviation of The Silk Road Economic Belt and the 21st-Century Maritime Silk Road. It uses the symbol of the ancient silk road. It holds the spirit of peace and  cooperation, openness and inclusiveness, mutual learning and mutual benefit. It focuses on 5 fields. Policy coordination, facilities connectivity, unimpeded trade, financial integration, people-to-people bonds. It holds the belief of jointly built through consultation to meet the interests of all. Through proposed by China, the Belt and Road Initiative is a common aspiration of all contries along their routes. It has delievered benefits well beyond its borders.
+
+“一带一路”是“丝绸之路经济带”和“21世纪海上丝绸之路”的简称。一带一路旨在借用古代丝绸之路的历史符号，高举和平发展的旗帜，积极发展与沿线国家的经济合作伙伴关系，共同打造政治互信、经济融合、文化包容的利益共同体、命运共同体和责任共同体。
+
+政策沟通，设施联通，贸易畅通，资金融通，民心相通。
+
+- 蒙内铁路（肯尼亚）；
+- 亚吉铁路（埃塞俄比亚至吉布提）；
+- 匈塞铁路（匈牙利至塞尔维亚）；
+- 雅万高铁（雅加达至万隆）；
+- 中老铁路（中国至老挝）；
+- 中泰铁路（中国至泰国）；
+
+- 瓜达尔港；
+- 比雷埃夫斯港（希腊）；
+- 吉布提港；
+- 马来西亚皇京港；
+- 巴拿马玛格丽特港；
+- 巴西巴拉那瓜港口；
+- 斯里兰卡港口；
+
+### 3.4 中美贸易战
+
+I believe the trade war between China and the US is both a challenge and a opportunity for China. It's a challenge because the present situation of import and export will be changed in the recent future. It may have negetive influence on economic growthof china. However it's also an opportunity to develop high-tech and strategy industry, for example, chip industry , artifical intellence to break the monopoly of the US. It's also a good opportunity to adjust the structure of China's economy. We have to accelerate the process of innovation and openness to win in this trade war.
