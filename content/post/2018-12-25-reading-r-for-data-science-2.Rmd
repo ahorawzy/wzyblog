@@ -1,0 +1,411 @@
+---
+title: 学习《R for Data Science》(2)——数据变形
+author: 王致远
+date: '2018-12-25'
+slug: reading-r-for-data-science-2
+categories:
+  - R语言
+tags:
+  - 学习总结
+---
+
+使用dplyr包进行数据变形
+
+```{r}
+library(tidyverse)
+library(nycflights13)
+```
+
+tibble是一种基于data.frame的数据类型，为了更好地适应于tidyverse包。
+
+几种数据类型的简写：
+
+- int
+- dbl
+- chr
+- dttm date-times
+- lgl logical
+- fctr factor
+- date
+
+dplyr中的重要函数：
+
+- filter() 根据观测值选择观测；
+- arrange() 行重新排序；
+- select() 根据变量名选择变量；
+- mutate() 根据已存在变量和函数创造新变量；
+- summarise() 产生汇总值
+- group_by() 分组运行
+
+语法：
+
+- 第一个参数是df；
+- 之后的参数描述变换，使用不带引号的变量名；
+- 结果是新的df；
+
+## 案例数据 flights
+
+```{r}
+str(flights)
+```
+
+## filter()
+
+```{r}
+filter(flights, month == 1, day ==1)
+```
+
+tidyverse的函数不修改原来的df.
+
+- 比较运算符 \> \>= \< \<= \!= \==
+- 逻辑运算符 \& \| |!
+- %in% 
+
+```{r}
+nov_dec <- filter(flights, month %in% c(11,12))
+dim(nov_dec)
+```
+
+注意：
+
+- 在这里不要使用\&&和\||
+- NA是传染性的
+
+## arrange()
+
+```{r}
+arrange(flights, year, month, day)
+```
+
+desc()函数用来降序排列
+
+```{r}
+arrange(flights, desc(dep_delay))
+```
+
+NA值通常被排序到最后
+
+## select()
+
+```{r}
+select(flights, year, month, day)
+```
+
+```{r}
+select(flights, year:day)
+```
+
+```{r}
+select(flights, -(year:day))
+```
+
+### helper函数
+
+select()可以和一些helper函数一起使用：
+
+- start_with("abc")
+- ends_with("xyz")
+- contains("ijk")
+- mathches("(.)\\1")
+- num_range("x",1:3)
+
+```{r}
+df <- data.frame(x1=1:10,x2=letters[1:10],x3=LETTERS[1:10],x4=10:1)
+select(df,num_range("x",1:3))
+```
+
+如果要更名变量，使用rename()
+
+```{r}
+names(flights)
+```
+
+```{r}
+df <- rename(flights,tail_num = tailnum)
+names(df)
+```
+
+将重要的变量排在前面
+
+```{r}
+select(flights, time_hour, air_time, everything())
+```
+
+## mutate()
+
+```{r}
+flights_sml <- select(flights, 
+  year:day, 
+  ends_with("delay"), 
+  distance, 
+  air_time
+)
+mutate(flights_sml,
+  gain = dep_delay - arr_delay,
+  speed = distance / air_time * 60
+) %>% names()
+```
+
+可以立即使用刚刚创建的变量
+
+```{r}
+mutate(flights_sml,
+  gain = dep_delay - arr_delay,
+  hours = air_time / 60,
+  gain_per_hour = gain / hours
+) %>% names()
+```
+
+如果只想保留新创建的变量，使用transmute()
+
+```{r}
+transmute(flights,
+  gain = dep_delay - arr_delay,
+  hours = air_time / 60,
+  gain_per_hour = gain / hours
+)
+```
+
+偏移（offset）函数
+
+- lead
+- lag
+
+```{r}
+x <- 1:10
+lead(x)
+lag(x)
+```
+
+累积函数
+
+- cumsum()
+- cumprod()
+- cummin()
+- cummax()
+
+## summaries()
+
+将数据框压缩到一行
+
+```{r}
+summarise(flights, delay = mean(dep_delay, na.rm = TRUE))
+```
+
+与group_by一起用
+
+```{r}
+by_day <- group_by(flights, year, month, day)
+summarise(by_day, delay = mean(dep_delay, na.rm = TRUE))
+```
+
+对比plyr包，ddply的分而治之的思维更强，dplyr包group_by的易理解性更强。
+
+```{r eval=FALSE}
+ddply(flights,.variables = c("year","month","day"),summarise,delay=mean(dep_delay, na.rm = T))
+```
+
+### 管道
+
+```{r}
+by_dest <- group_by(flights, dest)
+delay <- summarise(by_dest,
+  count = n(),
+  dist = mean(distance, na.rm = TRUE),
+  delay = mean(arr_delay, na.rm = TRUE)
+)
+delay <- filter(delay, count > 20, dest != "HNL")
+delay
+```
+
+```{r}
+ggplot(data = delay, mapping = aes(x = dist, y = delay)) +
+  geom_point(aes(size = count), alpha = 1/3) +
+  geom_smooth(se = FALSE)
+```
+
+管道式写法：  
+
+```{r}
+delays <- flights %>% 
+  group_by(dest) %>% 
+  summarise(
+    count = n(),
+    dist = mean(distance, na.rm = TRUE),
+    delay = mean(arr_delay, na.rm = TRUE)
+  ) %>% 
+  filter(count > 20, dest != "HNL")
+```
+
+### 缺失值
+
+集合型函数的缺失值处理：如果输入中有缺失值，那么输出就是缺失值，除非加na.rm=T。
+
+可以预先筛出没有缺失值的数据。
+
+```{r}
+not_cancelled <- flights %>% 
+  filter(!is.na(dep_delay), !is.na(arr_delay))
+
+not_cancelled %>% 
+  group_by(year, month, day) %>% 
+  summarise(mean = mean(dep_delay))
+```
+
+### 计数
+
+当做数据聚合时，最好加一个计数列，保证不是基于很小的数据量做出的结论。
+
+比如在分析每个飞机的延误时间时
+
+```{r}
+delays <- not_cancelled %>% 
+  group_by(tailnum) %>% 
+  summarise(
+    delay = mean(arr_delay)
+  )
+
+ggplot(data = delays, mapping = aes(x = delay)) + 
+  geom_freqpoly(binwidth = 10)
+```
+
+发现有飞机平均延误超过了300分钟。
+
+画出每架飞机航班数和延误的关系
+
+```{r}
+delays <- not_cancelled %>% 
+  group_by(tailnum) %>% 
+  summarise(
+    delay = mean(arr_delay, na.rm = TRUE),
+    n = n()
+  )
+
+ggplot(data = delays, mapping = aes(x = n, y = delay)) + 
+  geom_point(alpha = 1/10)
+```
+
+当航班数很小时，数据的方差就很大。随着数据规模增大，方差就会变小。
+
+所以在聚合数据时，通常剔除聚合后样本量很小的数据子集
+
+```{r}
+delays %>% 
+  filter(n > 25) %>% 
+  ggplot(mapping = aes(x = n, y = delay)) + 
+    geom_point(alpha = 1/10)
+```
+
+- 计数非缺失值时用sum(!is.na(x))
+- 计数unique值时用n_distinct(x)
+
+```{r}
+not_cancelled %>% 
+  group_by(dest) %>% 
+  summarise(carriers = n_distinct(carrier)) %>% 
+  arrange(desc(carriers))
+```
+
+count()函数单纯用来计数
+
+```{r}
+not_cancelled %>% 
+  count(dest)
+```
+
+相当于table
+
+```{r}
+table(not_cancelled$dest)
+```
+
+count可以加权重，就变成了sum
+
+```{r}
+not_cancelled %>% 
+  count(tailnum, wt= distance)
+```
+
+这么写更加直白一些
+
+```{r}
+not_cancelled %>% 
+  group_by(tailnum) %>% 
+  summarise(sum(distance))
+```
+
+对于逻辑值sum()就是统计TRUE的数量，mean()就是统计TRUE的百分比
+
+```{r}
+not_cancelled %>% 
+  group_by(year, month, day) %>% 
+  summarise(n_early = sum(dep_time < 500))
+```
+
+```{r}
+not_cancelled %>% 
+  group_by(year, month, day) %>% 
+  summarise(hour_perc = mean(arr_delay > 60))
+```
+
+### 上卷
+
+当使用多个分组变量时，可以完成渐进上卷的操作
+
+```{r}
+daily <- group_by(flights, year, month, day)
+(per_day   <- summarise(daily, flights = n()))
+```
+
+```{r}
+(per_month <- summarise(per_day, flights = sum(flights)))
+```
+
+```{r}
+(per_year  <- summarise(per_month, flights = sum(flights)))
+```
+
+### 移除分组
+
+```{r}
+daily %>% 
+  ungroup() %>%
+  summarise(flights = n())
+```
+
+## 分组mutate()和filter()
+
+寻找每组中最糟糕的值
+
+```{r}
+flights_sml <- select(flights, 
+  year:day, 
+  ends_with("delay"), 
+  distance, 
+  air_time
+)
+flights_sml %>% 
+  group_by(year, month, day) %>%
+  filter(rank(desc(arr_delay)) < 10)
+```
+
+寻找大于某个阈值的分组
+
+```{r}
+popular_dests <- flights %>% 
+  group_by(dest) %>% 
+  filter(n() > 365)
+popular_dests
+```
+
+分组标准化计算
+
+```{r}
+popular_dests %>% 
+  filter(arr_delay > 0) %>% 
+  mutate(prop_delay = arr_delay / sum(arr_delay)) %>% 
+  select(year:day, dest, arr_delay, prop_delay)
+```
+
+在script里，用ctrl+enter执行某一句。
+

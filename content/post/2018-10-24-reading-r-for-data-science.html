@@ -1,5 +1,5 @@
 ---
-title: 学习《R for Data Science》
+title: 学习《R for Data Science》(1)——数据可视化
 author: 王致远
 date: '2018-10-24'
 slug: reading-r-for-data-science
@@ -14,9 +14,7 @@ tags:
 <pre class="r"><code>library(tidyverse)</code></pre>
 <p>这本书是哈德利的入门之作。虽然对于我来说有点过于简单，不过这本书是以系统的观点阐述数据分析中的各个问题，并且都是用tidyverse工具箱中的包解决的。利用闲暇时间读一遍能够系统学习一边tidyverse，也不算浪费时间。不过这本书过的速度可以稍微快一点，毕竟很多都是太基础的内容。</p>
 <div class="section level1">
-<h1>数据探索</h1>
-<div class="section level2">
-<h2>3. 数据可视化</h2>
+<h1>3. 数据可视化</h1>
 <p>ggplot2的基础语法</p>
 <pre><code>ggplot(data = &lt;DATA&gt;) + 
   &lt;GEOM_FUNCTION&gt;(
@@ -65,8 +63,8 @@ tags:
 <blockquote>
 <p>“The greatest value of a picture is when it forces us to notice what we never expected to see.” — John Tukey</p>
 </blockquote>
-<div class="section level3">
-<h3>可映射的图形属性</h3>
+<div class="section level2">
+<h2>可映射的图形属性</h2>
 <ul>
 <li>color</li>
 <li>size</li>
@@ -75,8 +73,8 @@ tags:
 </ul>
 <p>+加号必须放在一句的末尾而不是下一句的开始。</p>
 </div>
-<div class="section level3">
-<h3>分面</h3>
+<div class="section level2">
+<h2>分面</h2>
 <p>对分类数据很有用</p>
 <p>单一变量的分面：facet_wrap()</p>
 <pre class="r"><code>ggplot(data = mpg) + 
@@ -97,15 +95,15 @@ tags:
   facet_grid(drv ~ .)</code></pre>
 <p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
-<div class="section level3">
-<h3>图形类型</h3>
+<div class="section level2">
+<h2>图形类型</h2>
 <pre class="r"><code>ggplot(data = mpg) + 
   geom_smooth(mapping = aes(x = displ, y = hwy, linetype = drv))</code></pre>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
 <p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
-<div class="section level3">
-<h3>多个图形</h3>
+<div class="section level2">
+<h2>多个图形</h2>
 <pre class="r"><code>ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy)) +
   geom_smooth(mapping = aes(x = displ, y = hwy))</code></pre>
@@ -140,8 +138,8 @@ usefulr::multiplot(p1,p2,cols = 2)</code></pre>
 ## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
 <p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 </div>
-<div class="section level3">
-<h3>数学变换</h3>
+<div class="section level2">
+<h2>数学变换</h2>
 <pre class="r"><code>ggplot(data = diamonds) + 
   geom_bar(mapping = aes(x = cut))</code></pre>
 <p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
@@ -177,8 +175,8 @@ ggplot(data = demo) +
   )</code></pre>
 <p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 </div>
-<div class="section level3">
-<h3>位置调整</h3>
+<div class="section level2">
+<h2>位置调整</h2>
 <pre class="r"><code>ggplot(data = diamonds) + 
   geom_bar(mapping = aes(x = cut, colour = cut))</code></pre>
 <p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
@@ -212,9 +210,9 @@ ggplot(data = demo) +
 <pre class="r"><code>ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy), position = &quot;jitter&quot;)</code></pre>
 <p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
-</div>
-<div class="section level3">
-<h3>坐标系统</h3>
+<blockquote>
+<h2>坐标系统</h2>
+</blockquote>
 <p>翻转坐标</p>
 <pre class="r"><code>p1 &lt;- ggplot(data = mpg, mapping = aes(x = class, y = hwy)) + 
   geom_boxplot()
@@ -236,6 +234,5 @@ p1 &lt;- bar + coord_flip()
 p2 &lt;- bar + coord_polar()
 usefulr::multiplot(p1,p2,cols=2)</code></pre>
 <p><img src="/post/2018-10-24-reading-r-for-data-science_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
-</div>
 </div>
 </div>

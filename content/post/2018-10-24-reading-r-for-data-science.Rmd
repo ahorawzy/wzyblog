@@ -1,5 +1,5 @@
 ---
-title: 学习《R for Data Science》
+title: 学习《R for Data Science》(1)——数据可视化
 author: 王致远
 date: '2018-10-24'
 slug: reading-r-for-data-science
@@ -16,9 +16,8 @@ library(tidyverse)
 
 这本书是哈德利的入门之作。虽然对于我来说有点过于简单，不过这本书是以系统的观点阐述数据分析中的各个问题，并且都是用tidyverse工具箱中的包解决的。利用闲暇时间读一遍能够系统学习一边tidyverse，也不算浪费时间。不过这本书过的速度可以稍微快一点，毕竟很多都是太基础的内容。
 
-# 数据探索
 
-## 3. 数据可视化
+# 3. 数据可视化
 
 ggplot2的基础语法
 
@@ -46,7 +45,7 @@ summary(mpg)
 
 > “The greatest value of a picture is when it forces us to notice what we never expected to see.” — John Tukey
 
-### 可映射的图形属性
+## 可映射的图形属性
 
 - color
 - size
@@ -55,7 +54,7 @@ summary(mpg)
 
 \+加号必须放在一句的末尾而不是下一句的开始。
 
-### 分面
+## 分面
 
 对分类数据很有用
 
@@ -87,14 +86,14 @@ ggplot(data = mpg) +
   facet_grid(drv ~ .)
 ```
 
-### 图形类型
+## 图形类型
 
 ```{r}
 ggplot(data = mpg) + 
   geom_smooth(mapping = aes(x = displ, y = hwy, linetype = drv))
 ```
 
-### 多个图形
+## 多个图形
 
 ```{r}
 ggplot(data = mpg) + 
@@ -138,7 +137,7 @@ usefulr::multiplot(p1,p2,cols = 2)
 ```
 
 
-### 数学变换
+## 数学变换
 
 ```{r}
 ggplot(data = diamonds) + 
@@ -184,7 +183,7 @@ ggplot(data = diamonds) +
   )
 ```
 
-### 位置调整
+## 位置调整
 
 ```{r}
 ggplot(data = diamonds) + 
@@ -234,7 +233,7 @@ ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy), position = "jitter")
 ```
 
-### 坐标系统
+>## 坐标系统
 
 翻转坐标
 

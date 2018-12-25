@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>学习《R for Data Science》(2)——数据变形 | Website of ZhiYuan Wang</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">主页</a></li>
+      
+      <li><a href="/categories/">分类</a></li>
+      
+      <li><a href="/tags/">标签</a></li>
+      
+      <li><a href="/about/">关于我</a></li>
+      
+      <li><a href="/friendly_links/">链接</a></li>
+      
+      <li><a href="/index.xml">订阅</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">学习《R for Data Science》(2)——数据变形</span></h1>
+<h2 class="author">王致远</h2>
+<h2 class="date">2018/12/25</h2>
+</div>
+
+<main>
+<p>使用dplyr包进行数据变形</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## -- Attaching packages ----------- tidyverse 1.2.1 --</code></pre>
+<pre><code>## √ ggplot2 3.1.0     √ purrr   0.2.5
+## √ tibble  1.4.2     √ dplyr   0.7.5
+## √ tidyr   0.8.1     √ stringr 1.3.1
+## √ readr   1.1.1     √ forcats 0.3.0</code></pre>
+<pre><code>## -- Conflicts -------------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(nycflights13)</code></pre>
+<p>tibble是一种基于data.frame的数据类型，为了更好地适应于tidyverse包。</p>
+<p>几种数据类型的简写：</p>
+<ul>
+<li>int</li>
+<li>dbl</li>
+<li>chr</li>
+<li>dttm date-times</li>
+<li>lgl logical</li>
+<li>fctr factor</li>
+<li>date</li>
+</ul>
+<p>dplyr中的重要函数：</p>
+<ul>
+<li>filter() 根据观测值选择观测；</li>
+<li>arrange() 行重新排序；</li>
+<li>select() 根据变量名选择变量；</li>
+<li>mutate() 根据已存在变量和函数创造新变量；</li>
+<li>summarise() 产生汇总值</li>
+<li>group_by() 分组运行</li>
+</ul>
+<p>语法：</p>
+<ul>
+<li>第一个参数是df；</li>
+<li>之后的参数描述变换，使用不带引号的变量名；</li>
+<li>结果是新的df；</li>
+</ul>
+<div id="-flights" class="section level2">
+<h2>案例数据 flights</h2>
+<pre class="r"><code>str(flights)</code></pre>
+<pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    336776 obs. of  19 variables:
+##  $ year          : int  2013 2013 2013 2013 2013 2013 2013 2013 2013 2013 ...
+##  $ month         : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ day           : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ dep_time      : int  517 533 542 544 554 554 555 557 557 558 ...
+##  $ sched_dep_time: int  515 529 540 545 600 558 600 600 600 600 ...
+##  $ dep_delay     : num  2 4 2 -1 -6 -4 -5 -3 -3 -2 ...
+##  $ arr_time      : int  830 850 923 1004 812 740 913 709 838 753 ...
+##  $ sched_arr_time: int  819 830 850 1022 837 728 854 723 846 745 ...
+##  $ arr_delay     : num  11 20 33 -18 -25 12 19 -14 -8 8 ...
+##  $ carrier       : chr  &quot;UA&quot; &quot;UA&quot; &quot;AA&quot; &quot;B6&quot; ...
+##  $ flight        : int  1545 1714 1141 725 461 1696 507 5708 79 301 ...
+##  $ tailnum       : chr  &quot;N14228&quot; &quot;N24211&quot; &quot;N619AA&quot; &quot;N804JB&quot; ...
+##  $ origin        : chr  &quot;EWR&quot; &quot;LGA&quot; &quot;JFK&quot; &quot;JFK&quot; ...
+##  $ dest          : chr  &quot;IAH&quot; &quot;IAH&quot; &quot;MIA&quot; &quot;BQN&quot; ...
+##  $ air_time      : num  227 227 160 183 116 150 158 53 140 138 ...
+##  $ distance      : num  1400 1416 1089 1576 762 ...
+##  $ hour          : num  5 5 5 5 6 5 6 6 6 6 ...
+##  $ minute        : num  15 29 40 45 0 58 0 0 0 0 ...
+##  $ time_hour     : POSIXct, format: &quot;2013-01-01 05:00:00&quot; &quot;2013-01-01 05:00:00&quot; ...</code></pre>
+</div>
+<div id="filter" class="section level2">
+<h2>filter()</h2>
+<pre class="r"><code>filter(flights, month == 1, day ==1)</code></pre>
+<pre><code>## # A tibble: 842 x 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
+##  1  2013     1     1      517            515         2      830
+##  2  2013     1     1      533            529         4      850
+##  3  2013     1     1      542            540         2      923
+##  4  2013     1     1      544            545        -1     1004
+##  5  2013     1     1      554            600        -6      812
+##  6  2013     1     1      554            558        -4      740
+##  7  2013     1     1      555            600        -5      913
+##  8  2013     1     1      557            600        -3      709
+##  9  2013     1     1      557            600        -3      838
+## 10  2013     1     1      558            600        -2      753
+## # ... with 832 more rows, and 12 more variables: sched_arr_time &lt;int&gt;,
+## #   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,
+## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
+## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<p>tidyverse的函数不修改原来的df.</p>
+<ul>
+<li>比较运算符 &gt; &gt;= &lt; &lt;= != ==</li>
+<li>逻辑运算符 &amp; | |!</li>
+<li>%in%</li>
+</ul>
+<pre class="r"><code>nov_dec &lt;- filter(flights, month %in% c(11,12))
+dim(nov_dec)</code></pre>
+<pre><code>## [1] 55403    19</code></pre>
+<p>注意：</p>
+<ul>
+<li>在这里不要使用&amp;&amp;和||</li>
+<li>NA是传染性的</li>
+</ul>
+</div>
+<div id="arrange" class="section level2">
+<h2>arrange()</h2>
+<pre class="r"><code>arrange(flights, year, month, day)</code></pre>
+<pre><code>## # A tibble: 336,776 x 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
+##  1  2013     1     1      517            515         2      830
+##  2  2013     1     1      533            529         4      850
+##  3  2013     1     1      542            540         2      923
+##  4  2013     1     1      544            545        -1     1004
+##  5  2013     1     1      554            600        -6      812
+##  6  2013     1     1      554            558        -4      740
+##  7  2013     1     1      555            600        -5      913
+##  8  2013     1     1      557            600        -3      709
+##  9  2013     1     1      557            600        -3      838
+## 10  2013     1     1      558            600        -2      753
+## # ... with 336,766 more rows, and 12 more variables: sched_arr_time &lt;int&gt;,
+## #   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,
+## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
+## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<p>desc()函数用来降序排列</p>
+<pre class="r"><code>arrange(flights, desc(dep_delay))</code></pre>
+<pre><code>## # A tibble: 336,776 x 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
+##  1  2013     1     9      641            900      1301     1242
+##  2  2013     6    15     1432           1935      1137     1607
+##  3  2013     1    10     1121           1635      1126     1239
+##  4  2013     9    20     1139           1845      1014     1457
+##  5  2013     7    22      845           1600      1005     1044
+##  6  2013     4    10     1100           1900       960     1342
+##  7  2013     3    17     2321            810       911      135
+##  8  2013     6    27      959           1900       899     1236
+##  9  2013     7    22     2257            759       898      121
+## 10  2013    12     5      756           1700       896     1058
+## # ... with 336,766 more rows, and 12 more variables: sched_arr_time &lt;int&gt;,
+## #   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,
+## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
+## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<p>NA值通常被排序到最后</p>
+</div>
+<div id="select" class="section level2">
+<h2>select()</h2>
+<pre class="r"><code>select(flights, year, month, day)</code></pre>
+<pre><code>## # A tibble: 336,776 x 3
+##     year month   day
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;
+##  1  2013     1     1
+##  2  2013     1     1
+##  3  2013     1     1
+##  4  2013     1     1
+##  5  2013     1     1
+##  6  2013     1     1
+##  7  2013     1     1
+##  8  2013     1     1
+##  9  2013     1     1
+## 10  2013     1     1
+## # ... with 336,766 more rows</code></pre>
+<pre class="r"><code>select(flights, year:day)</code></pre>
+<pre><code>## # A tibble: 336,776 x 3
+##     year month   day
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;
+##  1  2013     1     1
+##  2  2013     1     1
+##  3  2013     1     1
+##  4  2013     1     1
+##  5  2013     1     1
+##  6  2013     1     1
+##  7  2013     1     1
+##  8  2013     1     1
+##  9  2013     1     1
+## 10  2013     1     1
+## # ... with 336,766 more rows</code></pre>
+<pre class="r"><code>select(flights, -(year:day))</code></pre>
+<pre><code>## # A tibble: 336,776 x 16
+##    dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay
+##       &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;
+##  1      517            515         2      830            819        11
+##  2      533            529         4      850            830        20
+##  3      542            540         2      923            850        33
+##  4      544            545        -1     1004           1022       -18
+##  5      554            600        -6      812            837       -25
+##  6      554            558        -4      740            728        12
+##  7      555            600        -5      913            854        19
+##  8      557            600        -3      709            723       -14
+##  9      557            600        -3      838            846        -8
+## 10      558            600        -2      753            745         8
+## # ... with 336,766 more rows, and 10 more variables: carrier &lt;chr&gt;,
+## #   flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;,
+## #   distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<div id="helper" class="section level3">
+<h3>helper函数</h3>
+<p>select()可以和一些helper函数一起使用：</p>
+<ul>
+<li>start_with(“abc”)</li>
+<li>ends_with(“xyz”)</li>
+<li>contains(“ijk”)</li>
+<li>mathches(“(.)\1”)</li>
+<li>num_range(“x”,1:3)</li>
+</ul>
+<pre class="r"><code>df &lt;- data.frame(x1=1:10,x2=letters[1:10],x3=LETTERS[1:10],x4=10:1)
+select(df,num_range(&quot;x&quot;,1:3))</code></pre>
+<pre><code>##    x1 x2 x3
+## 1   1  a  A
+## 2   2  b  B
+## 3   3  c  C
+## 4   4  d  D
+## 5   5  e  E
+## 6   6  f  F
+## 7   7  g  G
+## 8   8  h  H
+## 9   9  i  I
+## 10 10  j  J</code></pre>
+<p>如果要更名变量，使用rename()</p>
+<pre class="r"><code>names(flights)</code></pre>
+<pre><code>##  [1] &quot;year&quot;           &quot;month&quot;          &quot;day&quot;            &quot;dep_time&quot;      
+##  [5] &quot;sched_dep_time&quot; &quot;dep_delay&quot;      &quot;arr_time&quot;       &quot;sched_arr_time&quot;
+##  [9] &quot;arr_delay&quot;      &quot;carrier&quot;        &quot;flight&quot;         &quot;tailnum&quot;       
+## [13] &quot;origin&quot;         &quot;dest&quot;           &quot;air_time&quot;       &quot;distance&quot;      
+## [17] &quot;hour&quot;           &quot;minute&quot;         &quot;time_hour&quot;</code></pre>
+<pre class="r"><code>df &lt;- rename(flights,tail_num = tailnum)
+names(df)</code></pre>
+<pre><code>##  [1] &quot;year&quot;           &quot;month&quot;          &quot;day&quot;            &quot;dep_time&quot;      
+##  [5] &quot;sched_dep_time&quot; &quot;dep_delay&quot;      &quot;arr_time&quot;       &quot;sched_arr_time&quot;
+##  [9] &quot;arr_delay&quot;      &quot;carrier&quot;        &quot;flight&quot;         &quot;tail_num&quot;      
+## [13] &quot;origin&quot;         &quot;dest&quot;           &quot;air_time&quot;       &quot;distance&quot;      
+## [17] &quot;hour&quot;           &quot;minute&quot;         &quot;time_hour&quot;</code></pre>
+<p>将重要的变量排在前面</p>
+<pre class="r"><code>select(flights, time_hour, air_time, everything())</code></pre>
+<pre><code>## # A tibble: 336,776 x 19
+##    time_hour           air_time  year month   day dep_time sched_dep_time
+##    &lt;dttm&gt;                 &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;
+##  1 2013-01-01 05:00:00      227  2013     1     1      517            515
+##  2 2013-01-01 05:00:00      227  2013     1     1      533            529
+##  3 2013-01-01 05:00:00      160  2013     1     1      542            540
+##  4 2013-01-01 05:00:00      183  2013     1     1      544            545
+##  5 2013-01-01 06:00:00      116  2013     1     1      554            600
+##  6 2013-01-01 05:00:00      150  2013     1     1      554            558
+##  7 2013-01-01 06:00:00      158  2013     1     1      555            600
+##  8 2013-01-01 06:00:00       53  2013     1     1      557            600
+##  9 2013-01-01 06:00:00      140  2013     1     1      557            600
+## 10 2013-01-01 06:00:00      138  2013     1     1      558            600
+## # ... with 336,766 more rows, and 12 more variables: dep_delay &lt;dbl&gt;,
+## #   arr_time &lt;int&gt;, sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;,
+## #   flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, distance &lt;dbl&gt;,
+## #   hour &lt;dbl&gt;, minute &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div id="mutate" class="section level2">
+<h2>mutate()</h2>
+<pre class="r"><code>flights_sml &lt;- select(flights, 
+  year:day, 
+  ends_with(&quot;delay&quot;), 
+  distance, 
+  air_time
+)
+mutate(flights_sml,
+  gain = dep_delay - arr_delay,
+  speed = distance / air_time * 60
+) %&gt;% names()</code></pre>
+<pre><code>## [1] &quot;year&quot;      &quot;month&quot;     &quot;day&quot;       &quot;dep_delay&quot; &quot;arr_delay&quot; &quot;distance&quot; 
+## [7] &quot;air_time&quot;  &quot;gain&quot;      &quot;speed&quot;</code></pre>
+<p>可以立即使用刚刚创建的变量</p>
+<pre class="r"><code>mutate(flights_sml,
+  gain = dep_delay - arr_delay,
+  hours = air_time / 60,
+  gain_per_hour = gain / hours
+) %&gt;% names()</code></pre>
+<pre><code>##  [1] &quot;year&quot;          &quot;month&quot;         &quot;day&quot;           &quot;dep_delay&quot;    
+##  [5] &quot;arr_delay&quot;     &quot;distance&quot;      &quot;air_time&quot;      &quot;gain&quot;         
+##  [9] &quot;hours&quot;         &quot;gain_per_hour&quot;</code></pre>
+<p>如果只想保留新创建的变量，使用transmute()</p>
+<pre class="r"><code>transmute(flights,
+  gain = dep_delay - arr_delay,
+  hours = air_time / 60,
+  gain_per_hour = gain / hours
+)</code></pre>
+<pre><code>## # A tibble: 336,776 x 3
+##     gain hours gain_per_hour
+##    &lt;dbl&gt; &lt;dbl&gt;         &lt;dbl&gt;
+##  1    -9 3.78          -2.38
+##  2   -16 3.78          -4.23
+##  3   -31 2.67         -11.6 
+##  4    17 3.05           5.57
+##  5    19 1.93           9.83
+##  6   -16 2.5           -6.4 
+##  7   -24 2.63          -9.11
+##  8    11 0.883         12.5 
+##  9     5 2.33           2.14
+## 10   -10 2.3           -4.35
+## # ... with 336,766 more rows</code></pre>
+<p>偏移（offset）函数</p>
+<ul>
+<li>lead</li>
+<li>lag</li>
+</ul>
+<pre class="r"><code>x &lt;- 1:10
+lead(x)</code></pre>
+<pre><code>##  [1]  2  3  4  5  6  7  8  9 10 NA</code></pre>
+<pre class="r"><code>lag(x)</code></pre>
+<pre><code>##  [1] NA  1  2  3  4  5  6  7  8  9</code></pre>
+<p>累积函数</p>
+<ul>
+<li>cumsum()</li>
+<li>cumprod()</li>
+<li>cummin()</li>
+<li>cummax()</li>
+</ul>
+</div>
+<div id="summaries" class="section level2">
+<h2>summaries()</h2>
+<p>将数据框压缩到一行</p>
+<pre class="r"><code>summarise(flights, delay = mean(dep_delay, na.rm = TRUE))</code></pre>
+<pre><code>## # A tibble: 1 x 1
+##   delay
+##   &lt;dbl&gt;
+## 1  12.6</code></pre>
+<p>与group_by一起用</p>
+<pre class="r"><code>by_day &lt;- group_by(flights, year, month, day)
+summarise(by_day, delay = mean(dep_delay, na.rm = TRUE))</code></pre>
+<pre><code>## # A tibble: 365 x 4
+## # Groups:   year, month [?]
+##     year month   day delay
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
+##  1  2013     1     1 11.5 
+##  2  2013     1     2 13.9 
+##  3  2013     1     3 11.0 
+##  4  2013     1     4  8.95
+##  5  2013     1     5  5.73
+##  6  2013     1     6  7.15
+##  7  2013     1     7  5.42
+##  8  2013     1     8  2.55
+##  9  2013     1     9  2.28
+## 10  2013     1    10  2.84
+## # ... with 355 more rows</code></pre>
+<p>对比plyr包，ddply的分而治之的思维更强，dplyr包group_by的易理解性更强。</p>
+<pre class="r"><code>ddply(flights,.variables = c(&quot;year&quot;,&quot;month&quot;,&quot;day&quot;),summarise,delay=mean(dep_delay, na.rm = T))</code></pre>
+<div class="section level3">
+<h3>管道</h3>
+<pre class="r"><code>by_dest &lt;- group_by(flights, dest)
+delay &lt;- summarise(by_dest,
+  count = n(),
+  dist = mean(distance, na.rm = TRUE),
+  delay = mean(arr_delay, na.rm = TRUE)
+)
+delay &lt;- filter(delay, count &gt; 20, dest != &quot;HNL&quot;)
+delay</code></pre>
+<pre><code>## # A tibble: 96 x 4
+##    dest  count  dist delay
+##    &lt;chr&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 ABQ     254 1826   4.38
+##  2 ACK     265  199   4.85
+##  3 ALB     439  143  14.4 
+##  4 ATL   17215  757. 11.3 
+##  5 AUS    2439 1514.  6.02
+##  6 AVL     275  584.  8.00
+##  7 BDL     443  116   7.05
+##  8 BGR     375  378   8.03
+##  9 BHM     297  866. 16.9 
+## 10 BNA    6333  758. 11.8 
+## # ... with 86 more rows</code></pre>
+<pre class="r"><code>ggplot(data = delay, mapping = aes(x = dist, y = delay)) +
+  geom_point(aes(size = count), alpha = 1/3) +
+  geom_smooth(se = FALSE)</code></pre>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-2_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p>管道式写法：</p>
+<pre class="r"><code>delays &lt;- flights %&gt;% 
+  group_by(dest) %&gt;% 
+  summarise(
+    count = n(),
+    dist = mean(distance, na.rm = TRUE),
+    delay = mean(arr_delay, na.rm = TRUE)
+  ) %&gt;% 
+  filter(count &gt; 20, dest != &quot;HNL&quot;)</code></pre>
+</div>
+<div class="section level3">
+<h3>缺失值</h3>
+<p>集合型函数的缺失值处理：如果输入中有缺失值，那么输出就是缺失值，除非加na.rm=T。</p>
+<p>可以预先筛出没有缺失值的数据。</p>
+<pre class="r"><code>not_cancelled &lt;- flights %&gt;% 
+  filter(!is.na(dep_delay), !is.na(arr_delay))
+
+not_cancelled %&gt;% 
+  group_by(year, month, day) %&gt;% 
+  summarise(mean = mean(dep_delay))</code></pre>
+<pre><code>## # A tibble: 365 x 4
+## # Groups:   year, month [?]
+##     year month   day  mean
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
+##  1  2013     1     1 11.4 
+##  2  2013     1     2 13.7 
+##  3  2013     1     3 10.9 
+##  4  2013     1     4  8.97
+##  5  2013     1     5  5.73
+##  6  2013     1     6  7.15
+##  7  2013     1     7  5.42
+##  8  2013     1     8  2.56
+##  9  2013     1     9  2.30
+## 10  2013     1    10  2.84
+## # ... with 355 more rows</code></pre>
+</div>
+<div class="section level3">
+<h3>计数</h3>
+<p>当做数据聚合时，最好加一个计数列，保证不是基于很小的数据量做出的结论。</p>
+<p>比如在分析每个飞机的延误时间时</p>
+<pre class="r"><code>delays &lt;- not_cancelled %&gt;% 
+  group_by(tailnum) %&gt;% 
+  summarise(
+    delay = mean(arr_delay)
+  )
+
+ggplot(data = delays, mapping = aes(x = delay)) + 
+  geom_freqpoly(binwidth = 10)</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-2_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>发现有飞机平均延误超过了300分钟。</p>
+<p>画出每架飞机航班数和延误的关系</p>
+<pre class="r"><code>delays &lt;- not_cancelled %&gt;% 
+  group_by(tailnum) %&gt;% 
+  summarise(
+    delay = mean(arr_delay, na.rm = TRUE),
+    n = n()
+  )
+
+ggplot(data = delays, mapping = aes(x = n, y = delay)) + 
+  geom_point(alpha = 1/10)</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-2_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p>当航班数很小时，数据的方差就很大。随着数据规模增大，方差就会变小。</p>
+<p>所以在聚合数据时，通常剔除聚合后样本量很小的数据子集</p>
+<pre class="r"><code>delays %&gt;% 
+  filter(n &gt; 25) %&gt;% 
+  ggplot(mapping = aes(x = n, y = delay)) + 
+    geom_point(alpha = 1/10)</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-2_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<ul>
+<li>计数非缺失值时用sum(!is.na(x))</li>
+<li>计数unique值时用n_distinct(x)</li>
+</ul>
+<pre class="r"><code>not_cancelled %&gt;% 
+  group_by(dest) %&gt;% 
+  summarise(carriers = n_distinct(carrier)) %&gt;% 
+  arrange(desc(carriers))</code></pre>
+<pre><code>## # A tibble: 104 x 2
+##    dest  carriers
+##    &lt;chr&gt;    &lt;int&gt;
+##  1 ATL          7
+##  2 BOS          7
+##  3 CLT          7
+##  4 ORD          7
+##  5 TPA          7
+##  6 AUS          6
+##  7 DCA          6
+##  8 DTW          6
+##  9 IAD          6
+## 10 MSP          6
+## # ... with 94 more rows</code></pre>
+<p>count()函数单纯用来计数</p>
+<pre class="r"><code>not_cancelled %&gt;% 
+  count(dest)</code></pre>
+<pre><code>## # A tibble: 104 x 2
+##    dest      n
+##    &lt;chr&gt; &lt;int&gt;
+##  1 ABQ     254
+##  2 ACK     264
+##  3 ALB     418
+##  4 ANC       8
+##  5 ATL   16837
+##  6 AUS    2411
+##  7 AVL     261
+##  8 BDL     412
+##  9 BGR     358
+## 10 BHM     269
+## # ... with 94 more rows</code></pre>
+<p>相当于table</p>
+<pre class="r"><code>table(not_cancelled$dest)</code></pre>
+<pre><code>## 
+##   ABQ   ACK   ALB   ANC   ATL   AUS   AVL   BDL   BGR   BHM   BNA   BOS 
+##   254   264   418     8 16837  2411   261   412   358   269  6084 15022 
+##   BQN   BTV   BUF   BUR   BWI   BZN   CAE   CAK   CHO   CHS   CLE   CLT 
+##   888  2510  4570   370  1687    35   106   842    46  2759  4394 13674 
+##   CMH   CRW   CVG   DAY   DCA   DEN   DFW   DSM   DTW   EGE   EYW   FLL 
+##  3326   134  3725  1399  9111  7169  8388   523  9031   207    17 11897 
+##   GRR   GSO   GSP   HDN   HNL   HOU   IAD   IAH   ILM   IND   JAC   JAX 
+##   728  1492   790    14   701  2083  5383  7085   107  1981    21  2623 
+##   LAS   LAX   LEX   LGB   MCI   MCO   MDW   MEM   MHT   MIA   MKE   MSN 
+##  5952 16026     1   661  1885 13967  4025  1686   932 11593  2709   556 
+##   MSP   MSY   MTJ   MVY   MYR   OAK   OKC   OMA   ORD   ORF   PBI   PDX 
+##  6929  3715    14   210    58   309   315   817 16566  1434  6487  1342 
+##   PHL   PHX   PIT   PSE   PSP   PVD   PWM   RDU   RIC   ROC   RSW   SAN 
+##  1541  4606  2746   358    18   358  2288  7770  2346  2358  3502  2709 
+##   SAT   SAV   SBN   SDF   SEA   SFO   SJC   SJU   SLC   SMF   SNA   SRQ 
+##   659   749    10  1104  3885 13173   328  5773  2451   282   812  1201 
+##   STL   STT   SYR   TPA   TUL   TVC   TYS   XNA 
+##  4142   518  1707  7390   294    95   578   992</code></pre>
+<p>count可以加权重，就变成了sum</p>
+<pre class="r"><code>not_cancelled %&gt;% 
+  count(tailnum, wt= distance)</code></pre>
+<pre><code>## # A tibble: 4,037 x 2
+##    tailnum      n
+##    &lt;chr&gt;    &lt;dbl&gt;
+##  1 D942DN    3418
+##  2 N0EGMQ  239143
+##  3 N10156  109664
+##  4 N102UW   25722
+##  5 N103US   24619
+##  6 N104UW   24616
+##  7 N10575  139903
+##  8 N105UW   23618
+##  9 N107US   21677
+## 10 N108UW   32070
+## # ... with 4,027 more rows</code></pre>
+<p>这么写更加直白一些</p>
+<pre class="r"><code>not_cancelled %&gt;% 
+  group_by(tailnum) %&gt;% 
+  summarise(sum(distance))</code></pre>
+<pre><code>## # A tibble: 4,037 x 2
+##    tailnum `sum(distance)`
+##    &lt;chr&gt;             &lt;dbl&gt;
+##  1 D942DN             3418
+##  2 N0EGMQ           239143
+##  3 N10156           109664
+##  4 N102UW            25722
+##  5 N103US            24619
+##  6 N104UW            24616
+##  7 N10575           139903
+##  8 N105UW            23618
+##  9 N107US            21677
+## 10 N108UW            32070
+## # ... with 4,027 more rows</code></pre>
+<p>对于逻辑值sum()就是统计TRUE的数量，mean()就是统计TRUE的百分比</p>
+<pre class="r"><code>not_cancelled %&gt;% 
+  group_by(year, month, day) %&gt;% 
+  summarise(n_early = sum(dep_time &lt; 500))</code></pre>
+<pre><code>## # A tibble: 365 x 4
+## # Groups:   year, month [?]
+##     year month   day n_early
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;   &lt;int&gt;
+##  1  2013     1     1       0
+##  2  2013     1     2       3
+##  3  2013     1     3       4
+##  4  2013     1     4       3
+##  5  2013     1     5       3
+##  6  2013     1     6       2
+##  7  2013     1     7       2
+##  8  2013     1     8       1
+##  9  2013     1     9       3
+## 10  2013     1    10       3
+## # ... with 355 more rows</code></pre>
+<pre class="r"><code>not_cancelled %&gt;% 
+  group_by(year, month, day) %&gt;% 
+  summarise(hour_perc = mean(arr_delay &gt; 60))</code></pre>
+<pre><code>## # A tibble: 365 x 4
+## # Groups:   year, month [?]
+##     year month   day hour_perc
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;
+##  1  2013     1     1    0.0722
+##  2  2013     1     2    0.0851
+##  3  2013     1     3    0.0567
+##  4  2013     1     4    0.0396
+##  5  2013     1     5    0.0349
+##  6  2013     1     6    0.0470
+##  7  2013     1     7    0.0333
+##  8  2013     1     8    0.0213
+##  9  2013     1     9    0.0202
+## 10  2013     1    10    0.0183
+## # ... with 355 more rows</code></pre>
+</div>
+<div class="section level3">
+<h3>上卷</h3>
+<p>当使用多个分组变量时，可以完成渐进上卷的操作</p>
+<pre class="r"><code>daily &lt;- group_by(flights, year, month, day)
+(per_day   &lt;- summarise(daily, flights = n()))</code></pre>
+<pre><code>## # A tibble: 365 x 4
+## # Groups:   year, month [?]
+##     year month   day flights
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;   &lt;int&gt;
+##  1  2013     1     1     842
+##  2  2013     1     2     943
+##  3  2013     1     3     914
+##  4  2013     1     4     915
+##  5  2013     1     5     720
+##  6  2013     1     6     832
+##  7  2013     1     7     933
+##  8  2013     1     8     899
+##  9  2013     1     9     902
+## 10  2013     1    10     932
+## # ... with 355 more rows</code></pre>
+<pre class="r"><code>(per_month &lt;- summarise(per_day, flights = sum(flights)))</code></pre>
+<pre><code>## # A tibble: 12 x 3
+## # Groups:   year [?]
+##     year month flights
+##    &lt;int&gt; &lt;int&gt;   &lt;int&gt;
+##  1  2013     1   27004
+##  2  2013     2   24951
+##  3  2013     3   28834
+##  4  2013     4   28330
+##  5  2013     5   28796
+##  6  2013     6   28243
+##  7  2013     7   29425
+##  8  2013     8   29327
+##  9  2013     9   27574
+## 10  2013    10   28889
+## 11  2013    11   27268
+## 12  2013    12   28135</code></pre>
+<pre class="r"><code>(per_year  &lt;- summarise(per_month, flights = sum(flights)))</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##    year flights
+##   &lt;int&gt;   &lt;int&gt;
+## 1  2013  336776</code></pre>
+</div>
+<div class="section level3">
+<h3>移除分组</h3>
+<pre class="r"><code>daily %&gt;% 
+  ungroup() %&gt;%
+  summarise(flights = n())</code></pre>
+<pre><code>## # A tibble: 1 x 1
+##   flights
+##     &lt;int&gt;
+## 1  336776</code></pre>
+</div>
+</div>
+<div id="mutatefilter" class="section level2">
+<h2>分组mutate()和filter()</h2>
+<p>寻找每组中最糟糕的值</p>
+<pre class="r"><code>flights_sml &lt;- select(flights, 
+  year:day, 
+  ends_with(&quot;delay&quot;), 
+  distance, 
+  air_time
+)
+flights_sml %&gt;% 
+  group_by(year, month, day) %&gt;%
+  filter(rank(desc(arr_delay)) &lt; 10)</code></pre>
+<pre><code>## # A tibble: 3,306 x 7
+## # Groups:   year, month, day [365]
+##     year month   day dep_delay arr_delay distance air_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+##  1  2013     1     1       853       851      184       41
+##  2  2013     1     1       290       338     1134      213
+##  3  2013     1     1       260       263      266       46
+##  4  2013     1     1       157       174      213       60
+##  5  2013     1     1       216       222      708      121
+##  6  2013     1     1       255       250      589      115
+##  7  2013     1     1       285       246     1085      146
+##  8  2013     1     1       192       191      199       44
+##  9  2013     1     1       379       456     1092      222
+## 10  2013     1     2       224       207      550       94
+## # ... with 3,296 more rows</code></pre>
+<p>寻找大于某个阈值的分组</p>
+<pre class="r"><code>popular_dests &lt;- flights %&gt;% 
+  group_by(dest) %&gt;% 
+  filter(n() &gt; 365)
+popular_dests</code></pre>
+<pre><code>## # A tibble: 332,577 x 19
+## # Groups:   dest [77]
+##     year month   day dep_time sched_dep_time dep_delay arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
+##  1  2013     1     1      517            515         2      830
+##  2  2013     1     1      533            529         4      850
+##  3  2013     1     1      542            540         2      923
+##  4  2013     1     1      544            545        -1     1004
+##  5  2013     1     1      554            600        -6      812
+##  6  2013     1     1      554            558        -4      740
+##  7  2013     1     1      555            600        -5      913
+##  8  2013     1     1      557            600        -3      709
+##  9  2013     1     1      557            600        -3      838
+## 10  2013     1     1      558            600        -2      753
+## # ... with 332,567 more rows, and 12 more variables: sched_arr_time &lt;int&gt;,
+## #   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,
+## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
+## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<p>分组标准化计算</p>
+<pre class="r"><code>popular_dests %&gt;% 
+  filter(arr_delay &gt; 0) %&gt;% 
+  mutate(prop_delay = arr_delay / sum(arr_delay)) %&gt;% 
+  select(year:day, dest, arr_delay, prop_delay)</code></pre>
+<pre><code>## # A tibble: 131,106 x 6
+## # Groups:   dest [77]
+##     year month   day dest  arr_delay prop_delay
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+##  1  2013     1     1 IAH          11  0.000111 
+##  2  2013     1     1 IAH          20  0.000201 
+##  3  2013     1     1 MIA          33  0.000235 
+##  4  2013     1     1 ORD          12  0.0000424
+##  5  2013     1     1 FLL          19  0.0000938
+##  6  2013     1     1 ORD           8  0.0000283
+##  7  2013     1     1 LAX           7  0.0000344
+##  8  2013     1     1 DFW          31  0.000282 
+##  9  2013     1     1 ATL          12  0.0000400
+## 10  2013     1     1 DTW          16  0.000116 
+## # ... with 131,096 more rows</code></pre>
+<p>在script里，用ctrl+enter执行某一句。</p>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+  
+  <hr/>
+  &copy; ZhiYuan Wang 2018
+  
+  </footer>
+  </body>
+</html>
+
