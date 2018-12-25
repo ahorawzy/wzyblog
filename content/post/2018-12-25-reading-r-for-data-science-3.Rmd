@@ -1,0 +1,274 @@
+---
+title: 学习《R for Data Science》(3)——探索性分析
+author: 王致远
+date: '2018-12-25'
+slug: reading-r-for-data-science-3
+categories:
+  - R语言
+tags:
+  - 学习总结
+---
+
+系统地综合使用可视化和数据变形来探索数据。EDA(Exploratory Data Analysis)
+
+EDA的循环步骤：
+
+1. 针对数据产生问题（假设）；
+2. 通过数据可视化、变形、建模来回答问题（验证假设）；
+3. 用所获得的知识改善问题或产生新问题；
+
+EDA不是一个严格的标准过程，而是一种思维模式。EDA的目的是对数据的理解。
+
+```{r message=FALSE}
+library(tidyverse)
+```
+
+## 问题
+
+> “There are no routine statistical questions, only questionable statistical routines.”   
+— Sir David Cox
+
+> “Far better an approximate answer to the right question, which is often vague, than an exact answer to the wrong question, which can always be made precise.”  
+— John Tukey
+
+使用问题来引导对数据的理解。EDA是个需要创造力的过程。通过问题来不断深化对数据的理解，越来越能问出好问题。
+
+有两类经典问题：
+
+1. 变量的变化是怎样的？（variation）
+2. 变量之间的协变化是怎样的？(covariation)
+
+## Variation
+
+### 可视化分布
+
+怎样可视化变量的分布取决于变量是离散的还是连续的。
+
+对于分类变量，通常使用柱状图(bar chart)
+
+```{r}
+ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x = cut))
+```
+
+或者直接输出计数
+
+```{r}
+diamonds %>% 
+  count(cut)
+```
+
+```{r}
+table(diamonds$cut)
+```
+
+对于连续变量，使用直方图（histogram）
+
+```{r}
+ggplot(data = diamonds) +
+  geom_histogram(mapping = aes(x = carat), binwidth = 0.5)
+```
+
+可以手动计算分箱
+
+```{r}
+diamonds %>% 
+  count(cut_width(carat, 0.5))
+```
+
+使用直方图时，应使用多个分箱区间来放大和缩小区间及粒度。
+
+```{r}
+smaller <- diamonds %>% 
+  filter(carat < 3)
+  
+ggplot(data = smaller, mapping = aes(x = carat)) +
+  geom_histogram(binwidth = 0.1)
+```
+
+如果想绘制多个直方图（比如一组分类变量下的），则使用geom_freqpoly
+
+```{r}
+ggplot(data = smaller, mapping = aes(x = carat, colour = cut)) +
+  geom_freqpoly(binwidth = 0.1)
+```
+
+### 典型值
+
+一些可能的问题：
+
+- Which values are the most common? Why?
+- Which values are rare? Why? Does that match your expectations?
+- Can you see any unusual patterns? What might explain them?
+
+对于钻石问题来说：
+
+- Why are there more diamonds at whole carats and common fractions of carats?
+- Why are there more diamonds slightly to the right of each peak than there are slightly to the left of each peak?
+- Why are there no diamonds bigger than 3 carats?
+
+```{r}
+ggplot(data = smaller, mapping = aes(x = carat)) +
+  geom_histogram(binwidth = 0.01)
+```
+
+观察到了钻石有聚类现象，则对聚类提出问题：
+
+- How are the observations within each cluster similar to each other?
+- How are the observations in separate clusters different from each other?
+- How can you explain or describe the clusters?
+- Why might the appearance of clusters be misleading?
+
+老忠实泉的喷发时间
+
+```{r}
+ggplot(data = faithful, mapping = aes(x = eruptions)) + 
+  geom_histogram(binwidth = 0.25)
+```
+
+为什么老忠实泉有两个集中的喷发时间，中间却很少。
+
+提出一些问题引导探索，比如，一些变量的分布是否能通过其他变量来解释。即变量之间的相互关系。
+
+### 异常值
+
+非典型值有两种情况：
+
+1. 错误数据；
+2. 蕴含重要新知识的数据；
+
+当数据量很大时，离群点不容易被发现。
+
+```{r}
+ggplot(diamonds) + 
+  geom_histogram(mapping = aes(x = y), binwidth = 0.5)
+```
+
+因为直方图被压缩，所以意识到有个很大的值。
+
+为了发现缺失值，可以zoom in到小值的范围
+
+```{r}
+ggplot(diamonds) + 
+  geom_histogram(mapping = aes(x = y), binwidth = 0.5) +
+  coord_cartesian(ylim = c(0, 50))
+```
+
+区别于xlim()和ylim()，这两个是将超出范围的样本扔掉
+
+存在3个异常值，挑选出来
+
+```{r}
+unusual <- diamonds %>% 
+  filter(y < 3 | y > 20) %>% 
+  select(price, x, y, z) %>%
+  arrange(y)
+unusual
+```
+
+发现这些异常数据都是有问题的。
+
+不推荐不加考虑直接扔掉。因为一个观测存在一个值是异常值，不代表其他值也是异常值。直接丢掉会很可惜。
+
+对于异常值，如果不知道为什么产生，可以将其替换为缺失值。
+
+```{r}
+diamonds2 <- diamonds %>% 
+  mutate(y = ifelse(y < 3 | y > 20, NA, y))
+```
+
+## 缺失值
+
+```{r}
+ggplot(data = diamonds2, mapping = aes(x = x, y = y)) + 
+  geom_point()
+```
+
+如果不想要提示，加上na.rm=T
+
+为了探寻缺失值的模式，可以将缺失单列出一个变量
+
+```{r}
+nycflights13::flights %>% 
+  mutate(
+    cancelled = is.na(dep_time),
+    sched_hour = sched_dep_time %/% 100,
+    sched_min = sched_dep_time %% 100,
+    sched_dep_time = sched_hour + sched_min / 60
+  ) %>% 
+  ggplot(mapping = aes(sched_dep_time)) + 
+    geom_freqpoly(mapping = aes(colour = cancelled), binwidth = 1/4)
+```
+
+然而由于没有取消的航班远远多于取消的航班，所以看不出规律。
+
+使用分面。
+
+```{r}
+nycflights13::flights %>% 
+  mutate(
+    cancelled = is.na(dep_time),
+    sched_hour = sched_dep_time %/% 100,
+    sched_min = sched_dep_time %% 100,
+    sched_dep_time = sched_hour + sched_min / 60
+  ) %>% 
+  ggplot(mapping = aes(sched_dep_time)) + 
+    geom_freqpoly(mapping = aes(colour = cancelled), binwidth = 1/4)+
+    facet_wrap(~cancelled,nrow = 2,scales = "free_y")
+```
+
+## Covariation
+
+多个变量之间的协变化关系
+
+### 一个分类变量和一个连续变量
+
+geom_freqpoly()不太容易比较，因为高度是由count给出的
+
+```{r}
+ggplot(data = diamonds, mapping = aes(x = price)) + 
+  geom_freqpoly(mapping = aes(colour = cut), binwidth = 500)
+```
+
+因为每组中样本量相差很大，所以分布的差别不容易看出来。
+
+```{r}
+ggplot(diamonds) + 
+  geom_bar(mapping = aes(x = cut))
+```
+
+为了消除量的差别，y坐标需要调整，改成density，是count的标准化结果
+
+```{r}
+ggplot(data = diamonds, mapping = aes(x = price, y = ..density..)) + 
+  geom_freqpoly(mapping = aes(colour = cut), binwidth = 500)
+```
+
+除了直方图外，还可以用箱线图看分布，箱体内（IQR）是25%~75%，离群点是超过1.5个IQR
+
+```{r}
+ggplot(data = diamonds, mapping = aes(x = cut, y = price)) +
+  geom_boxplot()
+```
+
+当分类变量是无序的时，可以考虑重新排序
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = class, y = hwy)) +
+  geom_boxplot()
+```
+
+```{r}
+ggplot(data = mpg) +
+  geom_boxplot(mapping = aes(x = reorder(class, hwy, FUN = median), y = hwy))
+```
+
+如果变量名较长，可以翻转xy坐标
+
+```{r}
+ggplot(data = mpg) +
+  geom_boxplot(mapping = aes(x = reorder(class, hwy, FUN = median), y = hwy)) +
+  coord_flip()
+```
+
+

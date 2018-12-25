@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>学习《R for Data Science》(3)——探索性分析 | Website of ZhiYuan Wang</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">主页</a></li>
+      
+      <li><a href="/categories/">分类</a></li>
+      
+      <li><a href="/tags/">标签</a></li>
+      
+      <li><a href="/about/">关于我</a></li>
+      
+      <li><a href="/friendly_links/">链接</a></li>
+      
+      <li><a href="/index.xml">订阅</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">学习《R for Data Science》(3)——探索性分析</span></h1>
+<h2 class="author">王致远</h2>
+<h2 class="date">2018/12/25</h2>
+</div>
+
+<main>
+<p>系统地综合使用可视化和数据变形来探索数据。EDA(Exploratory Data Analysis)</p>
+<p>EDA的循环步骤：</p>
+<ol style="list-style-type: decimal">
+<li>针对数据产生问题（假设）；</li>
+<li>通过数据可视化、变形、建模来回答问题（验证假设）；</li>
+<li>用所获得的知识改善问题或产生新问题；</li>
+</ol>
+<p>EDA不是一个严格的标准过程，而是一种思维模式。EDA的目的是对数据的理解。</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<div class="section level2">
+<h2>问题</h2>
+<blockquote>
+<p>“There are no routine statistical questions, only questionable statistical routines.”<br />
+— Sir David Cox</p>
+</blockquote>
+<blockquote>
+<p>“Far better an approximate answer to the right question, which is often vague, than an exact answer to the wrong question, which can always be made precise.”<br />
+— John Tukey</p>
+</blockquote>
+<p>使用问题来引导对数据的理解。EDA是个需要创造力的过程。通过问题来不断深化对数据的理解，越来越能问出好问题。</p>
+<p>有两类经典问题：</p>
+<ol style="list-style-type: decimal">
+<li>变量的变化是怎样的？（variation）</li>
+<li>变量之间的协变化是怎样的？(covariation)</li>
+</ol>
+</div>
+<div id="variation" class="section level2">
+<h2>Variation</h2>
+<div class="section level3">
+<h3>可视化分布</h3>
+<p>怎样可视化变量的分布取决于变量是离散的还是连续的。</p>
+<p>对于分类变量，通常使用柱状图(bar chart)</p>
+<pre class="r"><code>ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x = cut))</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>或者直接输出计数</p>
+<pre class="r"><code>diamonds %&gt;% 
+  count(cut)</code></pre>
+<pre><code>## # A tibble: 5 x 2
+##   cut           n
+##   &lt;ord&gt;     &lt;int&gt;
+## 1 Fair       1610
+## 2 Good       4906
+## 3 Very Good 12082
+## 4 Premium   13791
+## 5 Ideal     21551</code></pre>
+<pre class="r"><code>table(diamonds$cut)</code></pre>
+<pre><code>## 
+##      Fair      Good Very Good   Premium     Ideal 
+##      1610      4906     12082     13791     21551</code></pre>
+<p>对于连续变量，使用直方图（histogram）</p>
+<pre class="r"><code>ggplot(data = diamonds) +
+  geom_histogram(mapping = aes(x = carat), binwidth = 0.5)</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>可以手动计算分箱</p>
+<pre class="r"><code>diamonds %&gt;% 
+  count(cut_width(carat, 0.5))</code></pre>
+<pre><code>## # A tibble: 11 x 2
+##    `cut_width(carat, 0.5)`     n
+##    &lt;fct&gt;                   &lt;int&gt;
+##  1 [-0.25,0.25]              785
+##  2 (0.25,0.75]             29498
+##  3 (0.75,1.25]             15977
+##  4 (1.25,1.75]              5313
+##  5 (1.75,2.25]              2002
+##  6 (2.25,2.75]               322
+##  7 (2.75,3.25]                32
+##  8 (3.25,3.75]                 5
+##  9 (3.75,4.25]                 4
+## 10 (4.25,4.75]                 1
+## 11 (4.75,5.25]                 1</code></pre>
+<p>使用直方图时，应使用多个分箱区间来放大和缩小区间及粒度。</p>
+<pre class="r"><code>smaller &lt;- diamonds %&gt;% 
+  filter(carat &lt; 3)
+  
+ggplot(data = smaller, mapping = aes(x = carat)) +
+  geom_histogram(binwidth = 0.1)</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>如果想绘制多个直方图（比如一组分类变量下的），则使用geom_freqpoly</p>
+<pre class="r"><code>ggplot(data = smaller, mapping = aes(x = carat, colour = cut)) +
+  geom_freqpoly(binwidth = 0.1)</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div class="section level3">
+<h3>典型值</h3>
+<p>一些可能的问题：</p>
+<ul>
+<li>Which values are the most common? Why?</li>
+<li>Which values are rare? Why? Does that match your expectations?</li>
+<li>Can you see any unusual patterns? What might explain them?</li>
+</ul>
+<p>对于钻石问题来说：</p>
+<ul>
+<li>Why are there more diamonds at whole carats and common fractions of carats?</li>
+<li>Why are there more diamonds slightly to the right of each peak than there are slightly to the left of each peak?</li>
+<li>Why are there no diamonds bigger than 3 carats?</li>
+</ul>
+<pre class="r"><code>ggplot(data = smaller, mapping = aes(x = carat)) +
+  geom_histogram(binwidth = 0.01)</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>观察到了钻石有聚类现象，则对聚类提出问题：</p>
+<ul>
+<li>How are the observations within each cluster similar to each other?</li>
+<li>How are the observations in separate clusters different from each other?</li>
+<li>How can you explain or describe the clusters?</li>
+<li>Why might the appearance of clusters be misleading?</li>
+</ul>
+<p>老忠实泉的喷发时间</p>
+<pre class="r"><code>ggplot(data = faithful, mapping = aes(x = eruptions)) + 
+  geom_histogram(binwidth = 0.25)</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>为什么老忠实泉有两个集中的喷发时间，中间却很少。</p>
+<p>提出一些问题引导探索，比如，一些变量的分布是否能通过其他变量来解释。即变量之间的相互关系。</p>
+</div>
+<div class="section level3">
+<h3>异常值</h3>
+<p>非典型值有两种情况：</p>
+<ol style="list-style-type: decimal">
+<li>错误数据；</li>
+<li>蕴含重要新知识的数据；</li>
+</ol>
+<p>当数据量很大时，离群点不容易被发现。</p>
+<pre class="r"><code>ggplot(diamonds) + 
+  geom_histogram(mapping = aes(x = y), binwidth = 0.5)</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>因为直方图被压缩，所以意识到有个很大的值。</p>
+<p>为了发现缺失值，可以zoom in到小值的范围</p>
+<pre class="r"><code>ggplot(diamonds) + 
+  geom_histogram(mapping = aes(x = y), binwidth = 0.5) +
+  coord_cartesian(ylim = c(0, 50))</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>区别于xlim()和ylim()，这两个是将超出范围的样本扔掉</p>
+<p>存在3个异常值，挑选出来</p>
+<pre class="r"><code>unusual &lt;- diamonds %&gt;% 
+  filter(y &lt; 3 | y &gt; 20) %&gt;% 
+  select(price, x, y, z) %&gt;%
+  arrange(y)
+unusual</code></pre>
+<pre><code>## # A tibble: 9 x 4
+##   price     x     y     z
+##   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  5139  0      0    0   
+## 2  6381  0      0    0   
+## 3 12800  0      0    0   
+## 4 15686  0      0    0   
+## 5 18034  0      0    0   
+## 6  2130  0      0    0   
+## 7  2130  0      0    0   
+## 8  2075  5.15  31.8  5.12
+## 9 12210  8.09  58.9  8.06</code></pre>
+<p>发现这些异常数据都是有问题的。</p>
+<p>不推荐不加考虑直接扔掉。因为一个观测存在一个值是异常值，不代表其他值也是异常值。直接丢掉会很可惜。</p>
+<p>对于异常值，如果不知道为什么产生，可以将其替换为缺失值。</p>
+<pre class="r"><code>diamonds2 &lt;- diamonds %&gt;% 
+  mutate(y = ifelse(y &lt; 3 | y &gt; 20, NA, y))</code></pre>
+</div>
+</div>
+<div class="section level2">
+<h2>缺失值</h2>
+<pre class="r"><code>ggplot(data = diamonds2, mapping = aes(x = x, y = y)) + 
+  geom_point()</code></pre>
+<pre><code>## Warning: Removed 9 rows containing missing values (geom_point).</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>如果不想要提示，加上na.rm=T</p>
+<p>为了探寻缺失值的模式，可以将缺失单列出一个变量</p>
+<pre class="r"><code>nycflights13::flights %&gt;% 
+  mutate(
+    cancelled = is.na(dep_time),
+    sched_hour = sched_dep_time %/% 100,
+    sched_min = sched_dep_time %% 100,
+    sched_dep_time = sched_hour + sched_min / 60
+  ) %&gt;% 
+  ggplot(mapping = aes(sched_dep_time)) + 
+    geom_freqpoly(mapping = aes(colour = cancelled), binwidth = 1/4)</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>然而由于没有取消的航班远远多于取消的航班，所以看不出规律。</p>
+<p>使用分面。</p>
+<pre class="r"><code>nycflights13::flights %&gt;% 
+  mutate(
+    cancelled = is.na(dep_time),
+    sched_hour = sched_dep_time %/% 100,
+    sched_min = sched_dep_time %% 100,
+    sched_dep_time = sched_hour + sched_min / 60
+  ) %&gt;% 
+  ggplot(mapping = aes(sched_dep_time)) + 
+    geom_freqpoly(mapping = aes(colour = cancelled), binwidth = 1/4)+
+    facet_wrap(~cancelled,nrow = 2,scales = &quot;free_y&quot;)</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+</div>
+<div id="covariation" class="section level2">
+<h2>Covariation</h2>
+<p>多个变量之间的协变化关系</p>
+<div class="section level3">
+<h3>一个分类变量和一个连续变量</h3>
+<p>geom_freqpoly()不太容易比较，因为高度是由count给出的</p>
+<pre class="r"><code>ggplot(data = diamonds, mapping = aes(x = price)) + 
+  geom_freqpoly(mapping = aes(colour = cut), binwidth = 500)</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>因为每组中样本量相差很大，所以分布的差别不容易看出来。</p>
+<pre class="r"><code>ggplot(diamonds) + 
+  geom_bar(mapping = aes(x = cut))</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>为了消除量的差别，y坐标需要调整，改成density，是count的标准化结果</p>
+<pre class="r"><code>ggplot(data = diamonds, mapping = aes(x = price, y = ..density..)) + 
+  geom_freqpoly(mapping = aes(colour = cut), binwidth = 500)</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>除了直方图外，还可以用箱线图看分布，箱体内（IQR）是25%~75%，离群点是超过1.5个IQR</p>
+<pre class="r"><code>ggplot(data = diamonds, mapping = aes(x = cut, y = price)) +
+  geom_boxplot()</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>当分类变量是无序的时，可以考虑重新排序</p>
+<pre class="r"><code>ggplot(data = mpg, mapping = aes(x = class, y = hwy)) +
+  geom_boxplot()</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = mpg) +
+  geom_boxplot(mapping = aes(x = reorder(class, hwy, FUN = median), y = hwy))</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>如果变量名较长，可以翻转xy坐标</p>
+<pre class="r"><code>ggplot(data = mpg) +
+  geom_boxplot(mapping = aes(x = reorder(class, hwy, FUN = median), y = hwy)) +
+  coord_flip()</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+</div>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+  
+  <hr/>
+  &copy; ZhiYuan Wang 2018
+  
+  </footer>
+  </body>
+</html>
+

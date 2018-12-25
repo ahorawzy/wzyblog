@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>学习《R for Data Science》(3)——探索性分析</title>
+      <link>/post/2018/12/25/reading-r-for-data-science-3/</link>
+      <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/12/25/reading-r-for-data-science-3/</guid>
+      <description>系统地综合使用可视化和数据变形来探索数据。EDA(Exploratory Data Analysis) EDA的循环步骤： 针对数据产生问题（假设）； 通过数据可视化、变形</description>
+    </item>
+    
+    <item>
       <title>思维模式(2)——系统式思维</title>
       <link>/post/2018/12/11/thinking-method-2-system/</link>
       <pubDate>Tue, 11 Dec 2018 00:00:00 +0000</pubDate>
