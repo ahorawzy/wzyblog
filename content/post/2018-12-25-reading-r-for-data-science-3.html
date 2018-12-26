@@ -19,7 +19,9 @@ tags:
 <li>用所获得的知识改善问题或产生新问题；</li>
 </ol>
 <p>EDA不是一个严格的标准过程，而是一种思维模式。EDA的目的是对数据的理解。</p>
-<pre class="r"><code>library(tidyverse)</code></pre>
+<pre class="r"><code>library(tidyverse)
+library(hexbin)
+library(modelr)</code></pre>
 <div class="section level2">
 <h2>问题</h2>
 <blockquote>
@@ -234,4 +236,124 @@ unusual</code></pre>
   coord_flip()</code></pre>
 <p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 </div>
+<div class="section level3">
+<h3>两个分类变量</h3>
+<pre class="r"><code>ggplot(data = diamonds) +
+  geom_count(mapping = aes(x = cut, y = color))</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>相当于列联表的可视化</p>
+<pre class="r"><code>table(diamonds$color,diamonds$cut)</code></pre>
+<pre><code>##    
+##     Fair Good Very Good Premium Ideal
+##   D  163  662      1513    1603  2834
+##   E  224  933      2400    2337  3903
+##   F  312  909      2164    2331  3826
+##   G  314  871      2299    2924  4884
+##   H  303  702      1824    2360  3115
+##   I  175  522      1204    1428  2093
+##   J  119  307       678     808   896</code></pre>
+<p>可以用瓦块图</p>
+<pre class="r"><code>diamonds %&gt;% 
+  count(color, cut)</code></pre>
+<pre><code>## # A tibble: 35 x 3
+##    color cut           n
+##    &lt;ord&gt; &lt;ord&gt;     &lt;int&gt;
+##  1 D     Fair        163
+##  2 D     Good        662
+##  3 D     Very Good  1513
+##  4 D     Premium    1603
+##  5 D     Ideal      2834
+##  6 E     Fair        224
+##  7 E     Good        933
+##  8 E     Very Good  2400
+##  9 E     Premium    2337
+## 10 E     Ideal      3903
+## # ... with 25 more rows</code></pre>
+<pre class="r"><code>diamonds %&gt;% 
+  count(color, cut) %&gt;%  
+  ggplot(mapping = aes(x = color, y = cut)) +
+    geom_tile(mapping = aes(fill = n))</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+</div>
+<div class="section level3">
+<h3>两个连续变量</h3>
+<p>使用散点图</p>
+<pre class="r"><code>ggplot(data = diamonds) +
+  geom_point(mapping = aes(x = carat, y = price))</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p>如果点很多的话，散点图就看不清楚，可以加上透明度</p>
+<pre class="r"><code>ggplot(data = diamonds) + 
+  geom_point(mapping = aes(x = carat, y = price), alpha = 1 / 100)</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p>也可以使用二维分箱</p>
+<pre class="r"><code>smaller &lt;- diamonds %&gt;% 
+  filter(carat &lt; 3)
+ggplot(data = smaller) +
+  geom_bin2d(mapping = aes(x = carat, y = price))</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<pre class="r"><code># install.packages(&quot;hexbin&quot;)
+ggplot(data = smaller) +
+  geom_hex(mapping = aes(x = carat, y = price))</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p>也可以选择在一个维度上装箱，则变成了分类和连续变量问题</p>
+<p>使用group来分组</p>
+<pre class="r"><code>ggplot(data = smaller, mapping = aes(x = carat, y = price)) + 
+  geom_boxplot(mapping = aes(group = cut_width(carat, 0.1)))</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p>但cut_width()每一个箱体都是等宽的，所以不能反映该分组中样本数量，可以通过设置</p>
+<pre class="r"><code>ggplot(data = smaller, mapping = aes(x = carat, y = price)) + 
+  geom_boxplot(mapping = aes(group = cut_width(carat, 0.1)),varwidth = T)</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+</div>
+</div>
+<div class="section level2">
+<h2>模式和模型</h2>
+<p>关于模式可以提出的问题：</p>
+<ul>
+<li>Could this pattern be due to coincidence (i.e. random chance)?</li>
+<li>How can you describe the relationship implied by the pattern?</li>
+<li>How strong is the relationship implied by the pattern?</li>
+<li>What other variables might affect the relationship?</li>
+<li>Does the relationship change if you look at individual subgroups of the data?</li>
+</ul>
+<pre class="r"><code>ggplot(data = faithful) + 
+  geom_point(mapping = aes(x = eruptions, y = waiting))</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p>模式是很重要的，因为利于发现相关关系。</p>
+<p>如果说variation是增加了不确定性，covariation则是减少了不确定性。</p>
+<p>模型是一种提取模式的方法。</p>
+<p>钻石问题中，首先移除carat对price的影响</p>
+<pre class="r"><code>mod &lt;- lm(log(price) ~ log(carat), data = diamonds)
+diamonds2 &lt;- diamonds %&gt;% 
+  add_residuals(mod) %&gt;% 
+  mutate(resid = exp(resid))
+
+ggplot(data = diamonds2) + 
+  geom_point(mapping = aes(x = carat, y = resid))</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p>当移除了carat对price的影响后，就可以看cut对price的影响了</p>
+<pre class="r"><code>ggplot(data = diamonds2) + 
+  geom_boxplot(mapping = aes(x = cut, y = resid))</code></pre>
+<p><img src="/post/2018-12-25-reading-r-for-data-science-3_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<p>当移除了克拉因素后，切割越好价格越高。</p>
+</div>
+<div id="project" class="section level2">
+<h2>Project式工作流</h2>
+<ul>
+<li>C+S+F10重启Rstudio</li>
+<li>C+S+S运行当前脚本</li>
+</ul>
+<p>对于路径来说:</p>
+<ol style="list-style-type: decimal">
+<li>最好使用斜杠而不是反斜杠;</li>
+<li>不要使用绝对路径，因为别人的路径和你的不一样；</li>
+</ol>
+<p>Project工作流</p>
+<ul>
+<li>Create an RStudio project for each data analysis project.</li>
+<li>Keep data files there; we’ll talk about loading them into R in data import.</li>
+<li>Keep scripts there; edit them, run them in bits or as a whole.</li>
+<li>Save your outputs (plots and cleaned data) there.</li>
+<li>Only ever use relative paths, not absolute paths.</li>
+</ul>
 </div>

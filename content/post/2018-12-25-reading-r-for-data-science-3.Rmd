@@ -21,6 +21,8 @@ EDA不是一个严格的标准过程，而是一种思维模式。EDA的目的�
 
 ```{r message=FALSE}
 library(tidyverse)
+library(hexbin)
+library(modelr)
 ```
 
 ## 问题
@@ -271,4 +273,137 @@ ggplot(data = mpg) +
   coord_flip()
 ```
 
+### 两个分类变量
+
+```{r}
+ggplot(data = diamonds) +
+  geom_count(mapping = aes(x = cut, y = color))
+```
+
+相当于列联表的可视化
+
+```{r}
+table(diamonds$color,diamonds$cut)
+```
+
+可以用瓦块图
+
+```{r}
+diamonds %>% 
+  count(color, cut)
+```
+
+```{r}
+diamonds %>% 
+  count(color, cut) %>%  
+  ggplot(mapping = aes(x = color, y = cut)) +
+    geom_tile(mapping = aes(fill = n))
+```
+
+### 两个连续变量
+
+使用散点图
+
+```{r}
+ggplot(data = diamonds) +
+  geom_point(mapping = aes(x = carat, y = price))
+```
+
+如果点很多的话，散点图就看不清楚，可以加上透明度
+
+```{r}
+ggplot(data = diamonds) + 
+  geom_point(mapping = aes(x = carat, y = price), alpha = 1 / 100)
+```
+
+也可以使用二维分箱
+
+```{r}
+smaller <- diamonds %>% 
+  filter(carat < 3)
+ggplot(data = smaller) +
+  geom_bin2d(mapping = aes(x = carat, y = price))
+```
+
+```{r}
+# install.packages("hexbin")
+ggplot(data = smaller) +
+  geom_hex(mapping = aes(x = carat, y = price))
+```
+
+也可以选择在一个维度上装箱，则变成了分类和连续变量问题
+
+使用group来分组
+
+```{r}
+ggplot(data = smaller, mapping = aes(x = carat, y = price)) + 
+  geom_boxplot(mapping = aes(group = cut_width(carat, 0.1)))
+```
+
+但cut_width()每一个箱体都是等宽的，所以不能反映该分组中样本数量，可以通过设置
+
+```{r}
+ggplot(data = smaller, mapping = aes(x = carat, y = price)) + 
+  geom_boxplot(mapping = aes(group = cut_width(carat, 0.1)),varwidth = T)
+```
+
+## 模式和模型
+
+关于模式可以提出的问题：
+
+- Could this pattern be due to coincidence (i.e. random chance)?
+- How can you describe the relationship implied by the pattern?
+- How strong is the relationship implied by the pattern?
+- What other variables might affect the relationship?
+- Does the relationship change if you look at individual subgroups of the data?
+
+```{r}
+ggplot(data = faithful) + 
+  geom_point(mapping = aes(x = eruptions, y = waiting))
+```
+
+模式是很重要的，因为利于发现相关关系。
+
+如果说variation是增加了不确定性，covariation则是减少了不确定性。
+
+模型是一种提取模式的方法。
+
+钻石问题中，首先移除carat对price的影响
+
+```{r}
+mod <- lm(log(price) ~ log(carat), data = diamonds)
+diamonds2 <- diamonds %>% 
+  add_residuals(mod) %>% 
+  mutate(resid = exp(resid))
+
+ggplot(data = diamonds2) + 
+  geom_point(mapping = aes(x = carat, y = resid))
+```
+
+当移除了carat对price的影响后，就可以看cut对price的影响了
+
+```{r}
+ggplot(data = diamonds2) + 
+  geom_boxplot(mapping = aes(x = cut, y = resid))
+```
+
+当移除了克拉因素后，切割越好价格越高。
+
+## Project式工作流
+
+- C+S+F10重启Rstudio
+- C+S+S运行当前脚本
+
+对于路径来说:
+
+1. 最好使用斜杠而不是反斜杠;
+2. 不要使用绝对路径，因为别人的路径和你的不一样；
+
+Project工作流
+
+- Create an RStudio project for each data analysis project.
+- Keep data files there; we’ll talk about loading them into R in data import.
+- Keep scripts there; edit them, run them in bits or as a whole.
+- Save your outputs (plots and cleaned data) there.
+- Only ever use relative paths, not absolute paths.
 
