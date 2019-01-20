@@ -1,5 +1,5 @@
 ---
-title: 张小龙在微信八周年公开课上的演讲摘抄
+title: 张小龙在微信公开课上的演讲摘抄
 author: 王致远
 date: '2019-01-20'
 slug: speech-of-xiaolong-zhang-about-wechat
