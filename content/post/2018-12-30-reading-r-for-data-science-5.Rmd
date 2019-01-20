@@ -1,0 +1,31 @@
+---
+title: 学习《R for Data Science》(5)——数据导入
+author: 王致远
+date: '2018-12-30'
+slug: reading-r-for-data-science-5
+categories:
+  - R语言
+tags:
+  - 学习总结
+---
+
+本文需要用到readr包
+
+```{r}
+library(tidyverse)
+```
+
+## 概述
+
+- read_csv()读取逗号分隔；read_csv2()读取分号分隔；
+- read_tsv()读取tab分隔；
+- read_delim()读取任意分隔；
+- read_fwf()读取固定宽度文件；
+- read_log()读取Apache的log文件；
+
+readr::read_csv相比base::read.csv的好处：
+
+1. 速度更快；
+2. 直接创建tibble；
+3. 更有可重复性（不同操作系统之间）；
+

@@ -6,10 +6,28 @@
     <description>Recent content in R语言 on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 25 Dec 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 30 Dec 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/r%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>学习《R for Data Science》(4)——Tibbles</title>
+      <link>/post/2018/12/30/reading-r-for-data-science-4/</link>
+      <pubDate>Sun, 30 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/12/30/reading-r-for-data-science-4/</guid>
+      <description>学习更多的tibble知识，vignette(“tibble”) （除了打印好看点，好像没发现tibble多有用？） library(tidyverse) ## -- Attaching packages ----------- tidyverse 1.2.1 -- ## √ ggplot2 3.1.0</description>
+    </item>
+    
+    <item>
+      <title>学习《R for Data Science》(5)——数据导入</title>
+      <link>/post/2018/12/30/reading-r-for-data-science-5/</link>
+      <pubDate>Sun, 30 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/12/30/reading-r-for-data-science-5/</guid>
+      <description>本文需要用到readr包 library(tidyverse) ## -- Attaching packages ----------- tidyverse 1.2.1 -- ## √ ggplot2 3.1.0 √ purrr 0.2.5 ## √ tibble 1.4.2 √ dplyr 0.7.5 ## √ tidyr 0.8.1 √ stringr 1.3.1 ## √ readr 1.1.1 √ forcats 0.3.0 ## -- Conflicts -------------- tidyverse_conflicts() -- ## x dplyr::filter() masks stats::filter() ## x dplyr::lag() masks stats::lag() 概述 rea</description>
+    </item>
     
     <item>
       <title>学习《R for Data Science》(2)——数据变形</title>

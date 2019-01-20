@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>学习《R for Data Science》(5)——数据导入 | Website of ZhiYuan Wang</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">主页</a></li>
+      
+      <li><a href="/categories/">分类</a></li>
+      
+      <li><a href="/tags/">标签</a></li>
+      
+      <li><a href="/about/">关于我</a></li>
+      
+      <li><a href="/friendly_links/">链接</a></li>
+      
+      <li><a href="/index.xml">订阅</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">学习《R for Data Science》(5)——数据导入</span></h1>
+<h2 class="author">王致远</h2>
+<h2 class="date">2018/12/30</h2>
+</div>
+
+<main>
+<p>本文需要用到readr包</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## -- Attaching packages ----------- tidyverse 1.2.1 --</code></pre>
+<pre><code>## √ ggplot2 3.1.0     √ purrr   0.2.5
+## √ tibble  1.4.2     √ dplyr   0.7.5
+## √ tidyr   0.8.1     √ stringr 1.3.1
+## √ readr   1.1.1     √ forcats 0.3.0</code></pre>
+<pre><code>## -- Conflicts -------------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<div class="section level2">
+<h2>概述</h2>
+<ul>
+<li>read_csv()读取逗号分隔；read_csv2()读取分号分隔；</li>
+<li>read_tsv()读取tab分隔；</li>
+<li>read_delim()读取任意分隔；</li>
+<li>read_fwf()读取固定宽度文件；</li>
+<li>read_log()读取Apache的log文件；</li>
+</ul>
+<p>readr::read_csv相比base::read.csv的好处：</p>
+<ol style="list-style-type: decimal">
+<li>速度更快；</li>
+<li>直接创建tibble；</li>
+<li>更有可重复性（不同操作系统之间）；</li>
+</ol>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+  
+  <hr/>
+  &copy; ZhiYuan Wang 2018
+  
+  </footer>
+  </body>
+</html>
+

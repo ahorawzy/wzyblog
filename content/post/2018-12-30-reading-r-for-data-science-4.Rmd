@@ -1,0 +1,85 @@
+---
+title: 学习《R for Data Science》(4)——Tibbles
+author: 王致远
+date: '2018-12-30'
+slug: reading-r-for-data-science-4
+categories:
+  - R语言
+tags:
+  - 学习总结
+---
+
+学习更多的tibble知识，vignette("tibble")
+
+（除了打印好看点，好像没发现tibble多有用？）
+
+```{r}
+library(tidyverse)
+```
+
+## 创建Tibble
+
+tidyverse包里所有的函数，创建的都是tibble；
+
+如果要强制转换data.frame，使用
+
+```{r}
+as_tibble(iris)
+```
+
+也可以使用tibble()来创建
+
+```{r}
+tibble(
+  x = 1:5, 
+  y = 1, 
+  z = x ^ 2 + y
+)
+```
+
+## Tibble和data.frame的异同
+
+### 打印
+
+在打印大数据时，不会overwhelm your console
+
+### 构造子集
+
+```{r}
+df <- tibble(
+  x = runif(5),
+  y = rnorm(5)
+)
+```
+
+```{r}
+df$x
+```
+
+```{r}
+df[["x"]]
+```
+
+```{r}
+df[[1]]
+```
+
+在pipe中应用时，前面需要有个句点
+
+```{r}
+df %>% .$x
+df %>% .[["x"]]
+```
+
+tibble在使用$引用子集时，不能使用部分匹配，必须全部匹配。
+
+## 从tibble转回到data.frame
+
+```{r}
+class(df)
+```
+
+```{r}
+class(as.data.frame(df))
+```
+
