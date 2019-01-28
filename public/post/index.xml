@@ -39,12 +39,12 @@
     </item>
     
     <item>
-      <title>学习《R for Data Science》(5)——数据导入</title>
+      <title>学习《R for Data Science》(5)——数据导入、写出</title>
       <link>/post/2018/12/30/reading-r-for-data-science-5/</link>
       <pubDate>Sun, 30 Dec 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/2018/12/30/reading-r-for-data-science-5/</guid>
-      <description>本文需要用到readr包 library(tidyverse) ## -- Attaching packages ----------- tidyverse 1.2.1 -- ## √ ggplot2 3.1.0 √ purrr 0.2.5 ## √ tibble 1.4.2 √ dplyr 0.7.5 ## √ tidyr 0.8.1 √ stringr 1.3.1 ## √ readr 1.1.1 √ forcats 0.3.0 ## -- Conflicts -------------- tidyverse_conflicts() -- ## x dplyr::filter() masks stats::filter() ## x dplyr::lag() masks stats::lag() 概述 rea</description>
+      <description>本文需要用到readr包 library(tidyverse) library(hms) 概述 read_csv()读取逗号分隔；read_csv2()读取分号分隔； read_tsv()读取tab分隔； r</description>
     </item>
     
     <item>

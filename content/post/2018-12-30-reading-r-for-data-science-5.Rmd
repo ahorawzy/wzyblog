@@ -1,5 +1,5 @@
 ---
-title: 学习《R for Data Science》(5)——数据导入
+title: 学习《R for Data Science》(5)——数据导入、写出
 author: 王致远
 date: '2018-12-30'
 slug: reading-r-for-data-science-5
@@ -11,8 +11,9 @@ tags:
 
 本文需要用到readr包
 
-```{r}
+```{r warning=FALSE,message=FALSE}
 library(tidyverse)
+library(hms)
 ```
 
 ## 概述
@@ -25,7 +26,130 @@ library(tidyverse)
 
 readr::read_csv相比base::read.csv的好处：
 
-1. 速度更快；
-2. 直接创建tibble；
+1. 速度更快，10倍速，大文件时有进度条；
+2. 直接创建tibble，不会自动转换字符串为因子；
 3. 更有可重复性（不同操作系统之间）；
+
+## 解析函数
+
+parse_*() 能够将字符串向量解析为特殊类型向量
+
+```{r}
+str(parse_logical(c("TRUE", "FALSE", "NA")))
+str(parse_integer(c("1", "2", "3")))
+str(parse_date(c("2010-01-01", "1979-10-14")))
+```
+
+第一个参数为被解析对象；第二个参数为什么应该被解析为NA
+
+```{r}
+parse_integer(c("1", "231", ".", "456"), na = ".")
+```
+
+- parse_logical/parse_integer()
+- parse_double/parse_number()
+
+### 数字
+
+解决三个问题：
+
+1. 国家不同导致小数点符号不同；
+2. 数字中有特殊字符；
+3. 有分组标记；
+
+对于第一个问题，使用local解决
+
+```{r}
+parse_double("1,23", locale = locale(decimal_mark = ","))
+```
+
+对于第二个问题，parse会忽略特殊字符
+
+```{r}
+parse_number("$100")
+#> [1] 100
+parse_number("20%")
+#> [1] 20
+parse_number("It cost $123.45")
+#> [1] 123
+```
+
+对于第三个问题，parse会忽略分组符
+
+```{r}
+parse_number("$123,456,789")
+#> [1] 1.23e+08
+```
+
+### 字符串
+
+ASCII编码
+
+```{r}
+charToRaw("Hadley")
+```
+
+readr中默认使用UTF-8编码字符串
+
+如果要指定特殊编码，使用parse_character()
+
+```{r}
+x2 <- "\x82\xb1\x82\xf1\x82\xc9\x82\xbf\x82\xcd"
+parse_character(x2, locale = locale(encoding = "Shift-JIS"))
+```
+
+### 因子
+
+```{r}
+fruit <- c("apple", "banana")
+parse_factor(c("apple", "banana", "bananana"), levels = fruit)
+```
+
+### 日期和时间
+
+```{r}
+parse_datetime("2010-10-01T2010")
+parse_datetime("20101010")
+```
+
+```{r}
+parse_date("2010-10-01")
+```
+
+```{r}
+parse_time("01:10 am")
+#> 01:10:00
+parse_time("20:10:01")
+#> 20:10:01
+```
+
+特殊格式
+
+```{r}
+parse_date("01/02/15", "%m/%d/%y")
+#> [1] "2015-01-02"
+parse_date("01/02/15", "%d/%m/%y")
+#> [1] "2015-02-01"
+parse_date("01/02/15", "%y/%m/%d")
+#> [1] "2001-02-15"
+```
+
+- %Y 4位解析年份
+- %y 2位解析年份
+- %m 2位解析月份
+- %b "Jan"
+- %B "January"
+- %d 2位解析日期
+- %H 0-23小时
+
+## 写出文件
+
+- write_csv()
+- write_tsv()
+- write_excel_csv()
+
+- readxl包读取excel文件
+- DBI包读取数据库文件
+- jsonlite包读取json文件
+- xml2包读取XML文件
 
