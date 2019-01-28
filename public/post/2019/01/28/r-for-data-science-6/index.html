@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>学习《R for Data Science》(6)——Tidy | Website of ZhiYuan Wang</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">主页</a></li>
+      
+      <li><a href="/categories/">分类</a></li>
+      
+      <li><a href="/tags/">标签</a></li>
+      
+      <li><a href="/about/">关于我</a></li>
+      
+      <li><a href="/friendly_links/">链接</a></li>
+      
+      <li><a href="/index.xml">订阅</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">学习《R for Data Science》(6)——Tidy</span></h1>
+<h2 class="author">王致远</h2>
+<h2 class="date">2019/01/28</h2>
+</div>
+
+<main>
+<p>本章需要用到tidyr包</p>
+<pre class="r"><code>library(plyr)
+library(tidyverse)</code></pre>
+<pre><code>## -- Attaching packages -------------------------------------------------------- tidyverse 1.2.1 --</code></pre>
+<pre><code>## √ ggplot2 2.2.1     √ purrr   0.2.5
+## √ tibble  1.4.2     √ dplyr   0.7.6
+## √ tidyr   0.8.1     √ stringr 1.3.1
+## √ readr   1.1.1     √ forcats 0.3.0</code></pre>
+<pre><code>## -- Conflicts ----------------------------------------------------------- tidyverse_conflicts() --
+## x dplyr::arrange()   masks plyr::arrange()
+## x purrr::compact()   masks plyr::compact()
+## x dplyr::count()     masks plyr::count()
+## x dplyr::failwith()  masks plyr::failwith()
+## x dplyr::filter()    masks stats::filter()
+## x dplyr::id()        masks plyr::id()
+## x dplyr::lag()       masks stats::lag()
+## x dplyr::mutate()    masks plyr::mutate()
+## x dplyr::rename()    masks plyr::rename()
+## x dplyr::summarise() masks plyr::summarise()
+## x dplyr::summarize() masks plyr::summarize()</code></pre>
+<pre class="r"><code>library(ggplot2)
+library(pryr)</code></pre>
+<pre><code>## 
+## 载入程辑包：&#39;pryr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:purrr&#39;:
+## 
+##     compose, partial</code></pre>
+<div id="tidy-data" class="section level2">
+<h2>tidy data</h2>
+<p>同一组数据有多种表达方式</p>
+<p>tidy data的定义：</p>
+<ol style="list-style-type: decimal">
+<li>Each variable must have its own column.</li>
+<li>Each observation must have its own row.</li>
+<li>Each value must have its own cell.</li>
+</ol>
+<p>为什么要tidy data？</p>
+<ol style="list-style-type: decimal">
+<li>有一种一以贯之的数据存储方式；</li>
+<li>适应于R的向量化；</li>
+</ol>
+<pre class="r"><code>table1</code></pre>
+<pre><code>## # A tibble: 6 x 4
+##   country      year  cases population
+##   &lt;chr&gt;       &lt;int&gt;  &lt;int&gt;      &lt;int&gt;
+## 1 Afghanistan  1999    745   19987071
+## 2 Afghanistan  2000   2666   20595360
+## 3 Brazil       1999  37737  172006362
+## 4 Brazil       2000  80488  174504898
+## 5 China        1999 212258 1272915272
+## 6 China        2000 213766 1280428583</code></pre>
+<pre class="r"><code>table1 %&gt;% 
+  count(year, wt=cases)</code></pre>
+<pre><code>## # A tibble: 2 x 2
+##    year      n
+##   &lt;int&gt;  &lt;int&gt;
+## 1  1999 250740
+## 2  2000 296920</code></pre>
+<p>相当于</p>
+<pre class="r"><code>ddply(table1,&quot;year&quot;,function(x) sum(x[[&quot;cases&quot;]]))</code></pre>
+<pre><code>##   year     V1
+## 1 1999 250740
+## 2 2000 296920</code></pre>
+</div>
+<div id="spreading-and-gathering" class="section level2">
+<h2>Spreading and gathering</h2>
+<p>得到清洁数据的步骤：</p>
+<ol style="list-style-type: decimal">
+<li>指出什么是变量，什么是观测；</li>
+<li>解决以下两个问题：
+<ol style="list-style-type: decimal">
+<li>一个变量下的内容展开到了多个列中；</li>
+<li>一个观测分散在多个行中；</li>
+</ol></li>
+</ol>
+<p>需要tidyr的工具：</p>
+<ul>
+<li>gather()</li>
+<li>spread()</li>
+</ul>
+<div id="gathering" class="section level3">
+<h3>Gathering</h3>
+<p>一个常见问题：一些列名不是变量，而是观测值；</p>
+<pre class="r"><code>table4a</code></pre>
+<pre><code>## # A tibble: 3 x 3
+##   country     `1999` `2000`
+## * &lt;chr&gt;        &lt;int&gt;  &lt;int&gt;
+## 1 Afghanistan    745   2666
+## 2 Brazil       37737  80488
+## 3 China       212258 213766</code></pre>
+<p>每一行有两个观测值，而不是一个。</p>
+<p>使用gather函数进行聚合</p>
+<pre class="r"><code>table4a %&gt;% 
+  gather(`1999`, `2000`, key = &quot;year&quot;, value = &quot;cases&quot;)</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##   country     year   cases
+##   &lt;chr&gt;       &lt;chr&gt;  &lt;int&gt;
+## 1 Afghanistan 1999     745
+## 2 Brazil      1999   37737
+## 3 China       1999  212258
+## 4 Afghanistan 2000    2666
+## 5 Brazil      2000   80488
+## 6 China       2000  213766</code></pre>
+<p>相当于reshape2::melt函数</p>
+<pre class="r"><code>reshape2::melt(table4a,&quot;country&quot;)</code></pre>
+<pre><code>##       country variable  value
+## 1 Afghanistan     1999    745
+## 2      Brazil     1999  37737
+## 3       China     1999 212258
+## 4 Afghanistan     2000   2666
+## 5      Brazil     2000  80488
+## 6       China     2000 213766</code></pre>
+<p>再一例</p>
+<pre class="r"><code>table4b</code></pre>
+<pre><code>## # A tibble: 3 x 3
+##   country         `1999`     `2000`
+## * &lt;chr&gt;            &lt;int&gt;      &lt;int&gt;
+## 1 Afghanistan   19987071   20595360
+## 2 Brazil       172006362  174504898
+## 3 China       1272915272 1280428583</code></pre>
+<pre class="r"><code>table4b %&gt;% 
+  gather(`1999`, `2000`, key = &quot;year&quot;, value = &quot;population&quot;)</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##   country     year  population
+##   &lt;chr&gt;       &lt;chr&gt;      &lt;int&gt;
+## 1 Afghanistan 1999    19987071
+## 2 Brazil      1999   172006362
+## 3 China       1999  1272915272
+## 4 Afghanistan 2000    20595360
+## 5 Brazil      2000   174504898
+## 6 China       2000  1280428583</code></pre>
+<p>将两个数据框聚合，使用left_join</p>
+<pre class="r"><code>tidy4a &lt;- table4a %&gt;% 
+  gather(`1999`, `2000`, key = &quot;year&quot;, value = &quot;cases&quot;)
+tidy4b &lt;- table4b %&gt;% 
+  gather(`1999`, `2000`, key = &quot;year&quot;, value = &quot;population&quot;)
+left_join(tidy4a, tidy4b)</code></pre>
+<pre><code>## Joining, by = c(&quot;country&quot;, &quot;year&quot;)</code></pre>
+<pre><code>## # A tibble: 6 x 4
+##   country     year   cases population
+##   &lt;chr&gt;       &lt;chr&gt;  &lt;int&gt;      &lt;int&gt;
+## 1 Afghanistan 1999     745   19987071
+## 2 Brazil      1999   37737  172006362
+## 3 China       1999  212258 1272915272
+## 4 Afghanistan 2000    2666   20595360
+## 5 Brazil      2000   80488  174504898
+## 6 China       2000  213766 1280428583</code></pre>
+</div>
+<div id="spreading" class="section level3">
+<h3>Spreading</h3>
+<pre class="r"><code>table2</code></pre>
+<pre><code>## # A tibble: 12 x 4
+##    country      year type            count
+##    &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;           &lt;int&gt;
+##  1 Afghanistan  1999 cases             745
+##  2 Afghanistan  1999 population   19987071
+##  3 Afghanistan  2000 cases            2666
+##  4 Afghanistan  2000 population   20595360
+##  5 Brazil       1999 cases           37737
+##  6 Brazil       1999 population  172006362
+##  7 Brazil       2000 cases           80488
+##  8 Brazil       2000 population  174504898
+##  9 China        1999 cases          212258
+## 10 China        1999 population 1272915272
+## 11 China        2000 cases          213766
+## 12 China        2000 population 1280428583</code></pre>
+<p>每一个观测被分到了两行里</p>
+<pre class="r"><code>table2 %&gt;%
+    spread(key = type, value = count)</code></pre>
+<pre><code>## # A tibble: 6 x 4
+##   country      year  cases population
+##   &lt;chr&gt;       &lt;int&gt;  &lt;int&gt;      &lt;int&gt;
+## 1 Afghanistan  1999    745   19987071
+## 2 Afghanistan  2000   2666   20595360
+## 3 Brazil       1999  37737  172006362
+## 4 Brazil       2000  80488  174504898
+## 5 China        1999 212258 1272915272
+## 6 China        2000 213766 1280428583</code></pre>
+<p>相当于reshape2::dcast</p>
+<pre class="r"><code>reshape2::dcast(table2,country+year~type)</code></pre>
+<pre><code>## Using count as value column: use value.var to override.</code></pre>
+<pre><code>##       country year  cases population
+## 1 Afghanistan 1999    745   19987071
+## 2 Afghanistan 2000   2666   20595360
+## 3      Brazil 1999  37737  172006362
+## 4      Brazil 2000  80488  174504898
+## 5       China 1999 212258 1272915272
+## 6       China 2000 213766 1280428583</code></pre>
+</div>
+</div>
+<div id="separating-and-uniting" class="section level2">
+<h2>Separating and uniting</h2>
+<pre class="r"><code>table3</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##   country      year rate             
+## * &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;            
+## 1 Afghanistan  1999 745/19987071     
+## 2 Afghanistan  2000 2666/20595360    
+## 3 Brazil       1999 37737/172006362  
+## 4 Brazil       2000 80488/174504898  
+## 5 China        1999 212258/1272915272
+## 6 China        2000 213766/1280428583</code></pre>
+<div id="separate" class="section level3">
+<h3>Separate</h3>
+<p>separate()将一列的内容（字符串）分散到多列</p>
+<pre class="r"><code>table3 %&gt;% 
+  separate(rate, into = c(&quot;cases&quot;, &quot;population&quot;))</code></pre>
+<pre><code>## # A tibble: 6 x 4
+##   country      year cases  population
+## * &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     
+## 1 Afghanistan  1999 745    19987071  
+## 2 Afghanistan  2000 2666   20595360  
+## 3 Brazil       1999 37737  172006362 
+## 4 Brazil       2000 80488  174504898 
+## 5 China        1999 212258 1272915272
+## 6 China        2000 213766 1280428583</code></pre>
+<p>确实方便很多，省略了很多步骤。</p>
+<pre class="r"><code>table3 %&gt;% 
+  separate(rate, into = c(&quot;cases&quot;, &quot;population&quot;), sep = &quot;/&quot;)</code></pre>
+<pre><code>## # A tibble: 6 x 4
+##   country      year cases  population
+## * &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     
+## 1 Afghanistan  1999 745    19987071  
+## 2 Afghanistan  2000 2666   20595360  
+## 3 Brazil       1999 37737  172006362 
+## 4 Brazil       2000 80488  174504898 
+## 5 China        1999 212258 1272915272
+## 6 China        2000 213766 1280428583</code></pre>
+<p>sep是正则表达式</p>
+<p>但直接转换过来的变量都是字符串，可以让它自动匹配更合适的数据类型</p>
+<pre class="r"><code>table3 %&gt;% 
+  separate(rate, into = c(&quot;cases&quot;, &quot;population&quot;), convert = TRUE)</code></pre>
+<pre><code>## # A tibble: 6 x 4
+##   country      year  cases population
+## * &lt;chr&gt;       &lt;int&gt;  &lt;int&gt;      &lt;int&gt;
+## 1 Afghanistan  1999    745   19987071
+## 2 Afghanistan  2000   2666   20595360
+## 3 Brazil       1999  37737  172006362
+## 4 Brazil       2000  80488  174504898
+## 5 China        1999 212258 1272915272
+## 6 China        2000 213766 1280428583</code></pre>
+<p>也可以给sep传入一个数字向量，代表了seperate的位置</p>
+<pre class="r"><code>table3 %&gt;% 
+  separate(year, into = c(&quot;century&quot;, &quot;year&quot;), sep = 2)</code></pre>
+<pre><code>## # A tibble: 6 x 4
+##   country     century year  rate             
+## * &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;            
+## 1 Afghanistan 19      99    745/19987071     
+## 2 Afghanistan 20      00    2666/20595360    
+## 3 Brazil      19      99    37737/172006362  
+## 4 Brazil      20      00    80488/174504898  
+## 5 China       19      99    212258/1272915272
+## 6 China       20      00    213766/1280428583</code></pre>
+</div>
+<div id="unite" class="section level3">
+<h3>Unite</h3>
+<p>seperate的逆运算，将多个列合并为一个列</p>
+<pre class="r"><code>table5</code></pre>
+<pre><code>## # A tibble: 6 x 4
+##   country     century year  rate             
+## * &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;            
+## 1 Afghanistan 19      99    745/19987071     
+## 2 Afghanistan 20      00    2666/20595360    
+## 3 Brazil      19      99    37737/172006362  
+## 4 Brazil      20      00    80488/174504898  
+## 5 China       19      99    212258/1272915272
+## 6 China       20      00    213766/1280428583</code></pre>
+<pre class="r"><code>table5 %&gt;% 
+  unite(new, century, year)</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##   country     new   rate             
+##   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;            
+## 1 Afghanistan 19_99 745/19987071     
+## 2 Afghanistan 20_00 2666/20595360    
+## 3 Brazil      19_99 37737/172006362  
+## 4 Brazil      20_00 80488/174504898  
+## 5 China       19_99 212258/1272915272
+## 6 China       20_00 213766/1280428583</code></pre>
+<p>去掉分隔符</p>
+<pre class="r"><code>table5 %&gt;% 
+  unite(new, century, year, sep = &quot;&quot;)</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##   country     new   rate             
+##   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;            
+## 1 Afghanistan 1999  745/19987071     
+## 2 Afghanistan 2000  2666/20595360    
+## 3 Brazil      1999  37737/172006362  
+## 4 Brazil      2000  80488/174504898  
+## 5 China       1999  212258/1272915272
+## 6 China       2000  213766/1280428583</code></pre>
+</div>
+</div>
+<div class="section level2">
+<h2>缺失值</h2>
+<pre class="r"><code>stocks &lt;- tibble(
+  year   = c(2015, 2015, 2015, 2015, 2016, 2016, 2016),
+  qtr    = c(   1,    2,    3,    4,    2,    3,    4),
+  return = c(1.88, 0.59, 0.35,   NA, 0.92, 0.17, 2.66)
+)</code></pre>
+<pre class="r"><code>stocks</code></pre>
+<pre><code>## # A tibble: 7 x 3
+##    year   qtr return
+##   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1  2015     1   1.88
+## 2  2015     2   0.59
+## 3  2015     3   0.35
+## 4  2015     4  NA   
+## 5  2016     2   0.92
+## 6  2016     3   0.17
+## 7  2016     4   2.66</code></pre>
+<ul>
+<li>explicitly：显式缺失</li>
+<li>implicitly：隐式缺失</li>
+</ul>
+<p>将隐式缺失显式化的方法：spread</p>
+<pre class="r"><code>stocks %&gt;% 
+  spread(year, return)</code></pre>
+<pre><code>## # A tibble: 4 x 3
+##     qtr `2015` `2016`
+##   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1     1   1.88  NA   
+## 2     2   0.59   0.92
+## 3     3   0.35   0.17
+## 4     4  NA      2.66</code></pre>
+<p>另外一个显式化的方法：complete，接收几个列，寻找所有的独特组合</p>
+<pre class="r"><code>stocks %&gt;% 
+  complete(year, qtr)</code></pre>
+<pre><code>## # A tibble: 8 x 3
+##    year   qtr return
+##   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1  2015     1   1.88
+## 2  2015     2   0.59
+## 3  2015     3   0.35
+## 4  2015     4  NA   
+## 5  2016     1  NA   
+## 6  2016     2   0.92
+## 7  2016     3   0.17
+## 8  2016     4   2.66</code></pre>
+<p>一种独特的缺失值情况：缺失代表重复上一行内容</p>
+<pre class="r"><code>treatment &lt;- tribble(
+  ~ person,           ~ treatment, ~response,
+  &quot;Derrick Whitmore&quot;, 1,           7,
+  NA,                 2,           10,
+  NA,                 3,           9,
+  &quot;Katherine Burke&quot;,  1,           4
+)
+treatment</code></pre>
+<pre><code>## # A tibble: 4 x 3
+##   person           treatment response
+##   &lt;chr&gt;                &lt;dbl&gt;    &lt;dbl&gt;
+## 1 Derrick Whitmore         1        7
+## 2 &lt;NA&gt;                     2       10
+## 3 &lt;NA&gt;                     3        9
+## 4 Katherine Burke          1        4</code></pre>
+<p>这时可以用fill函数填充</p>
+<pre class="r"><code>treatment %&gt;% 
+  fill(person)</code></pre>
+<pre><code>## # A tibble: 4 x 3
+##   person           treatment response
+##   &lt;chr&gt;                &lt;dbl&gt;    &lt;dbl&gt;
+## 1 Derrick Whitmore         1        7
+## 2 Derrick Whitmore         2       10
+## 3 Derrick Whitmore         3        9
+## 4 Katherine Burke          1        4</code></pre>
+</div>
+<div class="section level2">
+<h2>案例分析</h2>
+<p>tidyr的设计思路和dplyr一样：每件小工具完成一个任务，用管道连接。</p>
+<p>肺结核数据tidyr::who</p>
+<pre class="r"><code>names(who)</code></pre>
+<pre><code>##  [1] &quot;country&quot;      &quot;iso2&quot;         &quot;iso3&quot;         &quot;year&quot;        
+##  [5] &quot;new_sp_m014&quot;  &quot;new_sp_m1524&quot; &quot;new_sp_m2534&quot; &quot;new_sp_m3544&quot;
+##  [9] &quot;new_sp_m4554&quot; &quot;new_sp_m5564&quot; &quot;new_sp_m65&quot;   &quot;new_sp_f014&quot; 
+## [13] &quot;new_sp_f1524&quot; &quot;new_sp_f2534&quot; &quot;new_sp_f3544&quot; &quot;new_sp_f4554&quot;
+## [17] &quot;new_sp_f5564&quot; &quot;new_sp_f65&quot;   &quot;new_sn_m014&quot;  &quot;new_sn_m1524&quot;
+## [21] &quot;new_sn_m2534&quot; &quot;new_sn_m3544&quot; &quot;new_sn_m4554&quot; &quot;new_sn_m5564&quot;
+## [25] &quot;new_sn_m65&quot;   &quot;new_sn_f014&quot;  &quot;new_sn_f1524&quot; &quot;new_sn_f2534&quot;
+## [29] &quot;new_sn_f3544&quot; &quot;new_sn_f4554&quot; &quot;new_sn_f5564&quot; &quot;new_sn_f65&quot;  
+## [33] &quot;new_ep_m014&quot;  &quot;new_ep_m1524&quot; &quot;new_ep_m2534&quot; &quot;new_ep_m3544&quot;
+## [37] &quot;new_ep_m4554&quot; &quot;new_ep_m5564&quot; &quot;new_ep_m65&quot;   &quot;new_ep_f014&quot; 
+## [41] &quot;new_ep_f1524&quot; &quot;new_ep_f2534&quot; &quot;new_ep_f3544&quot; &quot;new_ep_f4554&quot;
+## [45] &quot;new_ep_f5564&quot; &quot;new_ep_f65&quot;   &quot;newrel_m014&quot;  &quot;newrel_m1524&quot;
+## [49] &quot;newrel_m2534&quot; &quot;newrel_m3544&quot; &quot;newrel_m4554&quot; &quot;newrel_m5564&quot;
+## [53] &quot;newrel_m65&quot;   &quot;newrel_f014&quot;  &quot;newrel_f1524&quot; &quot;newrel_f2534&quot;
+## [57] &quot;newrel_f3544&quot; &quot;newrel_f4554&quot; &quot;newrel_f5564&quot; &quot;newrel_f65&quot;</code></pre>
+<ul>
+<li>country/iso2/iso3 是三个表征国家的变量；</li>
+<li>year 表征时间；</li>
+<li>从new_sp_m014到newrel_f65，不像是变量，而像是观测值，所以用gather函数收集起来</li>
+</ul>
+<p>因为有很多缺失值，所以先将缺失值剔除，看有什么信息</p>
+<pre class="r"><code>who1 &lt;- who %&gt;% 
+  gather(new_sp_m014:newrel_f65, key = &quot;key&quot;, value = &quot;cases&quot;, na.rm = TRUE)
+who1</code></pre>
+<pre><code>## # A tibble: 76,046 x 6
+##    country     iso2  iso3   year key         cases
+##  * &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;chr&gt;       &lt;int&gt;
+##  1 Afghanistan AF    AFG    1997 new_sp_m014     0
+##  2 Afghanistan AF    AFG    1998 new_sp_m014    30
+##  3 Afghanistan AF    AFG    1999 new_sp_m014     8
+##  4 Afghanistan AF    AFG    2000 new_sp_m014    52
+##  5 Afghanistan AF    AFG    2001 new_sp_m014   129
+##  6 Afghanistan AF    AFG    2002 new_sp_m014    90
+##  7 Afghanistan AF    AFG    2003 new_sp_m014   127
+##  8 Afghanistan AF    AFG    2004 new_sp_m014   139
+##  9 Afghanistan AF    AFG    2005 new_sp_m014   151
+## 10 Afghanistan AF    AFG    2006 new_sp_m014   193
+## # ... with 76,036 more rows</code></pre>
+<p>可以通过对key计数，来猜key的结构</p>
+<pre class="r"><code>who1 %&gt;% 
+  count(&quot;key&quot;)</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##   `&quot;key&quot;`     n
+##   &lt;chr&gt;   &lt;int&gt;
+## 1 key     76046</code></pre>
+<p>newrel应该为new_rel，需要用stringr::str_replace处理一下</p>
+<pre class="r"><code>who2 &lt;- who1 %&gt;% 
+  mutate(key = stringr::str_replace(key, &quot;newrel&quot;, &quot;new_rel&quot;))
+who2</code></pre>
+<pre><code>## # A tibble: 76,046 x 6
+##    country     iso2  iso3   year key         cases
+##    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;chr&gt;       &lt;int&gt;
+##  1 Afghanistan AF    AFG    1997 new_sp_m014     0
+##  2 Afghanistan AF    AFG    1998 new_sp_m014    30
+##  3 Afghanistan AF    AFG    1999 new_sp_m014     8
+##  4 Afghanistan AF    AFG    2000 new_sp_m014    52
+##  5 Afghanistan AF    AFG    2001 new_sp_m014   129
+##  6 Afghanistan AF    AFG    2002 new_sp_m014    90
+##  7 Afghanistan AF    AFG    2003 new_sp_m014   127
+##  8 Afghanistan AF    AFG    2004 new_sp_m014   139
+##  9 Afghanistan AF    AFG    2005 new_sp_m014   151
+## 10 Afghanistan AF    AFG    2006 new_sp_m014   193
+## # ... with 76,036 more rows</code></pre>
+<p>使用seperate函数分离各个变量</p>
+<pre class="r"><code>who3 &lt;- who2 %&gt;% 
+  separate(key, c(&quot;new&quot;, &quot;type&quot;, &quot;sexage&quot;), sep = &quot;_&quot;)
+who3</code></pre>
+<pre><code>## # A tibble: 76,046 x 8
+##    country     iso2  iso3   year new   type  sexage cases
+##    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;int&gt;
+##  1 Afghanistan AF    AFG    1997 new   sp    m014       0
+##  2 Afghanistan AF    AFG    1998 new   sp    m014      30
+##  3 Afghanistan AF    AFG    1999 new   sp    m014       8
+##  4 Afghanistan AF    AFG    2000 new   sp    m014      52
+##  5 Afghanistan AF    AFG    2001 new   sp    m014     129
+##  6 Afghanistan AF    AFG    2002 new   sp    m014      90
+##  7 Afghanistan AF    AFG    2003 new   sp    m014     127
+##  8 Afghanistan AF    AFG    2004 new   sp    m014     139
+##  9 Afghanistan AF    AFG    2005 new   sp    m014     151
+## 10 Afghanistan AF    AFG    2006 new   sp    m014     193
+## # ... with 76,036 more rows</code></pre>
+<p>将冗余的new,iso2,iso3丢掉</p>
+<pre class="r"><code>who3 %&gt;% 
+  count(&quot;new&quot;)</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##   `&quot;new&quot;`     n
+##   &lt;chr&gt;   &lt;int&gt;
+## 1 new     76046</code></pre>
+<pre class="r"><code>who4 &lt;- who3 %&gt;% 
+  select(-new, -iso2, -iso3)</code></pre>
+<p>将性别与年龄分开</p>
+<pre class="r"><code>who5 &lt;- who4 %&gt;% 
+  separate(sexage, c(&quot;sex&quot;, &quot;age&quot;), sep = 1)
+who5</code></pre>
+<pre><code>## # A tibble: 76,046 x 6
+##    country      year type  sex   age   cases
+##    &lt;chr&gt;       &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt;
+##  1 Afghanistan  1997 sp    m     014       0
+##  2 Afghanistan  1998 sp    m     014      30
+##  3 Afghanistan  1999 sp    m     014       8
+##  4 Afghanistan  2000 sp    m     014      52
+##  5 Afghanistan  2001 sp    m     014     129
+##  6 Afghanistan  2002 sp    m     014      90
+##  7 Afghanistan  2003 sp    m     014     127
+##  8 Afghanistan  2004 sp    m     014     139
+##  9 Afghanistan  2005 sp    m     014     151
+## 10 Afghanistan  2006 sp    m     014     193
+## # ... with 76,036 more rows</code></pre>
+<p>连起来构造一个复杂的管道</p>
+<pre class="r"><code>who %&gt;%
+  gather(key, value, new_sp_m014:newrel_f65, na.rm = TRUE) %&gt;% 
+  mutate(key = stringr::str_replace(key, &quot;newrel&quot;, &quot;new_rel&quot;)) %&gt;%
+  separate(key, c(&quot;new&quot;, &quot;var&quot;, &quot;sexage&quot;)) %&gt;% 
+  select(-new, -iso2, -iso3) %&gt;% 
+  separate(sexage, c(&quot;sex&quot;, &quot;age&quot;), sep = 1)</code></pre>
+<pre><code>## # A tibble: 76,046 x 6
+##    country      year var   sex   age   value
+##    &lt;chr&gt;       &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt;
+##  1 Afghanistan  1997 sp    m     014       0
+##  2 Afghanistan  1998 sp    m     014      30
+##  3 Afghanistan  1999 sp    m     014       8
+##  4 Afghanistan  2000 sp    m     014      52
+##  5 Afghanistan  2001 sp    m     014     129
+##  6 Afghanistan  2002 sp    m     014      90
+##  7 Afghanistan  2003 sp    m     014     127
+##  8 Afghanistan  2004 sp    m     014     139
+##  9 Afghanistan  2005 sp    m     014     151
+## 10 Afghanistan  2006 sp    m     014     193
+## # ... with 76,036 more rows</code></pre>
+</div>
+<div id="tidy-data" class="section level2">
+<h2>非tidy data</h2>
+<ol style="list-style-type: decimal">
+<li>空间或性能优势；</li>
+<li>专门领域的特定存储约定；</li>
+</ol>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+  
+  <hr/>
+  &copy; ZhiYuan Wang 2018
+  
+  </footer>
+  </body>
+</html>
+

@@ -1,0 +1,318 @@
+---
+title: 学习《R for Data Science》(6)——Tidy
+author: 王致远
+date: '2019-01-28'
+slug: r-for-data-science-6
+categories:
+  - R语言
+tags:
+  - 学习总结
+---
+
+本章需要用到tidyr包
+
+```{r warning=FALSE}
+library(plyr)
+library(tidyverse)
+library(ggplot2)
+library(pryr)
+```
+
+## tidy data
+
+同一组数据有多种表达方式
+
+tidy data的定义：
+
+1. Each variable must have its own column.
+2. Each observation must have its own row.
+3. Each value must have its own cell.
+
+为什么要tidy data？
+
+1. 有一种一以贯之的数据存储方式；
+2. 适应于R的向量化；
+
+```{r}
+table1
+```
+
+```{r}
+table1 %>% 
+  count(year, wt=cases)
+```
+
+相当于
+
+```{r}
+ddply(table1,"year",function(x) sum(x[["cases"]]))
+```
+
+## Spreading and gathering
+
+得到清洁数据的步骤：
+
+1. 指出什么是变量，什么是观测；
+2. 解决以下两个问题：
+    1. 一个变量下的内容展开到了多个列中；
+    2. 一个观测分散在多个行中；
+
+需要tidyr的工具：
+
+- gather()
+- spread()
+
+### Gathering
+
+一个常见问题：一些列名不是变量，而是观测值；
+
+```{r}
+table4a
+```
+
+每一行有两个观测值，而不是一个。
+
+使用gather函数进行聚合
+
+```{r}
+table4a %>% 
+  gather(`1999`, `2000`, key = "year", value = "cases")
+```
+
+相当于reshape2::melt函数
+
+```{r}
+reshape2::melt(table4a,"country")
+```
+
+再一例
+
+```{r}
+table4b
+```
+
+```{r}
+table4b %>% 
+  gather(`1999`, `2000`, key = "year", value = "population")
+```
+
+将两个数据框聚合，使用left_join
+
+```{r}
+tidy4a <- table4a %>% 
+  gather(`1999`, `2000`, key = "year", value = "cases")
+tidy4b <- table4b %>% 
+  gather(`1999`, `2000`, key = "year", value = "population")
+left_join(tidy4a, tidy4b)
+```
+
+### Spreading
+
+```{r}
+table2
+```
+
+每一个观测被分到了两行里
+
+```{r}
+table2 %>%
+    spread(key = type, value = count)
+```
+
+相当于reshape2::dcast
+
+```{r}
+reshape2::dcast(table2,country+year~type)
+```
+
+## Separating and uniting
+
+```{r}
+table3
+```
+
+### Separate
+
+separate()将一列的内容（字符串）分散到多列
+
+```{r}
+table3 %>% 
+  separate(rate, into = c("cases", "population"))
+```
+
+确实方便很多，省略了很多步骤。
+
+```{r}
+table3 %>% 
+  separate(rate, into = c("cases", "population"), sep = "/")
+```
+
+sep是正则表达式
+
+但直接转换过来的变量都是字符串，可以让它自动匹配更合适的数据类型
+
+```{r}
+table3 %>% 
+  separate(rate, into = c("cases", "population"), convert = TRUE)
+```
+
+也可以给sep传入一个数字向量，代表了seperate的位置
+
+```{r}
+table3 %>% 
+  separate(year, into = c("century", "year"), sep = 2)
+```
+
+### Unite
+
+seperate的逆运算，将多个列合并为一个列
+
+```{r}
+table5
+```
+
+```{r}
+table5 %>% 
+  unite(new, century, year)
+```
+
+去掉分隔符
+
+```{r}
+table5 %>% 
+  unite(new, century, year, sep = "")
+```
+
+## 缺失值
+
+```{r}
+stocks <- tibble(
+  year   = c(2015, 2015, 2015, 2015, 2016, 2016, 2016),
+  qtr    = c(   1,    2,    3,    4,    2,    3,    4),
+  return = c(1.88, 0.59, 0.35,   NA, 0.92, 0.17, 2.66)
+)
+```
+
+```{r}
+stocks
+```
+
+
+- explicitly：显式缺失
+- implicitly：隐式缺失
+
+将隐式缺失显式化的方法：spread
+
+```{r}
+stocks %>% 
+  spread(year, return)
+```
+
+另外一个显式化的方法：complete，接收几个列，寻找所有的独特组合
+
+```{r}
+stocks %>% 
+  complete(year, qtr)
+```
+
+一种独特的缺失值情况：缺失代表重复上一行内容
+
+```{r}
+treatment <- tribble(
+  ~ person,           ~ treatment, ~response,
+  "Derrick Whitmore", 1,           7,
+  NA,                 2,           10,
+  NA,                 3,           9,
+  "Katherine Burke",  1,           4
+)
+treatment
+```
+
+这时可以用fill函数填充
+
+```{r}
+treatment %>% 
+  fill(person)
+```
+
+## 案例分析
+
+tidyr的设计思路和dplyr一样：每件小工具完成一个任务，用管道连接。
+
+肺结核数据tidyr::who
+
+```{r}
+names(who)
+```
+
+- country/iso2/iso3 是三个表征国家的变量；
+- year 表征时间；
+- 从new_sp_m014到newrel_f65，不像是变量，而像是观测值，所以用gather函数收集起来
+
+因为有很多缺失值，所以先将缺失值剔除，看有什么信息
+
+```{r}
+who1 <- who %>% 
+  gather(new_sp_m014:newrel_f65, key = "key", value = "cases", na.rm = TRUE)
+who1
+```
+
+可以通过对key计数，来猜key的结构
+
+```{r}
+who1 %>% 
+  count("key")
+```
+
+newrel应该为new_rel，需要用stringr::str_replace处理一下
+
+```{r}
+who2 <- who1 %>% 
+  mutate(key = stringr::str_replace(key, "newrel", "new_rel"))
+who2
+```
+
+使用seperate函数分离各个变量
+
+```{r}
+who3 <- who2 %>% 
+  separate(key, c("new", "type", "sexage"), sep = "_")
+who3
+```
+
+将冗余的new,iso2,iso3丢掉
+
+```{r}
+who3 %>% 
+  count("new")
+```
+
+```{r}
+who4 <- who3 %>% 
+  select(-new, -iso2, -iso3)
+```
+
+将性别与年龄分开
+
+```{r}
+who5 <- who4 %>% 
+  separate(sexage, c("sex", "age"), sep = 1)
+who5
+```
+
+连起来构造一个复杂的管道
+
+```{r}
+who %>%
+  gather(key, value, new_sp_m014:newrel_f65, na.rm = TRUE) %>% 
+  mutate(key = stringr::str_replace(key, "newrel", "new_rel")) %>%
+  separate(key, c("new", "var", "sexage")) %>% 
+  select(-new, -iso2, -iso3) %>% 
+  separate(sexage, c("sex", "age"), sep = 1)
+```
+
+## 非tidy data
+
+1. 空间或性能优势；
+2. 专门领域的特定存储约定；
+
