@@ -1,5 +1,5 @@
 ---
-title: 《中国哲学简史》摘抄
+title: 读《中国哲学简史》
 author: 王致远
 date: '2019-01-19'
 slug: biref-history-of-chinese-philosophy
