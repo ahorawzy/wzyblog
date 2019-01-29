@@ -106,7 +106,7 @@ flights2 %>%
 相当于
 
 ```{r}
-merge(flights2,airlines,by="carrier")
+merge(flights2,airlines,by="carrier") %>% as.tibble()
 ```
 
 创建两个样例表
