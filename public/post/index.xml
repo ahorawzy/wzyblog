@@ -111,7 +111,7 @@
     </item>
     
     <item>
-      <title>华罗庚演讲《在困境中更要发奋求进》</title>
+      <title>读《在困境中更要发奋求进》(华罗庚演讲)</title>
       <link>/post/2018/12/03/hualuogeng-working-hard/</link>
       <pubDate>Mon, 03 Dec 2018 00:00:00 +0000</pubDate>
       
@@ -126,15 +126,6 @@
       
       <guid>/post/2018/12/01/wreck-it-ralph-2/</guid>
       <description>应豪杰邀，今天下午和豪杰、兴东一起去看《无敌破环王2·大闹互联网》（迪士尼），据说是年度动画片。上一年度是《寻梦环游记》（皮克斯），再上一年</description>
-    </item>
-    
-    <item>
-      <title>TPRI找工作准备</title>
-      <link>/post/2018/11/27/tpri-job-interview/</link>
-      <pubDate>Tue, 27 Nov 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/11/27/tpri-job-interview/</guid>
-      <description>1. 交通运输类知识 1.1 公路 1.1.1 干线公路 《国家公路网规划（2013年-2030年）》 公路网约40万公里，其中国家高速公路共36条，计11.8万公里；</description>
     </item>
     
     <item>
@@ -210,15 +201,6 @@
     </item>
     
     <item>
-      <title>数据挖掘概念总结</title>
-      <link>/post/2018/11/12/data-mining-conclusion/</link>
-      <pubDate>Mon, 12 Nov 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/11/12/data-mining-conclusion/</guid>
-      <description>1. 数据挖掘相关概念 数据挖掘是一种技术，将传统数据分析方法（基于统计学）与处理大量数据的复杂算法（基于机器学习）相结合。 数据挖掘是在大型数据存</description>
-    </item>
-    
-    <item>
       <title>Advanced R(1)——basic</title>
       <link>/post/2018/11/08/advanced-r-1-basic/</link>
       <pubDate>Thu, 08 Nov 2018 00:00:00 +0000</pubDate>
@@ -288,15 +270,6 @@
       
       <guid>/post/2018/11/07/chinese-import-exhibition/</guid>
       <description>12个主宾国： 印度尼西亚、越南、巴基斯坦、南非、埃及、俄罗斯、英国、匈牙利、德国、加拿大、巴西、墨西哥 展馆展区 国家贸易投资综合展区：展示贸易</description>
-    </item>
-    
-    <item>
-      <title>习近平论互联网摘抄</title>
-      <link>/post/2018/11/07/xitalkaboutinternet/</link>
-      <pubDate>Wed, 07 Nov 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/11/07/xitalkaboutinternet/</guid>
-      <description>信息化为中华民族带来了千载难逢的机遇。我们必须敏锐抓住信息化发展的历史机遇。 要从国际国内大势出发，总体布局，统筹各方，创新发展，努力把我国建</description>
     </item>
     
     <item>
@@ -399,12 +372,12 @@
     </item>
     
     <item>
-      <title>学习《R for Data Science》(1)——数据可视化</title>
+      <title>学习《R for Data Science》(1)——visualization</title>
       <link>/post/2018/10/24/reading-r-for-data-science/</link>
       <pubDate>Wed, 24 Oct 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/2018/10/24/reading-r-for-data-science/</guid>
-      <description>library(tidyverse) 这本书是哈德利的入门之作。虽然对于我来说有点过于简单，不过这本书是以系统的观点阐述数据分析中的各个问题，并且都是用tidyverse工具箱</description>
+      <description>3. 数据可视化 可映射的图形属性 分面 图形类型 多个图形 数学变换 位置调整 library(tidyverse) 这本书是哈德利的入门之作。虽然对于我来说有点过于简单，不过这本书是以系统的</description>
     </item>
     
     <item>
@@ -453,7 +426,7 @@
     </item>
     
     <item>
-      <title>《言叶之庭》片尾曲《Rain》</title>
+      <title>听《言叶之庭》片尾曲《Rain》</title>
       <link>/post/2018/10/19/yanyezhiting/</link>
       <pubDate>Fri, 19 Oct 2018 00:00:00 +0000</pubDate>
       
@@ -534,7 +507,7 @@
     </item>
     
     <item>
-      <title>看电影《影》</title>
+      <title>看《影》</title>
       <link>/post/2018/10/04/movie-shadow/</link>
       <pubDate>Thu, 04 Oct 2018 00:00:00 +0000</pubDate>
       
@@ -561,7 +534,7 @@
     </item>
     
     <item>
-      <title>观《海上钢琴师》</title>
+      <title>看《海上钢琴师》</title>
       <link>/post/2018/10/03/the-legend-of-1900/</link>
       <pubDate>Wed, 03 Oct 2018 00:00:00 +0000</pubDate>
       
@@ -642,7 +615,7 @@
     </item>
     
     <item>
-      <title>给电影人的情书</title>
+      <title>听《给电影人的情书》</title>
       <link>/post/2018/09/25/love-letter-to-filmmaker/</link>
       <pubDate>Tue, 25 Sep 2018 00:00:00 +0000</pubDate>
       

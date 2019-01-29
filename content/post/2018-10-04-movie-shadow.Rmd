@@ -1,5 +1,5 @@
 ---
-title: 看电影《影》
+title: 看《影》
 author: 王致远
 date: '2018-10-04'
 slug: movie-shadow

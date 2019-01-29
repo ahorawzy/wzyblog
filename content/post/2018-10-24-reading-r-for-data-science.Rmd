@@ -1,5 +1,5 @@
 ---
-title: 学习《R for Data Science》(1)——数据可视化
+title: 学习《R for Data Science》(1)——visualization
 author: 王致远
 date: '2018-10-24'
 slug: reading-r-for-data-science
@@ -7,6 +7,9 @@ categories:
   - R语言
 tags:
   - 学习总结
+output:
+  blogdown::html_page:
+    toc: true
 ---
 
 ```{r warning=FALSE,message=FALSE}
