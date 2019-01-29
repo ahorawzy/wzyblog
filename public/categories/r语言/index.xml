@@ -12,12 +12,12 @@
     
     
     <item>
-      <title>学习《R for Data Science》(7)——关系型数据分析</title>
+      <title>学习《R for Data Science》(7)——Relation Data</title>
       <link>/post/2019/01/29/r-for-data-science-7/</link>
       <pubDate>Tue, 29 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/2019/01/29/r-for-data-science-7/</guid>
-      <description>涉及到多个表的数据分析任务。 关系型数据的三个动词： mutating joins，通过一个表中相匹配的观测向另一个表中添加变量； filtering joins，通过一个表中的观</description>
+      <description>nycflights13数据集 Keys 主键 Mutating Joins inner join outer join duplicate keys dplyr中函数和merge函数的对应关系 Filtering joins Join problems Set operations 涉及到多个表的数据分析任务。 关系型</description>
     </item>
     
     <item>
@@ -26,7 +26,7 @@
       <pubDate>Mon, 28 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/2019/01/28/r-for-data-science-6/</guid>
-      <description>本章需要用到tidyr包 library(plyr) library(tidyverse) library(ggplot2) library(pryr) tidy data 同一组数据有多种表达方式 tidy data的定义： Each variable must have its own column. Each observation must have its own row. Each value must have its own cell. 为什么要tidy da</description>
+      <description>tidy data Spreading and gathering Gathering Spreading Separating and uniting Separate Unite 缺失值 案例分析 非tidy data 本章需要用到tidyr包 library(plyr) library(tidyverse) library(ggplot2) library(pryr) tidy data 同一组数据有多种表达方式 tidy data的定义： Each variable must have its own</description>
     </item>
     
     <item>
@@ -39,7 +39,7 @@
     </item>
     
     <item>
-      <title>学习《R for Data Science》(5)——数据导入、写出</title>
+      <title>学习《R for Data Science》(5)——Data Import</title>
       <link>/post/2018/12/30/reading-r-for-data-science-5/</link>
       <pubDate>Sun, 30 Dec 2018 00:00:00 +0000</pubDate>
       
@@ -48,7 +48,7 @@
     </item>
     
     <item>
-      <title>学习《R for Data Science》(2)——数据变形</title>
+      <title>学习《R for Data Science》(2)——Transformation</title>
       <link>/post/2018/12/25/reading-r-for-data-science-2/</link>
       <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
       
@@ -57,7 +57,7 @@
     </item>
     
     <item>
-      <title>学习《R for Data Science》(3)——探索性分析</title>
+      <title>学习《R for Data Science》(3)——EDA</title>
       <link>/post/2018/12/25/reading-r-for-data-science-3/</link>
       <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
       

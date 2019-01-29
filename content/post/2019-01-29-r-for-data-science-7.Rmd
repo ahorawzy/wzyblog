@@ -1,5 +1,5 @@
 ---
-title: 学习《R for Data Science》(7)——关系型数据分析
+title: 学习《R for Data Science》(7)——Relation Data
 author: 王致远
 date: '2019-01-29'
 slug: r-for-data-science-7
@@ -7,6 +7,9 @@ categories:
   - R语言
 tags:
   - 学习总结
+output:
+  blogdown::html_page:
+    toc: true
 ---
 
 涉及到多个表的数据分析任务。
@@ -17,7 +20,269 @@ tags:
 - filtering joins，通过一个表中的观测筛选另一个表中的观测；
 - set operations，将观测视为集合的元素。
 
-```{r message=FALSE}
+```{r message=FALSE,warning=FALSE}
 library(tidyverse)
+library(nycflights13)
 ```
 
+## nycflights13数据集
+
+flights查询航班信息
+
+```{r}
+flights
+```
+
+
+airlines查询航空公司及其缩写
+
+```{r}
+airlines
+```
+
+airports查询机场，用faa标识
+
+```{r}
+airports
+```
+
+planes查询飞机，用tailnum标识
+
+```{r}
+planes
+```
+
+weather给出所有机场每小时的天气信息
+
+只需要知道每一对表通过什么键连接即可
+
+- flights connects to planes via a single variable, tailnum.
+- flights connects to airlines through the carrier variable.
+- flights connects to airports in two ways: via the origin and dest variables.
+- flights connects to weather via origin (the location), and year, month, day and hour (the time).
+
+## Keys 主键
+
+主键是唯一标识每一个观测的变量或变量组。
+
+鉴定主键是否唯一标识的方法：
+
+```{r}
+planes %>% 
+  count(tailnum) %>% 
+  filter(n > 1)
+```
+
+```{r}
+weather %>% 
+  count(year, month, day, hour, origin) %>% 
+  filter(n > 1)
+```
+
+如果一个表中没有一个显式化的主键，可以使用代理主键，以用来追踪过滤前后的数据差异。使用mutate()。
+
+一个主键和一个外键构成一对关系,relation。
+
+## Mutating Joins
+
+将两个表中的变量合并。首先通过键来匹配观测，再将变量从一个表复制到另一个表。
+
+增加的变量默认放在最右边。创建一个窄表。
+
+```{r}
+flights2 <- flights %>% 
+  select(year:day, hour, origin, dest, tailnum, carrier)
+flights2
+```
+
+例如，想将航空公司全名添加到表中
+
+```{r}
+flights2 %>%
+  select(-origin, -dest) %>% 
+  left_join(airlines, by = "carrier")
+```
+
+相当于
+
+```{r}
+merge(flights2,airlines,by="carrier")
+```
+
+创建两个样例表
+
+```{r}
+x <- tribble(
+  ~key, ~val_x,
+     1, "x1",
+     2, "x2",
+     3, "x3"
+)
+y <- tribble(
+  ~key, ~val_y,
+     1, "y1",
+     2, "y2",
+     4, "y3"
+)
+```
+
+
+### inner join
+
+在两张表中找出共有观测
+
+```{r}
+x %>% 
+  inner_join(y, by = "key")
+```
+
+没有匹配的行不会包含在结果中。
+
+### outer join
+
+- left join包含所有x的观测；
+- right join包含所有y的观测；
+- full join包含所有x和y的观测；
+
+### duplicate keys
+
+当只有一个表中有重复键时：可以向一个一对多关系的表中添加额外信息
+
+```{r}
+x <- tribble(
+  ~key, ~val_x,
+     1, "x1",
+     2, "x2",
+     2, "x3",
+     1, "x4"
+)
+y <- tribble(
+  ~key, ~val_y,
+     1, "y1",
+     2, "y2"
+)
+left_join(x, y, by = "key")
+```
+
+当两个表中都有重复键时，会得到所有可能结果的笛卡尔积
+
+```{r}
+x <- tribble(
+  ~key, ~val_x,
+     1, "x1",
+     2, "x2",
+     2, "x3",
+     3, "x4"
+)
+y <- tribble(
+  ~key, ~val_y,
+     1, "y1",
+     2, "y2",
+     2, "y3",
+     3, "y4"
+)
+left_join(x, y, by = "key")
+```
+
+### dplyr中函数和merge函数的对应关系
+
+- inner_join(x, y) = merge(x, y)
+- left_join(x, y) = merge(x, y, all.x = TRUE)
+- right_join(x, y) = 	merge(x, y, all.y = TRUE)
+- full_join(x, y) = 	merge(x, y, all.x = TRUE, all.y = TRUE)
+
+dplyr中的函数含义更明确，速度更快，并且行的顺序不会错乱。
+
+## Filtering joins
+
+过滤型连接不会改变变量，而是改变观测。
+
+- semi_join(x, y) keeps all observations in x that have a match in y.
+- anti_join(x, y) drops all observations in x that have a match in y.
+
+例如：找到了最受欢迎的十个机场
+
+```{r}
+top_dest <- flights %>%
+  count(dest, sort = TRUE) %>%
+  head(10)
+top_dest
+```
+
+筛选去往这十个机场的航班
+
+```{r}
+flights %>% 
+  filter(dest %in% top_dest$dest)
+```
+
+使用semi_join，保留在y中有记录的x
+
+```{r}
+flights %>% 
+  semi_join(top_dest)
+```
+
+anti_join是反向操作：去掉y中有记录的x。anti_join在检验被删掉记录时很有用。
+
+下例找到了很多没有在planes里有记录的flights。
+
+```{r}
+flights %>%
+  anti_join(planes, by = "tailnum") %>%
+  count(tailnum, sort = TRUE)
+```
+
+## Join problems
+
+1. 根据对数据的理解来寻找主键，而不是根据唯一标识原则；
+2. 确认主键没有缺失值；
+3. 确认外键在其他表中有对应主键，使用anti_join()。
+4. 如果有缺失，需要仔细考虑是内连接还是外连接。
+
+## Set operations
+
+集合操作需要x和y有相同变量。
+
+- intersect(x,y)
+- union(x,y)
+- setdiff(x,y)
+
+```{r}
+df1 <- tribble(
+  ~x, ~y,
+   1,  1,
+   2,  1
+)
+df2 <- tribble(
+  ~x, ~y,
+   1,  1,
+   1,  2
+)
+df1
+```
+
+```{r}
+df2
+```
+
+
+```{r}
+intersect(df1, df2)
+```
+
+```{r}
+union(df1, df2)
+```
+
+```{r}
+setdiff(df1, df2)
+```
+
+保留df1中不一样的
+
+```{r}
+setdiff(df2, df1)
+```
+
+保留df2中不一样的
