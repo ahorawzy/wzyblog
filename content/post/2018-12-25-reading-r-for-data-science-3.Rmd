@@ -7,6 +7,9 @@ categories:
   - R语言
 tags:
   - 学习总结
+output:
+  blogdown::html_page:
+    toc: true
 ---
 
 系统地综合使用可视化和数据变形来探索数据。EDA(Exploratory Data Analysis)

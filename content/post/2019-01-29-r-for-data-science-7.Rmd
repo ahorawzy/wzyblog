@@ -1,0 +1,23 @@
+---
+title: 学习《R for Data Science》(7)——关系型数据分析
+author: 王致远
+date: '2019-01-29'
+slug: r-for-data-science-7
+categories:
+  - R语言
+tags:
+  - 学习总结
+---
+
+涉及到多个表的数据分析任务。
+
+关系型数据的三个动词：
+
+- mutating joins，通过一个表中相匹配的观测向另一个表中添加变量；
+- filtering joins，通过一个表中的观测筛选另一个表中的观测；
+- set operations，将观测视为集合的元素。
+
+```{r message=FALSE}
+library(tidyverse)
+```
+

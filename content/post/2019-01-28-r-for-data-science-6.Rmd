@@ -11,7 +11,7 @@ tags:
 
 本章需要用到tidyr包
 
-```{r warning=FALSE}
+```{r warning=FALSE,message=FALSE}
 library(plyr)
 library(tidyverse)
 library(ggplot2)

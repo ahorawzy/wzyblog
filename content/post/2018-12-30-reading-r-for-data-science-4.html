@@ -7,19 +7,36 @@ categories:
   - R语言
 tags:
   - 学习总结
+output:
+  blogdown::html_page:
+    toc: true
 ---
 
 
+<div id="TOC">
+<ul>
+<li><a href="#tibble">创建Tibble</a></li>
+<li><a href="#tibbledata.frame">Tibble和data.frame的异同</a><ul>
+<li><a>打印</a></li>
+<li><a>构造子集</a></li>
+</ul></li>
+<li><a href="#tibbledata.frame">从tibble转回到data.frame</a></li>
+</ul>
+</div>
 
 <p>学习更多的tibble知识，vignette(“tibble”)</p>
 <p>（除了打印好看点，好像没发现tibble多有用？）</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## -- Attaching packages ----------- tidyverse 1.2.1 --</code></pre>
-<pre><code>## √ ggplot2 3.1.0     √ purrr   0.2.5
-## √ tibble  1.4.2     √ dplyr   0.7.5
+<pre><code>## Warning: 程辑包&#39;tidyverse&#39;是用R版本3.5.1 来建造的</code></pre>
+<pre><code>## -- Attaching packages -------------------------------------------------------- tidyverse 1.2.1 --</code></pre>
+<pre><code>## √ ggplot2 2.2.1     √ purrr   0.2.5
+## √ tibble  1.4.2     √ dplyr   0.7.6
 ## √ tidyr   0.8.1     √ stringr 1.3.1
 ## √ readr   1.1.1     √ forcats 0.3.0</code></pre>
-<pre><code>## -- Conflicts -------------- tidyverse_conflicts() --
+<pre><code>## Warning: 程辑包&#39;tidyr&#39;是用R版本3.5.1 来建造的</code></pre>
+<pre><code>## Warning: 程辑包&#39;readr&#39;是用R版本3.5.1 来建造的</code></pre>
+<pre><code>## Warning: 程辑包&#39;forcats&#39;是用R版本3.5.1 来建造的</code></pre>
+<pre><code>## -- Conflicts ----------------------------------------------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <div id="tibble" class="section level2">
@@ -69,16 +86,16 @@ tags:
   y = rnorm(5)
 )</code></pre>
 <pre class="r"><code>df$x</code></pre>
-<pre><code>## [1] 0.5497055 0.4710939 0.6620958 0.8517295 0.0182842</code></pre>
+<pre><code>## [1] 0.5652198 0.3483937 0.4660307 0.4830957 0.9444043</code></pre>
 <pre class="r"><code>df[[&quot;x&quot;]]</code></pre>
-<pre><code>## [1] 0.5497055 0.4710939 0.6620958 0.8517295 0.0182842</code></pre>
+<pre><code>## [1] 0.5652198 0.3483937 0.4660307 0.4830957 0.9444043</code></pre>
 <pre class="r"><code>df[[1]]</code></pre>
-<pre><code>## [1] 0.5497055 0.4710939 0.6620958 0.8517295 0.0182842</code></pre>
+<pre><code>## [1] 0.5652198 0.3483937 0.4660307 0.4830957 0.9444043</code></pre>
 <p>在pipe中应用时，前面需要有个句点</p>
 <pre class="r"><code>df %&gt;% .$x</code></pre>
-<pre><code>## [1] 0.5497055 0.4710939 0.6620958 0.8517295 0.0182842</code></pre>
+<pre><code>## [1] 0.5652198 0.3483937 0.4660307 0.4830957 0.9444043</code></pre>
 <pre class="r"><code>df %&gt;% .[[&quot;x&quot;]]</code></pre>
-<pre><code>## [1] 0.5497055 0.4710939 0.6620958 0.8517295 0.0182842</code></pre>
+<pre><code>## [1] 0.5652198 0.3483937 0.4660307 0.4830957 0.9444043</code></pre>
 <p>tibble在使用$引用子集时，不能使用部分匹配，必须全部匹配。</p>
 </div>
 </div>

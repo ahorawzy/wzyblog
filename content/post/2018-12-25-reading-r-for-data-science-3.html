@@ -7,9 +7,30 @@ categories:
   - R语言
 tags:
   - 学习总结
+output:
+  blogdown::html_page:
+    toc: true
 ---
 
 
+<div id="TOC">
+<ul>
+<li><a>问题</a></li>
+<li><a href="#variation">Variation</a><ul>
+<li><a>可视化分布</a></li>
+<li><a>典型值</a></li>
+<li><a>异常值</a></li>
+</ul></li>
+<li><a>缺失值</a></li>
+<li><a href="#covariation">Covariation</a><ul>
+<li><a>一个分类变量和一个连续变量</a></li>
+<li><a>两个分类变量</a></li>
+<li><a>两个连续变量</a></li>
+</ul></li>
+<li><a>模式和模型</a></li>
+<li><a href="#project">Project式工作流</a></li>
+</ul>
+</div>
 
 <p>系统地综合使用可视化和数据变形来探索数据。EDA(Exploratory Data Analysis)</p>
 <p>EDA的循环步骤：</p>
@@ -19,9 +40,15 @@ tags:
 <li>用所获得的知识改善问题或产生新问题；</li>
 </ol>
 <p>EDA不是一个严格的标准过程，而是一种思维模式。EDA的目的是对数据的理解。</p>
-<pre class="r"><code>library(tidyverse)
-library(hexbin)
-library(modelr)</code></pre>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## Warning: 程辑包&#39;tidyverse&#39;是用R版本3.5.1 来建造的</code></pre>
+<pre><code>## Warning: 程辑包&#39;tidyr&#39;是用R版本3.5.1 来建造的</code></pre>
+<pre><code>## Warning: 程辑包&#39;readr&#39;是用R版本3.5.1 来建造的</code></pre>
+<pre><code>## Warning: 程辑包&#39;forcats&#39;是用R版本3.5.1 来建造的</code></pre>
+<pre class="r"><code>library(hexbin)</code></pre>
+<pre><code>## Warning: 程辑包&#39;hexbin&#39;是用R版本3.5.2 来建造的</code></pre>
+<pre class="r"><code>library(modelr)</code></pre>
+<pre><code>## Warning: 程辑包&#39;modelr&#39;是用R版本3.5.1 来建造的</code></pre>
 <div class="section level2">
 <h2>问题</h2>
 <blockquote>
