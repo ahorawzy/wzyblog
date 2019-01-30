@@ -25,13 +25,13 @@ stringr没有被包括在tidyverse中
 - \\n newline
 - \\t tab
 
-### String length
+### String length 字符长度
 
 ```{r}
 str_length(c("a", "R for data science", NA))
 ```
 
-### Combining strings
+### Combining strings 字符合并
 
 ```{r}
 str_c("x", "y")
@@ -55,7 +55,7 @@ str_c是向量化的，对于短向量会自动循环补齐
 str_c("prefix-", c("a", "b", "c"), "-suffix")
 ```
 
-### Subsetting strings
+### Subsetting strings 字符子集
 
 str_sub取字符串的闭区间（即包括开始和结束）
 
@@ -84,15 +84,17 @@ str_sub(x, 1, 1) <- str_to_lower(str_sub(x, 1, 1))
 x
 ```
 
-### Locales
+### Locales 大小写转换
 
 - str_to_lower()
 - str_to_upper()
 - str_to_title()
 
-## Matching patterns with regular expressions
+## Matching patterns with regular expressions 正则表达式
 
 为了学习正则表达式，使用str_view和str_view_all
+
+### basic
 
 ```{r}
 x <- c("apple", "banana", "pear")
@@ -118,7 +120,7 @@ x <- "a\\b"
 str_view(x, "\\\\")
 ```
 
-### Anchors
+### Anchors 锚
 
 从开头或结尾开始匹配
 
@@ -133,4 +135,26 @@ str_view(x, "^a")
 ```{r}
 str_view(x, "a$")
 ```
+
+如果要严格匹配某个字符串，可以同时使用\\^和\\$
+
+```{r}
+x <- c("apple pie", "apple", "apple cake")
+str_view(x, "apple")
+```
+
+```{r}
+str_view(x, "^apple$")
+```
+
+###  Character classes and alternatives
+
+除了\\.外其他的匹配
+
+- \\d: matches any digit.
+- \\s: matches any whitespace (e.g. space, tab, newline).
+- [abc]: matches a, b, or c.
+- [^abc]: matches anything except a, b, or c.
+
+如果要创建正则表达式，需要有双斜杠
 

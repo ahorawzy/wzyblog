@@ -17,7 +17,7 @@
       <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/2019/01/30/r-for-data-science-8/</guid>
-      <description>library(tidyverse) library(stringr) stringr没有被包括在tidyverse中 basic 在字符串中引用符号，需要加\ 特殊字符： \n newline \t tab String length str_length(c(&amp;quot;a&amp;quot;, &amp;quot;R for data science&amp;quot;, NA)) ## [1] 1 18 NA Combining strings str_c(&amp;quot;x&amp;quot;, &amp;quot;y&amp;quot;) ## [1] &amp;quot;xy&amp;quot; str_c(&amp;quot;x&amp;quot;,</description>
+      <description>library(tidyverse) library(stringr) stringr没有被包括在tidyverse中 basic 在字符串中引用符号，需要加\ 特殊字符： \n newline \t tab String length 字符长度 str_length(c(&amp;quot;a&amp;quot;, &amp;quot;R for data science&amp;quot;, NA)) ## [1] 1 18 NA Combining strings 字符</description>
     </item>
     
     <item>
