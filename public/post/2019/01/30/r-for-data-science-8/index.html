@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>学习《R for Data Science》(8)——Stringr | Website of ZhiYuan Wang</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">主页</a></li>
+      
+      <li><a href="/categories/">分类</a></li>
+      
+      <li><a href="/tags/">标签</a></li>
+      
+      <li><a href="/about/">关于我</a></li>
+      
+      <li><a href="/friendly_links/">链接</a></li>
+      
+      <li><a href="/index.xml">订阅</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">学习《R for Data Science》(8)——Stringr</span></h1>
+
+<h2 class="date">2019/01/30</h2>
+</div>
+
+<main>
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<link href="/rmarkdown-libs/str_view/str_view.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/str_view-binding/str_view.js"></script>
+
+
+<pre class="r"><code>library(tidyverse)
+library(stringr)</code></pre>
+<p>stringr没有被包括在tidyverse中</p>
+<div id="basic" class="section level2">
+<h2>basic</h2>
+<p>在字符串中引用符号，需要加\</p>
+<p>特殊字符：</p>
+<ul>
+<li>\n newline</li>
+<li>\t tab</li>
+</ul>
+<div id="string-length" class="section level3">
+<h3>String length</h3>
+<pre class="r"><code>str_length(c(&quot;a&quot;, &quot;R for data science&quot;, NA))</code></pre>
+<pre><code>## [1]  1 18 NA</code></pre>
+</div>
+<div id="combining-strings" class="section level3">
+<h3>Combining strings</h3>
+<pre class="r"><code>str_c(&quot;x&quot;, &quot;y&quot;)</code></pre>
+<pre><code>## [1] &quot;xy&quot;</code></pre>
+<pre class="r"><code>str_c(&quot;x&quot;, &quot;y&quot;, &quot;z&quot;)</code></pre>
+<pre><code>## [1] &quot;xyz&quot;</code></pre>
+<pre class="r"><code>str_c(&quot;x&quot;, &quot;y&quot;, sep = &quot;, &quot;)</code></pre>
+<pre><code>## [1] &quot;x, y&quot;</code></pre>
+<p>将所要合并的向量作为第一个参数传入，需要用到collapse参数</p>
+<pre class="r"><code>str_c(1:10,collapse = &quot;&quot;)</code></pre>
+<pre><code>## [1] &quot;12345678910&quot;</code></pre>
+<p>str_c是向量化的，对于短向量会自动循环补齐</p>
+<pre class="r"><code>str_c(&quot;prefix-&quot;, c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;), &quot;-suffix&quot;)</code></pre>
+<pre><code>## [1] &quot;prefix-a-suffix&quot; &quot;prefix-b-suffix&quot; &quot;prefix-c-suffix&quot;</code></pre>
+</div>
+<div id="subsetting-strings" class="section level3">
+<h3>Subsetting strings</h3>
+<p>str_sub取字符串的闭区间（即包括开始和结束）</p>
+<pre class="r"><code>x &lt;- c(&quot;Apple&quot;, &quot;Banana&quot;, &quot;Pear&quot;)
+str_sub(x, 1, 3)</code></pre>
+<pre><code>## [1] &quot;App&quot; &quot;Ban&quot; &quot;Pea&quot;</code></pre>
+<p>负数，则从后往前数，但仍是左在前，右在后</p>
+<pre class="r"><code>str_sub(x,-3,-1)</code></pre>
+<pre><code>## [1] &quot;ple&quot; &quot;ana&quot; &quot;ear&quot;</code></pre>
+<p>字符串过短时，str_sub也不会崩溃</p>
+<pre class="r"><code>str_sub(&quot;a&quot;, 1, 5)</code></pre>
+<pre><code>## [1] &quot;a&quot;</code></pre>
+<p>str_sub可以原地修改</p>
+<pre class="r"><code>str_sub(x, 1, 1) &lt;- str_to_lower(str_sub(x, 1, 1))
+x</code></pre>
+<pre><code>## [1] &quot;apple&quot;  &quot;banana&quot; &quot;pear&quot;</code></pre>
+</div>
+<div id="locales" class="section level3">
+<h3>Locales</h3>
+<ul>
+<li>str_to_lower()</li>
+<li>str_to_upper()</li>
+<li>str_to_title()</li>
+</ul>
+</div>
+</div>
+<div id="matching-patterns-with-regular-expressions" class="section level2">
+<h2>Matching patterns with regular expressions</h2>
+<p>为了学习正则表达式，使用str_view和str_view_all</p>
+<pre class="r"><code>x &lt;- c(&quot;apple&quot;, &quot;banana&quot;, &quot;pear&quot;)
+str_view(x, &quot;an&quot;)</code></pre>
+<div id="htmlwidget-1" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li>b<span class='match'>an<\/span>ana<\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<p>.可以匹配任意字符（除了空行）</p>
+<pre class="r"><code>str_view(x, &quot;.a.&quot;)</code></pre>
+<div id="htmlwidget-2" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li><span class='match'>ban<\/span>ana<\/li>\n  <li>p<span class='match'>ear<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<p>如果要匹配. 前面还需再加个\.，但为了正则表达式，还需要再加个\.</p>
+<pre class="r"><code>str_view(c(&quot;abc&quot;, &quot;a.c&quot;, &quot;bef&quot;), &quot;a\\.c&quot;)</code></pre>
+<div id="htmlwidget-3" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3">{"x":{"html":"<ul>\n  <li>abc<\/li>\n  <li><span class='match'>a.c<\/span><\/li>\n  <li>bef<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+  
+  <hr/>
+  &copy; ZhiYuan Wang 2018~2019
+  
+  </footer>
+  </body>
+</html>
+

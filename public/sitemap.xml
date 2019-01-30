@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/2019/01/30/r-for-data-science-8/</loc>
+    <lastmod>2019-01-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/2019/01/29/r-for-data-science-7/</loc>
     <lastmod>2019-01-29T00:00:00+00:00</lastmod>
   </url>
@@ -394,7 +399,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-01-29T00:00:00+00:00</lastmod>
+    <lastmod>2019-01-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -405,7 +410,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2019-01-29T00:00:00+00:00</lastmod>
+    <lastmod>2019-01-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -423,7 +428,7 @@
   
   <url>
     <loc>/categories/r%E8%AF%AD%E8%A8%80/</loc>
-    <lastmod>2019-01-29T00:00:00+00:00</lastmod>
+    <lastmod>2019-01-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -477,7 +482,7 @@
   
   <url>
     <loc>/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</loc>
-    <lastmod>2019-01-29T00:00:00+00:00</lastmod>
+    <lastmod>2019-01-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -1,0 +1,113 @@
+---
+title: 学习《R for Data Science》(8)——Stringr
+author: 
+date: '2019-01-30'
+slug: r-for-data-science-8
+categories:
+  - R语言
+tags:
+  - 学习总结
+---
+
+```{r message=FALSE,warning=FALSE}
+library(tidyverse)
+library(stringr)
+```
+
+stringr没有被包括在tidyverse中
+
+## basic
+
+在字符串中引用符号，需要加\\
+
+特殊字符：
+
+- \\n newline
+- \\t tab
+
+### String length
+
+```{r}
+str_length(c("a", "R for data science", NA))
+```
+
+### Combining strings
+
+```{r}
+str_c("x", "y")
+str_c("x", "y", "z")
+```
+
+```{r}
+str_c("x", "y", sep = ", ")
+```
+
+将所要合并的向量作为第一个参数传入，需要用到collapse参数
+
+```{r}
+str_c(1:10,collapse = "")
+```
+
+
+str_c是向量化的，对于短向量会自动循环补齐
+
+```{r}
+str_c("prefix-", c("a", "b", "c"), "-suffix")
+```
+
+### Subsetting strings
+
+str_sub取字符串的闭区间（即包括开始和结束）
+
+```{r}
+x <- c("Apple", "Banana", "Pear")
+str_sub(x, 1, 3)
+```
+
+负数，则从后往前数，但仍是左在前，右在后
+
+```{r}
+str_sub(x,-3,-1)
+```
+
+
+字符串过短时，str_sub也不会崩溃
+
+```{r}
+str_sub("a", 1, 5)
+```
+
+str_sub可以原地修改
+
+```{r}
+str_sub(x, 1, 1) <- str_to_lower(str_sub(x, 1, 1))
+x
+```
+
+### Locales
+
+- str_to_lower()
+- str_to_upper()
+- str_to_title()
+
+## Matching patterns with regular expressions
+
+为了学习正则表达式，使用str_view和str_view_all
+
+```{r}
+x <- c("apple", "banana", "pear")
+str_view(x, "an")
+```
+
+\.可以匹配任意字符（除了空行）
+
+```{r}
+str_view(x, ".a.")
+```
+
+如果要匹配\. 前面还需再加个\\.，但为了正则表达式，还需要再加个\\\.
+
+```{r}
+str_view(c("abc", "a.c", "bef"), "a\\.c")
+```
+
