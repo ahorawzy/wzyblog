@@ -111,3 +111,26 @@ str_view(x, ".a.")
 str_view(c("abc", "a.c", "bef"), "a\\.c")
 ```
 
+如果要匹配\\，需要四个斜杠
+
+```{r}
+x <- "a\\b"
+str_view(x, "\\\\")
+```
+
+### Anchors
+
+从开头或结尾开始匹配
+
+- \\^ 从开头开始匹配
+- \\$ 从结尾开始匹配
+
+```{r}
+x <- c("apple", "banana", "pear")
+str_view(x, "^a")
+```
+
+```{r}
+str_view(x, "a$")
+```
+
