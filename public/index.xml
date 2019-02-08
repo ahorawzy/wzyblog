@@ -6,10 +6,19 @@
     <description>Recent content in Home on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 30 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 08 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>读《中国历代政治得失》</title>
+      <link>/post/2019/02/08/read-chinese-politics-in-history/</link>
+      <pubDate>Fri, 08 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/02/08/read-chinese-politics-in-history/</guid>
+      <description>本书的作者是史学大家钱穆先生。本书从历史学的观点，细数中国五个重要朝代：汉、唐、宋、明、清，的政治组织形态，特别是从“政治制度”的层面，陈述</description>
+    </item>
     
     <item>
       <title>学习《R for Data Science》(8)——Stringr</title>
