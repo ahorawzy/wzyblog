@@ -1,5 +1,5 @@
 ---
-title: 读《世界文明史》（持续更新）
+title: 读《世界文明史·文明的条件》
 author: 王致远
 date: '2019-02-12'
 slug: history-of-civilization
@@ -8,10 +8,6 @@ categories:
 tags:
   - 读书笔记
 ---
-
-# 东方的遗产
-
-## 文明的条件
 
 所谓“文明”的内涵：
 
