@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>分组求和</title>
+      <link>/post/2019/03/04/sum-bygroup/</link>
+      <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/03/04/sum-bygroup/</guid>
+      <description>今天下午在做数据预处理时，碰到了去年此时难到我的一个问题——将不同车道号或上下行方向的交通流量相加。我当时的解法很笨很粗暴，这次寻求更加简单</description>
+    </item>
+    
+    <item>
       <title>将字符串分拆成数据框</title>
       <link>/post/2019/03/04/str-split-todf/</link>
       <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>

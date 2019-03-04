@@ -1,0 +1,43 @@
+---
+title: 分组求和
+author: 王致远
+date: '2019-03-04'
+slug: sum-bygroup
+categories:
+  - R语言
+tags:
+  - 解决方案
+---
+
+今天下午在做数据预处理时，碰到了去年此时难到我的一个问题——将不同车道号或上下行方向的交通流量相加。我当时的解法很笨很粗暴，这次寻求更加简单的解决方案。
+
+```{r echo=FALSE,message=FALSE,warning=FALSE}
+library(tidyverse)
+load("D:\\data\\jd201610.RData")
+```
+
+```{r}
+head(jd201610)
+```
+
+```{r}
+names(jd201610)
+```
+
+现在要将同一个交调站，日期和时间戳的交通流相加，也就是说要将不同的CDH和上下行的交通流相加。其使用dplyr::summarise就可以很方便的解决了。
+
+```{r}
+groups <- group_by(jd201610,station_name,date,timestamp)
+jd201610tt <- summarise(groups,ttvolume = sum(volume,na.rm = T))
+head(jd201610tt,10)
+```
+
+如果要分上下行，那么把上下行变量也加入分组里
+
+```{r}
+groups <- group_by(jd201610,station_name,date,timestamp,SX)
+jd201610tt <- summarise(groups,ttvolume = sum(volume,na.rm = T))
+head(jd201610tt,10)
+```
+
+非常漂亮地解决了该问题。

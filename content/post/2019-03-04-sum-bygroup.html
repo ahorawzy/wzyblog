@@ -1,0 +1,62 @@
+---
+title: 分组求和
+author: 王致远
+date: '2019-03-04'
+slug: sum-bygroup
+categories:
+  - R语言
+tags:
+  - 解决方案
+---
+
+
+
+<p>今天下午在做数据预处理时，碰到了去年此时难到我的一个问题——将不同车道号或上下行方向的交通流量相加。我当时的解法很笨很粗暴，这次寻求更加简单的解决方案。</p>
+<pre class="r"><code>head(jd201610)</code></pre>
+<pre><code>##   station_index station_name   date CDH SX timestamp volume
+## 1 S01L001520111     桐木岭站 Sep-19  12  S       279    0.0
+## 2 S01L001520111     桐木岭站 Sep-19  31  X       279    2.0
+## 3 S01L001520111     桐木岭站 Sep-19  32  X       279    4.0
+## 4 G75L197520322   松坎观测站 Sep-19  11  S       279   19.5
+## 5 G75L197520322   松坎观测站 Sep-19  12  S       279    4.5
+## 6 G75L197520322   松坎观测站 Sep-19  31  X       279    4.5</code></pre>
+<pre class="r"><code>names(jd201610)</code></pre>
+<pre><code>## [1] &quot;station_index&quot; &quot;station_name&quot;  &quot;date&quot;          &quot;CDH&quot;          
+## [5] &quot;SX&quot;            &quot;timestamp&quot;     &quot;volume&quot;</code></pre>
+<p>现在要将同一个交调站，日期和时间戳的交通流相加，也就是说要将不同的CDH和上下行的交通流相加。其使用dplyr::summarise就可以很方便的解决了。</p>
+<pre class="r"><code>groups &lt;- group_by(jd201610,station_name,date,timestamp)
+jd201610tt &lt;- summarise(groups,ttvolume = sum(volume,na.rm = T))
+head(jd201610tt,10)</code></pre>
+<pre><code>## # A tibble: 10 x 4
+## # Groups:   station_name, date [1]
+##    station_name date   timestamp ttvolume
+##    &lt;chr&gt;        &lt;chr&gt;      &lt;int&gt;    &lt;dbl&gt;
+##  1 丙妹         Oct-01         1      5  
+##  2 丙妹         Oct-01         2      6  
+##  3 丙妹         Oct-01         3      2.5
+##  4 丙妹         Oct-01         4      1  
+##  5 丙妹         Oct-01         5      3  
+##  6 丙妹         Oct-01         6      2  
+##  7 丙妹         Oct-01         7     12  
+##  8 丙妹         Oct-01         8      2.5
+##  9 丙妹         Oct-01         9      5.5
+## 10 丙妹         Oct-01        10      1</code></pre>
+<p>如果要分上下行，那么把上下行变量也加入分组里</p>
+<pre class="r"><code>groups &lt;- group_by(jd201610,station_name,date,timestamp,SX)
+jd201610tt &lt;- summarise(groups,ttvolume = sum(volume,na.rm = T))
+head(jd201610tt,10)</code></pre>
+<pre><code>## # A tibble: 10 x 5
+## # Groups:   station_name, date, timestamp [5]
+##    station_name date   timestamp SX    ttvolume
+##    &lt;chr&gt;        &lt;chr&gt;      &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt;
+##  1 丙妹         Oct-01         1 S          5  
+##  2 丙妹         Oct-01         1 X          0  
+##  3 丙妹         Oct-01         2 S          6  
+##  4 丙妹         Oct-01         2 X          0  
+##  5 丙妹         Oct-01         3 S          2.5
+##  6 丙妹         Oct-01         3 X          0  
+##  7 丙妹         Oct-01         4 S          1  
+##  8 丙妹         Oct-01         4 X          0  
+##  9 丙妹         Oct-01         5 S          3  
+## 10 丙妹         Oct-01         5 X          0</code></pre>
+<p>非常漂亮地解决了该问题。</p>
