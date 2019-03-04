@@ -1,0 +1,90 @@
+---
+title: 将字符串分拆成数据框
+author: 王致远
+date: '2019-03-04'
+slug: str-split-todf
+categories:
+  - R语言
+tags:
+  - 解决方案
+---
+
+今天要解决一个长期困扰我的问题：使用strsplit或stringr::str_split，都是将元素分拆为列表的形式，虽然这样的通用性比较好，但是在大多数情形下，分拆元素的个数是固定的，更希望以数据框的形式返回，这样更具有通用性。
+
+```{r echo=FALSE,warning=FALSE,message=FALSE}
+library(tidyverse)
+load("D:\\data\\jd201610.RData")
+```
+
+例如
+
+```{r}
+strsplit(jd201610$date,"-") %>% head(3)
+```
+
+```{r}
+str_split(jd201610$date,"-") %>% head(3)
+```
+
+### 思路一：强制转换数据框再转置
+
+一种思路是简单暴力的，强制转化为数据框。但由于as.data.frame是按元素转到数据框的列，不是想要的结果，所以还多了个转置的步骤，这样就大大增加了运行时间。
+
+```{r}
+str_split_todf01 <- function(strvec,sep){
+  tep <- strsplit(strvec,sep)
+  df <- as.data.frame(tep)
+  df <- t(df)
+  rownames(df) <- 1:nrow(df)
+  return(df)
+}
+```
+
+```{r}
+str_split_todf01(jd201610$date,"-") %>% head(10)
+```
+
+```{r}
+system.time(str_split_todf01(jd201610$date,"-"))
+```
+
+### 思路二：先转矩阵再转数据框
+
+```{r}
+str_split_todf02 <- function(strvec,sep){
+  tep <- strsplit(strvec,sep)
+  len <- length(tep[[1]])
+  return(as.data.frame(matrix(unlist(tep),ncol=len,byrow = T)))
+}
+str_split_todf02(jd201610$date,sep="-") %>% head(10)
+```
+
+```{r}
+system.time(str_split_todf02(jd201610$date,sep="-"))
+```
+
+### 思路三：用lapply提取列表元素构成数据框
+
+```{r}
+str_split_todf03 <- function(strvec,sep){
+  tep <- strsplit(strvec,sep)
+  li <- list()
+  len <- length(tep[[1]])
+  for(i in 1:len){
+    li[[i]] <- sapply(tep, `[`, i)
+  }
+  names(li) <- 1:len
+  return(data.frame(li))
+}
+str_split_todf03(jd201610$date,"-") %>% head(10)
+```
+
+```{r}
+system.time(str_split_todf03(jd201610$date,"-"))
+```
+
+### 结论
+
+由运行时间，思路一最不可取，思路二和三效率差不多。思路三多了个循环，美感稍差一些。
+
+得到经验：由列表转数据框时，如果行列不是想要的形式，可以先换成矩阵，再换成数据框；而不是使用数据框转置。

@@ -6,10 +6,19 @@
     <description>Recent content in 解决方案 on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 20 Nov 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 04 Mar 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>将字符串分拆成数据框</title>
+      <link>/post/2019/03/04/str-split-todf/</link>
+      <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/03/04/str-split-todf/</guid>
+      <description>今天要解决一个长期困扰我的问题：使用strsplit或stringr::str_split，都是将元素分拆为列表的形式，虽然这样的通用性比较</description>
+    </item>
     
     <item>
       <title>leaflet for R(4)——leafletCN色块图</title>

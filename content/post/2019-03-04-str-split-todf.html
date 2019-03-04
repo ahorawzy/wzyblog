@@ -1,0 +1,115 @@
+---
+title: 将字符串分拆成数据框
+author: 王致远
+date: '2019-03-04'
+slug: str-split-todf
+categories:
+  - R语言
+tags:
+  - 解决方案
+---
+
+
+
+<p>今天要解决一个长期困扰我的问题：使用strsplit或stringr::str_split，都是将元素分拆为列表的形式，虽然这样的通用性比较好，但是在大多数情形下，分拆元素的个数是固定的，更希望以数据框的形式返回，这样更具有通用性。</p>
+<p>例如</p>
+<pre class="r"><code>strsplit(jd201610$date,&quot;-&quot;) %&gt;% head(3)</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;19&quot;   &quot;9月 &quot; &quot;16&quot;  
+## 
+## [[2]]
+## [1] &quot;19&quot;   &quot;9月 &quot; &quot;16&quot;  
+## 
+## [[3]]
+## [1] &quot;19&quot;   &quot;9月 &quot; &quot;16&quot;</code></pre>
+<pre class="r"><code>str_split(jd201610$date,&quot;-&quot;) %&gt;% head(3)</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;19&quot;   &quot;9月 &quot; &quot;16&quot;  
+## 
+## [[2]]
+## [1] &quot;19&quot;   &quot;9月 &quot; &quot;16&quot;  
+## 
+## [[3]]
+## [1] &quot;19&quot;   &quot;9月 &quot; &quot;16&quot;</code></pre>
+<div class="section level3">
+<h3>思路一：强制转换数据框再转置</h3>
+<p>一种思路是简单暴力的，强制转化为数据框。但由于as.data.frame是按元素转到数据框的列，不是想要的结果，所以还多了个转置的步骤，这样就大大增加了运行时间。</p>
+<pre class="r"><code>str_split_todf01 &lt;- function(strvec,sep){
+  tep &lt;- strsplit(strvec,sep)
+  df &lt;- as.data.frame(tep)
+  df &lt;- t(df)
+  rownames(df) &lt;- 1:nrow(df)
+  return(df)
+}</code></pre>
+<pre class="r"><code>str_split_todf01(jd201610$date,&quot;-&quot;) %&gt;% head(10)</code></pre>
+<pre><code>##    [,1] [,2]   [,3]
+## 1  &quot;19&quot; &quot;9月 &quot; &quot;16&quot;
+## 2  &quot;19&quot; &quot;9月 &quot; &quot;16&quot;
+## 3  &quot;19&quot; &quot;9月 &quot; &quot;16&quot;
+## 4  &quot;19&quot; &quot;9月 &quot; &quot;16&quot;
+## 5  &quot;19&quot; &quot;9月 &quot; &quot;16&quot;
+## 6  &quot;19&quot; &quot;9月 &quot; &quot;16&quot;
+## 7  &quot;19&quot; &quot;9月 &quot; &quot;16&quot;
+## 8  &quot;19&quot; &quot;9月 &quot; &quot;16&quot;
+## 9  &quot;19&quot; &quot;9月 &quot; &quot;16&quot;
+## 10 &quot;19&quot; &quot;9月 &quot; &quot;16&quot;</code></pre>
+<pre class="r"><code>system.time(str_split_todf01(jd201610$date,&quot;-&quot;))</code></pre>
+<pre><code>##  用户  系统  流逝 
+## 27.97  0.03 28.11</code></pre>
+</div>
+<div class="section level3">
+<h3>思路二：先转矩阵再转数据框</h3>
+<pre class="r"><code>str_split_todf02 &lt;- function(strvec,sep){
+  tep &lt;- strsplit(strvec,sep)
+  len &lt;- length(tep[[1]])
+  return(as.data.frame(matrix(unlist(tep),ncol=len,byrow = T)))
+}
+str_split_todf02(jd201610$date,sep=&quot;-&quot;) %&gt;% head(10)</code></pre>
+<pre><code>##    V1   V2 V3
+## 1  19 9月  16
+## 2  19 9月  16
+## 3  19 9月  16
+## 4  19 9月  16
+## 5  19 9月  16
+## 6  19 9月  16
+## 7  19 9月  16
+## 8  19 9月  16
+## 9  19 9月  16
+## 10 19 9月  16</code></pre>
+<pre class="r"><code>system.time(str_split_todf02(jd201610$date,sep=&quot;-&quot;))</code></pre>
+<pre><code>## 用户 系统 流逝 
+## 0.50 0.00 0.49</code></pre>
+</div>
+<div id="lapply" class="section level3">
+<h3>思路三：用lapply提取列表元素构成数据框</h3>
+<pre class="r"><code>str_split_todf03 &lt;- function(strvec,sep){
+  tep &lt;- strsplit(strvec,sep)
+  li &lt;- list()
+  len &lt;- length(tep[[1]])
+  for(i in 1:len){
+    li[[i]] &lt;- sapply(tep, `[`, i)
+  }
+  names(li) &lt;- 1:len
+  return(data.frame(li))
+}
+str_split_todf03(jd201610$date,&quot;-&quot;) %&gt;% head(10)</code></pre>
+<pre><code>##    X1   X2 X3
+## 1  19 9月  16
+## 2  19 9月  16
+## 3  19 9月  16
+## 4  19 9月  16
+## 5  19 9月  16
+## 6  19 9月  16
+## 7  19 9月  16
+## 8  19 9月  16
+## 9  19 9月  16
+## 10 19 9月  16</code></pre>
+<pre class="r"><code>system.time(str_split_todf03(jd201610$date,&quot;-&quot;))</code></pre>
+<pre><code>## 用户 系统 流逝 
+## 0.72 0.00 0.72</code></pre>
+</div>
+<div class="section level3">
+<h3>结论</h3>
+<p>由运行时间，思路一最不可取，思路二和三效率差不多。思路三多了个循环，美感稍差一些。</p>
+<p>得到经验：由列表转数据框时，如果行列不是想要的形式，可以先换成矩阵，再换成数据框；而不是使用数据框转置。</p>
+</div>
