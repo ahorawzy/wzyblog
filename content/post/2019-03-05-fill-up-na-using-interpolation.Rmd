@@ -1,0 +1,212 @@
+---
+title: 利用插值法填补缺失值
+author: ZhiYuan Wang
+date: '2019-03-05'
+slug: fill-up-na-using-interpolation
+categories:
+  - R语言
+tags:
+  - 解决方案
+---
+
+今天解决了一个很重要的问题——对交通流序列插补缺失值。去年此时，我是用手工方法插补的，非常笨拙。这次要实现对所有交调站的自动化插补。
+
+```{r echo=FALSE,message=FALSE,warning=FALSE}
+library(tidyverse)
+load("D:\\data\\jdzzl.RData")
+```
+
+该问题可以用“分而治之”的思路切分，先用“桐木岭站”实验，成功后用lapply推广到所有站。
+
+### 桐木岭实验
+
+```{r}
+names(jdzzl)
+x <- jdzzl[[10]]
+```
+
+#### 缺失值识别
+
+```{r}
+rowSums(is.na(x))
+```
+
+#### 缺失值剔除
+
+剔除缺失值在15个以上的日期
+
+```{r}
+rowSums(is.na(x)) < 15
+```
+
+按日期排序，并剔除缺失值多的日期
+
+```{r}
+date_order <- c(rownames(x)[13:23],rownames(x)[1:12])
+x <- x[date_order,]
+x <- x[rowSums(is.na(x)) < 15,]
+```
+
+插补缺失值有两种思路：
+
+1. 将每日视为单独样本，按单日插补；
+2. 将每日视为相连的，变成大向量后整体插补；
+
+由于第一种思路有可能遇到一个问题：某一日的最后几个数据连续缺失，这样就不好进行插补。思路二更符合现实情况：时间是连续的，不是一天天断开的，并且更容易实现，所以采用思路二。
+
+#### 展开矩阵
+
+```{r}
+y <- as.matrix(x)
+y <- t(y)
+y <- as.vector(y)
+```
+
+#### 缺失值插补
+
+首先看哪些位置是缺失值，哪些位置不是缺失值
+
+```{r}
+(na_loc <- which(is.na(y)))
+(notna_loc <- which(!is.na(y))) %>% head(100)
+```
+
+第一个缺失值位置是26，考虑用26附近的非缺失值来插补。那么需要衡量每个非缺失值位置与位置26的距离。用26减去非缺失值位置的序列，看能得到什么。
+
+```{r}
+26 - notna_loc %>% head(100)
+```
+
+所以可以使用这个差值的绝对值较小的几个值的平均值作为缺失值的插补，其位置为：
+
+```{r}
+notna_loc[which(abs(26-notna_loc)<5)]
+```
+
+那么对于所有的缺失值，写个循环：
+
+```{r}
+na_loc <- which(is.na(y))
+notna_loc <- which(!is.na(y))
+for(i in na_loc){
+  y[i] <- mean(y[notna_loc[which(abs(i-notna_loc)<5)]])
+}
+```
+
+#### 重构矩阵
+
+将展开的大向量重新构造为矩阵，恢复行名及列名
+
+```{r}
+y <- matrix(y,ncol = 288,byrow = T)
+#y <- as.data.frame(matrix(y,ncol = 288,byrow = T))
+rownames(y) <- rownames(x)
+colnames(y) <- 1:288
+```
+
+**注意：当分而治之中，试探的步骤做完了，要删除试探时设的变量x,y，否则很容易被之后lapply中的匿名函数变量误用到。**
+
+```{r}
+rm(x,y)
+```
+
+### 拓展到全数据集
+
+#### 缺失值识别
+
+```{r}
+lapply(jdzzl, function(x) rowSums(is.na(x)))
+```
+
+#### 缺失值剔除
+
+```{r}
+jdzzl <- lapply(jdzzl, function(x){
+  x <- x[date_order,]
+  x <- x[rowSums(is.na(x))<15,]
+})
+```
+
+```{r}
+lapply(jdzzl, function(x) rowSums(is.na(x)))
+```
+
+#### 展开矩阵
+
+```{r}
+jdzzl <- lapply(jdzzl, function(x){
+  x <- as.matrix(x)
+  y <- t(x)
+  y <- as.vector(y)
+})
+```
+
+
+#### 缺失值插补
+
+这里可以把匿名函数提取出来
+
+```{r}
+jdzzl_try <- jdzzl
+fillupna <- function(y){
+  na_loc <- which(is.na(y))
+  notna_loc <- which(!is.na(y))
+  for(i in na_loc){
+    y[i] <- mean(y[notna_loc[which(abs(i-notna_loc)<7)]])
+  }
+  return(y)
+}
+jdzzl_try <- lapply(jdzzl_try, fillupna)
+lapply(jdzzl_try, function(x) sum(is.na(x)))
+```
+
+也可以直接用匿名函数，但注意要给返回值，否则循环之后不知道该返回谁，就会出错
+
+```{r}
+jdzzl <- lapply(jdzzl,function(y){
+  na_loc <- which(is.na(y))
+  notna_loc <- which(!is.na(y))
+  for(i in na_loc){
+    y[i] <- mean(y[notna_loc[which(abs(i-notna_loc)<7)]])
+  }
+  return(y)
+})
+lapply(jdzzl, function(x) sum(is.na(x)))
+```
+
+### 步骤整合
+
+把以上步骤全部整合在一起
+
+```{r echo=FALSE}
+load("D:\\data\\jdzzl.RData")
+```
+
+```{r}
+jdzzl <- lapply(jdzzl, function(x){
+  
+  # 缺失值剔除
+  x <- x[date_order,]
+  x <- x[rowSums(is.na(x))<15,]
+  
+  # 展开矩阵
+  x <- as.matrix(x)
+  dates <- rownames(x)
+  x <- t(x)
+  x <- as.vector(x)
+  
+  # 缺失值插补
+  na_loc <- which(is.na(x))
+  notna_loc <- which(!is.na(x))
+  for(i in na_loc){
+    x[i] <- mean(x[notna_loc[which(abs(i-notna_loc)<7)]])
+  }
+  
+  # 重构矩阵
+  x <- matrix(x,ncol = 288,byrow = T)
+  rownames(x) <- dates
+  colnames(x) <- 1:288
+  return(x)
+})
+lapply(jdzzl, function(x) sum(is.na(x)))
+```

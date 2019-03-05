@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>利用插值法填补缺失值 | Website of ZhiYuan Wang</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">主页</a></li>
+      
+      <li><a href="/categories/">分类</a></li>
+      
+      <li><a href="/tags/">标签</a></li>
+      
+      <li><a href="/about/">关于我</a></li>
+      
+      <li><a href="/friendly_links/">链接</a></li>
+      
+      <li><a href="/index.xml">订阅</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">利用插值法填补缺失值</span></h1>
+<h2 class="author">ZhiYuan Wang</h2>
+<h2 class="date">2019/03/05</h2>
+</div>
+
+<main>
+<p>今天解决了一个很重要的问题——对交通流序列插补缺失值。去年此时，我是用手工方法插补的，非常笨拙。这次要实现对所有交调站的自动化插补。</p>
+<p>该问题可以用“分而治之”的思路切分，先用“桐木岭站”实验，成功后用lapply推广到所有站。</p>
+<div class="section level3">
+<h3>桐木岭实验</h3>
+<pre class="r"><code>names(jdzzl)</code></pre>
+<pre><code>##  [1] &quot;丙妹&quot;       &quot;黑石&quot;       &quot;麻尾&quot;       &quot;南宁&quot;       &quot;平关站&quot;    
+##  [6] &quot;平胜&quot;       &quot;普宜&quot;       &quot;松坎观测站&quot; &quot;台盘&quot;       &quot;桐木岭站&quot;</code></pre>
+<pre class="r"><code>x &lt;- jdzzl[[10]]</code></pre>
+<div class="section level4">
+<h4>缺失值识别</h4>
+<pre class="r"><code>rowSums(is.na(x))</code></pre>
+<pre><code>## Oct-01 Oct-02 Oct-03 Oct-04 Oct-05 Oct-06 Oct-07 Oct-08 Oct-09 Oct-10 
+##      0      0      1      0      0      0      0      5     10     12 
+## Oct-11 Oct-12 Sep-19 Sep-20 Sep-21 Sep-22 Sep-23 Sep-24 Sep-25 Sep-26 
+##     10     94      2      4      6     11     12     17     13      6 
+## Sep-27 Sep-29 Sep-30 
+##     14     91      0</code></pre>
+</div>
+<div class="section level4">
+<h4>缺失值剔除</h4>
+<p>剔除缺失值在15个以上的日期</p>
+<pre class="r"><code>rowSums(is.na(x)) &lt; 15</code></pre>
+<pre><code>## Oct-01 Oct-02 Oct-03 Oct-04 Oct-05 Oct-06 Oct-07 Oct-08 Oct-09 Oct-10 
+##   TRUE   TRUE   TRUE   TRUE   TRUE   TRUE   TRUE   TRUE   TRUE   TRUE 
+## Oct-11 Oct-12 Sep-19 Sep-20 Sep-21 Sep-22 Sep-23 Sep-24 Sep-25 Sep-26 
+##   TRUE  FALSE   TRUE   TRUE   TRUE   TRUE   TRUE  FALSE   TRUE   TRUE 
+## Sep-27 Sep-29 Sep-30 
+##   TRUE  FALSE   TRUE</code></pre>
+<p>按日期排序，并剔除缺失值多的日期</p>
+<pre class="r"><code>date_order &lt;- c(rownames(x)[13:23],rownames(x)[1:12])
+x &lt;- x[date_order,]
+x &lt;- x[rowSums(is.na(x)) &lt; 15,]</code></pre>
+<p>插补缺失值有两种思路：</p>
+<ol style="list-style-type: decimal">
+<li>将每日视为单独样本，按单日插补；</li>
+<li>将每日视为相连的，变成大向量后整体插补；</li>
+</ol>
+<p>由于第一种思路有可能遇到一个问题：某一日的最后几个数据连续缺失，这样就不好进行插补。思路二更符合现实情况：时间是连续的，不是一天天断开的，并且更容易实现，所以采用思路二。</p>
+</div>
+<div class="section level4">
+<h4>展开矩阵</h4>
+<pre class="r"><code>y &lt;- as.matrix(x)
+y &lt;- t(y)
+y &lt;- as.vector(y)</code></pre>
+</div>
+<div class="section level4">
+<h4>缺失值插补</h4>
+<p>首先看哪些位置是缺失值，哪些位置不是缺失值</p>
+<pre class="r"><code>(na_loc &lt;- which(is.na(y)))</code></pre>
+<pre><code>##   [1]   26  265  329  357  385  502  659  667  685  771  799  847  882  900
+##  [15]  904  935  942  983 1015 1016 1060 1064 1073 1197 1198 1244 1273 1283
+##  [29] 1355 1356 1369 1378 1383 1388 1427 1462 1466 1476 1523 1528 1542 1599
+##  [43] 1600 1660 1683 1693 1704 1727 1749 1897 1898 1966 1993 2012 2042 2069
+##  [57] 2070 2207 2228 2252 2297 2298 2299 2300 2301 2302 2303 2304 3433 4812
+##  [71] 4813 4840 4848 4853 4950 4957 4961 5031 5050 5055 5069 5077 5100 5123
+##  [85] 5197 5223 5266 5271 5277 5296 5313 5322 5332 5349 5449 5467 5480 5526
+##  [99] 5531 5578 5579 5604 5682 5719 5748 5754</code></pre>
+<pre class="r"><code>(notna_loc &lt;- which(!is.na(y))) %&gt;% head(100)</code></pre>
+<pre><code>##   [1]   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17
+##  [18]  18  19  20  21  22  23  24  25  27  28  29  30  31  32  33  34  35
+##  [35]  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52
+##  [52]  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68  69
+##  [69]  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85  86
+##  [86]  87  88  89  90  91  92  93  94  95  96  97  98  99 100 101</code></pre>
+<p>第一个缺失值位置是26，考虑用26附近的非缺失值来插补。那么需要衡量每个非缺失值位置与位置26的距离。用26减去非缺失值位置的序列，看能得到什么。</p>
+<pre class="r"><code>26 - notna_loc %&gt;% head(100)</code></pre>
+<pre><code>##   [1]  25  24  23  22  21  20  19  18  17  16  15  14  13  12  11  10   9
+##  [18]   8   7   6   5   4   3   2   1  -1  -2  -3  -4  -5  -6  -7  -8  -9
+##  [35] -10 -11 -12 -13 -14 -15 -16 -17 -18 -19 -20 -21 -22 -23 -24 -25 -26
+##  [52] -27 -28 -29 -30 -31 -32 -33 -34 -35 -36 -37 -38 -39 -40 -41 -42 -43
+##  [69] -44 -45 -46 -47 -48 -49 -50 -51 -52 -53 -54 -55 -56 -57 -58 -59 -60
+##  [86] -61 -62 -63 -64 -65 -66 -67 -68 -69 -70 -71 -72 -73 -74 -75</code></pre>
+<p>所以可以使用这个差值的绝对值较小的几个值的平均值作为缺失值的插补，其位置为：</p>
+<pre class="r"><code>notna_loc[which(abs(26-notna_loc)&lt;5)]</code></pre>
+<pre><code>## [1] 22 23 24 25 27 28 29 30</code></pre>
+<p>那么对于所有的缺失值，写个循环：</p>
+<pre class="r"><code>na_loc &lt;- which(is.na(y))
+notna_loc &lt;- which(!is.na(y))
+for(i in na_loc){
+  y[i] &lt;- mean(y[notna_loc[which(abs(i-notna_loc)&lt;5)]])
+}</code></pre>
+</div>
+<div class="section level4">
+<h4>重构矩阵</h4>
+<p>将展开的大向量重新构造为矩阵，恢复行名及列名</p>
+<pre class="r"><code>y &lt;- matrix(y,ncol = 288,byrow = T)
+#y &lt;- as.data.frame(matrix(y,ncol = 288,byrow = T))
+rownames(y) &lt;- rownames(x)
+colnames(y) &lt;- 1:288</code></pre>
+<p><strong>注意：当分而治之中，试探的步骤做完了，要删除试探时设的变量x,y，否则很容易被之后lapply中的匿名函数变量误用到。</strong></p>
+<pre class="r"><code>rm(x,y)</code></pre>
+</div>
+</div>
+<div class="section level3">
+<h3>拓展到全数据集</h3>
+<div id="-1" class="section level4">
+<h4>缺失值识别</h4>
+<pre class="r"><code>lapply(jdzzl, function(x) rowSums(is.na(x)))</code></pre>
+<pre><code>## $丙妹
+## Oct-01 Oct-02 Oct-03 Oct-04 Oct-05 Oct-06 Oct-07 Oct-08 Oct-09 Oct-10 
+##      0      0      0      0      0      0      0      0      0      0 
+## Oct-11 Oct-12 Sep-19 Sep-20 Sep-21 Sep-22 Sep-23 Sep-24 Sep-25 Sep-26 
+##      0     89      0      0      0      0      0      0      0      0 
+## Sep-27 Sep-29 Sep-30 
+##      7     91      0 
+## 
+## $黑石
+## Oct-01 Oct-02 Oct-03 Oct-04 Oct-05 Oct-06 Oct-07 Oct-08 Oct-09 Oct-10 
+##      0      0      0      0      0      0      0      0      0      0 
+## Oct-11 Oct-12 Sep-19 Sep-20 Sep-21 Sep-22 Sep-23 Sep-24 Sep-25 Sep-26 
+##      0     88      0      0      0      0      0      0      0      0 
+## Sep-27 Sep-29 Sep-30 
+##      8     90     79 
+## 
+## $麻尾
+## Oct-01 Oct-02 Oct-03 Oct-04 Oct-05 Oct-06 Oct-07 Oct-08 Oct-09 Oct-10 
+##      0      0      1      0      0      0      0      0      0      1 
+## Oct-11 Oct-12 Sep-19 Sep-20 Sep-21 Sep-22 Sep-23 Sep-24 Sep-25 Sep-26 
+##      0     89      2      0      0      0      0      0      0      1 
+## Sep-27 Sep-29 Sep-30 
+##      7     91      0 
+## 
+## $南宁
+## Oct-01 Oct-02 Oct-03 Oct-04 Oct-05 Oct-06 Oct-07 Oct-08 Oct-09 Oct-10 
+##      0      0      0      0      0      0      0      0      0      0 
+## Oct-11 Oct-12 Sep-19 Sep-20 Sep-21 Sep-22 Sep-23 Sep-24 Sep-25 Sep-26 
+##      0     89      0      0      0      0      0      0      0      0 
+## Sep-27 Sep-29 Sep-30 
+##      7     91      0 
+## 
+## $平关站
+## Oct-01 Oct-02 Oct-03 Oct-04 Oct-05 Oct-06 Oct-07 Oct-08 Oct-09 Oct-10 
+##      0      0      1      0      0      0      0      0      0      1 
+## Oct-11 Oct-12 Sep-19 Sep-20 Sep-21 Sep-22 Sep-23 Sep-24 Sep-25 Sep-26 
+##      0     89      1      0      0      0      0      0      0      1 
+## Sep-27 Sep-29 Sep-30 
+##      7     91      0 
+## 
+## $平胜
+## Oct-01 Oct-02 Oct-03 Oct-04 Oct-05 Oct-06 Oct-07 Oct-08 Oct-09 Oct-10 
+##      0      0      0      0      0      0      0      0      0      0 
+## Oct-11 Oct-12 Sep-19 Sep-20 Sep-21 Sep-22 Sep-23 Sep-24 Sep-25 Sep-26 
+##      0     89      0      0      0      0      0      0      0      0 
+## Sep-27 Sep-29 Sep-30 
+##      7     91      0 
+## 
+## $普宜
+## Oct-01 Oct-02 Oct-03 Oct-04 Oct-05 Oct-06 Oct-07 Oct-08 Oct-09 Oct-10 
+##      0      0      1      0      0      0      0      0      0      1 
+## Oct-11 Oct-12 Sep-19 Sep-20 Sep-21 Sep-22 Sep-23 Sep-24 Sep-25 Sep-26 
+##      0     89      1      0      0      0      0      0      0      1 
+## Sep-27 Sep-29 Sep-30 
+##      7     91      0 
+## 
+## $松坎观测站
+## Oct-01 Oct-02 Oct-03 Oct-04 Oct-05 Oct-06 Oct-07 Oct-08 Oct-09 Oct-10 
+##      0      0      0      0      0      0      2      0     11      7 
+## Oct-11 Oct-12 Oct-13 Oct-14 Oct-15 Oct-16 Sep-19 Sep-20 Sep-21 Sep-22 
+##      0      0      0      2     11      0      3      4      4      5 
+## Sep-23 Sep-24 Sep-25 Sep-26 Sep-27 Sep-29 Sep-30 
+##     20      9     11     10     15     91      0 
+## 
+## $台盘
+## Oct-01 Oct-02 Oct-03 Oct-04 Oct-05 Oct-06 Oct-07 Oct-08 Oct-09 Oct-10 
+##      0      0      0      0      0      0      0      0      0      0 
+## Oct-11 Oct-12 Sep-19 Sep-20 Sep-21 Sep-22 Sep-23 Sep-24 Sep-25 Sep-26 
+##      0     89      0      0      0      0      0      0      0      0 
+## Sep-27 Sep-29 Sep-30 
+##      7     91      0 
+## 
+## $桐木岭站
+## Oct-01 Oct-02 Oct-03 Oct-04 Oct-05 Oct-06 Oct-07 Oct-08 Oct-09 Oct-10 
+##      0      0      1      0      0      0      0      5     10     12 
+## Oct-11 Oct-12 Sep-19 Sep-20 Sep-21 Sep-22 Sep-23 Sep-24 Sep-25 Sep-26 
+##     10     94      2      4      6     11     12     17     13      6 
+## Sep-27 Sep-29 Sep-30 
+##     14     91      0</code></pre>
+</div>
+<div id="-1" class="section level4">
+<h4>缺失值剔除</h4>
+<pre class="r"><code>jdzzl &lt;- lapply(jdzzl, function(x){
+  x &lt;- x[date_order,]
+  x &lt;- x[rowSums(is.na(x))&lt;15,]
+})</code></pre>
+<pre class="r"><code>lapply(jdzzl, function(x) rowSums(is.na(x)))</code></pre>
+<pre><code>## $丙妹
+## Sep-19 Sep-20 Sep-21 Sep-22 Sep-23 Sep-24 Sep-25 Sep-26 Sep-27 Sep-30 
+##      0      0      0      0      0      0      0      0      7      0 
+## Oct-01 Oct-02 Oct-03 Oct-04 Oct-05 Oct-06 Oct-07 Oct-08 Oct-09 Oct-10 
+##      0      0      0      0      0      0      0      0      0      0 
+## Oct-11 
+##      0 
+## 
+## $黑石
+## Sep-19 Sep-20 Sep-21 Sep-22 Sep-23 Sep-24 Sep-25 Sep-26 Sep-27 Oct-01 
+##      0      0      0      0      0      0      0      0      8      0 
+## Oct-02 Oct-03 Oct-04 Oct-05 Oct-06 Oct-07 Oct-08 Oct-09 Oct-10 Oct-11 
+##      0      0      0      0      0      0      0      0      0      0 
+## 
+## $麻尾
+## Sep-19 Sep-20 Sep-21 Sep-22 Sep-23 Sep-24 Sep-25 Sep-26 Sep-27 Sep-30 
+##      2      0      0      0      0      0      0      1      7      0 
+## Oct-01 Oct-02 Oct-03 Oct-04 Oct-05 Oct-06 Oct-07 Oct-08 Oct-09 Oct-10 
+##      0      0      1      0      0      0      0      0      0      1 
+## Oct-11 
+##      0 
+## 
+## $南宁
+## Sep-19 Sep-20 Sep-21 Sep-22 Sep-23 Sep-24 Sep-25 Sep-26 Sep-27 Sep-30 
+##      0      0      0      0      0      0      0      0      7      0 
+## Oct-01 Oct-02 Oct-03 Oct-04 Oct-05 Oct-06 Oct-07 Oct-08 Oct-09 Oct-10 
+##      0      0      0      0      0      0      0      0      0      0 
+## Oct-11 
+##      0 
+## 
+## $平关站
+## Sep-19 Sep-20 Sep-21 Sep-22 Sep-23 Sep-24 Sep-25 Sep-26 Sep-27 Sep-30 
+##      1      0      0      0      0      0      0      1      7      0 
+## Oct-01 Oct-02 Oct-03 Oct-04 Oct-05 Oct-06 Oct-07 Oct-08 Oct-09 Oct-10 
+##      0      0      1      0      0      0      0      0      0      1 
+## Oct-11 
+##      0 
+## 
+## $平胜
+## Sep-19 Sep-20 Sep-21 Sep-22 Sep-23 Sep-24 Sep-25 Sep-26 Sep-27 Sep-30 
+##      0      0      0      0      0      0      0      0      7      0 
+## Oct-01 Oct-02 Oct-03 Oct-04 Oct-05 Oct-06 Oct-07 Oct-08 Oct-09 Oct-10 
+##      0      0      0      0      0      0      0      0      0      0 
+## Oct-11 
+##      0 
+## 
+## $普宜
+## Sep-19 Sep-20 Sep-21 Sep-22 Sep-23 Sep-24 Sep-25 Sep-26 Sep-27 Sep-30 
+##      1      0      0      0      0      0      0      1      7      0 
+## Oct-01 Oct-02 Oct-03 Oct-04 Oct-05 Oct-06 Oct-07 Oct-08 Oct-09 Oct-10 
+##      0      0      1      0      0      0      0      0      0      1 
+## Oct-11 
+##      0 
+## 
+## $松坎观测站
+## Sep-19 Sep-20 Sep-21 Sep-22 Sep-24 Sep-25 Sep-26 Sep-30 Oct-01 Oct-02 
+##      3      4      4      5      9     11     10      0      0      0 
+## Oct-03 Oct-04 Oct-05 Oct-06 Oct-07 Oct-08 Oct-09 Oct-10 Oct-11 Oct-12 
+##      0      0      0      0      2      0     11      7      0      0 
+## 
+## $台盘
+## Sep-19 Sep-20 Sep-21 Sep-22 Sep-23 Sep-24 Sep-25 Sep-26 Sep-27 Sep-30 
+##      0      0      0      0      0      0      0      0      7      0 
+## Oct-01 Oct-02 Oct-03 Oct-04 Oct-05 Oct-06 Oct-07 Oct-08 Oct-09 Oct-10 
+##      0      0      0      0      0      0      0      0      0      0 
+## Oct-11 
+##      0 
+## 
+## $桐木岭站
+## Sep-19 Sep-20 Sep-21 Sep-22 Sep-23 Sep-25 Sep-26 Sep-27 Sep-30 Oct-01 
+##      2      4      6     11     12     13      6     14      0      0 
+## Oct-02 Oct-03 Oct-04 Oct-05 Oct-06 Oct-07 Oct-08 Oct-09 Oct-10 Oct-11 
+##      0      1      0      0      0      0      5     10     12     10</code></pre>
+</div>
+<div id="-1" class="section level4">
+<h4>展开矩阵</h4>
+<pre class="r"><code>jdzzl &lt;- lapply(jdzzl, function(x){
+  x &lt;- as.matrix(x)
+  y &lt;- t(x)
+  y &lt;- as.vector(y)
+})</code></pre>
+</div>
+<div id="-1" class="section level4">
+<h4>缺失值插补</h4>
+<p>这里可以把匿名函数提取出来</p>
+<pre class="r"><code>jdzzl_try &lt;- jdzzl
+fillupna &lt;- function(y){
+  na_loc &lt;- which(is.na(y))
+  notna_loc &lt;- which(!is.na(y))
+  for(i in na_loc){
+    y[i] &lt;- mean(y[notna_loc[which(abs(i-notna_loc)&lt;7)]])
+  }
+  return(y)
+}
+jdzzl_try &lt;- lapply(jdzzl_try, fillupna)
+lapply(jdzzl_try, function(x) sum(is.na(x)))</code></pre>
+<pre><code>## $丙妹
+## [1] 0
+## 
+## $黑石
+## [1] 0
+## 
+## $麻尾
+## [1] 0
+## 
+## $南宁
+## [1] 0
+## 
+## $平关站
+## [1] 0
+## 
+## $平胜
+## [1] 0
+## 
+## $普宜
+## [1] 0
+## 
+## $松坎观测站
+## [1] 0
+## 
+## $台盘
+## [1] 0
+## 
+## $桐木岭站
+## [1] 0</code></pre>
+<p>也可以直接用匿名函数，但注意要给返回值，否则循环之后不知道该返回谁，就会出错</p>
+<pre class="r"><code>jdzzl &lt;- lapply(jdzzl,function(y){
+  na_loc &lt;- which(is.na(y))
+  notna_loc &lt;- which(!is.na(y))
+  for(i in na_loc){
+    y[i] &lt;- mean(y[notna_loc[which(abs(i-notna_loc)&lt;7)]])
+  }
+  return(y)
+})
+lapply(jdzzl, function(x) sum(is.na(x)))</code></pre>
+<pre><code>## $丙妹
+## [1] 0
+## 
+## $黑石
+## [1] 0
+## 
+## $麻尾
+## [1] 0
+## 
+## $南宁
+## [1] 0
+## 
+## $平关站
+## [1] 0
+## 
+## $平胜
+## [1] 0
+## 
+## $普宜
+## [1] 0
+## 
+## $松坎观测站
+## [1] 0
+## 
+## $台盘
+## [1] 0
+## 
+## $桐木岭站
+## [1] 0</code></pre>
+</div>
+</div>
+<div class="section level3">
+<h3>步骤整合</h3>
+<p>把以上步骤全部整合在一起</p>
+<pre class="r"><code>jdzzl &lt;- lapply(jdzzl, function(x){
+  
+  # 缺失值剔除
+  x &lt;- x[date_order,]
+  x &lt;- x[rowSums(is.na(x))&lt;15,]
+  
+  # 展开矩阵
+  x &lt;- as.matrix(x)
+  dates &lt;- rownames(x)
+  x &lt;- t(x)
+  x &lt;- as.vector(x)
+  
+  # 缺失值插补
+  na_loc &lt;- which(is.na(x))
+  notna_loc &lt;- which(!is.na(x))
+  for(i in na_loc){
+    x[i] &lt;- mean(x[notna_loc[which(abs(i-notna_loc)&lt;7)]])
+  }
+  
+  # 重构矩阵
+  x &lt;- matrix(x,ncol = 288,byrow = T)
+  rownames(x) &lt;- dates
+  colnames(x) &lt;- 1:288
+  return(x)
+})
+lapply(jdzzl, function(x) sum(is.na(x)))</code></pre>
+<pre><code>## $丙妹
+## [1] 0
+## 
+## $黑石
+## [1] 0
+## 
+## $麻尾
+## [1] 0
+## 
+## $南宁
+## [1] 0
+## 
+## $平关站
+## [1] 0
+## 
+## $平胜
+## [1] 0
+## 
+## $普宜
+## [1] 0
+## 
+## $松坎观测站
+## [1] 0
+## 
+## $台盘
+## [1] 0
+## 
+## $桐木岭站
+## [1] 0</code></pre>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+  
+  <hr/>
+  &copy; ZhiYuan Wang 2018~2019
+  
+  </footer>
+  </body>
+</html>
+
