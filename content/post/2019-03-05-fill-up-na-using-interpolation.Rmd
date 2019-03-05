@@ -1,6 +1,6 @@
 ---
 title: 利用插值法填补缺失值
-author: ZhiYuan Wang
+author: 王致远
 date: '2019-03-05'
 slug: fill-up-na-using-interpolation
 categories:
