@@ -1,0 +1,30 @@
+---
+title: R包中的相对路径
+author: 王致远
+date: '2019-03-06'
+slug: r包中的相对路径
+categories:
+  - R语言
+tags:
+  - 解决方案
+---
+
+
+
+<p>今天无意中解决了一个困扰我多年的问题——R中的路径究竟是怎么回事。我发现之前的我在引用路径时有两个问题：</p>
+<ol style="list-style-type: decimal">
+<li>使用了反斜杠\；这样为了在R中用路径，就必须打N个反斜杠。</li>
+<li>使用了绝对路径；</li>
+</ol>
+<p>所以正确的做法是：</p>
+<ol style="list-style-type: decimal">
+<li>使用正斜杠/；</li>
+<li>使用相对路径；</li>
+</ol>
+<p>例如：</p>
+<p>我想将mtcars写入wzyblog/content中，我应该</p>
+<pre class="r"><code># save(mtcars,file=&quot;content/mtcars.rda&quot;)</code></pre>
+<p>子文件夹content前不用加斜杠/</p>
+<p>（注意要在终端，而不是在rmarkdown里，因为它改路径了）</p>
+<p>而不是</p>
+<pre class="r"><code># save(mtcars,file=&quot;D:\\R\\projects\\wzyblog\\content\\mtcars.csv&quot;)</code></pre>

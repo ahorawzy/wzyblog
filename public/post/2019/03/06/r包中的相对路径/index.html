@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>R包中的相对路径 | Website of ZhiYuan Wang</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">主页</a></li>
+      
+      <li><a href="/categories/">分类</a></li>
+      
+      <li><a href="/tags/">标签</a></li>
+      
+      <li><a href="/about/">关于我</a></li>
+      
+      <li><a href="/friendly_links/">链接</a></li>
+      
+      <li><a href="/index.xml">订阅</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">R包中的相对路径</span></h1>
+<h2 class="author">王致远</h2>
+<h2 class="date">2019/03/06</h2>
+</div>
+
+<main>
+<p>今天无意中解决了一个困扰我多年的问题——R中的路径究竟是怎么回事。我发现之前的我在引用路径时有两个问题：</p>
+<ol style="list-style-type: decimal">
+<li>使用了反斜杠\；这样为了在R中用路径，就必须打N个反斜杠。</li>
+<li>使用了绝对路径；</li>
+</ol>
+<p>所以正确的做法是：</p>
+<ol style="list-style-type: decimal">
+<li>使用正斜杠/；</li>
+<li>使用相对路径；</li>
+</ol>
+<p>例如：</p>
+<p>我想将mtcars写入wzyblog/content中，我应该</p>
+<pre class="r"><code># save(mtcars,file=&quot;content/mtcars.rda&quot;)</code></pre>
+<p>子文件夹content前不用加斜杠/</p>
+<p>（注意要在终端，而不是在rmarkdown里，因为它改路径了）</p>
+<p>而不是</p>
+<pre class="r"><code># save(mtcars,file=&quot;D:\\R\\projects\\wzyblog\\content\\mtcars.csv&quot;)</code></pre>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+  
+  <hr/>
+  &copy; ZhiYuan Wang 2018~2019
+  
+  </footer>
+  </body>
+</html>
+

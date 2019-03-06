@@ -6,10 +6,19 @@
     <description>Recent content in Home on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 05 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 06 Mar 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>R包中的相对路径</title>
+      <link>/post/2019/03/06/r%E5%8C%85%E4%B8%AD%E7%9A%84%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84/</link>
+      <pubDate>Wed, 06 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/03/06/r%E5%8C%85%E4%B8%AD%E7%9A%84%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84/</guid>
+      <description>今天无意中解决了一个困扰我多年的问题——R中的路径究竟是怎么回事。我发现之前的我在引用路径时有两个问题： 使用了反斜杠\；这样为了在R中用路径</description>
+    </item>
     
     <item>
       <title>利用插值法填补缺失值</title>

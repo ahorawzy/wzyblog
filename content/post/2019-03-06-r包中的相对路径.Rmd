@@ -1,0 +1,38 @@
+---
+title: R包中的相对路径
+author: 王致远
+date: '2019-03-06'
+slug: r包中的相对路径
+categories:
+  - R语言
+tags:
+  - 解决方案
+---
+
+今天无意中解决了一个困扰我多年的问题——R中的路径究竟是怎么回事。我发现之前的我在引用路径时有两个问题：
+
+1. 使用了反斜杠\\；这样为了在R中用路径，就必须打N个反斜杠。
+2. 使用了绝对路径；
+
+所以正确的做法是：
+
+1. 使用正斜杠/；
+2. 使用相对路径；
+
+例如：
+
+我想将mtcars写入wzyblog/content中，我应该
+
+```{r eval=FALSE}
+# save(mtcars,file="content/mtcars.rda")
+```
+
+子文件夹content前不用加斜杠/
+
+（注意要在终端，而不是在rmarkdown里，因为它改路径了）
+
+而不是
+
+```{r eval=FALSE}
+# save(mtcars,file="D:\\R\\projects\\wzyblog\\content\\mtcars.csv")
+```
