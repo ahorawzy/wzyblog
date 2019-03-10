@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>旅游 on Website of ZhiYuan Wang</title>
+    <link>/tags/%E6%97%85%E6%B8%B8/</link>
+    <description>Recent content in 旅游 on Website of ZhiYuan Wang</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 06 Mar 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/%E6%97%85%E6%B8%B8/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>《航拍中国》中的旅游景点</title>
+      <link>/post/2019/03/06/aerial-china/</link>
+      <pubDate>Wed, 06 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/03/06/aerial-china/</guid>
+      <description>四川 九曲黄河第一湾； 黄龙、九寨沟； 都江堰； 龙泉山； 宽窄巷子； 人民公园； 汶川-映秀； 剑门关； 阆中古城； 渠县； 安岳石刻； 蜀南竹海； 乐山大佛； 峨眉</description>
+    </item>
+    
+  </channel>
+</rss>

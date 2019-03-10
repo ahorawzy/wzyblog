@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>/post/2019/03/06/aerial-china/</loc>
+    <lastmod>2019-03-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/2019/03/05/fill-up-na-using-interpolation/</loc>
     <lastmod>2019-03-05T00:00:00+00:00</lastmod>
   </url>
@@ -566,6 +571,12 @@
   </url>
   
   <url>
+    <loc>/tags/%E6%97%85%E6%B8%B8/</loc>
+    <lastmod>2019-03-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/categories/%E6%97%B6%E4%BA%8B%E7%A4%BE%E8%AE%BA/</loc>
     <lastmod>2019-01-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -585,7 +596,7 @@
   
   <url>
     <loc>/categories/%E7%94%B5%E5%BD%B1/</loc>
-    <lastmod>2018-12-01T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
