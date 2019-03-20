@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/2019/03/20/the-kite-runner/</loc>
+    <lastmod>2019-03-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/2019/03/06/r%E5%8C%85%E4%B8%AD%E7%9A%84%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84/</loc>
     <lastmod>2019-03-06T00:00:00+00:00</lastmod>
   </url>
@@ -449,7 +454,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-03-06T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -460,7 +465,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2019-03-06T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -620,13 +625,13 @@
   
   <url>
     <loc>/categories/%E8%AF%BB%E4%B9%A6/</loc>
-    <lastmod>2019-03-01T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2019-03-01T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
