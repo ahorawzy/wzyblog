@@ -6,10 +6,19 @@
     <description>Recent content in R语言 on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 06 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 02 Apr 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/r%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>给每一行添加一个引用符</title>
+      <link>/post/2019/04/02/give-each-line-a-greaterthan/</link>
+      <pubDate>Tue, 02 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/04/02/give-each-line-a-greaterthan/</guid>
+      <description>在用Kindle + Kindle Mate整理读书笔记，并转化为博客时候，经常需要给每一行一个符号“&amp;gt;”，来在markdown中表示引用。而当笔记较</description>
+    </item>
     
     <item>
       <title>R包中的相对路径</title>

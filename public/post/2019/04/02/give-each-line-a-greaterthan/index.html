@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>给每一行添加一个引用符 | Website of ZhiYuan Wang</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">主页</a></li>
+      
+      <li><a href="/categories/">分类</a></li>
+      
+      <li><a href="/tags/">标签</a></li>
+      
+      <li><a href="/about/">关于我</a></li>
+      
+      <li><a href="/friendly_links/">链接</a></li>
+      
+      <li><a href="/index.xml">订阅</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">给每一行添加一个引用符</span></h1>
+<h2 class="author">王致远</h2>
+<h2 class="date">2019/04/02</h2>
+</div>
+
+<main>
+<p>在用Kindle + Kindle Mate整理读书笔记，并转化为博客时候，经常需要给每一行一个符号“&gt;”，来在markdown中表示引用。而当笔记较多时，一个一个添加引用符太过繁琐，所以想着写一个程序解决，如下：</p>
+<pre class="r"><code>AddGreaterthan &lt;- function(filename,encodestyle){
+  file &lt;- readLines(filename,encoding=encodestyle)
+  noemptyindex &lt;- which(nchar(file)!=0)
+  file[noemptyindex] &lt;- paste(&quot;&gt;&quot;,file[noemptyindex])
+  writeLines(file,filename)
+}</code></pre>
+<p>该程序写入了usefulr包里。</p>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+  
+  <hr/>
+  &copy; ZhiYuan Wang 2018~2019
+  
+  </footer>
+  </body>
+</html>
+

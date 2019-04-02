@@ -1,0 +1,23 @@
+---
+title: 给每一行添加一个引用符
+author: 王致远
+date: '2019-04-02'
+slug: give-each-line-a-greaterthan
+categories:
+  - R语言
+tags:
+  - 解决方案
+---
+
+在用Kindle + Kindle Mate整理读书笔记，并转化为博客时候，经常需要给每一行一个符号">"，来在markdown中表示引用。而当笔记较多时，一个一个添加引用符太过繁琐，所以想着写一个程序解决，如下：
+
+```{r eval=FALSE}
+AddGreaterthan <- function(filename,encodestyle){
+  file <- readLines(filename,encoding=encodestyle)
+  noemptyindex <- which(nchar(file)!=0)
+  file[noemptyindex] <- paste(">",file[noemptyindex])
+  writeLines(file,filename)
+}
+```
+
+该程序写入了usefulr包里。
