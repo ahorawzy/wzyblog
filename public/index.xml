@@ -219,6 +219,15 @@
     </item>
     
     <item>
+      <title>学习链接</title>
+      <link>/friendly_links/</link>
+      <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/friendly_links/</guid>
+      <description>谢益辉的博客 Rstudio Webinars bookdown书单-精华版 bookdown书单-完全版 blogdown bookdown rmarkdown R for Data Science Advanced R 统计之都 w3cschool</description>
+    </item>
+    
+    <item>
       <title>学习《R for Data Science》(4)——Tibbles</title>
       <link>/post/2018/12/30/reading-r-for-data-science-4/</link>
       <pubDate>Sun, 30 Dec 2018 00:00:00 +0000</pubDate>
@@ -864,15 +873,6 @@
       
       <guid>/post/2018/09/18/first-blog/</guid>
       <description>今天开始在这里写博客的契机很偶然，是看到微信公众号“R语言中文网”上关于blogdown的一篇简单介绍。中午用10分钟看完后，觉得用blog</description>
-    </item>
-    
-    <item>
-      <title>学习链接</title>
-      <link>/friendly_links/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/friendly_links/</guid>
-      <description>谢益辉的博客 Rstudio Webinars bookdown书单-精华版 bookdown书单-完全版 blogdown bookdown rmarkdown R for Data Science Advanced R 统计之都 w3cschool 聊斋志异 聊斋志异白话版</description>
     </item>
     
   </channel>
