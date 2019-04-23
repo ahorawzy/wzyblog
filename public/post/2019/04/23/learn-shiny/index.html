@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>学习shiny包 | Website of ZhiYuan Wang</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">主页</a></li>
+      
+      <li><a href="/categories/">分类</a></li>
+      
+      <li><a href="/tags/">标签</a></li>
+      
+      <li><a href="/about/">关于我</a></li>
+      
+      <li><a href="/friendly_links/">链接</a></li>
+      
+      <li><a href="/index.xml">订阅</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">学习shiny包</span></h1>
+<h2 class="author">王致远</h2>
+<h2 class="date">2019/04/23</h2>
+</div>
+
+<main>
+<div id="get-start" class="section level1">
+<h1>Get Start</h1>
+<p>Shiny包有11个内置demo。</p>
+<pre class="r"><code>library(shiny)
+runExample(&quot;01_hello&quot;)</code></pre>
+<p>每一个Shiny APP包含三个部分：</p>
+<ul>
+<li>UI，控制显示外观</li>
+<li>server function，运算</li>
+<li>shinyApp function，构造APP</li>
+</ul>
+<pre class="r"><code>library(shiny)
+
+# Define UI for app that draws a histogram ----
+ui &lt;- fluidPage(
+
+  # App title ----
+  titlePanel(&quot;Hello Shiny!&quot;),
+
+  # Sidebar layout with input and output definitions ----
+  sidebarLayout(
+
+    # Sidebar panel for inputs ----
+    sidebarPanel(
+
+      # Input: Slider for the number of bins ----
+      sliderInput(inputId = &quot;bins&quot;,
+                  label = &quot;Number of bins:&quot;,
+                  min = 1,
+                  max = 50,
+                  value = 30)
+
+    ),
+
+    # Main panel for displaying outputs ----
+    mainPanel(
+
+      # Output: Histogram ----
+      plotOutput(outputId = &quot;distPlot&quot;)
+
+    )
+  )
+)
+
+# Define server logic required to draw a histogram ----
+server &lt;- function(input, output) {
+
+  # Histogram of the Old Faithful Geyser Data ----
+  # with requested number of bins
+  # This expression that generates a histogram is wrapped in a call
+  # to renderPlot to indicate that:
+  #
+  # 1. It is &quot;reactive&quot; and therefore should be automatically
+  #    re-executed when inputs (input$bins) change
+  # 2. Its output type is a plot
+  output$distPlot &lt;- renderPlot({
+
+    x    &lt;- faithful$waiting
+    bins &lt;- seq(min(x), max(x), length.out = input$bins + 1)
+
+    hist(x, breaks = bins, col = &quot;#75AADB&quot;, border = &quot;white&quot;,
+         xlab = &quot;Waiting time to next eruption (in mins)&quot;,
+         main = &quot;Histogram of waiting times&quot;)
+
+    })
+
+}
+
+# Create Shiny app ----
+shinyApp(ui = ui, server = server)</code></pre>
+<p>一个Shiny APP的结构如下</p>
+<pre class="r"><code>library(shiny)
+
+# See above for the definitions of ui and server
+ui &lt;- ...
+
+server &lt;- ...
+
+shinyApp(ui = ui, server = server)</code></pre>
+<p>当运行APP时，R session忙着监听APP，所以不会有其他响应。</p>
+<p>建议每一个APP都在一个单独的project/directory里，例如如果目录叫my_app，那么可以这样运行它。runApp的第一个参数是路径名，所以必须要在当前工作路径下。</p>
+<pre class="r"><code>library(shiny)
+runApp(&quot;my_app&quot;)</code></pre>
+<p>如果需要将APP代码也显示出来，那么运行</p>
+<pre class="r"><code>runApp(&quot;App-1&quot;, display.mode = &quot;showcase&quot;)</code></pre>
+<p>也可以点击Script工具栏上的Run APP，可以选择在Window、Viewer Pane或者浏览器中运行APP。</p>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+  
+  <hr/>
+  &copy; ZhiYuan Wang 2018~2019
+  
+  </footer>
+  </body>
+</html>
+
