@@ -7,6 +7,9 @@ categories:
   - R语言
 tags:
   - 学习总结
+output:
+  blogdown::html_page:
+    toc: true
 ---
 
 ```{r echo=FALSE}
@@ -156,7 +159,9 @@ ui <- fluidPage(
 )
 ```
 
-sidebarLayout里包括了sidebarPanel和mainPanel，是它的两个参数。这两个函数用来显示内容，默认来说sidebar在左，main在右，也可以调整position。
+## 2.1 SidebarLayout
+
+sidebarLayout里包括了sidebarPanel和mainPanel，是它的两个参数。这两个函数用来显示内容，默认来说sidebar在左，main在右，也可以调整position。一般来说，sidebarPanel用来显示输入内容，mainPanel用来显示输出内容。
 
 ```{r eval=FALSE}
 ui <- fluidPage(
@@ -169,12 +174,6 @@ ui <- fluidPage(
 )
 ```
 
-除了sidebarLayout以外，还有多种高级控件，例如：
-
-- navbarPage可以创建带有导航栏的多页界面；
-- fluidRow通过网格系统创建界面；
-
-具体见：[高级页面控件](http://shiny.rstudio.com/articles/layout-guide.html)
 
 在····Panel函数里，可以添加内容，除了字符串外，还可以是HTML标记函数，如下：
 
@@ -183,6 +182,7 @@ ui <- fluidPage(
 - h6 六级标题
 - a 超链接
 - br 一个空行
+- hr 水平线
 - div 文字分割
 - span 行内分割
 - pre Text ‘as is’ in a fixed width font
@@ -295,3 +295,103 @@ server <- function(input, output) {
 shinyApp(ui = ui, server = server)
 ```
 
+除了sidebarLayout以外，还有多种高级控件，例如：
+
+- navbarPage可以创建带有导航栏的多页界面；
+- fluidRow通过网格系统创建界面；
+
+具体见：[高级页面控件](http://shiny.rstudio.com/articles/layout-guide.html)
+
+## 2.2 GridLayout
+
+- fluidRow()创建行；
+- column()创建列；列宽加起来必须等于12；
+
+```{r}
+  ui <- fluidPage(
+  
+    titlePanel("Hello Shiny!"),
+  
+    fluidRow(
+    
+      column(4,
+        wellPanel(
+          sliderInput("obs", "Number of observations:",  
+                      min = 1, max = 1000, value = 500)
+        )       
+      ),
+  
+      column(8,
+        plotOutput("distPlot")
+      )
+    )
+  )
+```
+
+```{r}
+library(shiny)
+library(ggplot2)
+
+dataset <- diamonds
+
+ui <- fluidPage(
+  
+  title = "Diamonds Explorer",
+  
+  plotOutput('plot'),
+  
+  hr(),
+  
+  fluidRow(
+    column(3,
+           h4("Diamonds Explorer"),
+           sliderInput('sampleSize', 'Sample Size', 
+                       min=1, max=nrow(dataset), value=min(1000, nrow(dataset)), 
+                       step=500, round=0),
+           br(),
+           checkboxInput('jitter', 'Jitter'),
+           checkboxInput('smooth', 'Smooth')
+    ),
+    column(4, 
+            offset = 1,
+           selectInput('x', 'X', names(dataset)),
+           selectInput('y', 'Y', names(dataset), names(dataset)[[2]]),
+           selectInput('color', 'Color', c('None', names(dataset)))
+    ),
+    column(4,
+           selectInput('facet_row', 'Facet Row', c(None='.', names(dataset))),
+           selectInput('facet_col', 'Facet Column', c(None='.', names(dataset)))
+    )
+  )
+)
+```
+
+- offset用来微调列的间距
+- 因为没有titlePanel，所以有个fluidPage的title参数
+
+# 3. Add control widgets
+
+控件widgets是用户可以交互的工具，widgets提供将信息传递给APP的途径。
+
+控件函数有：
+
+- actionButton
+- checkboxGroupInput: A group of check boxes
+- checkboxInput: A single check box
+- dateInput: A calendar to aid date selection
+- dateRangeInput: A pair of calendars for selecting a date range
+- fileInput
+- helpText
+- numericInput
+- radioButtons
+- selectInput
+- sliderInput
+- submitButton
+- textInput
+
+添加widgets就像添加HTML标记一样，将widgets放在sidebarPanel或mainPanel里。
+
+每个控件都有多个参数，前两个参数是一样的：
+
+- 控件名，用来获取控件的取值，控件名必须是字符串；
+- 标签label，用来显示在控件上，也必须是字符串，可以是空字符串；

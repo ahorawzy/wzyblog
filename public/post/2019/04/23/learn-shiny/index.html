@@ -36,6 +36,17 @@
 </div>
 
 <main>
+<div id="TOC">
+<ul>
+<li><a href="#get-start">1. Get Start</a></li>
+<li><a href="#build-a-user-interface">2. Build a user interface</a><ul>
+<li><a href="#sidebarlayout">2.1 SidebarLayout</a></li>
+<li><a href="#gridlayout">2.2 GridLayout</a></li>
+</ul></li>
+<li><a href="#add-control-widgets">3. Add control widgets</a></li>
+</ul>
+</div>
+
 <div id="get-start" class="section level1">
 <h1>1. Get Start</h1>
 <p>Shiny包有11个内置demo。</p>
@@ -149,7 +160,9 @@ shinyApp(ui = ui, server = server)</code></pre>
     mainPanel(&quot;main panel&quot;)
   )
 )</code></pre>
-<p>sidebarLayout里包括了sidebarPanel和mainPanel，是它的两个参数。这两个函数用来显示内容，默认来说sidebar在左，main在右，也可以调整position。</p>
+<div id="sidebarlayout" class="section level2">
+<h2>2.1 SidebarLayout</h2>
+<p>sidebarLayout里包括了sidebarPanel和mainPanel，是它的两个参数。这两个函数用来显示内容，默认来说sidebar在左，main在右，也可以调整position。一般来说，sidebarPanel用来显示输入内容，mainPanel用来显示输出内容。</p>
 <pre class="r"><code>ui &lt;- fluidPage(
   titlePanel(&quot;title panel&quot;),
   
@@ -158,12 +171,6 @@ shinyApp(ui = ui, server = server)</code></pre>
                 mainPanel(&quot;main panel&quot;)
   )
 )</code></pre>
-<p>除了sidebarLayout以外，还有多种高级控件，例如：</p>
-<ul>
-<li>navbarPage可以创建带有导航栏的多页界面；</li>
-<li>fluidRow通过网格系统创建界面；</li>
-</ul>
-<p>具体见：<a href="http://shiny.rstudio.com/articles/layout-guide.html">高级页面控件</a></p>
 <p>在····Panel函数里，可以添加内容，除了字符串外，还可以是HTML标记函数，如下：</p>
 <ul>
 <li>p 一段落文字</li>
@@ -171,6 +178,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <li>h6 六级标题</li>
 <li>a 超链接</li>
 <li>br 一个空行</li>
+<li>hr 水平线</li>
 <li>div 文字分割</li>
 <li>span 行内分割</li>
 <li>pre Text ‘as is’ in a fixed width font</li>
@@ -264,6 +272,103 @@ server &lt;- function(input, output) {
 
 # Run the app ----
 shinyApp(ui = ui, server = server)</code></pre>
+<p>除了sidebarLayout以外，还有多种高级控件，例如：</p>
+<ul>
+<li>navbarPage可以创建带有导航栏的多页界面；</li>
+<li>fluidRow通过网格系统创建界面；</li>
+</ul>
+<p>具体见：<a href="http://shiny.rstudio.com/articles/layout-guide.html">高级页面控件</a></p>
+</div>
+<div id="gridlayout" class="section level2">
+<h2>2.2 GridLayout</h2>
+<ul>
+<li>fluidRow()创建行；</li>
+<li>column()创建列；列宽加起来必须等于12；</li>
+</ul>
+<pre class="r"><code>  ui &lt;- fluidPage(
+  
+    titlePanel(&quot;Hello Shiny!&quot;),
+  
+    fluidRow(
+    
+      column(4,
+        wellPanel(
+          sliderInput(&quot;obs&quot;, &quot;Number of observations:&quot;,  
+                      min = 1, max = 1000, value = 500)
+        )       
+      ),
+  
+      column(8,
+        plotOutput(&quot;distPlot&quot;)
+      )
+    )
+  )</code></pre>
+<pre class="r"><code>library(shiny)
+library(ggplot2)
+
+dataset &lt;- diamonds
+
+ui &lt;- fluidPage(
+  
+  title = &quot;Diamonds Explorer&quot;,
+  
+  plotOutput(&#39;plot&#39;),
+  
+  hr(),
+  
+  fluidRow(
+    column(3,
+           h4(&quot;Diamonds Explorer&quot;),
+           sliderInput(&#39;sampleSize&#39;, &#39;Sample Size&#39;, 
+                       min=1, max=nrow(dataset), value=min(1000, nrow(dataset)), 
+                       step=500, round=0),
+           br(),
+           checkboxInput(&#39;jitter&#39;, &#39;Jitter&#39;),
+           checkboxInput(&#39;smooth&#39;, &#39;Smooth&#39;)
+    ),
+    column(4, 
+            offset = 1,
+           selectInput(&#39;x&#39;, &#39;X&#39;, names(dataset)),
+           selectInput(&#39;y&#39;, &#39;Y&#39;, names(dataset), names(dataset)[[2]]),
+           selectInput(&#39;color&#39;, &#39;Color&#39;, c(&#39;None&#39;, names(dataset)))
+    ),
+    column(4,
+           selectInput(&#39;facet_row&#39;, &#39;Facet Row&#39;, c(None=&#39;.&#39;, names(dataset))),
+           selectInput(&#39;facet_col&#39;, &#39;Facet Column&#39;, c(None=&#39;.&#39;, names(dataset)))
+    )
+  )
+)</code></pre>
+<ul>
+<li>offset用来微调列的间距</li>
+<li>因为没有titlePanel，所以有个fluidPage的title参数</li>
+</ul>
+</div>
+</div>
+<div id="add-control-widgets" class="section level1">
+<h1>3. Add control widgets</h1>
+<p>控件widgets是用户可以交互的工具，widgets提供将信息传递给APP的途径。</p>
+<p>控件函数有：</p>
+<ul>
+<li>actionButton</li>
+<li>checkboxGroupInput: A group of check boxes</li>
+<li>checkboxInput: A single check box</li>
+<li>dateInput: A calendar to aid date selection</li>
+<li>dateRangeInput: A pair of calendars for selecting a date range</li>
+<li>fileInput</li>
+<li>helpText</li>
+<li>numericInput</li>
+<li>radioButtons</li>
+<li>selectInput</li>
+<li>sliderInput</li>
+<li>submitButton</li>
+<li>textInput</li>
+</ul>
+<p>添加widgets就像添加HTML标记一样，将widgets放在sidebarPanel或mainPanel里。</p>
+<p>每个控件都有多个参数，前两个参数是一样的：</p>
+<ul>
+<li>控件名，用来获取控件的取值，控件名必须是字符串；</li>
+<li>标签label，用来显示在控件上，也必须是字符串，可以是空字符串；</li>
+</ul>
 </div>
 
 </main>
