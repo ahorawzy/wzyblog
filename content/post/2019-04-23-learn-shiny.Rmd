@@ -9,7 +9,11 @@ tags:
   - 学习总结
 ---
 
-# Get Start
+```{r echo=FALSE}
+knitr::opts_chunk$set(eval = F)
+```
+
+# 1. Get Start
 
 Shiny包有11个内置demo。
 
@@ -118,4 +122,176 @@ runApp("App-1", display.mode = "showcase")
 
 也可以点击Script工具栏上的Run APP，可以选择在Window、Viewer Pane或者浏览器中运行APP。
 
+# 2. Build a user interface
+
+Shiny APP的最小结构
+
+```{r eval=FALSE}
+library(shiny)
+
+# Define UI ----
+ui <- fluidPage(
+  
+)
+
+# Define server logic ----
+server <- function(input, output) {
+  
+}
+
+# Run the app ----
+shinyApp(ui = ui, server = server)
+```
+
+fluidPage函数创建了一个随用户窗口自动调整的页面，其余的panel都是在fluidPage()函数里的。
+
+```{r eval=FALSE}
+ui <- fluidPage(
+  titlePanel("title panel"),
+
+  sidebarLayout(
+    sidebarPanel("sidebar panel"),
+    mainPanel("main panel")
+  )
+)
+```
+
+sidebarLayout里包括了sidebarPanel和mainPanel，是它的两个参数。这两个函数用来显示内容，默认来说sidebar在左，main在右，也可以调整position。
+
+```{r eval=FALSE}
+ui <- fluidPage(
+  titlePanel("title panel"),
+  
+  sidebarLayout(position = "right",
+                sidebarPanel("sidebar panel"),
+                mainPanel("main panel")
+  )
+)
+```
+
+除了sidebarLayout以外，还有多种高级控件，例如：
+
+- navbarPage可以创建带有导航栏的多页界面；
+- fluidRow通过网格系统创建界面；
+
+具体见：[高级页面控件](http://shiny.rstudio.com/articles/layout-guide.html)
+
+在····Panel函数里，可以添加内容，除了字符串外，还可以是HTML标记函数，如下：
+
+- p 一段落文字
+- h1 一级标题
+- h6 六级标题
+- a 超链接
+- br 一个空行
+- div 文字分割
+- span 行内分割
+- pre Text ‘as is’ in a fixed width font
+- code 一段格式化代码
+- img 图像
+- strong 粗体字
+- em 斜体字
+
+在一个Panel里可以放多个内容，用逗号分隔。
+
+让文字居中显示，可以添加align="center"参数，h6("Episode IV", align = "center")。
+
+标记函数的使用方法
+
+```{r eval=FALSE}
+ui <- fluidPage(
+  titlePanel("My Shiny App"),
+  sidebarLayout(
+    sidebarPanel(),
+    mainPanel(
+      p("p creates a paragraph of text."),
+      p("A new p() command starts a new paragraph. Supply a style attribute to change the format of the entire paragraph.", style = "font-family: 'times'; font-si16pt"),
+      strong("strong() makes bold text."),
+      em("em() creates italicized (i.e, emphasized) text."),
+      br(),
+      code("code displays your text similar to computer code"),
+      div("div creates segments of text with a similar style. This division of text is all blue because I passed the argument 'style = color:blue' to div", style = "color:blue"),
+      br(),
+      p("span does the same thing as div, but it works with",
+        span("groups of words", style = "color:blue"),
+        "that appear inside a paragraph.")
+    )
+  )
+)
+```
+
+div为内容标签，可以设置CSS样式；p为段落标签，用于文章分段。
+
+img函数插入图片，src参数表明图片名
+
+```{r}
+img(src = "my_image.png", height = 72, width = 72)
+```
+
+其中图片必须放在与app.R同级的www文件夹里，该文件夹为浏览器提供呈现的各种素材。
+
+```
+- APP-1
+  - app.R
+  - www
+    - fig01
+    - fig02
+```
+
+其他标签的用法见
+
+- [Customize your UI with HTML](http://shiny.rstudio.com/articles/html-tags.html)
+- [Shiny HTML Tags Glossary](http://shiny.rstudio.com/articles/tag-glossary.html)
+
+标签使用作业：
+
+```{r}
+library(shiny)
+
+# Define UI ----
+ui <- fluidPage(
+  titlePanel("My Shiny App"),
+  sidebarLayout(
+    sidebarPanel(
+      h1("Installation"),
+      p("Shiny is available on CRAN, 
+        so you can install it in the usual way from your R console:"),
+      code("install.packages(\"shiny\")"),
+      br(),
+      br(),
+      br(),
+      br(),
+      img(src="rstudio.png",height=70,width=200),
+      br(),
+      "Shiny is a product of ",span("Rstudio",style = "color:blue")
+    ),
+    mainPanel(
+      h1("Introducing Shiny"),
+      br(),
+      p("Shiny is a new package from RStudio that makes it",
+        em("incredibly easy"),
+        "to build interactive web applications with R."
+      ),
+      br(),
+      p("For an introduction and live examples, visit the",
+        a(href="http://shiny.rstudio.com/","Shiny homepage.")),
+      br(),
+      h1("Features"),
+      p("- Build useful web applications with only a few lines of code - 
+        no JavaScript required."),
+      p("- Shiny applications are automativcally 'live' in the same way that",
+        strong("spreadsheets"),
+        " are live. Outputs change instantly as users modify inputs, without 
+        requiring a reload of the browser.")
+    )
+  )
+)
+
+# Define server logic ----
+server <- function(input, output) {
+  
+}
+
+# Run the app ----
+shinyApp(ui = ui, server = server)
+```
 
