@@ -6,10 +6,19 @@
     <description>Recent content in 博客 on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 25 Oct 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 25 Apr 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/%E5%8D%9A%E5%AE%A2/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>博客重新部署解决方案</title>
+      <link>/post/2019/04/25/netlify-fault/</link>
+      <pubDate>Thu, 25 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/04/25/netlify-fault/</guid>
+      <description>前两天格式化电脑后，原来的Rstudio和各类设置都没有了，需要重新设置，本篇博客记录下收拾的顺序，以便下次参考。 下载并安装好R/Rstud</description>
+    </item>
     
     <item>
       <title>blogdown中的公式支持</title>
