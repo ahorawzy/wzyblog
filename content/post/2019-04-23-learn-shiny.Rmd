@@ -369,6 +369,97 @@ ui <- fluidPage(
 - offset用来微调列的间距
 - 因为没有titlePanel，所以有个fluidPage的title参数
 
+## 2.3 Tabsets
+
+可以将一个页面分成多个部分，形成标签
+
+```{r}
+ui <- fluidPage(
+
+  titlePanel("Tabsets"),
+
+  sidebarLayout(
+    
+    sidebarPanel(
+      # Inputs excluded for brevity
+    ),
+  
+    mainPanel(
+      tabsetPanel(
+        tabPanel("Plot", plotOutput("plot")), 
+        tabPanel("Summary", verbatimTextOutput("summary")), 
+        tabPanel("Table", tableOutput("table"))
+      )
+    )
+  )
+)
+```
+
+如果想将标签放在页面的下面，可以指定position
+
+```{r}
+tabsetPanel(position = "below",
+  tabPanel("Plot", plotOutput("plot")), 
+  tabPanel("Summary", verbatimTextOutput("summary")), 
+  tabPanel("Table", tableOutput("table"))
+)
+```
+
+## 2.4 Navlists
+
+如果内容用Tabsets装不下时，可以考虑用Navlists。相当于是个竖排的标签。
+
+```{r}
+ui <- fluidPage(
+  
+  titlePanel("Application Title"),
+  
+  navlistPanel(
+    "Header A",
+    tabPanel("Component 1"),
+    tabPanel("Component 2"),
+    "Header B",
+    tabPanel("Component 3"),
+    tabPanel("Component 4"),
+    "-----",
+    tabPanel("Component 5")
+  )
+)
+```
+
+## 2.5 Navbar Pages
+
+创建顶部的菜单页面
+
+```{r}
+ui <- navbarPage("My Application",
+  tabPanel("Component 1"),
+  tabPanel("Component 2"),
+  tabPanel("Component 3")
+)
+```
+
+可以添加二级菜单
+
+```{r}
+ui <- navbarPage("My Application",
+  tabPanel("Component 1"),
+  tabPanel("Component 2"),
+  navbarMenu("More",
+    tabPanel("Sub-Component A"),
+    tabPanel("Sub-Component B"))
+)
+```
+
+navbarPage()可加参数：
+
+- header
+- footer
+- inverse 颜色翻转（黑色）
+- collapsable 折叠
+
+**注意tabPanel下可以再添加各种layout比如sidebarLayout,fuildRow,**
+
 # 3. Add control widgets
 
 控件widgets是用户可以交互的工具，widgets提供将信息传递给APP的途径。
@@ -395,3 +486,96 @@ ui <- fluidPage(
 
 - 控件名，用来获取控件的取值，控件名必须是字符串；
 - 标签label，用来显示在控件上，也必须是字符串，可以是空字符串；
+
+各类控件用法案例
+
+```{r}
+library(shiny)
+
+# Define UI ----
+ui <- fluidPage(
+  titlePanel("Basic widgets"),
+  
+  fluidRow(
+    
+    column(3,
+           h3("Buttons"),
+           actionButton("action", "Action"),
+           br(),
+           br(), 
+           submitButton("Submit")),
+    
+    column(3,
+           h3("Single checkbox"),
+           checkboxInput("checkbox", "Choice A", value = TRUE)),
+    
+    column(3, 
+           checkboxGroupInput("checkGroup", 
+                              h3("Checkbox group"), 
+                              choices = list("Choice 1" = 1, 
+                                             "Choice 2" = 2, 
+                                             "Choice 3" = 3),
+                              selected = 1)),
+    
+    column(3, 
+           dateInput("date", 
+                     h3("Date input"), 
+                     value = "2014-01-01"))   
+  ),
+  
+  fluidRow(
+    
+    column(3,
+           dateRangeInput("dates", h3("Date range"))),
+    
+    column(3,
+           fileInput("file", h3("File input"))),
+    
+    column(3, 
+           h3("Help text"),
+           helpText("Note: help text isn't a true widget,", 
+                    "but it provides an easy way to add text to",
+                    "accompany other widgets.")),
+    
+    column(3, 
+           numericInput("num", 
+                        h3("Numeric input"), 
+                        value = 1))   
+  ),
+  
+  fluidRow(
+    
+    column(3,
+           radioButtons("radio", h3("Radio buttons"),
+                        choices = list("Choice 1" = 1, "Choice 2" = 2,
+                                       "Choice 3" = 3),selected = 1)),
+    
+    column(3,
+           selectInput("select", h3("Select box"), 
+                       choices = list("Choice 1" = 1, "Choice 2" = 2,
+                                      "Choice 3" = 3), selected = 1)),
+    
+    column(3, 
+           sliderInput("slider1", h3("Sliders"),
+                       min = 0, max = 100, value = 50),
+           sliderInput("slider2", "",
+                       min = 0, max = 100, value = c(25, 75))
+    ),
+    
+    column(3, 
+           textInput("text", h3("Text input"), 
+                     value = "Enter text..."))   
+  )
+  
+)
+
+# Define server logic ----
+server <- function(input, output) {
+  
+}
+
+# Run the app ----
+shinyApp(ui = ui, server = server)
+```
+
+[各类控件的详细用法](http://shiny.rstudio.com/gallery/widget-gallery.html)

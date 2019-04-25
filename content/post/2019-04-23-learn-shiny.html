@@ -19,6 +19,9 @@ output:
 <li><a href="#build-a-user-interface">2. Build a user interface</a><ul>
 <li><a href="#sidebarlayout">2.1 SidebarLayout</a></li>
 <li><a href="#gridlayout">2.2 GridLayout</a></li>
+<li><a href="#tabsets">2.3 Tabsets</a></li>
+<li><a href="#navlists">2.4 Navlists</a></li>
+<li><a href="#navbar-pages">2.5 Navbar Pages</a></li>
 </ul></li>
 <li><a href="#add-control-widgets">3. Add control widgets</a></li>
 </ul>
@@ -320,6 +323,79 @@ ui &lt;- fluidPage(
 <li>因为没有titlePanel，所以有个fluidPage的title参数</li>
 </ul>
 </div>
+<div id="tabsets" class="section level2">
+<h2>2.3 Tabsets</h2>
+<p>可以将一个页面分成多个部分，形成标签</p>
+<pre class="r"><code>ui &lt;- fluidPage(
+
+  titlePanel(&quot;Tabsets&quot;),
+
+  sidebarLayout(
+    
+    sidebarPanel(
+      # Inputs excluded for brevity
+    ),
+  
+    mainPanel(
+      tabsetPanel(
+        tabPanel(&quot;Plot&quot;, plotOutput(&quot;plot&quot;)), 
+        tabPanel(&quot;Summary&quot;, verbatimTextOutput(&quot;summary&quot;)), 
+        tabPanel(&quot;Table&quot;, tableOutput(&quot;table&quot;))
+      )
+    )
+  )
+)</code></pre>
+<p>如果想将标签放在页面的下面，可以指定position</p>
+<pre class="r"><code>tabsetPanel(position = &quot;below&quot;,
+  tabPanel(&quot;Plot&quot;, plotOutput(&quot;plot&quot;)), 
+  tabPanel(&quot;Summary&quot;, verbatimTextOutput(&quot;summary&quot;)), 
+  tabPanel(&quot;Table&quot;, tableOutput(&quot;table&quot;))
+)</code></pre>
+</div>
+<div id="navlists" class="section level2">
+<h2>2.4 Navlists</h2>
+<p>如果内容用Tabsets装不下时，可以考虑用Navlists。相当于是个竖排的标签。</p>
+<pre class="r"><code>ui &lt;- fluidPage(
+  
+  titlePanel(&quot;Application Title&quot;),
+  
+  navlistPanel(
+    &quot;Header A&quot;,
+    tabPanel(&quot;Component 1&quot;),
+    tabPanel(&quot;Component 2&quot;),
+    &quot;Header B&quot;,
+    tabPanel(&quot;Component 3&quot;),
+    tabPanel(&quot;Component 4&quot;),
+    &quot;-----&quot;,
+    tabPanel(&quot;Component 5&quot;)
+  )
+)</code></pre>
+</div>
+<div id="navbar-pages" class="section level2">
+<h2>2.5 Navbar Pages</h2>
+<p>创建顶部的菜单页面</p>
+<pre class="r"><code>ui &lt;- navbarPage(&quot;My Application&quot;,
+  tabPanel(&quot;Component 1&quot;),
+  tabPanel(&quot;Component 2&quot;),
+  tabPanel(&quot;Component 3&quot;)
+)</code></pre>
+<p>可以添加二级菜单</p>
+<pre class="r"><code>ui &lt;- navbarPage(&quot;My Application&quot;,
+  tabPanel(&quot;Component 1&quot;),
+  tabPanel(&quot;Component 2&quot;),
+  navbarMenu(&quot;More&quot;,
+    tabPanel(&quot;Sub-Component A&quot;),
+    tabPanel(&quot;Sub-Component B&quot;))
+)</code></pre>
+<p>navbarPage()可加参数：</p>
+<ul>
+<li>header</li>
+<li>footer</li>
+<li>inverse 颜色翻转（黑色）</li>
+<li>collapsable 折叠</li>
+</ul>
+<p><strong>注意tabPanel下可以再添加各种layout比如sidebarLayout,fuildRow,</strong></p>
+</div>
 </div>
 <div id="add-control-widgets" class="section level1">
 <h1>3. Add control widgets</h1>
@@ -346,4 +422,92 @@ ui &lt;- fluidPage(
 <li>控件名，用来获取控件的取值，控件名必须是字符串；</li>
 <li>标签label，用来显示在控件上，也必须是字符串，可以是空字符串；</li>
 </ul>
+<p>各类控件用法案例</p>
+<pre class="r"><code>library(shiny)
+
+# Define UI ----
+ui &lt;- fluidPage(
+  titlePanel(&quot;Basic widgets&quot;),
+  
+  fluidRow(
+    
+    column(3,
+           h3(&quot;Buttons&quot;),
+           actionButton(&quot;action&quot;, &quot;Action&quot;),
+           br(),
+           br(), 
+           submitButton(&quot;Submit&quot;)),
+    
+    column(3,
+           h3(&quot;Single checkbox&quot;),
+           checkboxInput(&quot;checkbox&quot;, &quot;Choice A&quot;, value = TRUE)),
+    
+    column(3, 
+           checkboxGroupInput(&quot;checkGroup&quot;, 
+                              h3(&quot;Checkbox group&quot;), 
+                              choices = list(&quot;Choice 1&quot; = 1, 
+                                             &quot;Choice 2&quot; = 2, 
+                                             &quot;Choice 3&quot; = 3),
+                              selected = 1)),
+    
+    column(3, 
+           dateInput(&quot;date&quot;, 
+                     h3(&quot;Date input&quot;), 
+                     value = &quot;2014-01-01&quot;))   
+  ),
+  
+  fluidRow(
+    
+    column(3,
+           dateRangeInput(&quot;dates&quot;, h3(&quot;Date range&quot;))),
+    
+    column(3,
+           fileInput(&quot;file&quot;, h3(&quot;File input&quot;))),
+    
+    column(3, 
+           h3(&quot;Help text&quot;),
+           helpText(&quot;Note: help text isn&#39;t a true widget,&quot;, 
+                    &quot;but it provides an easy way to add text to&quot;,
+                    &quot;accompany other widgets.&quot;)),
+    
+    column(3, 
+           numericInput(&quot;num&quot;, 
+                        h3(&quot;Numeric input&quot;), 
+                        value = 1))   
+  ),
+  
+  fluidRow(
+    
+    column(3,
+           radioButtons(&quot;radio&quot;, h3(&quot;Radio buttons&quot;),
+                        choices = list(&quot;Choice 1&quot; = 1, &quot;Choice 2&quot; = 2,
+                                       &quot;Choice 3&quot; = 3),selected = 1)),
+    
+    column(3,
+           selectInput(&quot;select&quot;, h3(&quot;Select box&quot;), 
+                       choices = list(&quot;Choice 1&quot; = 1, &quot;Choice 2&quot; = 2,
+                                      &quot;Choice 3&quot; = 3), selected = 1)),
+    
+    column(3, 
+           sliderInput(&quot;slider1&quot;, h3(&quot;Sliders&quot;),
+                       min = 0, max = 100, value = 50),
+           sliderInput(&quot;slider2&quot;, &quot;&quot;,
+                       min = 0, max = 100, value = c(25, 75))
+    ),
+    
+    column(3, 
+           textInput(&quot;text&quot;, h3(&quot;Text input&quot;), 
+                     value = &quot;Enter text...&quot;))   
+  )
+  
+)
+
+# Define server logic ----
+server &lt;- function(input, output) {
+  
+}
+
+# Run the app ----
+shinyApp(ui = ui, server = server)</code></pre>
+<p><a href="http://shiny.rstudio.com/gallery/widget-gallery.html">各类控件的详细用法</a></p>
 </div>
