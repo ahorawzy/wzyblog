@@ -579,3 +579,143 @@ shinyApp(ui = ui, server = server)
 ```
 
 [各类控件的详细用法](http://shiny.rstudio.com/gallery/widget-gallery.html)
+
+# 4. Display reactive output
+
+You can create reactive output with a two step process.
+
+1. 在UI里添加R对象
+2. 在server函数里创建对象
+
+## 4.1 Add an R object to the UI
+
+下面的函数可以将R对象变为output，
+
+- dataTableOutput	DataTable
+- htmlOutput	raw HTML
+- imageOutput	image
+- plotOutput	plot
+- tableOutput	table
+- textOutput	text
+- uiOutput	raw HTML
+- verbatimTextOutput	text
+
+output可以像html一样加入到UI里的sidbarPanel或mainPanel里。
+
+```{r}
+ui <- fluidPage(
+  titlePanel("censusVis"),
+  
+  sidebarLayout(
+    sidebarPanel(
+      helpText("Create demographic maps with 
+               information from the 2010 US Census."),
+      
+      selectInput("var", 
+                  label = "Choose a variable to display",
+                  choices = c("Percent White", 
+                              "Percent Black",
+                              "Percent Hispanic", 
+                              "Percent Asian"),
+                  selected = "Percent White"),
+      
+      sliderInput("range", 
+                  label = "Range of interest:",
+                  min = 0, max = 100, value = c(0, 100))
+    ),
+    
+    mainPanel(
+      textOutput("selected_var")
+    )
+  )
+)
+```
+
+每一个output函数都需要一个字符串参数，即是可变元素的名字。用户看不到该名字，但开发者会用到。
+
+## 4.2 Provide R code to build the object.
+
+上一步在UI里告诉Shiny在哪里显示output，下一步告诉Shiny如何创建该对象。
+
+server函数创建了一个叫output的list，包含了所有需要时时更新的R对象。可以通过给output里增加元素来创建对象。元素名必须和在UI里创建的output里的参数名相一致。
+
+```{r}
+server <- function(input, output) {
+  output$selected_var <- renderText({ 
+    "You have selected this"
+  })
+}
+```
+
+不需要显式地return output list，R会自动返回output。
+
+每一个output元素的创建都需要一个render函数，根据不同类型的可变对象来选择不同的render函数：
+
+- renderDataTable	DataTable
+- renderImage	images (saved as a link to a source file)
+- renderPlot	plots
+- renderPrint	any printed output
+- renderTable	data frame, matrix, other table like structures
+- renderText	character strings
+- renderUI	a Shiny tag object or HTML
+，
+每一个render函数需要一个参数：{}大括号括起来的R表达式。
+
+如果表达式没有返回对象或返回了错误对象类型，则会抛出错误。
+
+## 4.3 Use widget values
+
+可以在server函数里使用widget的value。
+
+server函数里需要两个参数input和output，input也是一个list，用来储存widgets里的当前值，这些值会被储存在UI里给widgets起的名字的变量里。
+
+例如slider widget里有两个值，min和max，则input$range会储存长度为2的向量。
+
+如果使用了input的值，Shiny会创建响应型的变量。
+
+Shiny会追踪哪个output依赖于哪个widget，一旦用户改变了widget值，Shiny就会重新构建所有的output。
+
+本节重点：
+
+- 在UI函数中使用Output函数来放置对象；
+- 在server函数里使用render函数来告诉Shiny怎样创建对象；
+- 在每个render函数里，将所有的R表达式放置在大括号{}里；
+- 在render表达式里创建output列表的元素，每一个元素都是响应式对象；
+- 在render表达式里运用inp使用input列表里的值，其对应各个widget的取值；
+
+# 5. Use R scripts and data
+
+当Shiny运行server.R时，它会将文件路径默认为与server.R相同的路径。也就是说，保存server.R的路径变成了Shiny APP的工作路径。
+
+所以将helper.R保存在server.R相同路径下时，可以如此引入
+
+```{r}
+source("helpers.R")
+```
+
+将数据保存在data路径下时，可以如此引入
+
+```{r}
+counties <- readRDS("data/counties.rds")
+```
+
+引入包时，还是使用library
+
+```{r}
+library(maps)
+library(mapproj)
+```
+
+1. 第一次运行APP时，Shiny将运行整个程序；
+2. 每次有一个新用户时，Shiny将重新运行server，为每一个用户提供独立的区间；
+3. 当用户改变widgets的值时，对应的render函数里的内容将重新运行；
+
+所以有以下启示：
+
+1. 在server函数的外部加载包，导入脚本和数据；
+2. 在server函数中，render函数外，定义具有用户特征的对象，这些代码只为用户运行一次；
+3. 在render函数里，放置与widgets值变化有关的代码，shiny将在widgets值变化时重新运行该段代码；
+
+不要在render函数里放置没必要放置在这里的代码。
+
+

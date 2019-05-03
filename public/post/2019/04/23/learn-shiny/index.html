@@ -47,6 +47,12 @@
 <li><a href="#navbar-pages">2.5 Navbar Pages</a></li>
 </ul></li>
 <li><a href="#add-control-widgets">3. Add control widgets</a></li>
+<li><a href="#display-reactive-output">4. Display reactive output</a><ul>
+<li><a href="#add-an-r-object-to-the-ui">4.1 Add an R object to the UI</a></li>
+<li><a href="#provide-r-code-to-build-the-object.">4.2 Provide R code to build the object.</a></li>
+<li><a href="#use-widget-values">4.3 Use widget values</a></li>
+</ul></li>
+<li><a href="#use-r-scripts-and-data">5. Use R scripts and data</a></li>
 </ul>
 </div>
 
@@ -533,6 +539,119 @@ server &lt;- function(input, output) {
 # Run the app ----
 shinyApp(ui = ui, server = server)</code></pre>
 <p><a href="http://shiny.rstudio.com/gallery/widget-gallery.html">各类控件的详细用法</a></p>
+</div>
+<div id="display-reactive-output" class="section level1">
+<h1>4. Display reactive output</h1>
+<p>You can create reactive output with a two step process.</p>
+<ol style="list-style-type: decimal">
+<li>在UI里添加R对象</li>
+<li>在server函数里创建对象</li>
+</ol>
+<div id="add-an-r-object-to-the-ui" class="section level2">
+<h2>4.1 Add an R object to the UI</h2>
+<p>下面的函数可以将R对象变为output，</p>
+<ul>
+<li>dataTableOutput DataTable</li>
+<li>htmlOutput raw HTML</li>
+<li>imageOutput image</li>
+<li>plotOutput plot</li>
+<li>tableOutput table</li>
+<li>textOutput text</li>
+<li>uiOutput raw HTML</li>
+<li>verbatimTextOutput text</li>
+</ul>
+<p>output可以像html一样加入到UI里的sidbarPanel或mainPanel里。</p>
+<pre class="r"><code>ui &lt;- fluidPage(
+  titlePanel(&quot;censusVis&quot;),
+  
+  sidebarLayout(
+    sidebarPanel(
+      helpText(&quot;Create demographic maps with 
+               information from the 2010 US Census.&quot;),
+      
+      selectInput(&quot;var&quot;, 
+                  label = &quot;Choose a variable to display&quot;,
+                  choices = c(&quot;Percent White&quot;, 
+                              &quot;Percent Black&quot;,
+                              &quot;Percent Hispanic&quot;, 
+                              &quot;Percent Asian&quot;),
+                  selected = &quot;Percent White&quot;),
+      
+      sliderInput(&quot;range&quot;, 
+                  label = &quot;Range of interest:&quot;,
+                  min = 0, max = 100, value = c(0, 100))
+    ),
+    
+    mainPanel(
+      textOutput(&quot;selected_var&quot;)
+    )
+  )
+)</code></pre>
+<p>每一个output函数都需要一个字符串参数，即是可变元素的名字。用户看不到该名字，但开发者会用到。</p>
+</div>
+<div id="provide-r-code-to-build-the-object." class="section level2">
+<h2>4.2 Provide R code to build the object.</h2>
+<p>上一步在UI里告诉Shiny在哪里显示output，下一步告诉Shiny如何创建该对象。</p>
+<p>server函数创建了一个叫output的list，包含了所有需要时时更新的R对象。可以通过给output里增加元素来创建对象。元素名必须和在UI里创建的output里的参数名相一致。</p>
+<pre class="r"><code>server &lt;- function(input, output) {
+  output$selected_var &lt;- renderText({ 
+    &quot;You have selected this&quot;
+  })
+}</code></pre>
+<p>不需要显式地return output list，R会自动返回output。</p>
+<p>每一个output元素的创建都需要一个render函数，根据不同类型的可变对象来选择不同的render函数：</p>
+<ul>
+<li>renderDataTable DataTable</li>
+<li>renderImage images (saved as a link to a source file)</li>
+<li>renderPlot plots</li>
+<li>renderPrint any printed output</li>
+<li>renderTable data frame, matrix, other table like structures</li>
+<li>renderText character strings</li>
+<li>renderUI a Shiny tag object or HTML
+，
+每一个render函数需要一个参数：{}大括号括起来的R表达式。</li>
+</ul>
+<p>如果表达式没有返回对象或返回了错误对象类型，则会抛出错误。</p>
+</div>
+<div id="use-widget-values" class="section level2">
+<h2>4.3 Use widget values</h2>
+<p>可以在server函数里使用widget的value。</p>
+<p>server函数里需要两个参数input和output，input也是一个list，用来储存widgets里的当前值，这些值会被储存在UI里给widgets起的名字的变量里。</p>
+<p>例如slider widget里有两个值，min和max，则input$range会储存长度为2的向量。</p>
+<p>如果使用了input的值，Shiny会创建响应型的变量。</p>
+<p>Shiny会追踪哪个output依赖于哪个widget，一旦用户改变了widget值，Shiny就会重新构建所有的output。</p>
+<p>本节重点：</p>
+<ul>
+<li>在UI函数中使用Output函数来放置对象；</li>
+<li>在server函数里使用render函数来告诉Shiny怎样创建对象；</li>
+<li>在每个render函数里，将所有的R表达式放置在大括号{}里；</li>
+<li>在render表达式里创建output列表的元素，每一个元素都是响应式对象；</li>
+<li>在render表达式里运用inp使用input列表里的值，其对应各个widget的取值；</li>
+</ul>
+</div>
+</div>
+<div id="use-r-scripts-and-data" class="section level1">
+<h1>5. Use R scripts and data</h1>
+<p>当Shiny运行server.R时，它会将文件路径默认为与server.R相同的路径。也就是说，保存server.R的路径变成了Shiny APP的工作路径。</p>
+<p>所以将helper.R保存在server.R相同路径下时，可以如此引入</p>
+<pre class="r"><code>source(&quot;helpers.R&quot;)</code></pre>
+<p>将数据保存在data路径下时，可以如此引入</p>
+<pre class="r"><code>counties &lt;- readRDS(&quot;data/counties.rds&quot;)</code></pre>
+<p>引入包时，还是使用library</p>
+<pre class="r"><code>library(maps)
+library(mapproj)</code></pre>
+<ol style="list-style-type: decimal">
+<li>第一次运行APP时，Shiny将运行整个程序；</li>
+<li>每次有一个新用户时，Shiny将重新运行server，为每一个用户提供独立的区间；</li>
+<li>当用户改变widgets的值时，对应的render函数里的内容将重新运行；</li>
+</ol>
+<p>所以有以下启示：</p>
+<ol style="list-style-type: decimal">
+<li>在server函数的外部加载包，导入脚本和数据；</li>
+<li>在server函数中，render函数外，定义具有用户特征的对象，这些代码只为用户运行一次；</li>
+<li>在render函数里，放置与widgets值变化有关的代码，shiny将在widgets值变化时重新运行该段代码；</li>
+</ol>
+<p>不要在render函数里放置没必要放置在这里的代码。</p>
 </div>
 
 </main>

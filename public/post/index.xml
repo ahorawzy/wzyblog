@@ -35,7 +35,7 @@
       <pubDate>Tue, 23 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/2019/04/23/learn-shiny/</guid>
-      <description>1. Get Start 2. Build a user interface 2.1 SidebarLayout 2.2 GridLayout 2.3 Tabsets 2.4 Navlists 2.5 Navbar Pages 3. Add control widgets 1. Get Start Shiny包有11个内置demo。 library(shiny) runExample(&amp;quot;01_hello&amp;quot;) 每一个Shiny APP包含三个部分： UI，控制显示</description>
+      <description>1. Get Start 2. Build a user interface 2.1 SidebarLayout 2.2 GridLayout 2.3 Tabsets 2.4 Navlists 2.5 Navbar Pages 3. Add control widgets 4. Display reactive output 4.1 Add an R object to the UI 4.2 Provide R code to build the object. 4.3 Use widget values 5. Use R scripts and data 1. Get Start Shiny包有11个内置de</description>
     </item>
     
     <item>
