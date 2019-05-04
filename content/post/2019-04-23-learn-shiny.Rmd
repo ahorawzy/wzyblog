@@ -718,4 +718,94 @@ library(mapproj)
 
 不要在render函数里放置没必要放置在这里的代码。
 
+# 6. Use reactive expressions
+
+Reactive expressions可以控制APP中哪一部分自动更新，从而加快APP的运行效率。
+ 
+例如如果将server函数写成这样
+
+```{r}
+output$plot <- renderPlot({
+  data <- getSymbols(input$symb, src = "yahoo",
+                     from = input$dates[1],
+                     to = input$dates[2],
+                     auto.assign = FALSE)
+
+  chartSeries(data, theme = chartTheme("white"),
+              type = "line", log.scale = input$log, TA = NULL)
+})
+```
+
+那么每次改变log的widget时，会重新运行两件事：下载数据和绘图。而事实上只需要重新绘图。
+
+## 6.1 Reactive expressions
+
+可以通过使用reactive expressions来限制哪些部分重新运行。
+
+reactive expressions使用一个widget的input，并返回一个值。当widget变化时，reactive expressions更新返回值。
+
+reactive函数就像render函数一样，需要将R表达式写到大括号里{}，如下。
+
+```{r}
+dataInput <- reactive({
+  getSymbols(input$symb, src = "yahoo",
+    from = input$dates[1],
+    to = input$dates[2],
+    auto.assign = FALSE)
+})
+```
+
+在renderPlot里通过dataInput()来获得数据
+
+```{r}
+output$plot <- renderPlot({    
+  chartSeries(dataInput(), theme = chartTheme("white"),
+    type = "line", log.scale = input$log, TA = NULL)
+})
+```
+
+当第一次运行reactive expression时，server计算结果并将结果储存在内存中。下一次运行时，直接从内存中读取计算结果。它能时刻监听数据是否过时（widget是否改变），当改变时重新计算，并将结果储存在内存中。
+
+所以可以将原server函数写成这样
+
+```{r}
+server <- function(input, output) {
+
+  dataInput <- reactive({
+    getSymbols(input$symb, src = "yahoo",
+               from = input$dates[1],
+               to = input$dates[2],
+               auto.assign = FALSE)
+  })
+
+  output$plot <- renderPlot({
+
+    chartSeries(dataInput(), theme = chartTheme("white"),
+                type = "line", log.scale = input$log, TA = NULL)
+  })
+
+}
+```
+
+不论reactive expression变化还是input变化，render函数都能捕捉到。
+
+reactive expression可以调用另一个reactive expression，就像链条一样将Input和output连起来。只在reactive和render里调用reactive expression。不要在这两种之外调用。
+
+# 7. share APP
+
+```{r}
+library(shiny)
+runUrl( "<the weblink>")
+```
+
+```{r}
+runGitHub( "<your repository name>", "<your user name>") 
+```
+
+或以网页形式分享
+
+- shinyapps.io
+- Shiny Server
+- Shiny Server Pro
+- RStudio Connect
 

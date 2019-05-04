@@ -53,6 +53,10 @@
 <li><a href="#use-widget-values">4.3 Use widget values</a></li>
 </ul></li>
 <li><a href="#use-r-scripts-and-data">5. Use R scripts and data</a></li>
+<li><a href="#use-reactive-expressions">6. Use reactive expressions</a><ul>
+<li><a href="#reactive-expressions">6.1 Reactive expressions</a></li>
+</ul></li>
+<li><a href="#share-app">7. share APP</a></li>
 </ul>
 </div>
 
@@ -652,6 +656,71 @@ library(mapproj)</code></pre>
 <li>在render函数里，放置与widgets值变化有关的代码，shiny将在widgets值变化时重新运行该段代码；</li>
 </ol>
 <p>不要在render函数里放置没必要放置在这里的代码。</p>
+</div>
+<div id="use-reactive-expressions" class="section level1">
+<h1>6. Use reactive expressions</h1>
+<p>Reactive expressions可以控制APP中哪一部分自动更新，从而加快APP的运行效率。</p>
+<p>例如如果将server函数写成这样</p>
+<pre class="r"><code>output$plot &lt;- renderPlot({
+  data &lt;- getSymbols(input$symb, src = &quot;yahoo&quot;,
+                     from = input$dates[1],
+                     to = input$dates[2],
+                     auto.assign = FALSE)
+
+  chartSeries(data, theme = chartTheme(&quot;white&quot;),
+              type = &quot;line&quot;, log.scale = input$log, TA = NULL)
+})</code></pre>
+<p>那么每次改变log的widget时，会重新运行两件事：下载数据和绘图。而事实上只需要重新绘图。</p>
+<div id="reactive-expressions" class="section level2">
+<h2>6.1 Reactive expressions</h2>
+<p>可以通过使用reactive expressions来限制哪些部分重新运行。</p>
+<p>reactive expressions使用一个widget的input，并返回一个值。当widget变化时，reactive expressions更新返回值。</p>
+<p>reactive函数就像render函数一样，需要将R表达式写到大括号里{}，如下。</p>
+<pre class="r"><code>dataInput &lt;- reactive({
+  getSymbols(input$symb, src = &quot;yahoo&quot;,
+    from = input$dates[1],
+    to = input$dates[2],
+    auto.assign = FALSE)
+})</code></pre>
+<p>在renderPlot里通过dataInput()来获得数据</p>
+<pre class="r"><code>output$plot &lt;- renderPlot({    
+  chartSeries(dataInput(), theme = chartTheme(&quot;white&quot;),
+    type = &quot;line&quot;, log.scale = input$log, TA = NULL)
+})</code></pre>
+<p>当第一次运行reactive expression时，server计算结果并将结果储存在内存中。下一次运行时，直接从内存中读取计算结果。它能时刻监听数据是否过时（widget是否改变），当改变时重新计算，并将结果储存在内存中。</p>
+<p>所以可以将原server函数写成这样</p>
+<pre class="r"><code>server &lt;- function(input, output) {
+
+  dataInput &lt;- reactive({
+    getSymbols(input$symb, src = &quot;yahoo&quot;,
+               from = input$dates[1],
+               to = input$dates[2],
+               auto.assign = FALSE)
+  })
+
+  output$plot &lt;- renderPlot({
+
+    chartSeries(dataInput(), theme = chartTheme(&quot;white&quot;),
+                type = &quot;line&quot;, log.scale = input$log, TA = NULL)
+  })
+
+}</code></pre>
+<p>不论reactive expression变化还是input变化，render函数都能捕捉到。</p>
+<p>reactive expression可以调用另一个reactive expression，就像链条一样将Input和output连起来。只在reactive和render里调用reactive expression。不要在这两种之外调用。</p>
+</div>
+</div>
+<div id="share-app" class="section level1">
+<h1>7. share APP</h1>
+<pre class="r"><code>library(shiny)
+runUrl( &quot;&lt;the weblink&gt;&quot;)</code></pre>
+<pre class="r"><code>runGitHub( &quot;&lt;your repository name&gt;&quot;, &quot;&lt;your user name&gt;&quot;) </code></pre>
+<p>或以网页形式分享</p>
+<ul>
+<li>shinyapps.io</li>
+<li>Shiny Server</li>
+<li>Shiny Server Pro</li>
+<li>RStudio Connect</li>
+</ul>
 </div>
 
 </main>
