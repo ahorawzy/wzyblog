@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 05 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 22 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>重返博客</title>
+      <link>/post/2019/08/22/return-to-blog/</link>
+      <pubDate>Thu, 22 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/08/22/return-to-blog/</guid>
+      <description>已经有挺长一段时间没有更新博客和写日记了，原因是单位没有发电脑，就把笔记本电脑放在单位用了。因为既不可能在上班时间写博客写日记，也不想每天把</description>
+    </item>
     
     <item>
       <title>姥爷说</title>
