@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/2019/08/24/ps-railway/</loc>
+    <lastmod>2019-08-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/2019/08/22/return-to-blog/</loc>
     <lastmod>2019-08-22T00:00:00+00:00</lastmod>
   </url>
@@ -554,7 +559,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-08-22T00:00:00+00:00</lastmod>
+    <lastmod>2019-08-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -565,7 +570,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2019-08-22T00:00:00+00:00</lastmod>
+    <lastmod>2019-08-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -714,6 +719,12 @@
   </url>
   
   <url>
+    <loc>/categories/%E7%94%BB%E5%9B%BE/</loc>
+    <lastmod>2019-08-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/</loc>
     <lastmod>2018-11-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -721,7 +732,7 @@
   
   <url>
     <loc>/tags/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
-    <lastmod>2019-06-08T00:00:00+00:00</lastmod>
+    <lastmod>2019-08-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
