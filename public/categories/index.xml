@@ -6,26 +6,16 @@
     <description>Recent content in Categories on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 24 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>画图</title>
-      <link>/categories/%E7%94%BB%E5%9B%BE/</link>
-      <pubDate>Sat, 24 Aug 2019 00:00:00 +0000</pubDate>
+      <title>R语言</title>
+      <link>/categories/r%E8%AF%AD%E8%A8%80/</link>
+      <pubDate>Tue, 23 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/categories/%E7%94%BB%E5%9B%BE/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>博客</title>
-      <link>/categories/%E5%8D%9A%E5%AE%A2/</link>
-      <pubDate>Thu, 22 Aug 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/%E5%8D%9A%E5%AE%A2/</guid>
+      <guid>/categories/r%E8%AF%AD%E8%A8%80/</guid>
       <description></description>
     </item>
     
@@ -39,6 +29,33 @@
     </item>
     
     <item>
+      <title>博客</title>
+      <link>/categories/%E5%8D%9A%E5%AE%A2/</link>
+      <pubDate>Thu, 22 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/%E5%8D%9A%E5%AE%A2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>思维模式</title>
+      <link>/categories/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Tue, 11 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%BC%8F/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>找工作</title>
+      <link>/categories/%E6%89%BE%E5%B7%A5%E4%BD%9C/</link>
+      <pubDate>Wed, 31 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/%E6%89%BE%E5%B7%A5%E4%BD%9C/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>旅游</title>
       <link>/categories/%E6%97%85%E6%B8%B8/</link>
       <pubDate>Fri, 05 Jul 2019 00:00:00 +0000</pubDate>
@@ -48,11 +65,20 @@
     </item>
     
     <item>
-      <title>读书</title>
-      <link>/categories/%E8%AF%BB%E4%B9%A6/</link>
-      <pubDate>Sun, 23 Jun 2019 00:00:00 +0000</pubDate>
+      <title>时事社论</title>
+      <link>/categories/%E6%97%B6%E4%BA%8B%E7%A4%BE%E8%AE%BA/</link>
+      <pubDate>Sun, 20 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>/categories/%E8%AF%BB%E4%B9%A6/</guid>
+      <guid>/categories/%E6%97%B6%E4%BA%8B%E7%A4%BE%E8%AE%BA/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>理论</title>
+      <link>/categories/%E7%90%86%E8%AE%BA/</link>
+      <pubDate>Tue, 20 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/%E7%90%86%E8%AE%BA/</guid>
       <description></description>
     </item>
     
@@ -75,29 +101,11 @@
     </item>
     
     <item>
-      <title>R语言</title>
-      <link>/categories/r%E8%AF%AD%E8%A8%80/</link>
-      <pubDate>Tue, 23 Apr 2019 00:00:00 +0000</pubDate>
+      <title>画图</title>
+      <link>/categories/%E7%94%BB%E5%9B%BE/</link>
+      <pubDate>Sat, 24 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/categories/r%E8%AF%AD%E8%A8%80/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>时事社论</title>
-      <link>/categories/%E6%97%B6%E4%BA%8B%E7%A4%BE%E8%AE%BA/</link>
-      <pubDate>Sun, 20 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/%E6%97%B6%E4%BA%8B%E7%A4%BE%E8%AE%BA/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>思维模式</title>
-      <link>/categories/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%BC%8F/</link>
-      <pubDate>Tue, 11 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%BC%8F/</guid>
+      <guid>/categories/%E7%94%BB%E5%9B%BE/</guid>
       <description></description>
     </item>
     
@@ -111,27 +119,18 @@
     </item>
     
     <item>
-      <title>理论</title>
-      <link>/categories/%E7%90%86%E8%AE%BA/</link>
-      <pubDate>Tue, 20 Nov 2018 00:00:00 +0000</pubDate>
+      <title>读书</title>
+      <link>/categories/%E8%AF%BB%E4%B9%A6/</link>
+      <pubDate>Sun, 23 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>/categories/%E7%90%86%E8%AE%BA/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>找工作</title>
-      <link>/categories/%E6%89%BE%E5%B7%A5%E4%BD%9C/</link>
-      <pubDate>Wed, 31 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/%E6%89%BE%E5%B7%A5%E4%BD%9C/</guid>
+      <guid>/categories/%E8%AF%BB%E4%B9%A6/</guid>
       <description></description>
     </item>
     
     <item>
       <title>随想</title>
       <link>/categories/%E9%9A%8F%E6%83%B3/</link>
-      <pubDate>Wed, 31 Oct 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 31 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>/categories/%E9%9A%8F%E6%83%B3/</guid>
       <description></description>

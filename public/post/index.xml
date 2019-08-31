@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 24 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 31 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>“摩诃般若波罗蜜波罗蜜”新解</title>
+      <link>/post/2019/08/31/six-parami/</link>
+      <pubDate>Sat, 31 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/08/31/six-parami/</guid>
+      <description>“摩诃般若波罗蜜”是佛学中的常见词，是梵语的音译。但到底是什么意思呢？对我们在当代社会中的为人处世有怎样的启示和帮助呢？我在多年前看了《六祖</description>
+    </item>
     
     <item>
       <title>PS里铁路线的画法</title>
@@ -876,21 +885,21 @@
     </item>
     
     <item>
-      <title>leaflet for R(1)</title>
-      <link>/post/2018/09/27/leaflet-for-r-1/</link>
-      <pubDate>Thu, 27 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/09/27/leaflet-for-r-1/</guid>
-      <description>library(leaflet) library(leafletCN) 1. 简介 1.1 leaflet的功能 交互地图浏览（缩放、平移） 使用多种底图进行任意组合 加载地图瓦片（WMTS） 点要素定位标记 多边形要素标记 线要素</description>
-    </item>
-    
-    <item>
       <title>Rstudio的Git崩溃解决方案</title>
       <link>/post/2018/09/27/solution-to-rstudio-break-down/</link>
       <pubDate>Thu, 27 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/2018/09/27/solution-to-rstudio-break-down/</guid>
       <description>Rsutdio是我最喜爱的软件之一。它已经不仅仅是一个IDE了，而且能够在里面做实验、写报告、开发报告模板、写博客、做幻灯片（目前还不会）。</description>
+    </item>
+    
+    <item>
+      <title>leaflet for R(1)</title>
+      <link>/post/2018/09/27/leaflet-for-r-1/</link>
+      <pubDate>Thu, 27 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/09/27/leaflet-for-r-1/</guid>
+      <description>library(leaflet) library(leafletCN) 1. 简介 1.1 leaflet的功能 交互地图浏览（缩放、平移） 使用多种底图进行任意组合 加载地图瓦片（WMTS） 点要素定位标记 多边形要素标记 线要素</description>
     </item>
     
     <item>
