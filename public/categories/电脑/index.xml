@@ -6,10 +6,19 @@
     <description>Recent content in 电脑 on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 06 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 29 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/%E7%94%B5%E8%84%91/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>表头标准颜色</title>
+      <link>/post/2019/10/29/table-color/</link>
+      <pubDate>Tue, 29 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/10/29/table-color/</guid>
+      <description>中铁二院风格表格颜色 表头：224，240，235 表格边框：153，204，255</description>
+    </item>
     
     <item>
       <title>找回路由器密码</title>
