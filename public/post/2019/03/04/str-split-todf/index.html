@@ -36,9 +36,6 @@
 </div>
 
 <main>
-
-
-
 <p>今天要解决一个长期困扰我的问题：使用strsplit或stringr::str_split，都是将元素分拆为列表的形式，虽然这样的通用性比较好，但是在大多数情形下，分拆元素的个数是固定的，更希望以数据框的形式返回，这样更具有通用性。</p>
 <p>例如</p>
 <pre class="r"><code>strsplit(jd201610$date,&quot;-&quot;) %&gt;% head(3)</code></pre>

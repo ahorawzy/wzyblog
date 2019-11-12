@@ -30,15 +30,6 @@
     </item>
     
     <item>
-      <title>读《巨人的陨落》</title>
-      <link>/post/2019/10/06/read-the-fall-of-the-giant/</link>
-      <pubDate>Sun, 06 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/10/06/read-the-fall-of-the-giant/</guid>
-      <description>书评 《巨人的陨落》这本书是我入职第一天被派到西安出两周的差的路上开始看的。当时看介绍说，“读者平均花3个通宵看完”（形容这本书的精彩程度），</description>
-    </item>
-    
-    <item>
       <title>读《局外人》</title>
       <link>/post/2019/10/02/read-juwairen/</link>
       <pubDate>Wed, 02 Oct 2019 00:00:00 +0000</pubDate>
@@ -921,21 +912,21 @@
     </item>
     
     <item>
-      <title>leaflet for R(1)</title>
-      <link>/post/2018/09/27/leaflet-for-r-1/</link>
-      <pubDate>Thu, 27 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/09/27/leaflet-for-r-1/</guid>
-      <description>library(leaflet) library(leafletCN) 1. 简介 1.1 leaflet的功能 交互地图浏览（缩放、平移） 使用多种底图进行任意组合 加载地图瓦片（WMTS） 点要素定位标记 多边形要素标记 线要素</description>
-    </item>
-    
-    <item>
       <title>Rstudio的Git崩溃解决方案</title>
       <link>/post/2018/09/27/solution-to-rstudio-break-down/</link>
       <pubDate>Thu, 27 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/2018/09/27/solution-to-rstudio-break-down/</guid>
       <description>Rsutdio是我最喜爱的软件之一。它已经不仅仅是一个IDE了，而且能够在里面做实验、写报告、开发报告模板、写博客、做幻灯片（目前还不会）。</description>
+    </item>
+    
+    <item>
+      <title>leaflet for R(1)</title>
+      <link>/post/2018/09/27/leaflet-for-r-1/</link>
+      <pubDate>Thu, 27 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/09/27/leaflet-for-r-1/</guid>
+      <description>library(leaflet) library(leafletCN) 1. 简介 1.1 leaflet的功能 交互地图浏览（缩放、平移） 使用多种底图进行任意组合 加载地图瓦片（WMTS） 点要素定位标记 多边形要素标记 线要素</description>
     </item>
     
     <item>
