@@ -6,10 +6,19 @@
     <description>Recent content in 学习总结 on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 23 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 07 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>交通指标汇总</title>
+      <link>/post/2020/01/07/%E4%BA%A4%E9%80%9A%E6%8C%87%E6%A0%87%E6%B1%87%E6%80%BB/</link>
+      <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2020/01/07/%E4%BA%A4%E9%80%9A%E6%8C%87%E6%A0%87%E6%B1%87%E6%80%BB/</guid>
+      <description>1. 点 1.1 对外交通客运枢纽 1.1.0 换乘距离与时间限制 1.1.0 换乘用地 1.1.1 对外交通客运枢纽分级 1.1.2 铁路客运站规模 1.1.3 铁路客站集疏运设施衔接要求 1.1.4 机场航站楼设置条件 1.1.5</description>
+    </item>
     
     <item>
       <title>学习shiny包</title>
