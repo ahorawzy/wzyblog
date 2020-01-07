@@ -1,12 +1,15 @@
 ---
 title: 城际铁路与综合交通
-author: ZhiYuan Wang
+author: 王致远
 date: '2020-01-07'
 slug: 城际铁路与综合交通
 categories:
   - 交通
 tags:
   - 读书笔记
+output:
+  blogdown::html_page:
+    toc: true
 ---
 
 （出自《第七章 城际铁路与城市群综合交通系统的协调和分工》）
