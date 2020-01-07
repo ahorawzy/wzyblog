@@ -1,12 +1,15 @@
 ---
 title: 城际铁路站点综合交通衔接规划
-author: ZhiYuan Wang
+author: 王致远
 date: '2020-01-07'
 slug: 城际铁路站点综合交通衔接规划
 categories:
   - 交通
 tags:
   - 读书笔记
+output:
+  blogdown::html_page:
+    toc: true
 ---
 
 # 8.1 交通衔接规划主要内容
