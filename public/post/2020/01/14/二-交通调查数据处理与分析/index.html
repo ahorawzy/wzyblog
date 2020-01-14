@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>二、交通调查数据处理与分析 | Website of ZhiYuan Wang</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">主页</a></li>
+      
+      <li><a href="/categories/">分类</a></li>
+      
+      <li><a href="/tags/">标签</a></li>
+      
+      <li><a href="/about/">关于我</a></li>
+      
+      <li><a href="/friendly_links/">链接</a></li>
+      
+      <li><a href="/index.xml">订阅</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">二、交通调查数据处理与分析</span></h1>
+<h2 class="author">王致远</h2>
+<h2 class="date">2020/01/14</h2>
+</div>
+
+<main>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#section">1. 交通调查的对象</a></li>
+<li><a href="#section-1">2. 交通小区</a><ul>
+<li><a href="#section-2">2.1 交通小区划分</a></li>
+<li><a href="#section-3">2.2 编辑面类型地理文件</a></li>
+<li><a href="#section-4">2.3 为小区图层输入属性数据</a></li>
+<li><a href="#section-5">2.4 设置小区显示样式</a></li>
+<li><a href="#section-6">2.5 保存</a></li>
+</ul></li>
+<li><a href="#section-7">3. 社会经济基础资料</a><ul>
+<li><a href="#section-8">3.1 新建和编辑数据表文件</a></li>
+<li><a href="#section-9">3.2 将数据表连接到地图</a></li>
+<li><a href="#section-10">3.3 创建基于小区的专题地图</a><ul>
+<li><a href="#gdp">3.3.1 制作GDP分布色彩专题图</a></li>
+<li><a href="#section-11">3.3.2 制作人口分布点密度专题图</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#od">4. 交通需求调查：OD调查</a><ul>
+<li><a href="#section-12">4.1 建立和编辑矩阵文件</a></li>
+<li><a href="#section-13">4.2 从其他数据导入矩阵文件</a></li>
+<li><a href="#section-14">4.3 制造期望线</a></li>
+</ul></li>
+<li><a href="#section-15">5. 交通设施调查</a><ul>
+<li><a href="#section-16">5.1 新建线类型的地理文件</a></li>
+<li><a href="#section-17">5.2 编辑线类型地理文件</a></li>
+<li><a href="#section-18">5.3 检查路网连通性</a></li>
+<li><a href="#section-19">5.4 为路段图层输入属性数据</a><ul>
+<li><a href="#section-20">批量选择某一类型的路段</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-21">6. 交通量调查</a><ul>
+<li><a href="#section-22">6.1 调查目的</a></li>
+<li><a href="#section-23">6.2 调查内容</a></li>
+<li><a href="#section-24">6.3 交通量数据处理与分析</a><ul>
+<li><a href="#section-25">制作流量专题地图</a></li>
+<li><a href="#section-26">制作流量专题图的快捷工具</a></li>
+<li><a href="#section-27">制作交叉口流量流向图</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<div id="section" class="section level1">
+<h1>1. 交通调查的对象</h1>
+<ol style="list-style-type: decimal">
+<li>社会经济基础资料</li>
+<li>交通需求</li>
+<li>交通设施</li>
+<li>交通流量</li>
+</ol>
+</div>
+<div id="section-1" class="section level1">
+<h1>2. 交通小区</h1>
+<p>不可能对每个交通源进行单独研究，要将分散的交通源按一定原则就近合并成若干个交通小区。交通小区在形式上表现为一个区域，但在逻辑上表现为一个点，这个点可称为小区的质心。</p>
+<p>通常小范围的分区约为3000<sub>5000人，大范围的城市分区约为5000</sub>10000人。</p>
+<p>交通小区要有同质性，区内的土地利用、经济、社会等特性应尽量一致。</p>
+<div id="section-2" class="section level2">
+<h2>2.1 交通小区划分</h2>
+<p>文件-新建-Geographic File-面空间数据-添加字段ZoneID,修改数据类型，储存为dbd文件。</p>
+</div>
+<div id="section-3" class="section level2">
+<h2>2.2 编辑面类型地理文件</h2>
+<ul>
+<li>加号，在地图窗口绘制一条闭合的边界线，添加一个新面；</li>
+<li>斜杠圆，删除；</li>
+<li>白箭头，拖动柄编辑；</li>
+<li>绿灯，保存编辑；</li>
+<li>红灯，取消编辑；</li>
+</ul>
+</div>
+<div id="section-4" class="section level2">
+<h2>2.3 为小区图层输入属性数据</h2>
+<p>工具栏上i按钮，除ZoneID外，ID和Area为自动分配字段。</p>
+</div>
+<div id="section-5" class="section level2">
+<h2>2.4 设置小区显示样式</h2>
+<p>鼠标右键-图层-Style</p>
+<p>顶部菜单，图例按钮，可显示图例，并贴附于地图。</p>
+</div>
+<div id="section-6" class="section level2">
+<h2>2.5 保存</h2>
+<p>保存为地图，可保留设置的地图显示样式，还可组织地理文件。</p>
+<p><strong>一个地图中可以包含任意多个图层（地理文件）。</strong></p>
+</div>
+</div>
+<div id="section-7" class="section level1">
+<h1>3. 社会经济基础资料</h1>
+<ol style="list-style-type: decimal">
+<li>人口调查：人口数量、年龄分布、职业构成、迁移情况、增长状况；</li>
+<li>经济调查：国民生产总值、各产业产值、人均收入、投资状况、产业结构；</li>
+<li>土地利用调查：用地布局、开发状况、建筑密度、住户数量、就业岗位数、就学岗位数、商品销售额。</li>
+<li>车辆保有量：载货汽车、载客汽车和私人汽车、非机动车。</li>
+</ol>
+<div id="section-8" class="section level2">
+<h2>3.1 新建和编辑数据表文件</h2>
+<p>文件-新建-Table-Fixed-format binary- 添加字段-保存为bin文件；</p>
+<p>编辑-添加记录-输入要增加的数据记录条数</p>
+</div>
+<div id="section-9" class="section level2">
+<h2>3.2 将数据表连接到地图</h2>
+<p>打开地图数据和经济表-数据视图-加入-Joining from选地图-to选经济标</p>
+</div>
+<div id="section-10" class="section level2">
+<h2>3.3 创建基于小区的专题地图</h2>
+<p>彩色专题图、点密度专题图、等级符号专题图</p>
+<div id="gdp" class="section level3">
+<h3>3.3.1 制作GDP分布色彩专题图</h3>
+<p>工具栏上-Color Theme MapWizard-Field选择GDP</p>
+</div>
+<div id="section-11" class="section level3">
+<h3>3.3.2 制作人口分布点密度专题图</h3>
+<p>工具栏上-Dot density Theme MapWizard-Field选择People</p>
+</div>
+</div>
+</div>
+<div id="od" class="section level1">
+<h1>4. 交通需求调查：OD调查</h1>
+<p>OD调查是交通规划中的最基础调查项目，包含抽取样本、实施调查、样本放大、统计分析、数据处理，是从总体到样本，再从样本到总体的过程。</p>
+<p>包括：</p>
+<ol style="list-style-type: decimal">
+<li>出行主体信息；</li>
+<li>出行信息；</li>
+</ol>
+<p>多采用家访调查法</p>
+<p>分析结果：</p>
+<ol style="list-style-type: decimal">
+<li>各分区的出行产生、吸引量；</li>
+<li>出行分布量，即各分区之间的出行量；</li>
+<li>出行时间和距离分布等；</li>
+</ol>
+<p>表现形式：</p>
+<ul>
+<li>OD表</li>
+<li>期望线图</li>
+<li>统计图</li>
+<li>相关曲线：时间分布曲线、出行距离分布曲线</li>
+</ul>
+<div id="section-12" class="section level2">
+<h2>4.1 建立和编辑矩阵文件</h2>
+<p>新建-Matrix File-Name取名-IDs are in，选择ZoneID</p>
+</div>
+<div id="section-13" class="section level2">
+<h2>4.2 从其他数据导入矩阵文件</h2>
+<ul>
+<li>打开xls文件，选择工作簿，另存为一个bin文件，有O/D/Trips三列；</li>
+<li>选择矩阵-导入-选择行/列ID分别为O和D-选择字段为Trips</li>
+</ul>
+</div>
+<div id="section-14" class="section level2">
+<h2>4.3 制造期望线</h2>
+<p>工具-地图分析-欲行线</p>
+<p>想改变期望线外观，点Scaled-symbol Theme Wizard</p>
+</div>
+</div>
+<div id="section-15" class="section level1">
+<h1>5. 交通设施调查</h1>
+<p>交通网络的长度、密度、能力、级配</p>
+<p>交通网络拓扑结构与技术参数信息，包含：</p>
+<ol style="list-style-type: decimal">
+<li>路段及其连接关系</li>
+<li>路段的等级、长度、宽度、车道、分隔方式、设计车速；</li>
+<li>交叉口的类型、位置；</li>
+<li>公交/轨道线网布局、站点设施、车辆配置、公交场站设置；</li>
+</ol>
+<div id="section-16" class="section level2">
+<h2>5.1 新建线类型的地理文件</h2>
+<ul>
+<li>一定要勾选 Create a Table for endpoint data；</li>
+<li>建立四个字段，Type（路段类型），Speed（设计车速），Time（行驶时间），Capacity（通行能力）；</li>
+</ul>
+</div>
+<div id="section-17" class="section level2">
+<h2>5.2 编辑线类型地理文件</h2>
+<ul>
+<li>在根据网络地图编辑线图层时，不要依次输入整条“道路”，而是应该分段输入“路段”，即遇到一个交叉口，就双击一次鼠标，在单击开始下一条路段的输入。如果一次输入整条道路，很可能路网不连通。</li>
+<li>可在图层对话框，将隐藏的节点显示出来。</li>
+</ul>
+</div>
+<div id="section-18" class="section level2">
+<h2>5.3 检查路网连通性</h2>
+<p>检查是否有虚接的线段或不连通的节点。</p>
+<p>工具-地图编辑-检查线层连通性-设置阈值50米；</p>
+</div>
+<div id="section-19" class="section level2">
+<h2>5.4 为路段图层输入属性数据</h2>
+<p>快速路、主干道、次干道、支路</p>
+<div id="section-20" class="section level3">
+<h3>批量选择某一类型的路段</h3>
+<ol style="list-style-type: decimal">
+<li>蓝色手指按钮，按住Shift键，批量选择同一类型的多个路段；</li>
+<li>点击DataView；</li>
+<li>顶部下拉，选择Selection;</li>
+<li>选择某一字段的列，点击fill；</li>
+<li>用公事计算路段设计车速；</li>
+</ol>
+<pre><code>if Type=1 then 80 else if Type=2 then 60 else if Type=3 then 40</code></pre>
+</div>
+</div>
+</div>
+<div id="section-21" class="section level1">
+<h1>6. 交通量调查</h1>
+<div id="section-22" class="section level2">
+<h2>6.1 调查目的</h2>
+<ul>
+<li>评价现状交通网络运行状况；</li>
+<li>标定交通分配模型中的关键参数；</li>
+<li>为设计未来交通网络规划方案提供依据；</li>
+<li>校核OD调查成果的精度；</li>
+<li>通过路段交通量反推出行分布量；</li>
+</ul>
+</div>
+<div id="section-23" class="section level2">
+<h2>6.2 调查内容</h2>
+<ul>
+<li>机动车、非机动车流量调查；</li>
+<li>公交客流调查；</li>
+<li>行人流量调查；</li>
+<li>核查线流量调查；</li>
+</ul>
+</div>
+<div id="section-24" class="section level2">
+<h2>6.3 交通量数据处理与分析</h2>
+<p>分别为每条道路分别输入两个方向的流量</p>
+<p>在路段属性表中添加分别以AB和BA开头的字段，TransCAD将自动对其进行分配并分方向使用这两个字段中的数值；</p>
+<div id="section-25" class="section level3">
+<h3>制作流量专题地图</h3>
+<p>点击Scaled-Symbol Theme，选择BA_Flow</p>
+</div>
+<div id="section-26" class="section level3">
+<h3>制作流量专题图的快捷工具</h3>
+<p>绘图Planing-Planing Utilities-Create Flow Map，选择Flow和V/Cziduan</p>
+</div>
+<div id="section-27" class="section level3">
+<h3>制作交叉口流量流向图</h3>
+<ul>
+<li>工具栏上InterSection Diagram按钮</li>
+<li>Forward Flow 选AB_FLOW</li>
+<li>Display Flow 选BA_Flow;</li>
+<li>勾选Display Flow Labels；</li>
+</ul>
+</div>
+</div>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+  
+  <hr/>
+  &copy; ZhiYuan Wang 2018~2019
+  
+  </footer>
+  </body>
+</html>
+
