@@ -1,0 +1,57 @@
+---
+title: 一、TransCAD——预备知识
+author: 王致远
+date: '2020-01-14'
+slug: transcad-get-start
+categories:
+  - TransCAD
+tags:
+  - 学习总结
+---
+
+# 1. 菜单项
+
+- File 文件
+- Edit 编辑
+- Map 地图
+- Dataview 数据视图
+- Selection 选择
+- Matrix 矩阵
+- Layout 布局
+- Tools 工具
+- Procedures 程序
+- Networks/Paths 网络/路径
+- Route Systems 路线系统
+- Planing 绘图
+- Transit 运输
+- Routing/Logistics 路线/物流
+- Statistics 统计数据
+- Window 窗口
+- Help 帮助
+
+# 2. TransCAD的基本文件类型
+
+| 文件类型    | 中文名 | 拓展名 | 归类 | 说明                       |
+| --------------- | -------- | ------ | ---- | ---------------------------- |
+| Table           | 数据表 | bin    | 数据 | 储存一般形式的表格数据 |
+| Matrix          | 矩阵   | mtx    | 数据 | 储存矩阵形式的表格数据 |
+| Geographic File | 地理文件 | dbd    | 数据 | 储存点线面形式的空间数据 |
+| Route System    | 路线系统 | rts    | 数据 | 储存公交线路和站点数据 |
+| Dataview        | 数据视图 | dvw    | 视图 | 储存普通数据表的外观 |
+| Matrix View     | 矩阵视图 | mvw    | 视图 | 储存矩阵数据表的外观 |
+| Map             | 地图   | map    | 视图 | 储存地理文件、路线系等的外观 |
+| Chart/Figure    | 图表   | fig    | 视图 | 储存基于数据表的统计图表 |
+| Layout          | 布局   | lay    | 视图 | 将以上多种视图集合在一起 |
+| WorkSpace       | 工作空间 | wrk    | 其他 | 同时储存多个窗口以便于管理 |
+
+1. 矩阵->矩阵视图
+2. 数据表->数据视图
+3. 数据表->图表
+4. 地理文件->地图
+5. 路线系->地图
+
+# 3. 能够导入的文件类型
+
+- dbf文件，dBASE数据表
+- dxf文件，CAD图形文件
+- shp文件，ESRI地理文件
