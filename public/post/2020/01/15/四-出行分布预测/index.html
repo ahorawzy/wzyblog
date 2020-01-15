@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>四、出行分布预测 | Website of ZhiYuan Wang</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">主页</a></li>
+      
+      <li><a href="/categories/">分类</a></li>
+      
+      <li><a href="/tags/">标签</a></li>
+      
+      <li><a href="/about/">关于我</a></li>
+      
+      <li><a href="/friendly_links/">链接</a></li>
+      
+      <li><a href="/index.xml">订阅</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">四、出行分布预测</span></h1>
+<h2 class="author">ZhiYuan Wang</h2>
+<h2 class="date">2020/01/15</h2>
+</div>
+
+<main>
+
+
+
+<div id="section" class="section level1">
+<h1>1. 基本原理与方法</h1>
+<p>出行生成预测：得到了未来年各小区出行的产生量与吸引量，需要进一步分析各校区之间的出行交换量。</p>
+<p>出行分布预测：在已知分布矩阵各行、各列之和的条件下，求矩阵中每个元素具体数值的问题。</p>
+<p>在数据上无解，需要补充额外条件</p>
+<ol style="list-style-type: decimal">
+<li>补充历史信息：将现状出行分布矩阵（OD调查得到）乘以一定的增长系数，得到未来出行分布矩阵——增长系数法；</li>
+<li>模拟出行者的目的地选择行为并以此构造相应的分布预测模型，包括重力模型、介入机会模型、最大熵模型等。</li>
+</ol>
+<div id="section-1" class="section level2">
+<h2>1.1 增长系数法</h2>
+<p>基本假设：未来的出行分布量是现在出行分布量的基础上，乘以相应的增长系数得到的。</p>
+<p>TransCAD中使用Fratar法，收敛速度快。</p>
+<p>增长系数法的缺点：</p>
+<ol style="list-style-type: decimal">
+<li>要求有完整的现状出行分布矩阵，而得到这种基础数据的成本很高；</li>
+<li>对几年出行矩阵精度依赖性较大；</li>
+<li>如果基年矩阵中有零元素，那么预测矩阵中对应的部分也为零；</li>
+<li>无法预测与未来年新增加小区相关的出行分布量。</li>
+</ol>
+</div>
+<div id="section-2" class="section level2">
+<h2>1.2 重力模型</h2>
+<p>基本假设：出行分布是群体出行决策的结果，两小区之间的出行分布量的大小，受两小区出行生成量与两小区之间出行距离（或广义费用）的共同影响。</p>
+<p><span class="math display">\[q_{ij}=\alpha O_i D_j f(c_{ij})\]</span></p>
+<p><span class="math inline">\(C_{ij}\)</span>为两分区间的阻抗；<span class="math inline">\(f(c_{ij})\)</span>为阻抗函数。</p>
+<ul>
+<li>无约束重力模型：直接计算不满足行列和为OD量的约束条件，不能直接用于出行分布预测；</li>
+<li>有约束重力模型：使用增长系数法对无约束重力模型初始计算结果迭代。</li>
+</ul>
+<p>模型标定：</p>
+<p>需要根据现状出行分布矩阵和阻抗矩阵估计阻抗函数中的参数。</p>
+<p>优点：</p>
+<ol style="list-style-type: decimal">
+<li>可解释性强；</li>
+<li>敏感反应交通供给变化对出行影响，适用于中长期需求预测；</li>
+<li>不需要完整基年OD矩阵，如果有可信赖的模型参数，甚至不需要基年OD矩阵；</li>
+<li>特定交通小区（如新开发区）之间分布量为零时，也能进行预测；</li>
+</ol>
+<p>缺点：难以准确预测小区内出行分布量。</p>
+</div>
+</div>
+<div id="transcad" class="section level1">
+<h1>2. 增长系数法在TransCAD中应用</h1>
+<div id="section-3" class="section level2">
+<h2>2.1 数据准备</h2>
+<p>-　现状年出行OD矩阵
+-　未来年出行发生量和吸引量表。</p>
+</div>
+<div id="section-4" class="section level2">
+<h2>2.2 操作</h2>
+<ol style="list-style-type: decimal">
+<li>绘图Planing-Trip Distribution-Growth Factor Method</li>
+<li>Production Field选O；Attraction Field选D，点OK；</li>
+</ol>
+</div>
+</div>
+<div id="transcad-1" class="section level1">
+<h1>3. 重力模型在TransCAD中应用</h1>
+<p><strong>以幂函数型阻抗函数为例</strong></p>
+<div id="section-5" class="section level2">
+<h2>2.1 数据准备</h2>
+<ul>
+<li>小区地理文件</li>
+<li>现状出行分布矩阵</li>
+<li>现状小区阻抗矩阵</li>
+</ul>
+</div>
+<div id="section-6" class="section level2">
+<h2>2.2 标定重力模型</h2>
+<ol style="list-style-type: decimal">
+<li>Planing-Trip Distribution-Gravity Calibration；</li>
+<li>Matrix File选择OD_Base；</li>
+<li>下方Impedance Matrix File（阻抗矩阵）选择Impedance；</li>
+<li>Function下勾选Inverse Power，新数据视图下b为阻抗函数参数。</li>
+</ol>
+</div>
+<div id="section-7" class="section level2">
+<h2>2.3 运行重力模型</h2>
+<p>需要：</p>
+<ul>
+<li>一个未来年小区间阻抗矩阵；</li>
+<li>一个未来年出行产生量和吸引量表；</li>
+<li>重力模型阻抗函数的参数。</li>
+</ul>
+<p>Planing-Trip Distribution-Gravity。</p>
+</div>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+  
+  <hr/>
+  &copy; ZhiYuan Wang 2018~2019
+  
+  </footer>
+  </body>
+</html>
+
