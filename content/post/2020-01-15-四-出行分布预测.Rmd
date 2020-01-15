@@ -1,6 +1,6 @@
 ---
 title: 四、出行分布预测
-author: ZhiYuan Wang
+author: 王致远
 date: '2020-01-15'
 slug: 四-出行分布预测
 categories:
