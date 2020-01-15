@@ -6,10 +6,19 @@
     <description>Recent content in TransCAD on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 14 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 15 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/transcad/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>三、出行生成预测</title>
+      <link>/post/2020/01/15/%E4%B8%89-%E5%87%BA%E8%A1%8C%E7%94%9F%E6%88%90%E9%A2%84%E6%B5%8B/</link>
+      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2020/01/15/%E4%B8%89-%E5%87%BA%E8%A1%8C%E7%94%9F%E6%88%90%E9%A2%84%E6%B5%8B/</guid>
+      <description>1. 出行的基本概念 1.1 出行的三个属性 每次出行有起讫点； 每次出行有一定目的； 每次出行使用一种或多种交通方式； 1.2 出行生成的表达 国内交通规划工作中对出</description>
+    </item>
     
     <item>
       <title>一、TransCAD——预备知识</title>
