@@ -1,0 +1,52 @@
+---
+title: 六、交通分配与OD反推
+author: 王致远
+date: '2020-01-16'
+slug: 六-交通分配与od反推
+categories:
+  - TransCAD
+tags:
+  - 学习总结
+---
+
+
+
+<p>交通分配是四阶段的最后一阶段，将各种出行方式的OD矩阵按一定的路径选择原则分配到交通网络中的各条道路上，求出各路段的流量及相关的交通指标。</p>
+<p>OD矩阵反推，是通过路段观测交通量快速获取OD矩阵。</p>
+<div id="section" class="section level1">
+<h1>1. 基本原理与方法</h1>
+<div id="section-1" class="section level2">
+<h2>1.1 基本概念</h2>
+<p>交通分配可归纳为问题形式</p>
+<p>已知：</p>
+<ul>
+<li>交通网络的有向图表示形式；</li>
+<li>路段阻抗函数；</li>
+<li>OD矩阵；</li>
+</ul>
+<p>求解：</p>
+<ul>
+<li>网络中各路段的交通量及阻抗值</li>
+</ul>
+<p>路段的阻抗函数能反应实际道路路段上行程时间与路段有两之间的关系</p>
+<p>BPR阻抗函数</p>
+<p><span class="math display">\[t_a=t_a(0)[1+\alpha (\frac{V_a}{C_a})^\beta]\]</span></p>
+<ul>
+<li><span class="math inline">\(t_a\)</span>路段a的行程时间；</li>
+<li><span class="math inline">\(C_a\)</span>路段a的通行能力；</li>
+<li><span class="math inline">\(V_a\)</span>路段a的流量；</li>
+<li><span class="math inline">\(t_a(0)\)</span>路段a的零流时间；</li>
+<li><span class="math inline">\(\alpha=0.15\)</span></li>
+<li><span class="math inline">\(\beta=4\)</span></li>
+</ul>
+</div>
+<div id="wardrop" class="section level2">
+<h2>1.2 Wardrop原理</h2>
+<div id="ue" class="section level3">
+<h3>第一原理：用户平衡UE</h3>
+</div>
+<div id="so" class="section level3">
+<h3>第二原理：系统最优SO</h3>
+</div>
+</div>
+</div>
