@@ -38,6 +38,34 @@
 <main>
 
 
+<div id="TOC">
+<ul>
+<li><a href="#section">1. 基本原理与方法</a><ul>
+<li><a href="#section-1">1.1 基本概念</a></li>
+<li><a href="#wardrop">1.2 Wardrop原理</a><ul>
+<li><a href="#ue">第一原理：用户平衡UE</a></li>
+<li><a href="#so">第二原理：系统最优SO</a></li>
+</ul></li>
+<li><a href="#section-2">1.3 非平衡分配算法</a></li>
+<li><a href="#section-3">1.4 随机分配方法</a></li>
+<li><a href="#od">1.5 OD矩阵反推</a></li>
+</ul></li>
+<li><a href="#transcad">2. 在TransCAD中进行交通分配</a><ul>
+<li><a href="#section-4">2.1 数据准备</a></li>
+<li><a href="#section-5">2.2 创建小区质心地理文件</a></li>
+<li><a href="#section-6">2.3 将质心连接到路网</a></li>
+<li><a href="#section-7">2.4 设置质心连接线属性</a></li>
+<li><a href="#section-8">2.5 创建网络</a></li>
+<li><a href="#section-9">2.6 生成小区间阻抗矩阵</a></li>
+<li><a href="#od-1">2.7 OD矩阵</a></li>
+<li><a href="#section-10">2.8 运行交通分配模型</a></li>
+</ul></li>
+<li><a href="#transcadod">3. 在TransCAD中进行OD反推</a><ul>
+<li><a href="#section-11">3.1 数据准备</a></li>
+<li><a href="#od-2">3.2 运行OD反推模型</a></li>
+</ul></li>
+</ul>
+</div>
 
 <p>交通分配是四阶段的最后一阶段，将各种出行方式的OD矩阵按一定的路径选择原则分配到交通网络中的各条道路上，求出各路段的流量及相关的交通指标。</p>
 <p>OD矩阵反推，是通过路段观测交通量快速获取OD矩阵。</p>
@@ -121,6 +149,93 @@
 <li>小区图层（面类型地理文件）</li>
 </ol>
 <p>小区图层的作用是在OD矩阵和交通网络之间建立联系。因为OD矩阵的索引是基于小区的，路网节点有另外一套编号系统，OD矩阵无法直接加载到交通网络上。将小区图层作为中介，可以将以小区编号为索引的OD矩阵转换为以路网节点编号为索引的OD矩阵。</p>
+</div>
+<div id="section-5" class="section level2">
+<h2>2.2 创建小区质心地理文件</h2>
+<ol style="list-style-type: decimal">
+<li>打开小区图层-面类型地理文件；</li>
+<li>工具-导出-导出地区地理文件；</li>
+<li>选择Standard Geographic File，ID选ZoneID，勾选Exports as Centoid Point;</li>
+<li>明明问Cent.dbd。</li>
+</ol>
+</div>
+<div id="section-6" class="section level2">
+<h2>2.3 将质心连接到路网</h2>
+<ol style="list-style-type: decimal">
+<li>打开Street.dbd，打开图层，将Node设置为可见；</li>
+<li>Add Layer-Cent.dbd；</li>
+<li>将Zone置为当前图层，选Tools-Map Editing-Connect；</li>
+<li>选Fill选项卡，在Node field后选INdex，并勾选IDs from Zone layer。</li>
+</ol>
+</div>
+<div id="section-7" class="section level2">
+<h2>2.4 设置质心连接线属性</h2>
+<p>小区的出行量全部通过质心连接线进出路网，需要为质心连接线设置较大的通行能力和较小的行驶时间。</p>
+<ol style="list-style-type: decimal">
+<li>Selection-Select by Condition；</li>
+<li>Enter a Condition：Time=null；</li>
+<li>选择Time字段，Fill-Single Value输入0.1；</li>
+<li>Capacity输入100000；</li>
+</ol>
+</div>
+<div id="section-8" class="section level2">
+<h2>2.5 创建网络</h2>
+<p>线类型地理文件只是一个包含了属性数据的地图，还需要在地理文件的基础上创建网络（Networks）文件。</p>
+<ol style="list-style-type: decimal">
+<li>Street置为当前图层；</li>
+<li>Networkds/Paths-Create；左边列表框选择Time和Capacity。</li>
+</ol>
+</div>
+<div id="section-9" class="section level2">
+<h2>2.6 生成小区间阻抗矩阵</h2>
+<p>因为只对质心之间的阻抗感兴趣，因此先选出质心。</p>
+<ol style="list-style-type: decimal">
+<li>Node置为当前图层；</li>
+<li>Selection-Select by Condition- Index &lt;&gt; null；</li>
+<li>Networks/Paths-Multiple Paths-Multiple shortest Paths;</li>
+<li>Minimize选择Time/Length，From和To均选择Selection，勾选Matrix File，保存最短距离矩阵；</li>
+</ol>
+</div>
+<div id="od-1" class="section level2">
+<h2>2.7 OD矩阵</h2>
+<p>需要对OD矩阵索引进行转换（小区编号转为交通网络节点ID）</p>
+<ol style="list-style-type: decimal">
+<li>选出质心点；</li>
+<li>打开OD_Car；</li>
+<li>右键-指数-弹出Matrix Indices；</li>
+<li>Add-Index-Add matrix Index；</li>
+<li>Field后选择INdex,下方的Field选择ID，Selection选择Selection；</li>
+<li>在矩阵索引设置对话框中，Rows和Columns后均选择New；</li>
+</ol>
+</div>
+<div id="section-10" class="section level2">
+<h2>2.8 运行交通分配模型</h2>
+<ol style="list-style-type: decimal">
+<li>地图窗口设置为当前活动窗口；</li>
+<li>Planning-Traffic Assignment；</li>
+<li>Method选择交通分配方法；Matrix选择待分配矩阵；Time和CaPacity路段行驶时间和通行能力；</li>
+<li>Alpha和Beta是默认阻抗函数参数；</li>
+<li>会自动弹出一个数据视图，是路段图层Street的属性表与路段流量表ASN_LinkFlow的连接。；</li>
+<li>制作流量专题地图。</li>
+</ol>
+</div>
+</div>
+<div id="transcadod" class="section level1">
+<h1>3. 在TransCAD中进行OD反推</h1>
+<p>OD反推是交通分配的逆过程，是根据路段流量推算可能的OD矩阵。</p>
+<div id="section-11" class="section level2">
+<h2>3.1 数据准备</h2>
+<p>运行OD反推功能，首先要准备一个含有路段流量的交通网络地理文件。</p>
+<p>另外，为了给输出的OD矩阵设置尺寸，还需要准备与一个初始的OD矩阵，它的元素可以全为1。</p>
+</div>
+<div id="od-2" class="section level2">
+<h2>3.2 运行OD反推模型</h2>
+<ol style="list-style-type: decimal">
+<li>打开ODME.wrk；</li>
+<li>Planning-OD Matrix Estimation；</li>
+<li>Method后是各种交通分配方法，Matrix是初始矩阵，Time和Capacity是路段行驶时间和通行能力，Count是观测交通量；Alpha和Beta是默认阻抗函数；</li>
+<li>弹出的两个表分别是路段流量表和反推的OD矩阵。</li>
+</ol>
 </div>
 </div>
 

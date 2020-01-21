@@ -7,6 +7,9 @@ categories:
   - TransCAD
 tags:
   - 学习总结
+output:
+  blogdown::html_page:
+    toc: true
 ---
 
 交通分配是四阶段的最后一阶段，将各种出行方式的OD矩阵按一定的路径选择原则分配到交通网络中的各条道路上，求出各路段的流量及相关的交通指标。
@@ -95,5 +98,78 @@ STOCH分配方法，路径选择概率由Logit模型计算。时间越短的路�
 
 小区图层的作用是在OD矩阵和交通网络之间建立联系。因为OD矩阵的索引是基于小区的，路网节点有另外一套编号系统，OD矩阵无法直接加载到交通网络上。将小区图层作为中介，可以将以小区编号为索引的OD矩阵转换为以路网节点编号为索引的OD矩阵。
 
+## 2.2 创建小区质心地理文件
 
+1. 打开小区图层-面类型地理文件；
+2. 工具-导出-导出地区地理文件；
+3. 选择Standard Geographic File，ID选ZoneID，勾选Exports as Centoid Point;
+4. 明明问Cent.dbd。
 
+## 2.3 将质心连接到路网
+
+1. 打开Street.dbd，打开图层，将Node设置为可见；
+2. Add Layer-Cent.dbd；
+3. 将Zone置为当前图层，选Tools-Map Editing-Connect；
+4. 选Fill选项卡，在Node field后选INdex，并勾选IDs from Zone layer。
+
+## 2.4 设置质心连接线属性
+
+小区的出行量全部通过质心连接线进出路网，需要为质心连接线设置较大的通行能力和较小的行驶时间。
+
+1. Selection-Select by Condition；
+2. Enter a Condition：Time=null；
+3. 选择Time字段，Fill-Single Value输入0.1；
+4. Capacity输入100000；
+
+## 2.5 创建网络
+
+线类型地理文件只是一个包含了属性数据的地图，还需要在地理文件的基础上创建网络（Networks）文件。
+
+1. Street置为当前图层；
+2. Networkds/Paths-Create；左边列表框选择Time和Capacity。
+
+## 2.6 生成小区间阻抗矩阵
+
+因为只对质心之间的阻抗感兴趣，因此先选出质心。
+
+1. Node置为当前图层；
+2. Selection-Select by Condition- Index <> null；
+3. Networks/Paths-Multiple Paths-Multiple shortest Paths;
+4. Minimize选择Time/Length，From和To均选择Selection，勾选Matrix File，保存最短距离矩阵；
+
+## 2.7 OD矩阵
+
+需要对OD矩阵索引进行转换（小区编号转为交通网络节点ID）
+
+1. 选出质心点；
+2. 打开OD_Car；
+3. 右键-指数-弹出Matrix Indices；
+4. Add-Index-Add matrix Index；
+5. Field后选择INdex,下方的Field选择ID，Selection选择Selection；
+6. 在矩阵索引设置对话框中，Rows和Columns后均选择New；
+
+## 2.8 运行交通分配模型
+
+1. 地图窗口设置为当前活动窗口；
+2. Planning-Traffic Assignment；
+3. Method选择交通分配方法；Matrix选择待分配矩阵；Time和CaPacity路段行驶时间和通行能力；
+4. Alpha和Beta是默认阻抗函数参数；
+5. 会自动弹出一个数据视图，是路段图层Street的属性表与路段流量表ASN_LinkFlow的连接。；
+6. 制作流量专题地图。
+
+# 3. 在TransCAD中进行OD反推
+
+OD反推是交通分配的逆过程，是根据路段流量推算可能的OD矩阵。
+
+## 3.1 数据准备
+
+运行OD反推功能，首先要准备一个含有路段流量的交通网络地理文件。
+
+另外，为了给输出的OD矩阵设置尺寸，还需要准备与一个初始的OD矩阵，它的元素可以全为1。
+
+## 3.2 运行OD反推模型
+
+1. 打开ODME.wrk；
+2. Planning-OD Matrix Estimation；
+3. Method后是各种交通分配方法，Matrix是初始矩阵，Time和Capacity是路段行驶时间和通行能力，Count是观测交通量；Alpha和Beta是默认阻抗函数；
+4. 弹出的两个表分别是路段流量表和反推的OD矩阵。
