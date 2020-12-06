@@ -38,7 +38,7 @@ hasCJKLanguage = true
 
 [params]
     description = "A website built through Hugo and blogdown."
-    footer = "&copy; ZhiYuan Wang 2018~2019"
+    footer = "&copy; ZhiYuan Wang 2018~2021"
     
     highlightjsVersion = "9.11.0"
     highlightjsCDN = "//cdn.bootcss.com"
