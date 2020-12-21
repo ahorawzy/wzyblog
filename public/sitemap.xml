@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/2020/12/21/%E5%9F%8E%E5%B8%82%E8%BD%A8%E9%81%93%E4%BA%A4%E9%80%9A%E5%BF%AB%E7%BA%BF/</loc>
+    <lastmod>2020-12-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/2020/12/06/%E5%8F%88%E9%87%8D%E8%BF%94%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2020-12-06T00:00:00+00:00</lastmod>
   </url>
@@ -669,7 +674,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-12-06T00:00:00+00:00</lastmod>
+    <lastmod>2020-12-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -680,7 +685,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2020-12-06T00:00:00+00:00</lastmod>
+    <lastmod>2020-12-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -728,7 +733,7 @@
   
   <url>
     <loc>/categories/%E4%BA%A4%E9%80%9A/</loc>
-    <lastmod>2020-12-06T00:00:00+00:00</lastmod>
+    <lastmod>2020-12-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
