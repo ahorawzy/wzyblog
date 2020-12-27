@@ -11,6 +11,8 @@ date: "2019-01-01"
 
 <center>[bookdown书单-完全版](https://bookdown.org/home/archive/)</center>
 
+<center>[Geocomputation with R](https://geocompr.robinlovelace.net/)</center>
+
 <center>[blogdown](https://bookdown.org/yihui/blogdown/)</center>
 
 <center>[bookdown](https://bookdown.org/yihui/bookdown/)</center>
