@@ -10,4 +10,27 @@ tags: []
 
 
 
-<p>try add a new post.</p>
+<p>载入相关包</p>
+<pre class="r"><code>library(sf)</code></pre>
+<pre><code>## Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1</code></pre>
+<pre class="r"><code>library(raster)</code></pre>
+<pre><code>## 载入需要的程辑包：sp</code></pre>
+<pre class="r"><code>library(spData)
+library(spDataLarge)</code></pre>
+<ul>
+<li>矢量数据：使用点，线和多边形；具有离散的，定义明确的边界，通常具有很高的精度。sf包处理矢量数据。</li>
+<li>栅格数据：将表面分成恒定大小的方格，是底图的基础。raster包处理栅格数据。</li>
+</ul>
+<div id="简单特征simple-features简介" class="section level2">
+<h2>2.2.1 简单特征（Simple features）简介</h2>
+<p>简单特征是一种开放标准，是一种表示大量几何图形的分层次的模型。</p>
+<p>sf包可以表示多种常见几何形状：点，线，多边形和它们的multi版本。</p>
+<p>sf包同时支持多种类型几何形状的组合。</p>
+<p>sf包是多个地理数据分析包的有机结合：</p>
+<ol style="list-style-type: decimal">
+<li>sp包，主要用于构建数据结构；</li>
+<li>rgdal包，用于与GDAL接口读写数据；</li>
+<li>rgeos包，用于与GEOS接口实现空间数据运算。</li>
+<li>PROJ库，用于呈现和转换投影坐标系。</li>
+</ol>
+</div>
