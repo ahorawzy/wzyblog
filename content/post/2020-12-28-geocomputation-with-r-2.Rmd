@@ -1,0 +1,39 @@
+---
+title: Geocomputation with R - Geographic data in R
+author: 王致远
+date: '2020-12-28'
+slug: geocomputation-with-r-geographic-data-in-r
+categories:
+  - R语言
+tags: []
+output:
+  blogdown::html_page:
+    toc: true
+---
+
+载入相关包
+
+```{r}
+library(sf)
+library(raster)
+library(spData)
+library(spDataLarge)
+```
+
+- 矢量数据：使用点，线和多边形；具有离散的，定义明确的边界，通常具有很高的精度。sf包处理矢量数据。
+- 栅格数据：将表面分成恒定大小的方格，是底图的基础。raster包处理栅格数据。
+
+## 2.2.1 简单特征（Simple features）简介
+
+简单特征是一种开放标准，是一种表示大量几何图形的分层次的模型。
+
+sf包可以表示多种常见几何形状：点，线，多边形和它们的multi版本。
+
+sf包同时支持多种类型几何形状的组合。
+
+sf包是多个地理数据分析包的有机结合：
+
+1. sp包，主要用于构建数据结构；
+2. rgdal包，用于与GDAL接口读写数据；
+3. rgeos包，用于与GEOS接口实现空间数据运算。
+4. PROJ库，用于呈现和转换投影坐标系。
