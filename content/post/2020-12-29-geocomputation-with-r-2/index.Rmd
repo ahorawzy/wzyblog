@@ -1,0 +1,11 @@
+---
+title: Geocomputation with R-2
+author: ZhiYuan Wang
+date: '2020-12-29'
+slug: geocomputation-with-r-2
+categories:
+  - R语言
+tags: []
+---
+
+try add a new post.
