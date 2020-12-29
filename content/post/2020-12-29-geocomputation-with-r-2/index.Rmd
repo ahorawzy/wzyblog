@@ -1,6 +1,6 @@
 ---
 title: Geocomputation with R-2
-author: ZhiYuan Wang
+author: 王致远
 date: '2020-12-29'
 slug: geocomputation-with-r-2
 categories:
