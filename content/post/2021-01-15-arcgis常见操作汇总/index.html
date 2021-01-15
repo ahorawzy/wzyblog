@@ -1,0 +1,41 @@
+---
+title: ARCGIS常见操作汇总
+author: 王致远
+date: '2021-01-15'
+slug: arcgis常见操作汇总
+categories:
+  - ARCGIS
+tags: []
+output:
+  blogdown::html_page:
+    toc: true
+---
+
+<script src="index_files/header-attrs/header-attrs.js"></script>
+
+<div id="TOC">
+<ul>
+<li><a href="#分乡镇出图">1. 分乡镇出图</a></li>
+<li><a href="#矢量数据分面统计">2. 矢量数据分面统计</a></li>
+</ul>
+</div>
+
+<div id="分乡镇出图" class="section level1">
+<h1>1. 分乡镇出图</h1>
+<ol style="list-style-type: decimal">
+<li>打开总图，选择要剪裁乡镇；</li>
+<li>工具-分析-剪裁；</li>
+<li>输入要素：需要剪裁的图层；剪裁要素：乡镇面；输出要素类：自己命名；XY容差，不填。</li>
+</ol>
+</div>
+<div id="矢量数据分面统计" class="section level1">
+<h1>2. 矢量数据分面统计</h1>
+<ol style="list-style-type: decimal">
+<li>分析工具-叠加分析-标识；</li>
+<li>输入要素：公路网；标识要素：乡镇面；输出要素类：自己命名；XY容差，不填。</li>
+<li>打开新标识图层属性表；</li>
+<li>添加字段；长度-浮点型；</li>
+<li>计算几何：长度，</li>
+<li>汇总：</li>
+</ol>
+</div>
