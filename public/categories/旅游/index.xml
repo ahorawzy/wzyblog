@@ -1,40 +1,36 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>旅游 on Website of ZhiYuan Wang</title>
-    <link>/categories/%E6%97%85%E6%B8%B8/</link>
+    <link>https://www.wzyblog.top/categories/%E6%97%85%E6%B8%B8/</link>
     <description>Recent content in 旅游 on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 05 Jul 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/categories/%E6%97%85%E6%B8%B8/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 05 Jul 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://www.wzyblog.top/categories/%E6%97%85%E6%B8%B8/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>游江南（毕业旅行）</title>
-      <link>/post/2019/07/05/travel-of-jiangnan/</link>
+      <link>https://www.wzyblog.top/post/2019/07/05/travel-of-jiangnan/</link>
       <pubDate>Fri, 05 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/07/05/travel-of-jiangnan/</guid>
+      <guid>https://www.wzyblog.top/post/2019/07/05/travel-of-jiangnan/</guid>
       <description>背景 DAY 1：鸡鸣寺-明城墙-玄武湖-老门东-夫子庙 DAY 2：灵谷圣境-中山陵-音乐台-明孝陵-美龄宫-十朝历史文化园-新街口-夫子庙 DAY3：总统</description>
     </item>
     
     <item>
       <title>游北京世园会</title>
-      <link>/post/2019/06/22/beijing-garden-expo/</link>
+      <link>https://www.wzyblog.top/post/2019/06/22/beijing-garden-expo/</link>
       <pubDate>Sat, 22 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/06/22/beijing-garden-expo/</guid>
+      <guid>https://www.wzyblog.top/post/2019/06/22/beijing-garden-expo/</guid>
       <description>从三月份知道北京要举办世园会，我就决定在离开北京之前一定要去一次，所以世园会和秦皇岛一样，都在我的毕业待完成清单里。今天是毕业典礼，而我昨晚</description>
     </item>
     
     <item>
       <title>游山海关&amp;北戴河</title>
-      <link>/post/2019/06/21/qinhuangdao/</link>
+      <link>https://www.wzyblog.top/post/2019/06/21/qinhuangdao/</link>
       <pubDate>Fri, 21 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/06/21/qinhuangdao/</guid>
+      <guid>https://www.wzyblog.top/post/2019/06/21/qinhuangdao/</guid>
       <description>之前早打算在毕业这段时间去秦皇岛玩，但因为导师安排的编书任务和自己的拖延一直没抽时间去。眼看着距离离开北京越来越近了，列了个未完成事情清单，</description>
     </item>
     

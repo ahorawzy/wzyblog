@@ -1,49 +1,45 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>电脑 on Website of ZhiYuan Wang</title>
-    <link>/categories/%E7%94%B5%E8%84%91/</link>
+    <link>https://www.wzyblog.top/categories/%E7%94%B5%E8%84%91/</link>
     <description>Recent content in 电脑 on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 09 Jan 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/categories/%E7%94%B5%E8%84%91/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 09 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://www.wzyblog.top/categories/%E7%94%B5%E8%84%91/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>所里FTP设置</title>
-      <link>/post/2020/01/09/%E6%89%80%E9%87%8Cftp%E8%AE%BE%E7%BD%AE/</link>
+      <link>https://www.wzyblog.top/post/2020/01/09/%E6%89%80%E9%87%8Cftp%E8%AE%BE%E7%BD%AE/</link>
       <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/01/09/%E6%89%80%E9%87%8Cftp%E8%AE%BE%E7%BD%AE/</guid>
+      <guid>https://www.wzyblog.top/post/2020/01/09/%E6%89%80%E9%87%8Cftp%E8%AE%BE%E7%BD%AE/</guid>
       <description>FXP 是File Exchange Protocol（文件交换协议）的英文简称，而中文简称为“文传协议”。用于Internet上的控制文件的双向传输。 打开flas</description>
     </item>
     
     <item>
       <title>表头标准颜色</title>
-      <link>/post/2019/10/29/table-color/</link>
+      <link>https://www.wzyblog.top/post/2019/10/29/table-color/</link>
       <pubDate>Tue, 29 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/10/29/table-color/</guid>
+      <guid>https://www.wzyblog.top/post/2019/10/29/table-color/</guid>
       <description>公司风格表格 表头颜色：224，240，235 表格边框颜色：153，204，255 表序号靠右，表名居中，小四黑体，Times New Roman 表内字体五号宋</description>
     </item>
     
     <item>
       <title>找回路由器密码</title>
-      <link>/post/2019/10/06/password-of-router/</link>
+      <link>https://www.wzyblog.top/post/2019/10/06/password-of-router/</link>
       <pubDate>Sun, 06 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/10/06/password-of-router/</guid>
+      <guid>https://www.wzyblog.top/post/2019/10/06/password-of-router/</guid>
       <description>今天突然发现我把屋里路由器的密码忘了，虽然笔记本、手机、kindle等设备都记着密码，但总觉得心里不踏实，还是找回密码的好。上网找到了解决方</description>
     </item>
     
     <item>
       <title>离线安装chrome插件</title>
-      <link>/post/2019/06/08/%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85chrome%E6%8F%92%E4%BB%B6/</link>
+      <link>https://www.wzyblog.top/post/2019/06/08/%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85chrome%E6%8F%92%E4%BB%B6/</link>
       <pubDate>Sat, 08 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/06/08/%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85chrome%E6%8F%92%E4%BB%B6/</guid>
+      <guid>https://www.wzyblog.top/post/2019/06/08/%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85chrome%E6%8F%92%E4%BB%B6/</guid>
       <description>上个月将笔记本重装了系统，但由于我的笔记本没法设置ipv6，所以无法登录谷歌商店下载、安装插件。昨天在学习OneNote时，接触到OneNo</description>
     </item>
     

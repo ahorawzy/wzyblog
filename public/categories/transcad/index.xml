@@ -1,67 +1,63 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Transcad on Website of ZhiYuan Wang</title>
-    <link>/categories/transcad/</link>
-    <description>Recent content in Transcad on Website of ZhiYuan Wang</description>
+    <title>TransCAD on Website of ZhiYuan Wang</title>
+    <link>https://www.wzyblog.top/categories/transcad/</link>
+    <description>Recent content in TransCAD on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 16 Jan 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/categories/transcad/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 16 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://www.wzyblog.top/categories/transcad/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>六、交通分配与OD反推</title>
-      <link>/post/2020/01/16/%E5%85%AD-%E4%BA%A4%E9%80%9A%E5%88%86%E9%85%8D%E4%B8%8Eod%E5%8F%8D%E6%8E%A8/</link>
+      <link>https://www.wzyblog.top/post/2020/01/16/%E5%85%AD-%E4%BA%A4%E9%80%9A%E5%88%86%E9%85%8D%E4%B8%8Eod%E5%8F%8D%E6%8E%A8/</link>
       <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/01/16/%E5%85%AD-%E4%BA%A4%E9%80%9A%E5%88%86%E9%85%8D%E4%B8%8Eod%E5%8F%8D%E6%8E%A8/</guid>
+      <guid>https://www.wzyblog.top/post/2020/01/16/%E5%85%AD-%E4%BA%A4%E9%80%9A%E5%88%86%E9%85%8D%E4%B8%8Eod%E5%8F%8D%E6%8E%A8/</guid>
       <description>1. 基本原理与方法 1.1 基本概念 1.2 Wardrop原理 第一原理：用户平衡UE 第二原理：系统最优SO 1.3 非平衡分配算法 1.4 随机分配方法 1.5 OD矩阵反推 2. 在T</description>
     </item>
     
     <item>
       <title>三、出行生成预测</title>
-      <link>/post/2020/01/15/%E4%B8%89-%E5%87%BA%E8%A1%8C%E7%94%9F%E6%88%90%E9%A2%84%E6%B5%8B/</link>
+      <link>https://www.wzyblog.top/post/2020/01/15/%E4%B8%89-%E5%87%BA%E8%A1%8C%E7%94%9F%E6%88%90%E9%A2%84%E6%B5%8B/</link>
       <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/01/15/%E4%B8%89-%E5%87%BA%E8%A1%8C%E7%94%9F%E6%88%90%E9%A2%84%E6%B5%8B/</guid>
+      <guid>https://www.wzyblog.top/post/2020/01/15/%E4%B8%89-%E5%87%BA%E8%A1%8C%E7%94%9F%E6%88%90%E9%A2%84%E6%B5%8B/</guid>
       <description>1. 出行的基本概念 1.1 出行的三个属性 每次出行有起讫点； 每次出行有一定目的； 每次出行使用一种或多种交通方式； 1.2 出行生成的表达 国内交通规划工作中对出</description>
     </item>
     
     <item>
       <title>五、方式划分预测</title>
-      <link>/post/2020/01/15/%E4%BA%94-%E6%96%B9%E5%BC%8F%E5%88%92%E5%88%86%E9%A2%84%E6%B5%8B/</link>
+      <link>https://www.wzyblog.top/post/2020/01/15/%E4%BA%94-%E6%96%B9%E5%BC%8F%E5%88%92%E5%88%86%E9%A2%84%E6%B5%8B/</link>
       <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/01/15/%E4%BA%94-%E6%96%B9%E5%BC%8F%E5%88%92%E5%88%86%E9%A2%84%E6%B5%8B/</guid>
+      <guid>https://www.wzyblog.top/post/2020/01/15/%E4%BA%94-%E6%96%B9%E5%BC%8F%E5%88%92%E5%88%86%E9%A2%84%E6%B5%8B/</guid>
       <description>方式划分是四阶段的第三阶段，目的是将各小区间的出行分布量划分为各种交通方式的分布量。 在TransCAD中用Logit模型。 1. 基本原理与方法 1.1</description>
     </item>
     
     <item>
       <title>四、出行分布预测</title>
-      <link>/post/2020/01/15/%E5%9B%9B-%E5%87%BA%E8%A1%8C%E5%88%86%E5%B8%83%E9%A2%84%E6%B5%8B/</link>
+      <link>https://www.wzyblog.top/post/2020/01/15/%E5%9B%9B-%E5%87%BA%E8%A1%8C%E5%88%86%E5%B8%83%E9%A2%84%E6%B5%8B/</link>
       <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/01/15/%E5%9B%9B-%E5%87%BA%E8%A1%8C%E5%88%86%E5%B8%83%E9%A2%84%E6%B5%8B/</guid>
+      <guid>https://www.wzyblog.top/post/2020/01/15/%E5%9B%9B-%E5%87%BA%E8%A1%8C%E5%88%86%E5%B8%83%E9%A2%84%E6%B5%8B/</guid>
       <description>1. 基本原理与方法 出行生成预测：得到了未来年各小区出行的产生量与吸引量，需要进一步分析各校区之间的出行交换量。 出行分布预测：在已知分布矩阵各行</description>
     </item>
     
     <item>
       <title>一、TransCAD——预备知识</title>
-      <link>/post/2020/01/14/transcad-get-start/</link>
+      <link>https://www.wzyblog.top/post/2020/01/14/transcad-get-start/</link>
       <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/01/14/transcad-get-start/</guid>
+      <guid>https://www.wzyblog.top/post/2020/01/14/transcad-get-start/</guid>
       <description>1. 菜单项 File 文件 Edit 编辑 Map 地图 Dataview 数据视图 Selection 选择 Matrix 矩阵 Layout 布局 Tools 工具 Procedures 程序 Networks/Paths 网络/路径 Route Systems 路线系统 Planing 绘图 Transit 运输 Routing/Logistics 路线/物流 Statistics 统计数据 Window 窗口 Help 帮助 2. T</description>
     </item>
     
     <item>
       <title>二、交通调查数据处理与分析</title>
-      <link>/post/2020/01/14/%E4%BA%8C-%E4%BA%A4%E9%80%9A%E8%B0%83%E6%9F%A5%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E5%88%86%E6%9E%90/</link>
+      <link>https://www.wzyblog.top/post/2020/01/14/%E4%BA%8C-%E4%BA%A4%E9%80%9A%E8%B0%83%E6%9F%A5%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E5%88%86%E6%9E%90/</link>
       <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/01/14/%E4%BA%8C-%E4%BA%A4%E9%80%9A%E8%B0%83%E6%9F%A5%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E5%88%86%E6%9E%90/</guid>
+      <guid>https://www.wzyblog.top/post/2020/01/14/%E4%BA%8C-%E4%BA%A4%E9%80%9A%E8%B0%83%E6%9F%A5%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E5%88%86%E6%9E%90/</guid>
       <description>1. 交通调查的对象 2. 交通小区 2.1 交通小区划分 2.2 编辑面类型地理文件 2.3 为小区图层输入属性数据 2.4 设置小区显示样式 2.5 保存 3. 社会经济基础资料 3.1 新建和编辑数</description>
     </item>
     

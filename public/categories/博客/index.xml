@@ -1,67 +1,63 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>博客 on Website of ZhiYuan Wang</title>
-    <link>/categories/%E5%8D%9A%E5%AE%A2/</link>
+    <link>https://www.wzyblog.top/categories/%E5%8D%9A%E5%AE%A2/</link>
     <description>Recent content in 博客 on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 06 Dec 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/categories/%E5%8D%9A%E5%AE%A2/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 06 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://www.wzyblog.top/categories/%E5%8D%9A%E5%AE%A2/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>又重返博客</title>
-      <link>/post/2020/12/06/%E5%8F%88%E9%87%8D%E8%BF%94%E5%8D%9A%E5%AE%A2/</link>
+      <link>https://www.wzyblog.top/post/2020/12/06/%E5%8F%88%E9%87%8D%E8%BF%94%E5%8D%9A%E5%AE%A2/</link>
       <pubDate>Sun, 06 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/12/06/%E5%8F%88%E9%87%8D%E8%BF%94%E5%8D%9A%E5%AE%A2/</guid>
+      <guid>https://www.wzyblog.top/post/2020/12/06/%E5%8F%88%E9%87%8D%E8%BF%94%E5%8D%9A%E5%AE%A2/</guid>
       <description>上一次更新博客还是2020年的开头因为疫情困在家中记录蛋炒饭菜谱，一转眼再想着更新博客已经是2020年的末尾了。2020年是不平凡的一年，中</description>
     </item>
     
     <item>
       <title>重返博客</title>
-      <link>/post/2019/08/22/return-to-blog/</link>
+      <link>https://www.wzyblog.top/post/2019/08/22/return-to-blog/</link>
       <pubDate>Thu, 22 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/08/22/return-to-blog/</guid>
+      <guid>https://www.wzyblog.top/post/2019/08/22/return-to-blog/</guid>
       <description>已经有挺长一段时间没有更新博客和写日记了，原因是单位没有发电脑，就把笔记本电脑放在单位用了。因为既不可能在上班时间写博客写日记，也不想每天把</description>
     </item>
     
     <item>
       <title>博客重新部署解决方案</title>
-      <link>/post/2019/04/25/netlify-fault/</link>
+      <link>https://www.wzyblog.top/post/2019/04/25/netlify-fault/</link>
       <pubDate>Thu, 25 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/04/25/netlify-fault/</guid>
+      <guid>https://www.wzyblog.top/post/2019/04/25/netlify-fault/</guid>
       <description>前两天格式化电脑后，原来的Rstudio和各类设置都没有了，需要重新设置，本篇博客记录下收拾的顺序，以便下次参考。 下载并安装好R/Rstud</description>
     </item>
     
     <item>
       <title>blogdown中的公式支持</title>
-      <link>/post/2018/10/25/latex-formula/</link>
+      <link>https://www.wzyblog.top/post/2018/10/25/latex-formula/</link>
       <pubDate>Thu, 25 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/25/latex-formula/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/25/latex-formula/</guid>
       <description>最近在总结行测题时，发现我的xmin主题不支持公式了，加了反双引号也没用。用knit渲染出来是带公式的，但博客里怎么都显示不了公式。所以判断</description>
     </item>
     
     <item>
       <title>【转载】阿里云的这群疯子</title>
-      <link>/post/2018/10/17/ali-cloud-crazy-people/</link>
+      <link>https://www.wzyblog.top/post/2018/10/17/ali-cloud-crazy-people/</link>
       <pubDate>Wed, 17 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/17/ali-cloud-crazy-people/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/17/ali-cloud-crazy-people/</guid>
       <description>链接《阿里云的这群疯子》 这篇文章很长，不过我是一口气读完的。也许是故事本身很坎坷，也许是作者描写得过于精彩。读完后，我为阿里云创造出这样的奇</description>
     </item>
     
     <item>
       <title>谢益辉精彩博客（持续更新）</title>
-      <link>/post/2018/10/04/yihui-excellent-post/</link>
+      <link>https://www.wzyblog.top/post/2018/10/04/yihui-excellent-post/</link>
       <pubDate>Thu, 04 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/04/yihui-excellent-post/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/04/yihui-excellent-post/</guid>
       <description>韩愈的《师说》中说：“古之学者必有师。师者，所以传道受业解惑也。”从小学到中学到大学，拥有老师似乎是理所当然的事。但一个人一旦脱离了校园环境</description>
     </item>
     

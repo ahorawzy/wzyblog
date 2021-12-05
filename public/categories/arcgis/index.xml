@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ARCGIS on Website of ZhiYuan Wang</title>
+    <link>https://www.wzyblog.top/categories/arcgis/</link>
+    <description>Recent content in ARCGIS on Website of ZhiYuan Wang</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 15 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://www.wzyblog.top/categories/arcgis/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ARCGIS常见操作汇总</title>
+      <link>https://www.wzyblog.top/post/2021/01/15/arcgis%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C%E6%B1%87%E6%80%BB/</link>
+      <pubDate>Fri, 15 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.wzyblog.top/post/2021/01/15/arcgis%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C%E6%B1%87%E6%80%BB/</guid>
+      <description>1. 分乡镇出图 2. 矢量数据分面统计 3. 按某一字段的属性值分成子元素集 4. 将自然村点标记到乡镇面、行政村面 5. 计算点到线的最近距离 1. 分乡镇出图 打开总图，</description>
+    </item>
+    
+  </channel>
+</rss>

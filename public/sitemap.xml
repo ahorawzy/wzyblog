@@ -1,926 +1,560 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
-    <loc>/post/2020/12/21/%E5%9F%8E%E5%B8%82%E8%BD%A8%E9%81%93%E4%BA%A4%E9%80%9A%E5%BF%AB%E7%BA%BF/</loc>
+    <loc>https://www.wzyblog.top/categories/</loc>
+    <lastmod>2021-08-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/</loc>
+    <lastmod>2021-08-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/</loc>
+    <lastmod>2021-08-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2021/08/08/%E8%AF%BB-%E6%AF%9B%E9%80%89-%E7%AC%AC%E4%B8%80%E5%8D%B7/</loc>
+    <lastmod>2021-08-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/categories/%E8%AF%BB%E4%B9%A6/</loc>
+    <lastmod>2021-08-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/categories/arcgis/</loc>
+    <lastmod>2021-01-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2021/01/15/arcgis%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C%E6%B1%87%E6%80%BB/</loc>
+    <lastmod>2021-01-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2021/01/10/%E8%AF%BB-%E6%88%98%E7%A5%9E%E7%B2%9F%E8%A3%95/</loc>
+    <lastmod>2021-01-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2021/01/02/%E5%86%99%E5%9C%A8%E6%96%B0%E5%B9%B4%E7%9A%84%E5%BC%80%E5%A7%8B/</loc>
+    <lastmod>2021-01-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/categories/%E9%9A%8F%E6%83%B3/</loc>
+    <lastmod>2021-01-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2021/01/01/116%E5%8F%B7%E6%96%87-%E5%85%B3%E4%BA%8E%E6%8E%A8%E5%8A%A8%E9%83%BD%E5%B8%82%E5%9C%88%E5%B8%82%E5%9F%9F-%E9%83%8A-%E9%93%81%E8%B7%AF%E5%8A%A0%E5%BF%AB%E5%8F%91%E5%B1%95%E6%84%8F%E8%A7%81%E7%9A%84%E9%80%9A%E7%9F%A5/</loc>
+    <lastmod>2021-01-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/categories/%E4%BA%A4%E9%80%9A/</loc>
+    <lastmod>2021-01-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2020/12/29/geocomputation-with-r-2/</loc>
+    <lastmod>2020-12-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2020/12/29/geocomputation-with-r-3/</loc>
+    <lastmod>2020-12-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/categories/r%E8%AF%AD%E8%A8%80/</loc>
+    <lastmod>2020-12-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2020/12/28/geocomputation-with-r-geographic-data-in-r/</loc>
+    <lastmod>2020-12-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2020/12/21/%E5%9F%8E%E5%B8%82%E8%BD%A8%E9%81%93%E4%BA%A4%E9%80%9A%E5%BF%AB%E7%BA%BF/</loc>
     <lastmod>2020-12-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2020/12/06/%E5%8F%88%E9%87%8D%E8%BF%94%E5%8D%9A%E5%AE%A2/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/categories/%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2020-12-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2020/12/06/%E9%80%9A%E5%8B%A4%E4%BA%A4%E9%80%9A%E4%B8%8E%E8%81%8C%E4%BD%8F%E5%85%B3%E7%B3%BB/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2020/12/06/%E5%8F%88%E9%87%8D%E8%BF%94%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2020-12-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2020/02/10/%E8%9B%8B%E7%82%92%E9%A5%AD/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2020/12/06/%E9%80%9A%E5%8B%A4%E4%BA%A4%E9%80%9A%E4%B8%8E%E8%81%8C%E4%BD%8F%E5%85%B3%E7%B3%BB/</loc>
+    <lastmod>2020-12-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/tags/</loc>
     <lastmod>2020-02-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2020/02/07/%E6%89%8B%E6%92%95%E5%8C%85%E8%8F%9C/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/categories/%E8%8F%9C%E5%8D%95/</loc>
+    <lastmod>2020-02-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2020/02/10/%E8%9B%8B%E7%82%92%E9%A5%AD/</loc>
+    <lastmod>2020-02-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/tags/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
+    <lastmod>2020-02-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2020/02/07/%E6%89%8B%E6%92%95%E5%8C%85%E8%8F%9C/</loc>
     <lastmod>2020-02-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2020/02/07/%E6%B8%85%E7%82%92%E8%8A%A5%E8%8F%9C/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2020/02/07/%E6%B8%85%E7%82%92%E8%8A%A5%E8%8F%9C/</loc>
     <lastmod>2020-02-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2020/01/16/%E5%85%AD-%E4%BA%A4%E9%80%9A%E5%88%86%E9%85%8D%E4%B8%8Eod%E5%8F%8D%E6%8E%A8/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/categories/transcad/</loc>
     <lastmod>2020-01-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2020/01/15/%E4%B8%89-%E5%87%BA%E8%A1%8C%E7%94%9F%E6%88%90%E9%A2%84%E6%B5%8B/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2020/01/16/%E5%85%AD-%E4%BA%A4%E9%80%9A%E5%88%86%E9%85%8D%E4%B8%8Eod%E5%8F%8D%E6%8E%A8/</loc>
+    <lastmod>2020-01-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2020-01-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2020/01/15/%E4%B8%89-%E5%87%BA%E8%A1%8C%E7%94%9F%E6%88%90%E9%A2%84%E6%B5%8B/</loc>
     <lastmod>2020-01-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2020/01/15/%E4%BA%94-%E6%96%B9%E5%BC%8F%E5%88%92%E5%88%86%E9%A2%84%E6%B5%8B/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2020/01/15/%E4%BA%94-%E6%96%B9%E5%BC%8F%E5%88%92%E5%88%86%E9%A2%84%E6%B5%8B/</loc>
     <lastmod>2020-01-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2020/01/15/%E5%9B%9B-%E5%87%BA%E8%A1%8C%E5%88%86%E5%B8%83%E9%A2%84%E6%B5%8B/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2020/01/15/%E5%9B%9B-%E5%87%BA%E8%A1%8C%E5%88%86%E5%B8%83%E9%A2%84%E6%B5%8B/</loc>
     <lastmod>2020-01-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2020/01/14/transcad-get-start/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2020/01/14/transcad-get-start/</loc>
     <lastmod>2020-01-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2020/01/14/%E4%BA%8C-%E4%BA%A4%E9%80%9A%E8%B0%83%E6%9F%A5%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E5%88%86%E6%9E%90/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2020/01/14/%E4%BA%8C-%E4%BA%A4%E9%80%9A%E8%B0%83%E6%9F%A5%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E5%88%86%E6%9E%90/</loc>
     <lastmod>2020-01-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2020/01/09/%E6%89%80%E9%87%8Cftp%E8%AE%BE%E7%BD%AE/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2020/01/09/%E6%89%80%E9%87%8Cftp%E8%AE%BE%E7%BD%AE/</loc>
     <lastmod>2020-01-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2020/01/08/%E9%93%81%E8%B7%AF%E5%AE%A2%E8%BF%90%E7%AB%99%E7%82%B9%E7%BB%BC%E5%90%88%E4%BA%A4%E9%80%9A%E8%A7%84%E5%88%92/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/categories/%E7%94%B5%E8%84%91/</loc>
+    <lastmod>2020-01-09T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2020/01/08/%E9%93%81%E8%B7%AF%E5%AE%A2%E8%BF%90%E7%AB%99%E7%82%B9%E7%BB%BC%E5%90%88%E4%BA%A4%E9%80%9A%E8%A7%84%E5%88%92/</loc>
     <lastmod>2020-01-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2020/01/07/%E4%BA%A4%E9%80%9A%E6%8C%87%E6%A0%87%E6%B1%87%E6%80%BB/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2020/01/07/%E4%BA%A4%E9%80%9A%E6%8C%87%E6%A0%87%E6%B1%87%E6%80%BB/</loc>
     <lastmod>2020-01-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2020/01/07/%E5%9F%8E%E9%99%85%E9%93%81%E8%B7%AF%E4%B8%8E%E7%BB%BC%E5%90%88%E4%BA%A4%E9%80%9A/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2020/01/07/%E5%9F%8E%E9%99%85%E9%93%81%E8%B7%AF%E4%B8%8E%E7%BB%BC%E5%90%88%E4%BA%A4%E9%80%9A/</loc>
     <lastmod>2020-01-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2020/01/07/%E5%9F%8E%E9%99%85%E9%93%81%E8%B7%AF%E7%AB%99%E7%82%B9%E7%BB%BC%E5%90%88%E4%BA%A4%E9%80%9A%E8%A1%94%E6%8E%A5%E8%A7%84%E5%88%92/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2020/01/07/%E5%9F%8E%E9%99%85%E9%93%81%E8%B7%AF%E7%AB%99%E7%82%B9%E7%BB%BC%E5%90%88%E4%BA%A4%E9%80%9A%E8%A1%94%E6%8E%A5%E8%A7%84%E5%88%92/</loc>
     <lastmod>2020-01-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/12/23/send-me-flight-ticket/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2020-01-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/12/23/send-me-flight-ticket/</loc>
     <lastmod>2019-12-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/11/12/read-close-ralationship/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/categories/%E5%B7%A5%E4%BD%9C/</loc>
+    <lastmod>2019-12-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/11/12/read-close-ralationship/</loc>
     <lastmod>2019-11-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/11/12/read-the-fall-of-giant/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/11/12/read-the-fall-of-giant/</loc>
     <lastmod>2019-11-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/10/29/table-color/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/10/29/table-color/</loc>
     <lastmod>2019-10-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/10/06/password-of-router/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/10/06/password-of-router/</loc>
     <lastmod>2019-10-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/10/02/read-juwairen/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/10/02/read-juwairen/</loc>
     <lastmod>2019-10-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/09/28/read-flipped/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/09/28/read-flipped/</loc>
     <lastmod>2019-09-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/08/24/ps-railway/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/08/24/ps-railway/</loc>
     <lastmod>2019-08-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/08/22/return-to-blog/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/categories/%E7%94%BB%E5%9B%BE/</loc>
+    <lastmod>2019-08-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/tags/%E6%84%9F%E5%8F%97/</loc>
     <lastmod>2019-08-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/07/05/grandpa-said/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/08/22/return-to-blog/</loc>
+    <lastmod>2019-08-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/categories/%E4%B8%AA%E4%BA%BA/</loc>
     <lastmod>2019-07-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/07/05/travel-of-jiangnan/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/07/05/grandpa-said/</loc>
     <lastmod>2019-07-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/06/23/biancheng/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/tags/%E6%80%9D%E8%80%83/</loc>
+    <lastmod>2019-07-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/tags/%E6%97%85%E6%B8%B8/</loc>
+    <lastmod>2019-07-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/categories/%E6%97%85%E6%B8%B8/</loc>
+    <lastmod>2019-07-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/07/05/travel-of-jiangnan/</loc>
+    <lastmod>2019-07-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/06/23/biancheng/</loc>
     <lastmod>2019-06-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/06/22/beijing-garden-expo/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/06/22/beijing-garden-expo/</loc>
     <lastmod>2019-06-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/06/21/qinhuangdao/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/06/21/qinhuangdao/</loc>
     <lastmod>2019-06-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/06/20/flipped/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/categories/%E7%94%B5%E5%BD%B1/</loc>
     <lastmod>2019-06-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/06/17/history-of-civilization-03/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/06/20/flipped/</loc>
+    <lastmod>2019-06-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/06/17/history-of-civilization-03/</loc>
     <lastmod>2019-06-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/06/08/%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85chrome%E6%8F%92%E4%BB%B6/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/06/08/%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85chrome%E6%8F%92%E4%BB%B6/</loc>
     <lastmod>2019-06-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/05/16/read-yijing/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/05/16/read-yijing/</loc>
     <lastmod>2019-05-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/05/14/read-animal-farm/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/05/14/read-animal-farm/</loc>
     <lastmod>2019-05-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/04/29/sentimental-swordsman-with-his-merciless-sword/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/04/29/sentimental-swordsman-with-his-merciless-sword/</loc>
     <lastmod>2019-04-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/04/25/netlify-fault/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/04/25/netlify-fault/</loc>
     <lastmod>2019-04-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/04/23/learn-shiny/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/04/23/learn-shiny/</loc>
     <lastmod>2019-04-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/04/22/zhouen-lai/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/04/22/zhouen-lai/</loc>
     <lastmod>2019-04-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/04/09/the-moon-and-sixpence/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/04/09/the-moon-and-sixpence/</loc>
     <lastmod>2019-04-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/04/02/give-each-line-a-greaterthan/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/04/02/give-each-line-a-greaterthan/</loc>
     <lastmod>2019-04-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/04/02/economy-history-of-japan/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/04/02/economy-history-of-japan/</loc>
     <lastmod>2019-04-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/03/20/the-kite-runner/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/03/20/the-kite-runner/</loc>
     <lastmod>2019-03-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/03/06/r%E5%8C%85%E4%B8%AD%E7%9A%84%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/03/06/r%E5%8C%85%E4%B8%AD%E7%9A%84%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84/</loc>
     <lastmod>2019-03-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/03/06/aerial-china/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/03/06/aerial-china/</loc>
     <lastmod>2019-03-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/03/05/fill-up-na-using-interpolation/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/03/05/fill-up-na-using-interpolation/</loc>
     <lastmod>2019-03-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/03/04/sum-bygroup/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/03/04/sum-bygroup/</loc>
     <lastmod>2019-03-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/03/04/str-split-todf/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/03/04/str-split-todf/</loc>
     <lastmod>2019-03-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/03/01/history-of-civilization-02/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/03/01/history-of-civilization-02/</loc>
     <lastmod>2019-03-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/02/15/liyong-memoir/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/02/15/liyong-memoir/</loc>
     <lastmod>2019-02-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/02/12/history-of-civilization/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/02/12/history-of-civilization/</loc>
     <lastmod>2019-02-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/02/08/read-chinese-politics-in-history/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/02/08/read-chinese-politics-in-history/</loc>
     <lastmod>2019-02-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/01/30/r-for-data-science-8/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/01/30/r-for-data-science-8/</loc>
     <lastmod>2019-01-30T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/01/30/21-century-capital/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/01/30/21-century-capital/</loc>
     <lastmod>2019-01-30T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/01/29/r-for-data-science-7/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/01/29/r-for-data-science-7/</loc>
     <lastmod>2019-01-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/01/28/r-for-data-science-6/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/01/28/r-for-data-science-6/</loc>
     <lastmod>2019-01-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/01/28/read-weicheng/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/01/28/read-weicheng/</loc>
     <lastmod>2019-01-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/01/20/speech-of-xiaolong-zhang-about-wechat/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/01/20/speech-of-xiaolong-zhang-about-wechat/</loc>
     <lastmod>2019-01-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/01/19/biref-history-of-chinese-philosophy/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/categories/%E6%97%B6%E4%BA%8B%E7%A4%BE%E8%AE%BA/</loc>
+    <lastmod>2019-01-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2019/01/19/biref-history-of-chinese-philosophy/</loc>
     <lastmod>2019-01-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/friendly_links/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/friendly_links/</loc>
     <lastmod>2019-01-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/12/30/reading-r-for-data-science-4/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/12/30/reading-r-for-data-science-4/</loc>
     <lastmod>2018-12-30T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/12/30/reading-r-for-data-science-5/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/12/30/reading-r-for-data-science-5/</loc>
     <lastmod>2018-12-30T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/12/25/reading-r-for-data-science-2/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/12/25/reading-r-for-data-science-2/</loc>
     <lastmod>2018-12-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/12/25/reading-r-for-data-science-3/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/12/25/reading-r-for-data-science-3/</loc>
     <lastmod>2018-12-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/12/11/thinking-method-2-system/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/categories/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%BC%8F/</loc>
     <lastmod>2018-12-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/12/10/read-supply-chain-management/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/12/11/thinking-method-2-system/</loc>
+    <lastmod>2018-12-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/12/10/read-supply-chain-management/</loc>
     <lastmod>2018-12-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/12/03/hualuogeng-working-hard/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/12/03/hualuogeng-working-hard/</loc>
     <lastmod>2018-12-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/12/01/wreck-it-ralph-2/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/12/01/wreck-it-ralph-2/</loc>
     <lastmod>2018-12-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/11/25/capture-the-wind-of-luck/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/11/25/capture-the-wind-of-luck/</loc>
     <lastmod>2018-11-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/11/23/25-years-what-to-do/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/11/23/25-years-what-to-do/</loc>
     <lastmod>2018-11-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/11/22/%E5%BD%93%E4%BB%A3%E4%B8%AD%E5%9B%BD%E4%B8%8E%E7%A4%BE%E4%BC%9A%E7%9A%84%E4%B9%A6%E5%8D%95/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/tags/%E8%BD%AC%E8%BD%BD/</loc>
+    <lastmod>2018-11-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/tags/%E4%B9%A6%E5%8D%95/</loc>
     <lastmod>2018-11-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/11/21/traffic-flow-literature-review-2/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/11/22/%E5%BD%93%E4%BB%A3%E4%B8%AD%E5%9B%BD%E4%B8%8E%E7%A4%BE%E4%BC%9A%E7%9A%84%E4%B9%A6%E5%8D%95/</loc>
+    <lastmod>2018-11-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/11/21/traffic-flow-literature-review-2/</loc>
     <lastmod>2018-11-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/11/20/leaflet-for-r-4-leafletcn-bug/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/categories/%E8%AE%BA%E6%96%87/</loc>
+    <lastmod>2018-11-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/11/20/leaflet-for-r-4-leafletcn-bug/</loc>
     <lastmod>2018-11-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/11/20/essence-of-linear-algebra/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/categories/%E7%90%86%E8%AE%BA/</loc>
     <lastmod>2018-11-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/11/19/bunch-files-operate-2-ldply/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/</loc>
+    <lastmod>2018-11-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/11/20/essence-of-linear-algebra/</loc>
+    <lastmod>2018-11-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/11/19/bunch-files-operate-2-ldply/</loc>
     <lastmod>2018-11-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/11/18/trump-s-remarks/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/11/18/trump-s-remarks/</loc>
     <lastmod>2018-11-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/11/08/advanced-r-1-basic/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/11/08/advanced-r-1-basic/</loc>
     <lastmod>2018-11-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/11/08/advanced-r-2-debug/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/11/08/advanced-r-2-debug/</loc>
     <lastmod>2018-11-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/11/08/advanced-r-3-oo/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/11/08/advanced-r-3-oo/</loc>
     <lastmod>2018-11-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/11/08/advanced-r-4-fp/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/11/08/advanced-r-4-fp/</loc>
     <lastmod>2018-11-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/11/08/thinking-method-0-preface/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/11/08/thinking-method-0-preface/</loc>
     <lastmod>2018-11-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/11/08/plot-factor/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/11/08/plot-factor/</loc>
     <lastmod>2018-11-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/11/07/most-difficult-experiences-in-journey-to-the-west/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/11/07/most-difficult-experiences-in-journey-to-the-west/</loc>
     <lastmod>2018-11-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/11/07/chinese-import-exhibition/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/11/07/chinese-import-exhibition/</loc>
     <lastmod>2018-11-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/11/06/ggplot2-multiplot/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/11/06/ggplot2-multiplot/</loc>
     <lastmod>2018-11-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/11/05/tianlong-character/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/11/05/tianlong-character/</loc>
     <lastmod>2018-11-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/31/remember-louis-cha/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/categories/%E6%89%BE%E5%B7%A5%E4%BD%9C/</loc>
     <lastmod>2018-10-31T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/31/certain-company-auditioin/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/31/remember-louis-cha/</loc>
     <lastmod>2018-10-31T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/29/shenlun/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/31/certain-company-auditioin/</loc>
+    <lastmod>2018-10-31T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/29/shenlun/</loc>
     <lastmod>2018-10-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/28/vulnerability-of-hong-zhu-macao-bridge/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/28/vulnerability-of-hong-zhu-macao-bridge/</loc>
     <lastmod>2018-10-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/27/twosimilarsongs/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/27/twosimilarsongs/</loc>
     <lastmod>2018-10-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/26/american-genius/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/categories/%E9%9F%B3%E4%B9%90/</loc>
+    <lastmod>2018-10-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/26/american-genius/</loc>
     <lastmod>2018-10-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/25/latex-formula/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/25/latex-formula/</loc>
     <lastmod>2018-10-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/25/xingce-3/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/25/xingce-3/</loc>
     <lastmod>2018-10-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/25/xingce-4/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/25/xingce-4/</loc>
     <lastmod>2018-10-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/24/reading-r-for-data-science/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/24/reading-r-for-data-science/</loc>
     <lastmod>2018-10-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/24/miband3/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/24/miband3/</loc>
     <lastmod>2018-10-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/23/gangzhuao-bridge/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/23/gangzhuao-bridge/</loc>
     <lastmod>2018-10-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/23/xingce-1/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/23/xingce-1/</loc>
     <lastmod>2018-10-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/23/xingce-2/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/23/xingce-2/</loc>
     <lastmod>2018-10-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/21/yinghuozhisen/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/tags/%E8%B6%85%E7%BA%A7%E5%B7%A5%E7%A8%8B/</loc>
+    <lastmod>2018-10-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/21/yinghuozhisen/</loc>
     <lastmod>2018-10-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/19/yanyezhiting/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/19/yanyezhiting/</loc>
     <lastmod>2018-10-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/17/ali-cloud-crazy-people/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/17/ali-cloud-crazy-people/</loc>
     <lastmod>2018-10-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/17/traffic-flow-literature-review-1/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/17/traffic-flow-literature-review-1/</loc>
     <lastmod>2018-10-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/16/log-function-to-color-mapping/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/tags/leaflet/</loc>
     <lastmod>2018-10-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/14/28-characters-maxim-from-deng/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/16/log-function-to-color-mapping/</loc>
+    <lastmod>2018-10-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/</loc>
+    <lastmod>2018-10-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/14/28-characters-maxim-from-deng/</loc>
     <lastmod>2018-10-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/13/traffic-flow-terms-collection/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/13/traffic-flow-terms-collection/</loc>
     <lastmod>2018-10-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/12/drawing-skin/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/12/drawing-skin/</loc>
     <lastmod>2018-10-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/11/bunch-files-operate/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
     <lastmod>2018-10-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/10/merge-list/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/11/bunch-files-operate/</loc>
+    <lastmod>2018-10-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/tags/%E6%B3%9B%E5%87%BD/</loc>
+    <lastmod>2018-10-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/10/merge-list/</loc>
     <lastmod>2018-10-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/04/movie-shadow/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/04/movie-shadow/</loc>
     <lastmod>2018-10-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/04/read-flow/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/04/read-flow/</loc>
     <lastmod>2018-10-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/04/yihui-excellent-post/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/tags/%E8%B0%A2%E7%9B%8A%E8%BE%89/</loc>
     <lastmod>2018-10-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/03/the-legend-of-1900/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/04/yihui-excellent-post/</loc>
+    <lastmod>2018-10-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/03/the-legend-of-1900/</loc>
     <lastmod>2018-10-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/02/lvbuwei-biography/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/tags/%E5%8F%B2%E8%AE%B0/</loc>
     <lastmod>2018-10-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/01/quyuanjiasheng-biography/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/02/lvbuwei-biography/</loc>
+    <lastmod>2018-10-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/10/01/quyuanjiasheng-biography/</loc>
     <lastmod>2018-10-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/09/30/learn-stringr/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/tags/r%E5%8C%85/</loc>
     <lastmod>2018-09-30T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/09/29/leaflet-for-r-3/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/09/30/learn-stringr/</loc>
+    <lastmod>2018-09-30T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/09/29/leaflet-for-r-3/</loc>
     <lastmod>2018-09-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/09/28/leaflet-for-r-2/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/09/28/leaflet-for-r-2/</loc>
     <lastmod>2018-09-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/09/27/solution-to-rstudio-break-down/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/09/27/leaflet-for-r-1/</loc>
     <lastmod>2018-09-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/09/27/leaflet-for-r-1/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/tags/rstudio/</loc>
     <lastmod>2018-09-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/09/26/basic-principle-getting-along-with-people/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/09/27/solution-to-rstudio-break-down/</loc>
+    <lastmod>2018-09-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/tags/%E4%BA%BA%E6%80%A7%E7%9A%84%E5%BC%B1%E7%82%B9/</loc>
     <lastmod>2018-09-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/09/25/love-letter-to-filmmaker/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/09/26/basic-principle-getting-along-with-people/</loc>
+    <lastmod>2018-09-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/09/25/love-letter-to-filmmaker/</loc>
     <lastmod>2018-09-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/09/24/books-40-list/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/09/24/books-40-list/</loc>
     <lastmod>2018-09-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/09/24/split-and-conquer-3/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/tags/%E5%88%86%E8%80%8C%E6%B2%BB%E4%B9%8B%E7%9A%84%E7%AD%96%E7%95%A5/</loc>
     <lastmod>2018-09-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/09/23/split-and-conquer-2/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/09/24/split-and-conquer-3/</loc>
+    <lastmod>2018-09-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/09/23/split-and-conquer-2/</loc>
     <lastmod>2018-09-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/09/22/split-and-conquer-1/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/09/22/split-and-conquer-1/</loc>
     <lastmod>2018-09-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/09/21/matrix-multiply-vector/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/09/21/matrix-multiply-vector/</loc>
     <lastmod>2018-09-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/09/20/order-of-factor/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/09/20/order-of-factor/</loc>
     <lastmod>2018-09-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/about/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/about/</loc>
     <lastmod>2018-09-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/09/19/creating-r-packages/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/09/19/creating-r-packages/</loc>
     <lastmod>2018-09-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/09/18/first-blog/</loc>
+  </url><url>
+    <loc>https://www.wzyblog.top/post/2018/09/18/first-blog/</loc>
     <lastmod>2018-09-18T00:00:00+00:00</lastmod>
   </url>
-  
-  <url>
-    <loc>/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2020-12-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/leaflet/</loc>
-    <lastmod>2018-10-16T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
-    <lastmod>2020-12-21T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/rstudio/</loc>
-    <lastmod>2018-09-27T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/r%E5%8C%85/</loc>
-    <lastmod>2018-09-30T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/r%E8%AF%AD%E8%A8%80/</loc>
-    <lastmod>2019-04-23T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2018-10-16T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/transcad/</loc>
-    <lastmod>2020-01-16T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/%E4%B8%AA%E4%BA%BA/</loc>
-    <lastmod>2019-07-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/%E4%B9%A6%E5%8D%95/</loc>
-    <lastmod>2018-11-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/%E4%BA%A4%E9%80%9A/</loc>
-    <lastmod>2020-12-21T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/%E4%BA%BA%E6%80%A7%E7%9A%84%E5%BC%B1%E7%82%B9/</loc>
-    <lastmod>2018-09-26T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/%E5%88%86%E8%80%8C%E6%B2%BB%E4%B9%8B%E7%9A%84%E7%AD%96%E7%95%A5/</loc>
-    <lastmod>2018-09-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/%E5%8D%9A%E5%AE%A2/</loc>
-    <lastmod>2020-12-06T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/</loc>
-    <lastmod>2018-10-16T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/%E5%8F%B2%E8%AE%B0/</loc>
-    <lastmod>2018-10-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</loc>
-    <lastmod>2020-01-16T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/%E5%B7%A5%E4%BD%9C/</loc>
-    <lastmod>2019-12-23T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%BC%8F/</loc>
-    <lastmod>2018-12-11T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/%E6%80%9D%E8%80%83/</loc>
-    <lastmod>2019-07-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/%E6%84%9F%E5%8F%97/</loc>
-    <lastmod>2019-08-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/%E6%89%BE%E5%B7%A5%E4%BD%9C/</loc>
-    <lastmod>2018-10-31T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
-    <lastmod>2018-10-11T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/%E6%97%85%E6%B8%B8/</loc>
-    <lastmod>2019-07-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/%E6%97%85%E6%B8%B8/</loc>
-    <lastmod>2019-07-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/%E6%97%B6%E4%BA%8B%E7%A4%BE%E8%AE%BA/</loc>
-    <lastmod>2019-01-20T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/%E6%B3%9B%E5%87%BD/</loc>
-    <lastmod>2018-10-11T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/%E7%90%86%E8%AE%BA/</loc>
-    <lastmod>2018-11-20T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/%E7%94%B5%E5%BD%B1/</loc>
-    <lastmod>2019-06-20T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/%E7%94%B5%E8%84%91/</loc>
-    <lastmod>2020-01-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/%E7%94%BB%E5%9B%BE/</loc>
-    <lastmod>2019-08-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/</loc>
-    <lastmod>2018-11-20T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/%E8%8F%9C%E5%8D%95/</loc>
-    <lastmod>2020-02-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
-    <lastmod>2020-02-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/%E8%AE%BA%E6%96%87/</loc>
-    <lastmod>2018-11-21T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/%E8%AF%BB%E4%B9%A6/</loc>
-    <lastmod>2019-11-12T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2020-01-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/%E8%B0%A2%E7%9B%8A%E8%BE%89/</loc>
-    <lastmod>2018-10-04T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/%E8%B6%85%E7%BA%A7%E5%B7%A5%E7%A8%8B/</loc>
-    <lastmod>2018-10-23T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/%E8%BD%AC%E8%BD%BD/</loc>
-    <lastmod>2018-11-23T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/%E9%9A%8F%E6%83%B3/</loc>
-    <lastmod>2018-10-31T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/%E9%9F%B3%E4%B9%90/</loc>
-    <lastmod>2018-10-27T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
 </urlset>

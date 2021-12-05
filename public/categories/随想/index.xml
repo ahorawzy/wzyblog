@@ -1,31 +1,36 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>随想 on Website of ZhiYuan Wang</title>
-    <link>/categories/%E9%9A%8F%E6%83%B3/</link>
+    <link>https://www.wzyblog.top/categories/%E9%9A%8F%E6%83%B3/</link>
     <description>Recent content in 随想 on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 31 Oct 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/categories/%E9%9A%8F%E6%83%B3/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Sat, 02 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://www.wzyblog.top/categories/%E9%9A%8F%E6%83%B3/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>写在新年的开始</title>
+      <link>https://www.wzyblog.top/post/2021/01/02/%E5%86%99%E5%9C%A8%E6%96%B0%E5%B9%B4%E7%9A%84%E5%BC%80%E5%A7%8B/</link>
+      <pubDate>Sat, 02 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.wzyblog.top/post/2021/01/02/%E5%86%99%E5%9C%A8%E6%96%B0%E5%B9%B4%E7%9A%84%E5%BC%80%E5%A7%8B/</guid>
+      <description>为什么写在新年的开始不是1号而是2号呢？因为今天在翻1号日历的时候，突然感觉到了时间的流逝。之前看数字从1号到2号，没有什么感觉，人类的进化</description>
+    </item>
     
     <item>
       <title>缅怀金庸先生</title>
-      <link>/post/2018/10/31/remember-louis-cha/</link>
+      <link>https://www.wzyblog.top/post/2018/10/31/remember-louis-cha/</link>
       <pubDate>Wed, 31 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/31/remember-louis-cha/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/31/remember-louis-cha/</guid>
       <description>昨晚看新闻说金庸先生去世了，享年94岁。金庸的“飞雪连天射白鹿，笑书神侠倚碧鸳”14部小说，对中国的70后、80后、90后影响太深，对我的影</description>
     </item>
     
     <item>
       <title>港珠澳大桥的脆弱性假想</title>
-      <link>/post/2018/10/28/vulnerability-of-hong-zhu-macao-bridge/</link>
+      <link>https://www.wzyblog.top/post/2018/10/28/vulnerability-of-hong-zhu-macao-bridge/</link>
       <pubDate>Sun, 28 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/28/vulnerability-of-hong-zhu-macao-bridge/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/28/vulnerability-of-hong-zhu-macao-bridge/</guid>
       <description>背景 今天重庆发生了一起交通事故：重庆万州一辆公交车在桥上撞上一辆逆行的小客车，掉入了江中，目前遇难人数不明。我在脑海里模拟这件事故发生的始末</description>
     </item>
     

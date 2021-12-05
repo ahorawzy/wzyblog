@@ -1,67 +1,63 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>找工作 on Website of ZhiYuan Wang</title>
-    <link>/categories/%E6%89%BE%E5%B7%A5%E4%BD%9C/</link>
+    <link>https://www.wzyblog.top/categories/%E6%89%BE%E5%B7%A5%E4%BD%9C/</link>
     <description>Recent content in 找工作 on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 31 Oct 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/categories/%E6%89%BE%E5%B7%A5%E4%BD%9C/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 31 Oct 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://www.wzyblog.top/categories/%E6%89%BE%E5%B7%A5%E4%BD%9C/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>面试</title>
-      <link>/post/2018/10/31/certain-company-auditioin/</link>
+      <link>https://www.wzyblog.top/post/2018/10/31/certain-company-auditioin/</link>
       <pubDate>Wed, 31 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/31/certain-company-auditioin/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/31/certain-company-auditioin/</guid>
       <description>无领导小组 注意要点： 询问结果呈现形式的要求； 服务组员； 征求大家的讨论方式，是直接讨论还是先个人思考（5 min）后再讨论； 选出时间控制者； 每个</description>
     </item>
     
     <item>
       <title>申论</title>
-      <link>/post/2018/10/29/shenlun/</link>
+      <link>https://www.wzyblog.top/post/2018/10/29/shenlun/</link>
       <pubDate>Mon, 29 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/29/shenlun/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/29/shenlun/</guid>
       <description>1. 总论 考察对给定材料的分析、概括、提炼、加工。 在把握材料主旨和精神的基础上，形成并提出自己的观点、思路或解决方案，准确流畅地用文字形式表达出</description>
     </item>
     
     <item>
       <title>行测(3)——材料分析题</title>
-      <link>/post/2018/10/25/xingce-3/</link>
+      <link>https://www.wzyblog.top/post/2018/10/25/xingce-3/</link>
       <pubDate>Thu, 25 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/25/xingce-3/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/25/xingce-3/</guid>
       <description>注意 注意审题，严格对照清楚问的是谁，别计算错了对象； 例题 1. 已知今年水平，问去年（前年）水平 去年=今年/(1+增长率) 2015年蔬菜产量15.</description>
     </item>
     
     <item>
       <title>行测(4)——专业知识</title>
-      <link>/post/2018/10/25/xingce-4/</link>
+      <link>https://www.wzyblog.top/post/2018/10/25/xingce-4/</link>
       <pubDate>Thu, 25 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/25/xingce-4/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/25/xingce-4/</guid>
       <description>1. 金融学 1.1 货币 货币是固定充当一般等价物的特殊商品。 五个职能：价值尺度、流通手段、支付手段（清偿债务）、贮藏手段、世界货币。 充当世界货币的条件</description>
     </item>
     
     <item>
       <title>行测(1)——数量关系题</title>
-      <link>/post/2018/10/23/xingce-1/</link>
+      <link>https://www.wzyblog.top/post/2018/10/23/xingce-1/</link>
       <pubDate>Tue, 23 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/23/xingce-1/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/23/xingce-1/</guid>
       <description>数字推理题 1. 多级数列 对相邻两项进行四则运算（做差，做商，做和），进行一次或两次运算。 若呈平稳递增趋势，可尝试使用倒三角法寻找规律。 有时做差和</description>
     </item>
     
     <item>
       <title>行测(2)——推理题</title>
-      <link>/post/2018/10/23/xingce-2/</link>
+      <link>https://www.wzyblog.top/post/2018/10/23/xingce-2/</link>
       <pubDate>Tue, 23 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/23/xingce-2/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/23/xingce-2/</guid>
       <description>1. 图形推理题 注意： 九宫格问题一般横着找规律； 有些存在交替规律或递增递减规律； 九宫格问题：第一与第二存在相同规律，第二与第三存在相同规律 规律总</description>
     </item>
     

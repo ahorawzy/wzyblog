@@ -36,6 +36,9 @@
 </div>
 
 <main>
+
+
+
 <p>在之前的两篇文章中，我首先用手动版的分而治之解决了工作中遇到的问题，之后根据Hadley的论文学习了plyr的应用方法和思想。在本文中，我将探索使用更多方法来解决第一篇中的问题。</p>
 <p>首先还是先得到断面交通量计算数据。</p>
 <pre class="r"><code>x &lt;- caculate_frecarsmean(jdcitys,c(&quot;ym&quot;,&quot;province&quot;,&quot;level&quot;)) %&gt;% dcast(ym+province~level)
@@ -223,7 +226,7 @@ o1 &lt;- t(o1[,-1]);o1</code></pre>
 <script async src="//yihui.name/js/center-img.js"></script>
   
   <hr/>
-  &copy; ZhiYuan Wang 2018~2021
+  © ZhiYuan Wang 2018~2021
   
   </footer>
   </body>

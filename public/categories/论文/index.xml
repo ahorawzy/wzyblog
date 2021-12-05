@@ -1,40 +1,36 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>论文 on Website of ZhiYuan Wang</title>
-    <link>/categories/%E8%AE%BA%E6%96%87/</link>
+    <link>https://www.wzyblog.top/categories/%E8%AE%BA%E6%96%87/</link>
     <description>Recent content in 论文 on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 21 Nov 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/categories/%E8%AE%BA%E6%96%87/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 21 Nov 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://www.wzyblog.top/categories/%E8%AE%BA%E6%96%87/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>交通流问题文献综述(2)</title>
-      <link>/post/2018/11/21/traffic-flow-literature-review-2/</link>
+      <link>https://www.wzyblog.top/post/2018/11/21/traffic-flow-literature-review-2/</link>
       <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/11/21/traffic-flow-literature-review-2/</guid>
+      <guid>https://www.wzyblog.top/post/2018/11/21/traffic-flow-literature-review-2/</guid>
       <description>参考文献引用 Ahmed, M. S. and Cook, A. R. (1979) Analysis of freeway traffic time-series data by using Box–Jenkins techniques, Transportation Research Board, 722, pp. 1–9. Vlahogianni E , Golias J , Karlaftis M . Short-term traffic forecasting: Overview of objectives and methods[J]. Transport Reviews, 2004, 24(5):533-557. Vlahogianni E I , Karlaftis M</description>
     </item>
     
     <item>
       <title>交通流问题文献综述(1)</title>
-      <link>/post/2018/10/17/traffic-flow-literature-review-1/</link>
+      <link>https://www.wzyblog.top/post/2018/10/17/traffic-flow-literature-review-1/</link>
       <pubDate>Wed, 17 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/17/traffic-flow-literature-review-1/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/17/traffic-flow-literature-review-1/</guid>
       <description>本篇文章服务于我的硕士毕业论文以及与之相关的准备投寄的小论文，也许可能也可以为未来在这方面更多的研究做积累。 英文文献 0. Analysis of freeway traffic time-series data by using Box-Jenkins techniques. 开</description>
     </item>
     
     <item>
       <title>交通流问题相关表达总结(1)</title>
-      <link>/post/2018/10/13/traffic-flow-terms-collection/</link>
+      <link>https://www.wzyblog.top/post/2018/10/13/traffic-flow-terms-collection/</link>
       <pubDate>Sat, 13 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/13/traffic-flow-terms-collection/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/13/traffic-flow-terms-collection/</guid>
       <description>1. 套话 结论性 This research provides strong evidence suggesting that 得到良好结果 provides promising results 良好的实用性 it can be easily incorporated with real-time traffic control for proactive freeway traffic management. 最原始的目标 The prime objective of traffic management strategies is to 局限于 has been limited to 随着科技进步</description>
     </item>
     

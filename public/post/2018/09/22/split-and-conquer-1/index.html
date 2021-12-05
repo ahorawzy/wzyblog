@@ -36,6 +36,9 @@
 </div>
 
 <main>
+
+
+
 <p>昨天在工作中遇到了这样一个问题：<strong>我希望按年月，按省份，按公路等级计算断面交通量，进而计算总行驶量。</strong></p>
 <p>PS：以下交通量计算数据均用随机数代替。</p>
 <p>使用我之前写的caculate_frecarsmean函数，可以调用plyr::ddply函数，这里便使用了plyr的思想：<strong>分而治之</strong>。关于plyr的思想，具体会在之后的《分而治之的策略》系列中详细写。考虑到日期必须是列的形式，公路等级必须是行的形式（因为各省公路里程是行的形式，如下表）。</p>
@@ -132,7 +135,7 @@ k2</code></pre>
 <script async src="//yihui.name/js/center-img.js"></script>
   
   <hr/>
-  &copy; ZhiYuan Wang 2018~2021
+  © ZhiYuan Wang 2018~2021
   
   </footer>
   </body>

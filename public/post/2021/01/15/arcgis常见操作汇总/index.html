@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ARCGIS常见操作汇总 | Website of ZhiYuan Wang</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">主页</a></li>
+      
+      <li><a href="/categories/">分类</a></li>
+      
+      <li><a href="/tags/">标签</a></li>
+      
+      <li><a href="/about/">关于我</a></li>
+      
+      <li><a href="/friendly_links/">链接</a></li>
+      
+      <li><a href="/index.xml">订阅</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">ARCGIS常见操作汇总</span></h1>
+<h2 class="author">王致远</h2>
+<h2 class="date">2021/01/15</h2>
+</div>
+
+<main>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#分乡镇出图">1. 分乡镇出图</a></li>
+<li><a href="#矢量数据分面统计">2. 矢量数据分面统计</a></li>
+<li><a href="#按某一字段的属性值分成子元素集">3. 按某一字段的属性值分成子元素集</a></li>
+<li><a href="#将自然村点标记到乡镇面行政村面">4. 将自然村点标记到乡镇面、行政村面</a></li>
+<li><a href="#计算点到线的最近距离">5. 计算点到线的最近距离</a></li>
+</ul>
+</div>
+
+<div id="分乡镇出图" class="section level1">
+<h1>1. 分乡镇出图</h1>
+<ol style="list-style-type: decimal">
+<li>打开总图，选择要剪裁乡镇；</li>
+<li>工具-分析-剪裁；</li>
+<li>输入要素：需要剪裁的图层；剪裁要素：乡镇面；输出要素类：自己命名；XY容差，不填。</li>
+</ol>
+</div>
+<div id="矢量数据分面统计" class="section level1">
+<h1>2. 矢量数据分面统计</h1>
+<ol style="list-style-type: decimal">
+<li>分析工具-叠加分析-标识；</li>
+<li>输入要素：公路网；标识要素：乡镇面；输出要素类：自己命名；XY容差，不填。</li>
+<li>打开新标识图层属性表；</li>
+<li>添加字段；长度-浮点型；</li>
+<li>计算几何：长度，</li>
+<li>汇总：</li>
+</ol>
+</div>
+<div id="按某一字段的属性值分成子元素集" class="section level1">
+<h1>3. 按某一字段的属性值分成子元素集</h1>
+<ol style="list-style-type: decimal">
+<li>分析-提取分析-按属性分割。</li>
+</ol>
+</div>
+<div id="将自然村点标记到乡镇面行政村面" class="section level1">
+<h1>4. 将自然村点标记到乡镇面、行政村面</h1>
+<ol style="list-style-type: decimal">
+<li>分析-叠加分析-标识。</li>
+<li>输入要素：自然村点。</li>
+<li>标识要素：乡镇面、行政村面。</li>
+<li>输出要素：另存为。</li>
+</ol>
+</div>
+<div id="计算点到线的最近距离" class="section level1">
+<h1>5. 计算点到线的最近距离</h1>
+<ol style="list-style-type: decimal">
+<li>分析-邻域分析-近邻分析。</li>
+<li>输入要素：点。</li>
+<li>临近要素：线（可为多图层的线）。</li>
+</ol>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+  
+  <hr/>
+  © ZhiYuan Wang 2018~2021
+  
+  </footer>
+  </body>
+</html>
+

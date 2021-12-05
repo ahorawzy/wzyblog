@@ -1,1210 +1,1278 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Home on Website of ZhiYuan Wang</title>
-    <link>/</link>
+    <link>https://www.wzyblog.top/</link>
     <description>Recent content in Home on Website of ZhiYuan Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 21 Dec 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 08 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://www.wzyblog.top/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>读《毛选（第一卷）》</title>
+      <link>https://www.wzyblog.top/post/2021/08/08/%E8%AF%BB-%E6%AF%9B%E9%80%89-%E7%AC%AC%E4%B8%80%E5%8D%B7/</link>
+      <pubDate>Sun, 08 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.wzyblog.top/post/2021/08/08/%E8%AF%BB-%E6%AF%9B%E9%80%89-%E7%AC%AC%E4%B8%80%E5%8D%B7/</guid>
+      <description>《实践论》 马克思主义者认为人类的生产活动是最基本的实践活动，是决定其他一切活动的东西。 在阶级社会中，每一个人都在一定的阶级地位中生活，各种思</description>
+    </item>
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ARCGIS常见操作汇总</title>
+      <link>https://www.wzyblog.top/post/2021/01/15/arcgis%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C%E6%B1%87%E6%80%BB/</link>
+      <pubDate>Fri, 15 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.wzyblog.top/post/2021/01/15/arcgis%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C%E6%B1%87%E6%80%BB/</guid>
+      <description>1. 分乡镇出图 2. 矢量数据分面统计 3. 按某一字段的属性值分成子元素集 4. 将自然村点标记到乡镇面、行政村面 5. 计算点到线的最近距离 1. 分乡镇出图 打开总图，</description>
+    </item>
     
+    <item>
+      <title>读《战神粟裕》</title>
+      <link>https://www.wzyblog.top/post/2021/01/10/%E8%AF%BB-%E6%88%98%E7%A5%9E%E7%B2%9F%E8%A3%95/</link>
+      <pubDate>Sun, 10 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.wzyblog.top/post/2021/01/10/%E8%AF%BB-%E6%88%98%E7%A5%9E%E7%B2%9F%E8%A3%95/</guid>
+      <description>读书笔记 艰苦岁月不只给人难堪，还有作为战士必须经历的磨炼和考验，这样在进入下一个搏杀场时你才不致心虚胆怯。 粟裕技高一筹的地方，不是他没有失误</description>
+    </item>
+    
+    <item>
+      <title>写在新年的开始</title>
+      <link>https://www.wzyblog.top/post/2021/01/02/%E5%86%99%E5%9C%A8%E6%96%B0%E5%B9%B4%E7%9A%84%E5%BC%80%E5%A7%8B/</link>
+      <pubDate>Sat, 02 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.wzyblog.top/post/2021/01/02/%E5%86%99%E5%9C%A8%E6%96%B0%E5%B9%B4%E7%9A%84%E5%BC%80%E5%A7%8B/</guid>
+      <description>为什么写在新年的开始不是1号而是2号呢？因为今天在翻1号日历的时候，突然感觉到了时间的流逝。之前看数字从1号到2号，没有什么感觉，人类的进化</description>
+    </item>
+    
+    <item>
+      <title>116号文-关于推动都市圈市域（郊）铁路加快发展意见的通知</title>
+      <link>https://www.wzyblog.top/post/2021/01/01/116%E5%8F%B7%E6%96%87-%E5%85%B3%E4%BA%8E%E6%8E%A8%E5%8A%A8%E9%83%BD%E5%B8%82%E5%9C%88%E5%B8%82%E5%9F%9F-%E9%83%8A-%E9%93%81%E8%B7%AF%E5%8A%A0%E5%BF%AB%E5%8F%91%E5%B1%95%E6%84%8F%E8%A7%81%E7%9A%84%E9%80%9A%E7%9F%A5/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.wzyblog.top/post/2021/01/01/116%E5%8F%B7%E6%96%87-%E5%85%B3%E4%BA%8E%E6%8E%A8%E5%8A%A8%E9%83%BD%E5%B8%82%E5%9C%88%E5%B8%82%E5%9F%9F-%E9%83%8A-%E9%93%81%E8%B7%AF%E5%8A%A0%E5%BF%AB%E5%8F%91%E5%B1%95%E6%84%8F%E8%A7%81%E7%9A%84%E9%80%9A%E7%9F%A5/</guid>
+      <description>国务院办公厅转发国家发展改革委等单位关于推动都市圈市域（郊）铁路加快发展意见的通知 国办函〔2020〕116号 各省、自治区、直辖市人民政府，国</description>
+    </item>
+    
+    <item>
+      <title>Geocomputation with R-2</title>
+      <link>https://www.wzyblog.top/post/2020/12/29/geocomputation-with-r-2/</link>
+      <pubDate>Tue, 29 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.wzyblog.top/post/2020/12/29/geocomputation-with-r-2/</guid>
+      <description>载入相关包 library(sf) ## Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1 library(raster) ## 载入需要的程辑包：sp library(spData) library(spDataLarge) 矢量数据：使用点，线和多边形；具有离散的，定义明确的边界，通常具有很高的精度。s</description>
+    </item>
+    
+    <item>
+      <title>Geocomputation-with-R-3</title>
+      <link>https://www.wzyblog.top/post/2020/12/29/geocomputation-with-r-3/</link>
+      <pubDate>Tue, 29 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.wzyblog.top/post/2020/12/29/geocomputation-with-r-3/</guid>
+      <description>Try add another post.</description>
+    </item>
+    
+    <item>
+      <title>Geocomputation with R - Geographic data in R</title>
+      <link>https://www.wzyblog.top/post/2020/12/28/geocomputation-with-r-geographic-data-in-r/</link>
+      <pubDate>Mon, 28 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.wzyblog.top/post/2020/12/28/geocomputation-with-r-geographic-data-in-r/</guid>
+      <description>2.2.1 简单特征（Simple features）简介 载入相关包 library(sf) ## Linking to GEOS 3.9.1, GDAL 3.2.1, PROJ 7.2.1 library(raster) ## 载入需要的程辑包：sp library(spData) library(spDataLarge) 矢量数据：使用点，线和多边形；具有</description>
+    </item>
     
     <item>
       <title>城市轨道交通快线</title>
-      <link>/post/2020/12/21/%E5%9F%8E%E5%B8%82%E8%BD%A8%E9%81%93%E4%BA%A4%E9%80%9A%E5%BF%AB%E7%BA%BF/</link>
+      <link>https://www.wzyblog.top/post/2020/12/21/%E5%9F%8E%E5%B8%82%E8%BD%A8%E9%81%93%E4%BA%A4%E9%80%9A%E5%BF%AB%E7%BA%BF/</link>
       <pubDate>Mon, 21 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/12/21/%E5%9F%8E%E5%B8%82%E8%BD%A8%E9%81%93%E4%BA%A4%E9%80%9A%E5%BF%AB%E7%BA%BF/</guid>
+      <guid>https://www.wzyblog.top/post/2020/12/21/%E5%9F%8E%E5%B8%82%E8%BD%A8%E9%81%93%E4%BA%A4%E9%80%9A%E5%BF%AB%E7%BA%BF/</guid>
       <description>1. 快线与市域铁路、城际铁路 2. 快线与干线 2.1 旅行速度区分 2.2 客流区分 2.3 长度区分 3. 多网融合 4. 多速度目标走廊规划建设 5. 快线进城组织模式 6. 客流 1. 快线与市</description>
     </item>
     
     <item>
       <title>又重返博客</title>
-      <link>/post/2020/12/06/%E5%8F%88%E9%87%8D%E8%BF%94%E5%8D%9A%E5%AE%A2/</link>
+      <link>https://www.wzyblog.top/post/2020/12/06/%E5%8F%88%E9%87%8D%E8%BF%94%E5%8D%9A%E5%AE%A2/</link>
       <pubDate>Sun, 06 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/12/06/%E5%8F%88%E9%87%8D%E8%BF%94%E5%8D%9A%E5%AE%A2/</guid>
+      <guid>https://www.wzyblog.top/post/2020/12/06/%E5%8F%88%E9%87%8D%E8%BF%94%E5%8D%9A%E5%AE%A2/</guid>
       <description>上一次更新博客还是2020年的开头因为疫情困在家中记录蛋炒饭菜谱，一转眼再想着更新博客已经是2020年的末尾了。2020年是不平凡的一年，中</description>
     </item>
     
     <item>
       <title>通勤交通与职住关系</title>
-      <link>/post/2020/12/06/%E9%80%9A%E5%8B%A4%E4%BA%A4%E9%80%9A%E4%B8%8E%E8%81%8C%E4%BD%8F%E5%85%B3%E7%B3%BB/</link>
+      <link>https://www.wzyblog.top/post/2020/12/06/%E9%80%9A%E5%8B%A4%E4%BA%A4%E9%80%9A%E4%B8%8E%E8%81%8C%E4%BD%8F%E5%85%B3%E7%B3%BB/</link>
       <pubDate>Sun, 06 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/12/06/%E9%80%9A%E5%8B%A4%E4%BA%A4%E9%80%9A%E4%B8%8E%E8%81%8C%E4%BD%8F%E5%85%B3%E7%B3%BB/</guid>
+      <guid>https://www.wzyblog.top/post/2020/12/06/%E9%80%9A%E5%8B%A4%E4%BA%A4%E9%80%9A%E4%B8%8E%E8%81%8C%E4%BD%8F%E5%85%B3%E7%B3%BB/</guid>
       <description>1. 研究通勤交通与职住关系的重要性 新型城镇化发展阶段 通勤特征是城市体检关注的重要主题 通勤匹配是轨道交通与城市良性互动的关键 通勤健康是城市风险不</description>
     </item>
     
     <item>
       <title>蛋炒饭</title>
-      <link>/post/2020/02/10/%E8%9B%8B%E7%82%92%E9%A5%AD/</link>
+      <link>https://www.wzyblog.top/post/2020/02/10/%E8%9B%8B%E7%82%92%E9%A5%AD/</link>
       <pubDate>Mon, 10 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/02/10/%E8%9B%8B%E7%82%92%E9%A5%AD/</guid>
+      <guid>https://www.wzyblog.top/post/2020/02/10/%E8%9B%8B%E7%82%92%E9%A5%AD/</guid>
       <description>V1.0 黄瓜胡萝卜丝蛋炒饭 食材 黄瓜一个，擦丝； 胡萝卜一个，擦丝； 米饭，适量； 肉臊子或其他类型猪肉，适量； 鸡蛋2-3个，在小碗中打匀； 葱，切花； 火腿</description>
     </item>
     
     <item>
       <title>手撕包菜</title>
-      <link>/post/2020/02/07/%E6%89%8B%E6%92%95%E5%8C%85%E8%8F%9C/</link>
+      <link>https://www.wzyblog.top/post/2020/02/07/%E6%89%8B%E6%92%95%E5%8C%85%E8%8F%9C/</link>
       <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/02/07/%E6%89%8B%E6%92%95%E5%8C%85%E8%8F%9C/</guid>
+      <guid>https://www.wzyblog.top/post/2020/02/07/%E6%89%8B%E6%92%95%E5%8C%85%E8%8F%9C/</guid>
       <description>食材 包菜（大的半颗，小的一颗）； 肉臊子适量； 干辣椒4个； 葱姜蒜； 盐； 料酒（50ml）； 生抽（15ml）； 蒸鱼豉油（10ml）； 蚝油（10ml</description>
     </item>
     
     <item>
       <title>清炒芥菜</title>
-      <link>/post/2020/02/07/%E6%B8%85%E7%82%92%E8%8A%A5%E8%8F%9C/</link>
+      <link>https://www.wzyblog.top/post/2020/02/07/%E6%B8%85%E7%82%92%E8%8A%A5%E8%8F%9C/</link>
       <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/02/07/%E6%B8%85%E7%82%92%E8%8A%A5%E8%8F%9C/</guid>
+      <guid>https://www.wzyblog.top/post/2020/02/07/%E6%B8%85%E7%82%92%E8%8A%A5%E8%8F%9C/</guid>
       <description>芥菜 芥菜俗称苦芥菜，被李时珍收入《本草纲目》中，能化痰平喘，消肿止痛。其种子磨粉就是芥末，榨出的油是芥子油。 芥菜味道苦，苦能降火，经常食用能</description>
     </item>
     
     <item>
       <title>六、交通分配与OD反推</title>
-      <link>/post/2020/01/16/%E5%85%AD-%E4%BA%A4%E9%80%9A%E5%88%86%E9%85%8D%E4%B8%8Eod%E5%8F%8D%E6%8E%A8/</link>
+      <link>https://www.wzyblog.top/post/2020/01/16/%E5%85%AD-%E4%BA%A4%E9%80%9A%E5%88%86%E9%85%8D%E4%B8%8Eod%E5%8F%8D%E6%8E%A8/</link>
       <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/01/16/%E5%85%AD-%E4%BA%A4%E9%80%9A%E5%88%86%E9%85%8D%E4%B8%8Eod%E5%8F%8D%E6%8E%A8/</guid>
+      <guid>https://www.wzyblog.top/post/2020/01/16/%E5%85%AD-%E4%BA%A4%E9%80%9A%E5%88%86%E9%85%8D%E4%B8%8Eod%E5%8F%8D%E6%8E%A8/</guid>
       <description>1. 基本原理与方法 1.1 基本概念 1.2 Wardrop原理 第一原理：用户平衡UE 第二原理：系统最优SO 1.3 非平衡分配算法 1.4 随机分配方法 1.5 OD矩阵反推 2. 在T</description>
     </item>
     
     <item>
       <title>三、出行生成预测</title>
-      <link>/post/2020/01/15/%E4%B8%89-%E5%87%BA%E8%A1%8C%E7%94%9F%E6%88%90%E9%A2%84%E6%B5%8B/</link>
+      <link>https://www.wzyblog.top/post/2020/01/15/%E4%B8%89-%E5%87%BA%E8%A1%8C%E7%94%9F%E6%88%90%E9%A2%84%E6%B5%8B/</link>
       <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/01/15/%E4%B8%89-%E5%87%BA%E8%A1%8C%E7%94%9F%E6%88%90%E9%A2%84%E6%B5%8B/</guid>
+      <guid>https://www.wzyblog.top/post/2020/01/15/%E4%B8%89-%E5%87%BA%E8%A1%8C%E7%94%9F%E6%88%90%E9%A2%84%E6%B5%8B/</guid>
       <description>1. 出行的基本概念 1.1 出行的三个属性 每次出行有起讫点； 每次出行有一定目的； 每次出行使用一种或多种交通方式； 1.2 出行生成的表达 国内交通规划工作中对出</description>
     </item>
     
     <item>
       <title>五、方式划分预测</title>
-      <link>/post/2020/01/15/%E4%BA%94-%E6%96%B9%E5%BC%8F%E5%88%92%E5%88%86%E9%A2%84%E6%B5%8B/</link>
+      <link>https://www.wzyblog.top/post/2020/01/15/%E4%BA%94-%E6%96%B9%E5%BC%8F%E5%88%92%E5%88%86%E9%A2%84%E6%B5%8B/</link>
       <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/01/15/%E4%BA%94-%E6%96%B9%E5%BC%8F%E5%88%92%E5%88%86%E9%A2%84%E6%B5%8B/</guid>
+      <guid>https://www.wzyblog.top/post/2020/01/15/%E4%BA%94-%E6%96%B9%E5%BC%8F%E5%88%92%E5%88%86%E9%A2%84%E6%B5%8B/</guid>
       <description>方式划分是四阶段的第三阶段，目的是将各小区间的出行分布量划分为各种交通方式的分布量。 在TransCAD中用Logit模型。 1. 基本原理与方法 1.1</description>
     </item>
     
     <item>
       <title>四、出行分布预测</title>
-      <link>/post/2020/01/15/%E5%9B%9B-%E5%87%BA%E8%A1%8C%E5%88%86%E5%B8%83%E9%A2%84%E6%B5%8B/</link>
+      <link>https://www.wzyblog.top/post/2020/01/15/%E5%9B%9B-%E5%87%BA%E8%A1%8C%E5%88%86%E5%B8%83%E9%A2%84%E6%B5%8B/</link>
       <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/01/15/%E5%9B%9B-%E5%87%BA%E8%A1%8C%E5%88%86%E5%B8%83%E9%A2%84%E6%B5%8B/</guid>
+      <guid>https://www.wzyblog.top/post/2020/01/15/%E5%9B%9B-%E5%87%BA%E8%A1%8C%E5%88%86%E5%B8%83%E9%A2%84%E6%B5%8B/</guid>
       <description>1. 基本原理与方法 出行生成预测：得到了未来年各小区出行的产生量与吸引量，需要进一步分析各校区之间的出行交换量。 出行分布预测：在已知分布矩阵各行</description>
     </item>
     
     <item>
       <title>一、TransCAD——预备知识</title>
-      <link>/post/2020/01/14/transcad-get-start/</link>
+      <link>https://www.wzyblog.top/post/2020/01/14/transcad-get-start/</link>
       <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/01/14/transcad-get-start/</guid>
+      <guid>https://www.wzyblog.top/post/2020/01/14/transcad-get-start/</guid>
       <description>1. 菜单项 File 文件 Edit 编辑 Map 地图 Dataview 数据视图 Selection 选择 Matrix 矩阵 Layout 布局 Tools 工具 Procedures 程序 Networks/Paths 网络/路径 Route Systems 路线系统 Planing 绘图 Transit 运输 Routing/Logistics 路线/物流 Statistics 统计数据 Window 窗口 Help 帮助 2. T</description>
     </item>
     
     <item>
       <title>二、交通调查数据处理与分析</title>
-      <link>/post/2020/01/14/%E4%BA%8C-%E4%BA%A4%E9%80%9A%E8%B0%83%E6%9F%A5%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E5%88%86%E6%9E%90/</link>
+      <link>https://www.wzyblog.top/post/2020/01/14/%E4%BA%8C-%E4%BA%A4%E9%80%9A%E8%B0%83%E6%9F%A5%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E5%88%86%E6%9E%90/</link>
       <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/01/14/%E4%BA%8C-%E4%BA%A4%E9%80%9A%E8%B0%83%E6%9F%A5%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E5%88%86%E6%9E%90/</guid>
+      <guid>https://www.wzyblog.top/post/2020/01/14/%E4%BA%8C-%E4%BA%A4%E9%80%9A%E8%B0%83%E6%9F%A5%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E5%88%86%E6%9E%90/</guid>
       <description>1. 交通调查的对象 2. 交通小区 2.1 交通小区划分 2.2 编辑面类型地理文件 2.3 为小区图层输入属性数据 2.4 设置小区显示样式 2.5 保存 3. 社会经济基础资料 3.1 新建和编辑数</description>
     </item>
     
     <item>
       <title>所里FTP设置</title>
-      <link>/post/2020/01/09/%E6%89%80%E9%87%8Cftp%E8%AE%BE%E7%BD%AE/</link>
+      <link>https://www.wzyblog.top/post/2020/01/09/%E6%89%80%E9%87%8Cftp%E8%AE%BE%E7%BD%AE/</link>
       <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/01/09/%E6%89%80%E9%87%8Cftp%E8%AE%BE%E7%BD%AE/</guid>
+      <guid>https://www.wzyblog.top/post/2020/01/09/%E6%89%80%E9%87%8Cftp%E8%AE%BE%E7%BD%AE/</guid>
       <description>FXP 是File Exchange Protocol（文件交换协议）的英文简称，而中文简称为“文传协议”。用于Internet上的控制文件的双向传输。 打开flas</description>
     </item>
     
     <item>
       <title>铁路客运站点综合交通规划</title>
-      <link>/post/2020/01/08/%E9%93%81%E8%B7%AF%E5%AE%A2%E8%BF%90%E7%AB%99%E7%82%B9%E7%BB%BC%E5%90%88%E4%BA%A4%E9%80%9A%E8%A7%84%E5%88%92/</link>
+      <link>https://www.wzyblog.top/post/2020/01/08/%E9%93%81%E8%B7%AF%E5%AE%A2%E8%BF%90%E7%AB%99%E7%82%B9%E7%BB%BC%E5%90%88%E4%BA%A4%E9%80%9A%E8%A7%84%E5%88%92/</link>
       <pubDate>Wed, 08 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/01/08/%E9%93%81%E8%B7%AF%E5%AE%A2%E8%BF%90%E7%AB%99%E7%82%B9%E7%BB%BC%E5%90%88%E4%BA%A4%E9%80%9A%E8%A7%84%E5%88%92/</guid>
+      <guid>https://www.wzyblog.top/post/2020/01/08/%E9%93%81%E8%B7%AF%E5%AE%A2%E8%BF%90%E7%AB%99%E7%82%B9%E7%BB%BC%E5%90%88%E4%BA%A4%E9%80%9A%E8%A7%84%E5%88%92/</guid>
       <description>11.4.1 铁路客运站点综合交通规划主要内容 铁路客运站点综合交通规划应从功能定位、场站布局、交通组织、用地布局等方面开展，主要内容包括： 功能定位及发展</description>
     </item>
     
     <item>
       <title>交通指标汇总</title>
-      <link>/post/2020/01/07/%E4%BA%A4%E9%80%9A%E6%8C%87%E6%A0%87%E6%B1%87%E6%80%BB/</link>
+      <link>https://www.wzyblog.top/post/2020/01/07/%E4%BA%A4%E9%80%9A%E6%8C%87%E6%A0%87%E6%B1%87%E6%80%BB/</link>
       <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/01/07/%E4%BA%A4%E9%80%9A%E6%8C%87%E6%A0%87%E6%B1%87%E6%80%BB/</guid>
+      <guid>https://www.wzyblog.top/post/2020/01/07/%E4%BA%A4%E9%80%9A%E6%8C%87%E6%A0%87%E6%B1%87%E6%80%BB/</guid>
       <description>0. 总 1. 点 1.1 对外交通客运枢纽 1.1.0 换乘距离与时间限制 1.1.0 换乘用地 1.1.1 对外交通客运枢纽分级 1.1.2 铁路客运站规模 1.1.3 铁路客站集疏运设施衔接要求 1.1.4 机场航站楼设置条</description>
     </item>
     
     <item>
       <title>城际铁路与综合交通</title>
-      <link>/post/2020/01/07/%E5%9F%8E%E9%99%85%E9%93%81%E8%B7%AF%E4%B8%8E%E7%BB%BC%E5%90%88%E4%BA%A4%E9%80%9A/</link>
+      <link>https://www.wzyblog.top/post/2020/01/07/%E5%9F%8E%E9%99%85%E9%93%81%E8%B7%AF%E4%B8%8E%E7%BB%BC%E5%90%88%E4%BA%A4%E9%80%9A/</link>
       <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/01/07/%E5%9F%8E%E9%99%85%E9%93%81%E8%B7%AF%E4%B8%8E%E7%BB%BC%E5%90%88%E4%BA%A4%E9%80%9A/</guid>
+      <guid>https://www.wzyblog.top/post/2020/01/07/%E5%9F%8E%E9%99%85%E9%93%81%E8%B7%AF%E4%B8%8E%E7%BB%BC%E5%90%88%E4%BA%A4%E9%80%9A/</guid>
       <description>7.1 城际铁路与区域综合交通的关系及分工 7.1.1 与区域综合交通的协调原则 7.1.2 与干线铁路的关系与运输分工 城际铁路与干线铁路的关系 城际铁路与干线铁路的区别 城</description>
     </item>
     
     <item>
       <title>城际铁路站点综合交通衔接规划</title>
-      <link>/post/2020/01/07/%E5%9F%8E%E9%99%85%E9%93%81%E8%B7%AF%E7%AB%99%E7%82%B9%E7%BB%BC%E5%90%88%E4%BA%A4%E9%80%9A%E8%A1%94%E6%8E%A5%E8%A7%84%E5%88%92/</link>
+      <link>https://www.wzyblog.top/post/2020/01/07/%E5%9F%8E%E9%99%85%E9%93%81%E8%B7%AF%E7%AB%99%E7%82%B9%E7%BB%BC%E5%90%88%E4%BA%A4%E9%80%9A%E8%A1%94%E6%8E%A5%E8%A7%84%E5%88%92/</link>
       <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/01/07/%E5%9F%8E%E9%99%85%E9%93%81%E8%B7%AF%E7%AB%99%E7%82%B9%E7%BB%BC%E5%90%88%E4%BA%A4%E9%80%9A%E8%A1%94%E6%8E%A5%E8%A7%84%E5%88%92/</guid>
+      <guid>https://www.wzyblog.top/post/2020/01/07/%E5%9F%8E%E9%99%85%E9%93%81%E8%B7%AF%E7%AB%99%E7%82%B9%E7%BB%BC%E5%90%88%E4%BA%A4%E9%80%9A%E8%A1%94%E6%8E%A5%E8%A7%84%E5%88%92/</guid>
       <description>8.1 交通衔接规划主要内容 功能定位及发展战略 综合交通场站布局 城际铁路车站交通组织 8.2 交通衔接规划主要原则和理念 8.2.1 模式 8.2.2 原则 外部畅通、过境分离 立体布</description>
     </item>
     
     <item>
       <title>出差后联系商旅中心送机票</title>
-      <link>/post/2019/12/23/send-me-flight-ticket/</link>
+      <link>https://www.wzyblog.top/post/2019/12/23/send-me-flight-ticket/</link>
       <pubDate>Mon, 23 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/12/23/send-me-flight-ticket/</guid>
+      <guid>https://www.wzyblog.top/post/2019/12/23/send-me-flight-ticket/</guid>
       <description>二院商旅部 86446868</description>
     </item>
     
     <item>
       <title>读《亲密关系》</title>
-      <link>/post/2019/11/12/read-close-ralationship/</link>
+      <link>https://www.wzyblog.top/post/2019/11/12/read-close-ralationship/</link>
       <pubDate>Tue, 12 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/11/12/read-close-ralationship/</guid>
+      <guid>https://www.wzyblog.top/post/2019/11/12/read-close-ralationship/</guid>
       <description>其他的人呢，纯粹是为恋爱而恋爱，一生中不断寻找能让我们热情不灭的特殊人物，而当热情熄灭时便转而寻找下一个可能目标。 亲密关系的过程，一开始是互</description>
     </item>
     
     <item>
       <title>读《巨人的陨落》</title>
-      <link>/post/2019/11/12/read-the-fall-of-giant/</link>
+      <link>https://www.wzyblog.top/post/2019/11/12/read-the-fall-of-giant/</link>
       <pubDate>Tue, 12 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/11/12/read-the-fall-of-giant/</guid>
+      <guid>https://www.wzyblog.top/post/2019/11/12/read-the-fall-of-giant/</guid>
       <description>学校里的老师告诉男孩们，安全灯是矿主对雇员表示关切的方式之一。爸爸说：“就好像防止爆炸、避免停工或隧道受损对老板们没好处似的。” 他们看着那个</description>
     </item>
     
     <item>
       <title>表头标准颜色</title>
-      <link>/post/2019/10/29/table-color/</link>
+      <link>https://www.wzyblog.top/post/2019/10/29/table-color/</link>
       <pubDate>Tue, 29 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/10/29/table-color/</guid>
+      <guid>https://www.wzyblog.top/post/2019/10/29/table-color/</guid>
       <description>公司风格表格 表头颜色：224，240，235 表格边框颜色：153，204，255 表序号靠右，表名居中，小四黑体，Times New Roman 表内字体五号宋</description>
     </item>
     
     <item>
       <title>找回路由器密码</title>
-      <link>/post/2019/10/06/password-of-router/</link>
+      <link>https://www.wzyblog.top/post/2019/10/06/password-of-router/</link>
       <pubDate>Sun, 06 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/10/06/password-of-router/</guid>
+      <guid>https://www.wzyblog.top/post/2019/10/06/password-of-router/</guid>
       <description>今天突然发现我把屋里路由器的密码忘了，虽然笔记本、手机、kindle等设备都记着密码，但总觉得心里不踏实，还是找回密码的好。上网找到了解决方</description>
     </item>
     
     <item>
       <title>读《局外人》</title>
-      <link>/post/2019/10/02/read-juwairen/</link>
+      <link>https://www.wzyblog.top/post/2019/10/02/read-juwairen/</link>
       <pubDate>Wed, 02 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/10/02/read-juwairen/</guid>
+      <guid>https://www.wzyblog.top/post/2019/10/02/read-juwairen/</guid>
       <description>书评 《局外人》这本书是我毕业旅行时空闲时间边看的。毕业旅行后就到成都报到了，搬家和报到事情很杂很密，没时间梳理；再后来正式入职后笔记本电脑就</description>
     </item>
     
     <item>
       <title>读《怦然心动》</title>
-      <link>/post/2019/09/28/read-flipped/</link>
+      <link>https://www.wzyblog.top/post/2019/09/28/read-flipped/</link>
       <pubDate>Sat, 28 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/09/28/read-flipped/</guid>
+      <guid>https://www.wzyblog.top/post/2019/09/28/read-flipped/</guid>
       <description>书评 之前在看过《怦然心动》电影后写过一篇博客看《怦然心动》。故事里女孩一家人的价值观帮助我更加清晰地认识了自己的价值观，看完后意犹未尽。于是</description>
     </item>
     
     <item>
       <title>PS里铁路线的画法</title>
-      <link>/post/2019/08/24/ps-railway/</link>
+      <link>https://www.wzyblog.top/post/2019/08/24/ps-railway/</link>
       <pubDate>Sat, 24 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/08/24/ps-railway/</guid>
+      <guid>https://www.wzyblog.top/post/2019/08/24/ps-railway/</guid>
       <description>由于工作中经常要在底图上加铁路线，所以今天想攻克这个问题。 首先我尝试了用黑线块和白线块创建一个笔刷，用笔刷画铁路线。但实际效果和我想的不一样</description>
     </item>
     
     <item>
       <title>重返博客</title>
-      <link>/post/2019/08/22/return-to-blog/</link>
+      <link>https://www.wzyblog.top/post/2019/08/22/return-to-blog/</link>
       <pubDate>Thu, 22 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/08/22/return-to-blog/</guid>
+      <guid>https://www.wzyblog.top/post/2019/08/22/return-to-blog/</guid>
       <description>已经有挺长一段时间没有更新博客和写日记了，原因是单位没有发电脑，就把笔记本电脑放在单位用了。因为既不可能在上班时间写博客写日记，也不想每天把</description>
     </item>
     
     <item>
       <title>姥爷说</title>
-      <link>/post/2019/07/05/grandpa-said/</link>
+      <link>https://www.wzyblog.top/post/2019/07/05/grandpa-said/</link>
       <pubDate>Fri, 05 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/07/05/grandpa-said/</guid>
+      <guid>https://www.wzyblog.top/post/2019/07/05/grandpa-said/</guid>
       <description>姥爷是1929年出生的，今年已经九十岁了。俗话说“人活七十古来稀”，而从我懂事起姥爷就已经七十岁了，得益于坚持爬山运动和勤俭的生活习惯，一直</description>
     </item>
     
     <item>
       <title>游江南（毕业旅行）</title>
-      <link>/post/2019/07/05/travel-of-jiangnan/</link>
+      <link>https://www.wzyblog.top/post/2019/07/05/travel-of-jiangnan/</link>
       <pubDate>Fri, 05 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/07/05/travel-of-jiangnan/</guid>
+      <guid>https://www.wzyblog.top/post/2019/07/05/travel-of-jiangnan/</guid>
       <description>背景 DAY 1：鸡鸣寺-明城墙-玄武湖-老门东-夫子庙 DAY 2：灵谷圣境-中山陵-音乐台-明孝陵-美龄宫-十朝历史文化园-新街口-夫子庙 DAY3：总统</description>
     </item>
     
     <item>
       <title>读《边城》</title>
-      <link>/post/2019/06/23/biancheng/</link>
+      <link>https://www.wzyblog.top/post/2019/06/23/biancheng/</link>
       <pubDate>Sun, 23 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/06/23/biancheng/</guid>
+      <guid>https://www.wzyblog.top/post/2019/06/23/biancheng/</guid>
       <description>书摘 他从不思索自己职务对于本人的意义，只是静静的很忠实的在那里活下去。 翠翠在风日里长养着，把皮肤变得黑黑的，触目为青山绿水，一对眸子清明如水</description>
     </item>
     
     <item>
       <title>游北京世园会</title>
-      <link>/post/2019/06/22/beijing-garden-expo/</link>
+      <link>https://www.wzyblog.top/post/2019/06/22/beijing-garden-expo/</link>
       <pubDate>Sat, 22 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/06/22/beijing-garden-expo/</guid>
+      <guid>https://www.wzyblog.top/post/2019/06/22/beijing-garden-expo/</guid>
       <description>从三月份知道北京要举办世园会，我就决定在离开北京之前一定要去一次，所以世园会和秦皇岛一样，都在我的毕业待完成清单里。今天是毕业典礼，而我昨晚</description>
     </item>
     
     <item>
       <title>游山海关&amp;北戴河</title>
-      <link>/post/2019/06/21/qinhuangdao/</link>
+      <link>https://www.wzyblog.top/post/2019/06/21/qinhuangdao/</link>
       <pubDate>Fri, 21 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/06/21/qinhuangdao/</guid>
+      <guid>https://www.wzyblog.top/post/2019/06/21/qinhuangdao/</guid>
       <description>之前早打算在毕业这段时间去秦皇岛玩，但因为导师安排的编书任务和自己的拖延一直没抽时间去。眼看着距离离开北京越来越近了，列了个未完成事情清单，</description>
     </item>
     
     <item>
       <title>看《怦然心动》</title>
-      <link>/post/2019/06/20/flipped/</link>
+      <link>https://www.wzyblog.top/post/2019/06/20/flipped/</link>
       <pubDate>Thu, 20 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/06/20/flipped/</guid>
+      <guid>https://www.wzyblog.top/post/2019/06/20/flipped/</guid>
       <description>“斯人若彩虹，遇上方知有。”最早知道这部电影是因为这句话。当时看到电影的封面是坐在树上的男孩女孩，以为故事讲述的是青梅竹马两小无猜的初恋。但</description>
     </item>
     
     <item>
       <title>读《世界文明史·中国&amp;日本》</title>
-      <link>/post/2019/06/17/history-of-civilization-03/</link>
+      <link>https://www.wzyblog.top/post/2019/06/17/history-of-civilization-03/</link>
       <pubDate>Mon, 17 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/06/17/history-of-civilization-03/</guid>
+      <guid>https://www.wzyblog.top/post/2019/06/17/history-of-civilization-03/</guid>
       <description>中国 中国和日本是《世界文明史》最后的一部分，看完了这部分，第一本《东方的遗产》就看完了。中间的印度部分由于过于晦涩，加上之前没有了解，看不太</description>
     </item>
     
     <item>
       <title>离线安装chrome插件</title>
-      <link>/post/2019/06/08/%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85chrome%E6%8F%92%E4%BB%B6/</link>
+      <link>https://www.wzyblog.top/post/2019/06/08/%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85chrome%E6%8F%92%E4%BB%B6/</link>
       <pubDate>Sat, 08 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/06/08/%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85chrome%E6%8F%92%E4%BB%B6/</guid>
+      <guid>https://www.wzyblog.top/post/2019/06/08/%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85chrome%E6%8F%92%E4%BB%B6/</guid>
       <description>上个月将笔记本重装了系统，但由于我的笔记本没法设置ipv6，所以无法登录谷歌商店下载、安装插件。昨天在学习OneNote时，接触到OneNo</description>
     </item>
     
     <item>
       <title>读《易经》（持续更新）</title>
-      <link>/post/2019/05/16/read-yijing/</link>
+      <link>https://www.wzyblog.top/post/2019/05/16/read-yijing/</link>
       <pubDate>Thu, 16 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/05/16/read-yijing/</guid>
+      <guid>https://www.wzyblog.top/post/2019/05/16/read-yijing/</guid>
       <description>易之卦辞与爻辞含义十分灵活，从不同角度，不同层面，可以有不同理解，应仔细玩味，耐心探索。 经上 1. 乾卦 111111 乾，元亨利貞。 上乾下乾，也叫重天乾卦。天</description>
     </item>
     
     <item>
       <title>读《动物农场》</title>
-      <link>/post/2019/05/14/read-animal-farm/</link>
+      <link>https://www.wzyblog.top/post/2019/05/14/read-animal-farm/</link>
       <pubDate>Tue, 14 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/05/14/read-animal-farm/</guid>
+      <guid>https://www.wzyblog.top/post/2019/05/14/read-animal-farm/</guid>
       <description>例如他会说上帝赐给他尾巴以便驱赶苍蝇，然而他宁愿尾巴和苍蝇都不要。 我们还是实话实说吧：我们的生命是悲惨的，劳苦的，和短促的。我们生了下来，供</description>
     </item>
     
     <item>
       <title>读《多情剑客无情剑》</title>
-      <link>/post/2019/04/29/sentimental-swordsman-with-his-merciless-sword/</link>
+      <link>https://www.wzyblog.top/post/2019/04/29/sentimental-swordsman-with-his-merciless-sword/</link>
       <pubDate>Mon, 29 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/04/29/sentimental-swordsman-with-his-merciless-sword/</guid>
+      <guid>https://www.wzyblog.top/post/2019/04/29/sentimental-swordsman-with-his-merciless-sword/</guid>
       <description>当他将“她”埋下去时，他自己的生命也就变得毫无意义。 但他一点也不着急，因为他知道这世上用金钱买不到的东西毕竟不多。 你看见过一匹狼在雪地上走路</description>
     </item>
     
     <item>
       <title>博客重新部署解决方案</title>
-      <link>/post/2019/04/25/netlify-fault/</link>
+      <link>https://www.wzyblog.top/post/2019/04/25/netlify-fault/</link>
       <pubDate>Thu, 25 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/04/25/netlify-fault/</guid>
+      <guid>https://www.wzyblog.top/post/2019/04/25/netlify-fault/</guid>
       <description>前两天格式化电脑后，原来的Rstudio和各类设置都没有了，需要重新设置，本篇博客记录下收拾的顺序，以便下次参考。 下载并安装好R/Rstud</description>
     </item>
     
     <item>
       <title>学习shiny包</title>
-      <link>/post/2019/04/23/learn-shiny/</link>
+      <link>https://www.wzyblog.top/post/2019/04/23/learn-shiny/</link>
       <pubDate>Tue, 23 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/04/23/learn-shiny/</guid>
+      <guid>https://www.wzyblog.top/post/2019/04/23/learn-shiny/</guid>
       <description>1. Get Start 2. Build a user interface 2.1 SidebarLayout 2.2 GridLayout 2.3 Tabsets 2.4 Navlists 2.5 Navbar Pages 3. Add control widgets 4. Display reactive output 4.1 Add an R object to the UI 4.2 Provide R code to build the object. 4.3 Use widget values 5. Use R scripts and data 6. Use reactive expressions 6.1 Reactive expressions 7. share APP 1. Get Start Shin</description>
     </item>
     
     <item>
       <title>读《周恩来传》</title>
-      <link>/post/2019/04/22/zhouen-lai/</link>
+      <link>https://www.wzyblog.top/post/2019/04/22/zhouen-lai/</link>
       <pubDate>Mon, 22 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/04/22/zhouen-lai/</guid>
+      <guid>https://www.wzyblog.top/post/2019/04/22/zhouen-lai/</guid>
       <description>摘抄 文雅、非常富有忍耐性，极为聪慧、机敏。 周的家庭长辈们是一些有修养的、遭受了艰难时世磨炼的绅士。 养母是淮安陈氏家族中最了不起的妇女，她有自</description>
     </item>
     
     <item>
       <title>读《月亮与六便士》</title>
-      <link>/post/2019/04/09/the-moon-and-sixpence/</link>
+      <link>https://www.wzyblog.top/post/2019/04/09/the-moon-and-sixpence/</link>
       <pubDate>Tue, 09 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/04/09/the-moon-and-sixpence/</guid>
+      <guid>https://www.wzyblog.top/post/2019/04/09/the-moon-and-sixpence/</guid>
       <description>摘抄 《圣经》反复告诫凡人不能彼此论断是有道理的，因为人和人的相互了解往往肤浅、局限而片面。 月亮象征着崇高的理想追求和美妙的精神境界。 六便士这</description>
     </item>
     
     <item>
       <title>给每一行添加一个引用符</title>
-      <link>/post/2019/04/02/give-each-line-a-greaterthan/</link>
+      <link>https://www.wzyblog.top/post/2019/04/02/give-each-line-a-greaterthan/</link>
       <pubDate>Tue, 02 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/04/02/give-each-line-a-greaterthan/</guid>
+      <guid>https://www.wzyblog.top/post/2019/04/02/give-each-line-a-greaterthan/</guid>
       <description>在用Kindle + Kindle Mate整理读书笔记，并转化为博客时候，经常需要给每一行一个符号“&amp;gt;”，来在markdown中表示引用。而当笔记较</description>
     </item>
     
     <item>
       <title>读《战后日本经济史》</title>
-      <link>/post/2019/04/02/economy-history-of-japan/</link>
+      <link>https://www.wzyblog.top/post/2019/04/02/economy-history-of-japan/</link>
       <pubDate>Tue, 02 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/04/02/economy-history-of-japan/</guid>
+      <guid>https://www.wzyblog.top/post/2019/04/02/economy-history-of-japan/</guid>
       <description>书摘 和我们一同躲在防空洞里的人大部分都窒息而死。 以后如果要躲在防空洞里，一定要躲在靠洞口的位置，氧气比里面充足。 “国家总动员体制”，即“19</description>
     </item>
     
     <item>
       <title>读《追风筝的人》</title>
-      <link>/post/2019/03/20/the-kite-runner/</link>
+      <link>https://www.wzyblog.top/post/2019/03/20/the-kite-runner/</link>
       <pubDate>Wed, 20 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/03/20/the-kite-runner/</guid>
+      <guid>https://www.wzyblog.top/post/2019/03/20/the-kite-runner/</guid>
       <description>书评 很早就听说过这本书了，因为它常年蝉联豆瓣读书排行榜前列，前段时间终于将其一口气读完。读的过程中很有触动，曾一度读到泪目，在候车厅盯着天花</description>
     </item>
     
     <item>
       <title>R包中的相对路径</title>
-      <link>/post/2019/03/06/r%E5%8C%85%E4%B8%AD%E7%9A%84%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84/</link>
+      <link>https://www.wzyblog.top/post/2019/03/06/r%E5%8C%85%E4%B8%AD%E7%9A%84%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84/</link>
       <pubDate>Wed, 06 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/03/06/r%E5%8C%85%E4%B8%AD%E7%9A%84%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84/</guid>
+      <guid>https://www.wzyblog.top/post/2019/03/06/r%E5%8C%85%E4%B8%AD%E7%9A%84%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84/</guid>
       <description>今天无意中解决了一个困扰我多年的问题——R中的路径究竟是怎么回事。我发现之前的我在引用路径时有两个问题： 使用了反斜杠\；这样为了在R中用路径</description>
     </item>
     
     <item>
       <title>《航拍中国》中的旅游景点</title>
-      <link>/post/2019/03/06/aerial-china/</link>
+      <link>https://www.wzyblog.top/post/2019/03/06/aerial-china/</link>
       <pubDate>Wed, 06 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/03/06/aerial-china/</guid>
+      <guid>https://www.wzyblog.top/post/2019/03/06/aerial-china/</guid>
       <description>四川 九曲黄河第一湾； 黄龙、九寨沟； 都江堰； 龙泉山； 宽窄巷子； 人民公园； 汶川-映秀； 剑门关； 阆中古城； 渠县； 安岳石刻； 蜀南竹海； 乐山大佛； 峨眉</description>
     </item>
     
     <item>
       <title>利用插值法填补缺失值</title>
-      <link>/post/2019/03/05/fill-up-na-using-interpolation/</link>
+      <link>https://www.wzyblog.top/post/2019/03/05/fill-up-na-using-interpolation/</link>
       <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/03/05/fill-up-na-using-interpolation/</guid>
+      <guid>https://www.wzyblog.top/post/2019/03/05/fill-up-na-using-interpolation/</guid>
       <description>今天解决了一个很重要的问题——对交通流序列插补缺失值。去年此时，我是用手工方法插补的，非常笨拙。这次要实现对所有交调站的自动化插补。 该问题可</description>
     </item>
     
     <item>
       <title>分组求和</title>
-      <link>/post/2019/03/04/sum-bygroup/</link>
+      <link>https://www.wzyblog.top/post/2019/03/04/sum-bygroup/</link>
       <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/03/04/sum-bygroup/</guid>
+      <guid>https://www.wzyblog.top/post/2019/03/04/sum-bygroup/</guid>
       <description>今天下午在做数据预处理时，碰到了去年此时难到我的一个问题——将不同车道号或上下行方向的交通流量相加。我当时的解法很笨很粗暴，这次寻求更加简单</description>
     </item>
     
     <item>
       <title>将字符串分拆成数据框</title>
-      <link>/post/2019/03/04/str-split-todf/</link>
+      <link>https://www.wzyblog.top/post/2019/03/04/str-split-todf/</link>
       <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/03/04/str-split-todf/</guid>
+      <guid>https://www.wzyblog.top/post/2019/03/04/str-split-todf/</guid>
       <description>今天要解决一个长期困扰我的问题：使用strsplit或stringr::str_split，都是将元素分拆为列表的形式，虽然这样的通用性比较</description>
     </item>
     
     <item>
       <title>读《世界文明史·近东》</title>
-      <link>/post/2019/03/01/history-of-civilization-02/</link>
+      <link>https://www.wzyblog.top/post/2019/03/01/history-of-civilization-02/</link>
       <pubDate>Fri, 01 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/03/01/history-of-civilization-02/</guid>
+      <guid>https://www.wzyblog.top/post/2019/03/01/history-of-civilization-02/</guid>
       <description>从这里开始，这本书就进入了正题——世界各个时期，各地的文明。文字也变得具体、生动、有趣起来。 苏美尔 一开始介绍的当然是人类历史上最古老的文明—</description>
     </item>
     
     <item>
       <title>读《咏远有李》</title>
-      <link>/post/2019/02/15/liyong-memoir/</link>
+      <link>https://www.wzyblog.top/post/2019/02/15/liyong-memoir/</link>
       <pubDate>Fri, 15 Feb 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/02/15/liyong-memoir/</guid>
+      <guid>https://www.wzyblog.top/post/2019/02/15/liyong-memoir/</guid>
       <description>书摘 关于爱情 包容哈文的直接与脾气： 我给她起了个绰号，叫“劈头士”——劈头盖脸谩骂的人士。 越是直白，越是在乎。 怎样处理矛盾： 矛盾不过夜，过夜就</description>
     </item>
     
     <item>
       <title>读《世界文明史·文明的条件》</title>
-      <link>/post/2019/02/12/history-of-civilization/</link>
+      <link>https://www.wzyblog.top/post/2019/02/12/history-of-civilization/</link>
       <pubDate>Tue, 12 Feb 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/02/12/history-of-civilization/</guid>
+      <guid>https://www.wzyblog.top/post/2019/02/12/history-of-civilization/</guid>
       <description>文明的条件是《世界文明史·东方的智慧》的第一部分，主要讲了文明的定义和内涵，以及其诞生的经济、政治、伦理条件。这一部分说理性的文字较多，读起</description>
     </item>
     
     <item>
       <title>读《中国历代政治得失》</title>
-      <link>/post/2019/02/08/read-chinese-politics-in-history/</link>
+      <link>https://www.wzyblog.top/post/2019/02/08/read-chinese-politics-in-history/</link>
       <pubDate>Fri, 08 Feb 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/02/08/read-chinese-politics-in-history/</guid>
+      <guid>https://www.wzyblog.top/post/2019/02/08/read-chinese-politics-in-history/</guid>
       <description>本书的作者是史学大家钱穆先生。本书从历史学的观点，细数中国五个重要朝代：汉、唐、宋、明、清，的政治组织形态，特别是从“政治制度”的层面，陈述</description>
     </item>
     
     <item>
       <title>学习《R for Data Science》(8)——Stringr</title>
-      <link>/post/2019/01/30/r-for-data-science-8/</link>
+      <link>https://www.wzyblog.top/post/2019/01/30/r-for-data-science-8/</link>
       <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/01/30/r-for-data-science-8/</guid>
+      <guid>https://www.wzyblog.top/post/2019/01/30/r-for-data-science-8/</guid>
       <description>library(tidyverse) library(stringr) stringr没有被包括在tidyverse中 basic 在字符串中引用符号，需要加\ 特殊字符： \n newline \t tab String length 字符长度 str_length(c(&amp;quot;a&amp;quot;, &amp;quot;R for data science&amp;quot;, NA)) ## [1] 1 18 NA Combining strings 字符</description>
     </item>
     
     <item>
       <title>读《21世纪资本论》（精选本）</title>
-      <link>/post/2019/01/30/21-century-capital/</link>
+      <link>https://www.wzyblog.top/post/2019/01/30/21-century-capital/</link>
       <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/01/30/21-century-capital/</guid>
+      <guid>https://www.wzyblog.top/post/2019/01/30/21-century-capital/</guid>
       <description>摘抄 托马斯·马尔萨斯在1798年发表的《人口原理评述》一文中明确指出：人口过剩是影响财富分配的首要因素。 农业时代的古老观点，但现在读到仍然脊</description>
     </item>
     
     <item>
       <title>学习《R for Data Science》(7)——Relation Data</title>
-      <link>/post/2019/01/29/r-for-data-science-7/</link>
+      <link>https://www.wzyblog.top/post/2019/01/29/r-for-data-science-7/</link>
       <pubDate>Tue, 29 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/01/29/r-for-data-science-7/</guid>
+      <guid>https://www.wzyblog.top/post/2019/01/29/r-for-data-science-7/</guid>
       <description>nycflights13数据集 Keys 主键 Mutating Joins inner join outer join duplicate keys dplyr中函数和merge函数的对应关系 Filtering joins Join problems Set operations 涉及到多个表的数据分析任务。 关系型</description>
     </item>
     
     <item>
       <title>学习《R for Data Science》(6)——Tidy</title>
-      <link>/post/2019/01/28/r-for-data-science-6/</link>
+      <link>https://www.wzyblog.top/post/2019/01/28/r-for-data-science-6/</link>
       <pubDate>Mon, 28 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/01/28/r-for-data-science-6/</guid>
+      <guid>https://www.wzyblog.top/post/2019/01/28/r-for-data-science-6/</guid>
       <description>tidy data Spreading and gathering Gathering Spreading Separating and uniting Separate Unite 缺失值 案例分析 非tidy data 本章需要用到tidyr包 library(plyr) library(tidyverse) library(ggplot2) library(pryr) tidy data 同一组数据有多种表达方式 tidy data的定义： Each variable must have its own</description>
     </item>
     
     <item>
       <title>读《围城》</title>
-      <link>/post/2019/01/28/read-weicheng/</link>
+      <link>https://www.wzyblog.top/post/2019/01/28/read-weicheng/</link>
       <pubDate>Mon, 28 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/01/28/read-weicheng/</guid>
+      <guid>https://www.wzyblog.top/post/2019/01/28/read-weicheng/</guid>
       <description>摘抄 我们对采摘不到的葡萄，不但想像它酸，也很可能想像它是分外地甜。 忠厚老实人的恶毒，像饭里的砂砾或者出骨鱼片里未净的刺，会给人一种不期待的伤</description>
     </item>
     
     <item>
       <title>张小龙在微信公开课上的演讲摘抄</title>
-      <link>/post/2019/01/20/speech-of-xiaolong-zhang-about-wechat/</link>
+      <link>https://www.wzyblog.top/post/2019/01/20/speech-of-xiaolong-zhang-about-wechat/</link>
       <pubDate>Sun, 20 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/01/20/speech-of-xiaolong-zhang-about-wechat/</guid>
+      <guid>https://www.wzyblog.top/post/2019/01/20/speech-of-xiaolong-zhang-about-wechat/</guid>
       <description>讲到设计微信时的原动力： 原动力应该是你内心深处的一种很深的认知或者希望。它很强大，以至于说它可以坚持很久，并且你克服很多困难都要去做到它。 微</description>
     </item>
     
     <item>
       <title>读《中国哲学简史》</title>
-      <link>/post/2019/01/19/biref-history-of-chinese-philosophy/</link>
+      <link>https://www.wzyblog.top/post/2019/01/19/biref-history-of-chinese-philosophy/</link>
       <pubDate>Sat, 19 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2019/01/19/biref-history-of-chinese-philosophy/</guid>
+      <guid>https://www.wzyblog.top/post/2019/01/19/biref-history-of-chinese-philosophy/</guid>
       <description>由于本书前半部分（先秦哲学）是在纸质书上看的，后半部分是在kindle上看的，所以摘抄只有后半部分的。前半部分已看过多边，印象深刻，所留到以</description>
     </item>
     
     <item>
       <title>学习链接</title>
-      <link>/friendly_links/</link>
+      <link>https://www.wzyblog.top/friendly_links/</link>
       <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>/friendly_links/</guid>
-      <description>谢益辉的博客 Rstudio Webinars bookdown书单-精华版 bookdown书单-完全版 blogdown bookdown rmarkdown R for Data Science Advanced R 统计之都 w3cschool</description>
+      <guid>https://www.wzyblog.top/friendly_links/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>学习《R for Data Science》(4)——Tibbles</title>
-      <link>/post/2018/12/30/reading-r-for-data-science-4/</link>
+      <link>https://www.wzyblog.top/post/2018/12/30/reading-r-for-data-science-4/</link>
       <pubDate>Sun, 30 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/12/30/reading-r-for-data-science-4/</guid>
+      <guid>https://www.wzyblog.top/post/2018/12/30/reading-r-for-data-science-4/</guid>
       <description>创建Tibble Tibble和data.frame的异同 打印 构造子集 从tibble转回到data.frame 学习更多的tibble知识，vi</description>
     </item>
     
     <item>
       <title>学习《R for Data Science》(5)——Data Import</title>
-      <link>/post/2018/12/30/reading-r-for-data-science-5/</link>
+      <link>https://www.wzyblog.top/post/2018/12/30/reading-r-for-data-science-5/</link>
       <pubDate>Sun, 30 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/12/30/reading-r-for-data-science-5/</guid>
+      <guid>https://www.wzyblog.top/post/2018/12/30/reading-r-for-data-science-5/</guid>
       <description>概述 解析函数 数字 字符串 因子 日期和时间 写出文件 本文需要用到readr包 library(tidyverse) library(hms) 概述 read_csv()读取逗号分隔；read_csv2()读取分号</description>
     </item>
     
     <item>
       <title>学习《R for Data Science》(2)——Transformation</title>
-      <link>/post/2018/12/25/reading-r-for-data-science-2/</link>
+      <link>https://www.wzyblog.top/post/2018/12/25/reading-r-for-data-science-2/</link>
       <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/12/25/reading-r-for-data-science-2/</guid>
+      <guid>https://www.wzyblog.top/post/2018/12/25/reading-r-for-data-science-2/</guid>
       <description>案例数据 flights filter() arrange() select() helper函数 mutate() summaries() 管道 缺失值 计数 上卷 移除分组 分组mutate()和filter() 使用dplyr包进行数据变形 library(tidyverse) ## Warning: 程辑包</description>
     </item>
     
     <item>
       <title>学习《R for Data Science》(3)——EDA</title>
-      <link>/post/2018/12/25/reading-r-for-data-science-3/</link>
+      <link>https://www.wzyblog.top/post/2018/12/25/reading-r-for-data-science-3/</link>
       <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/12/25/reading-r-for-data-science-3/</guid>
+      <guid>https://www.wzyblog.top/post/2018/12/25/reading-r-for-data-science-3/</guid>
       <description>问题 Variation 可视化分布 典型值 异常值 缺失值 Covariation 一个分类变量和一个连续变量 两个分类变量 两个连续变量 模式和模型 Project式工作流 系统地综合使用可视化和</description>
     </item>
     
     <item>
       <title>思维模式(2)——系统式思维</title>
-      <link>/post/2018/12/11/thinking-method-2-system/</link>
+      <link>https://www.wzyblog.top/post/2018/12/11/thinking-method-2-system/</link>
       <pubDate>Tue, 11 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/12/11/thinking-method-2-system/</guid>
+      <guid>https://www.wzyblog.top/post/2018/12/11/thinking-method-2-system/</guid>
       <description>本文主要来源于《系统之美》一书。 《系统之美》提供了一套“系统理论”，指导我们在面临混乱不堪、纷繁复杂且迅速变化的局面时，重新找回对整个系统的</description>
     </item>
     
     <item>
       <title>思维模式(1)——供应链与供应商</title>
-      <link>/post/2018/12/10/read-supply-chain-management/</link>
+      <link>https://www.wzyblog.top/post/2018/12/10/read-supply-chain-management/</link>
       <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/12/10/read-supply-chain-management/</guid>
+      <guid>https://www.wzyblog.top/post/2018/12/10/read-supply-chain-management/</guid>
       <description>本思维模式主要来源于《采购与供应链管理——一个实践者的角度》这本书。 供应链视角 供应链管理是对贯穿其中的产品流、信息流和资金流的集成。三者结合</description>
     </item>
     
     <item>
       <title>读《在困境中更要发奋求进》(华罗庚演讲)</title>
-      <link>/post/2018/12/03/hualuogeng-working-hard/</link>
+      <link>https://www.wzyblog.top/post/2018/12/03/hualuogeng-working-hard/</link>
       <pubDate>Mon, 03 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/12/03/hualuogeng-working-hard/</guid>
+      <guid>https://www.wzyblog.top/post/2018/12/03/hualuogeng-working-hard/</guid>
       <description>真正肯钻研的人在什么场合都可以钻研。 学习要自己努力，努力就可以很快上去。 白天紧张地搞优选法…我的理论研究室晚上进行的。 于其讲我自己所长的，不</description>
     </item>
     
     <item>
       <title>看《无敌破环王2·大闹互联网》</title>
-      <link>/post/2018/12/01/wreck-it-ralph-2/</link>
+      <link>https://www.wzyblog.top/post/2018/12/01/wreck-it-ralph-2/</link>
       <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/12/01/wreck-it-ralph-2/</guid>
+      <guid>https://www.wzyblog.top/post/2018/12/01/wreck-it-ralph-2/</guid>
       <description>应豪杰邀，今天下午和豪杰、兴东一起去看《无敌破环王2·大闹互联网》（迪士尼），据说是年度动画片。上一年度是《寻梦环游记》（皮克斯），再上一年</description>
     </item>
     
     <item>
       <title>捕捉幸运之风</title>
-      <link>/post/2018/11/25/capture-the-wind-of-luck/</link>
+      <link>https://www.wzyblog.top/post/2018/11/25/capture-the-wind-of-luck/</link>
       <pubDate>Sun, 25 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/11/25/capture-the-wind-of-luck/</guid>
+      <guid>https://www.wzyblog.top/post/2018/11/25/capture-the-wind-of-luck/</guid>
       <description>1 TED上一个关于“捕捉幸运之风”中提到的三点： 走出舒适区，承担一定的风险； 常怀感恩之心； 尊重各种各样的想法。 2 另外一篇讲运气的专栏文章 提升</description>
     </item>
     
     <item>
       <title>25岁做什么可以让五年后受益匪浅</title>
-      <link>/post/2018/11/23/25-years-what-to-do/</link>
+      <link>https://www.wzyblog.top/post/2018/11/23/25-years-what-to-do/</link>
       <pubDate>Fri, 23 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/11/23/25-years-what-to-do/</guid>
+      <guid>https://www.wzyblog.top/post/2018/11/23/25-years-what-to-do/</guid>
       <description>知乎上关于25岁做什么可以在五年后受益匪浅的讨论： 学霸猫 作者：学霸猫 链接：https://www.zhihu.com/question/52</description>
     </item>
     
     <item>
       <title>当代中国与社会的书单</title>
-      <link>/post/2018/11/22/%E5%BD%93%E4%BB%A3%E4%B8%AD%E5%9B%BD%E4%B8%8E%E7%A4%BE%E4%BC%9A%E7%9A%84%E4%B9%A6%E5%8D%95/</link>
+      <link>https://www.wzyblog.top/post/2018/11/22/%E5%BD%93%E4%BB%A3%E4%B8%AD%E5%9B%BD%E4%B8%8E%E7%A4%BE%E4%BC%9A%E7%9A%84%E4%B9%A6%E5%8D%95/</link>
       <pubDate>Thu, 22 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/11/22/%E5%BD%93%E4%BB%A3%E4%B8%AD%E5%9B%BD%E4%B8%8E%E7%A4%BE%E4%BC%9A%E7%9A%84%E4%B9%A6%E5%8D%95/</guid>
+      <guid>https://www.wzyblog.top/post/2018/11/22/%E5%BD%93%E4%BB%A3%E4%B8%AD%E5%9B%BD%E4%B8%8E%E7%A4%BE%E4%BC%9A%E7%9A%84%E4%B9%A6%E5%8D%95/</guid>
       <description>景跃进等《当代中国政府与政治》 李侃如《治理中国》 吴毅《小镇喧嚣》 项飙《跨越边界的社区：北京“浙江村”的生活史》 谭同学《双面人：转型农村中的人</description>
     </item>
     
     <item>
       <title>交通流问题文献综述(2)</title>
-      <link>/post/2018/11/21/traffic-flow-literature-review-2/</link>
+      <link>https://www.wzyblog.top/post/2018/11/21/traffic-flow-literature-review-2/</link>
       <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/11/21/traffic-flow-literature-review-2/</guid>
+      <guid>https://www.wzyblog.top/post/2018/11/21/traffic-flow-literature-review-2/</guid>
       <description>参考文献引用 Ahmed, M. S. and Cook, A. R. (1979) Analysis of freeway traffic time-series data by using Box–Jenkins techniques, Transportation Research Board, 722, pp. 1–9. Vlahogianni E , Golias J , Karlaftis M . Short-term traffic forecasting: Overview of objectives and methods[J]. Transport Reviews, 2004, 24(5):533-557. Vlahogianni E I , Karlaftis M</description>
     </item>
     
     <item>
       <title>leaflet for R(4)——leafletCN色块图</title>
-      <link>/post/2018/11/20/leaflet-for-r-4-leafletcn-bug/</link>
+      <link>https://www.wzyblog.top/post/2018/11/20/leaflet-for-r-4-leafletcn-bug/</link>
       <pubDate>Tue, 20 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/11/20/leaflet-for-r-4-leafletcn-bug/</guid>
+      <guid>https://www.wzyblog.top/post/2018/11/20/leaflet-for-r-4-leafletcn-bug/</guid>
       <description>(本博客中的数据已替换为随机数) 之前发现了一个leafletCN中的一个bug，就是geojsonMap函数的颜色映射有问题。 ## Using Wmean as value column: use</description>
     </item>
     
     <item>
       <title>线性代数的本质（更新中）</title>
-      <link>/post/2018/11/20/essence-of-linear-algebra/</link>
+      <link>https://www.wzyblog.top/post/2018/11/20/essence-of-linear-algebra/</link>
       <pubDate>Tue, 20 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/11/20/essence-of-linear-algebra/</guid>
+      <guid>https://www.wzyblog.top/post/2018/11/20/essence-of-linear-algebra/</guid>
       <description>在知乎看矩阵乘法的意义时，无意间发现B站上讲线性代数本质的系列视频，看了几集后觉得很好。重新看一遍，把重要观点记录下来。 0. 序言 一般课堂上讲线</description>
     </item>
     
     <item>
       <title>文件的批量处理(2)——ldply</title>
-      <link>/post/2018/11/19/bunch-files-operate-2-ldply/</link>
+      <link>https://www.wzyblog.top/post/2018/11/19/bunch-files-operate-2-ldply/</link>
       <pubDate>Mon, 19 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/11/19/bunch-files-operate-2-ldply/</guid>
+      <guid>https://www.wzyblog.top/post/2018/11/19/bunch-files-operate-2-ldply/</guid>
       <description>(本博客中使用的数据已全部替换为随机数) 在上一次的工作中，我将文件的批量处理执行地更加彻底，基本上驾轻就熟了。并且发现了plyr里很有用的工</description>
     </item>
     
     <item>
       <title>川普的几句话</title>
-      <link>/post/2018/11/18/trump-s-remarks/</link>
+      <link>https://www.wzyblog.top/post/2018/11/18/trump-s-remarks/</link>
       <pubDate>Sun, 18 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/11/18/trump-s-remarks/</guid>
+      <guid>https://www.wzyblog.top/post/2018/11/18/trump-s-remarks/</guid>
       <description>今天无意看到了个川普关于“成功学”的一个视频，虽然有些鸡汤（或者说是鸡血），但想想还是挺有启发的。摘录如下。 Thinking Big. 要开始思考任何事时，要大胆设</description>
     </item>
     
     <item>
       <title>Advanced R(1)——basic</title>
-      <link>/post/2018/11/08/advanced-r-1-basic/</link>
+      <link>https://www.wzyblog.top/post/2018/11/08/advanced-r-1-basic/</link>
       <pubDate>Thu, 08 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/11/08/advanced-r-1-basic/</guid>
+      <guid>https://www.wzyblog.top/post/2018/11/08/advanced-r-1-basic/</guid>
       <description>library(magrittr) 第2章 数据结构 2.1 向量 两种向量：原子向量，列表，三个共同属性： typeof() length() attributes() 附加任意元数据 a &amp;lt;- 1:3 typeof(a) ## [1] &amp;quot;integer&amp;quot; length(a) ## [1] 3 attributes(a) ## NULL l &amp;lt;- list(a) typeof(l) ## [1] &amp;quot;list&amp;quot; length(l) ## [1] 1 attributes(l) ## NULL 2.1.1</description>
     </item>
     
     <item>
       <title>Advanced R(2)——debug</title>
-      <link>/post/2018/11/08/advanced-r-2-debug/</link>
+      <link>https://www.wzyblog.top/post/2018/11/08/advanced-r-2-debug/</link>
       <pubDate>Thu, 08 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/11/08/advanced-r-2-debug/</guid>
+      <guid>https://www.wzyblog.top/post/2018/11/08/advanced-r-2-debug/</guid>
       <description>调试是一门用来解决代码中意想不到的错误的艺术和科学。 致命错误由stop()引起 警告由warning()产生 消息由message()产生 9.1 调试</description>
     </item>
     
     <item>
       <title>Advanced R(3)——OO</title>
-      <link>/post/2018/11/08/advanced-r-3-oo/</link>
+      <link>https://www.wzyblog.top/post/2018/11/08/advanced-r-3-oo/</link>
       <pubDate>Thu, 08 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/11/08/advanced-r-3-oo/</guid>
+      <guid>https://www.wzyblog.top/post/2018/11/08/advanced-r-3-oo/</guid>
       <description>面向对象 A class defines the behaviour of objects by describing their attributes and their relationship to other classes. The class is also used when selecting methods, functions that behave differently depending on the class of their input. 基于消息传递的OO系统：With message-passing, messages (methods) are sent to objects and the object determines which function to</description>
     </item>
     
     <item>
       <title>Advanced R(4)——FP</title>
-      <link>/post/2018/11/08/advanced-r-4-fp/</link>
+      <link>https://www.wzyblog.top/post/2018/11/08/advanced-r-4-fp/</link>
       <pubDate>Thu, 08 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/11/08/advanced-r-4-fp/</guid>
+      <guid>https://www.wzyblog.top/post/2018/11/08/advanced-r-4-fp/</guid>
       <description>library(magrittr) rm(list=ls()) 第10章：函数式编程 函数式编程：创建和操作函数的工具。 适用于向量的所有操作也都适用于函数： 将函数赋值给变量； 将函数存储在列表； 函数作为参</description>
     </item>
     
     <item>
       <title>思维模式(0)——序</title>
-      <link>/post/2018/11/08/thinking-method-0-preface/</link>
+      <link>https://www.wzyblog.top/post/2018/11/08/thinking-method-0-preface/</link>
       <pubDate>Thu, 08 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/11/08/thinking-method-0-preface/</guid>
+      <guid>https://www.wzyblog.top/post/2018/11/08/thinking-method-0-preface/</guid>
       <description>一直以来我都有一种隐隐的思考，但直到今天我才能较为清楚地表达出来。那就是我发现，一个人通过书本学习或实践经历，将理论或方法抽象并提升到更高的</description>
     </item>
     
     <item>
       <title>画因子型日期的点画线时存在的问题</title>
-      <link>/post/2018/11/08/plot-factor/</link>
+      <link>https://www.wzyblog.top/post/2018/11/08/plot-factor/</link>
       <pubDate>Thu, 08 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/11/08/plot-factor/</guid>
+      <guid>https://www.wzyblog.top/post/2018/11/08/plot-factor/</guid>
       <description>今天在画因子型日期的点画线时遇到了两个问题。 数据如下： head(xzyk_mds[c(&amp;quot;md&amp;quot;,&amp;quot;cars&amp;quot;)],10) ## md cars ## 1 10-1 52356 ## 2 10-2 53108 ## 3 10-3 53738 ## 4 10-4 50594 ## 5 10-5 50012 ## 6 10-6 49111 ## 7 10-7 49118 ## 8 10-8 49744 ## 9 10-9 49855 ## 10 10-10</description>
     </item>
     
     <item>
       <title>《西游记》中最难的三难</title>
-      <link>/post/2018/11/07/most-difficult-experiences-in-journey-to-the-west/</link>
+      <link>https://www.wzyblog.top/post/2018/11/07/most-difficult-experiences-in-journey-to-the-west/</link>
       <pubDate>Wed, 07 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/11/07/most-difficult-experiences-in-journey-to-the-west/</guid>
+      <guid>https://www.wzyblog.top/post/2018/11/07/most-difficult-experiences-in-journey-to-the-west/</guid>
       <description>今天看了“键客行”的视频，点评西游记中最艰难的三难。首先他说难不仅仅是肉体上的，更多是内心跟自己的斗争，或是一些无形的斗争。因为有形的斗争都</description>
     </item>
     
     <item>
       <title>【转载】中国进口博览会纪实</title>
-      <link>/post/2018/11/07/chinese-import-exhibition/</link>
+      <link>https://www.wzyblog.top/post/2018/11/07/chinese-import-exhibition/</link>
       <pubDate>Wed, 07 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/11/07/chinese-import-exhibition/</guid>
+      <guid>https://www.wzyblog.top/post/2018/11/07/chinese-import-exhibition/</guid>
       <description>12个主宾国： 印度尼西亚、越南、巴基斯坦、南非、埃及、俄罗斯、英国、匈牙利、德国、加拿大、巴西、墨西哥 展馆展区 国家贸易投资综合展区：展示贸易</description>
     </item>
     
     <item>
       <title>ggplot2一页多图的解决方案</title>
-      <link>/post/2018/11/06/ggplot2-multiplot/</link>
+      <link>https://www.wzyblog.top/post/2018/11/06/ggplot2-multiplot/</link>
       <pubDate>Tue, 06 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/11/06/ggplot2-multiplot/</guid>
+      <guid>https://www.wzyblog.top/post/2018/11/06/ggplot2-multiplot/</guid>
       <description>在网上找到一个函数，能够很好地解决ggplot2一页多图，函数如下： # Multiple plot function # # ggplot objects can be passed in ..., or to plotlist (as a list of ggplot objects) # - cols: Number of columns in layout # - layout: A matrix specifying</description>
     </item>
     
     <item>
       <title>《天龙八部》中的主角们</title>
-      <link>/post/2018/11/05/tianlong-character/</link>
+      <link>https://www.wzyblog.top/post/2018/11/05/tianlong-character/</link>
       <pubDate>Mon, 05 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/11/05/tianlong-character/</guid>
+      <guid>https://www.wzyblog.top/post/2018/11/05/tianlong-character/</guid>
       <description>最近在看一个Up主叫“键行客”推的关于金庸小说介绍的系列视频，每段视频先用非常浅显的语言叙述故事梗概，后半部分有其对作品和人物的相关理解和思</description>
     </item>
     
     <item>
       <title>缅怀金庸先生</title>
-      <link>/post/2018/10/31/remember-louis-cha/</link>
+      <link>https://www.wzyblog.top/post/2018/10/31/remember-louis-cha/</link>
       <pubDate>Wed, 31 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/31/remember-louis-cha/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/31/remember-louis-cha/</guid>
       <description>昨晚看新闻说金庸先生去世了，享年94岁。金庸的“飞雪连天射白鹿，笑书神侠倚碧鸳”14部小说，对中国的70后、80后、90后影响太深，对我的影</description>
     </item>
     
     <item>
       <title>面试</title>
-      <link>/post/2018/10/31/certain-company-auditioin/</link>
+      <link>https://www.wzyblog.top/post/2018/10/31/certain-company-auditioin/</link>
       <pubDate>Wed, 31 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/31/certain-company-auditioin/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/31/certain-company-auditioin/</guid>
       <description>无领导小组 注意要点： 询问结果呈现形式的要求； 服务组员； 征求大家的讨论方式，是直接讨论还是先个人思考（5 min）后再讨论； 选出时间控制者； 每个</description>
     </item>
     
     <item>
       <title>申论</title>
-      <link>/post/2018/10/29/shenlun/</link>
+      <link>https://www.wzyblog.top/post/2018/10/29/shenlun/</link>
       <pubDate>Mon, 29 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/29/shenlun/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/29/shenlun/</guid>
       <description>1. 总论 考察对给定材料的分析、概括、提炼、加工。 在把握材料主旨和精神的基础上，形成并提出自己的观点、思路或解决方案，准确流畅地用文字形式表达出</description>
     </item>
     
     <item>
       <title>港珠澳大桥的脆弱性假想</title>
-      <link>/post/2018/10/28/vulnerability-of-hong-zhu-macao-bridge/</link>
+      <link>https://www.wzyblog.top/post/2018/10/28/vulnerability-of-hong-zhu-macao-bridge/</link>
       <pubDate>Sun, 28 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/28/vulnerability-of-hong-zhu-macao-bridge/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/28/vulnerability-of-hong-zhu-macao-bridge/</guid>
       <description>背景 今天重庆发生了一起交通事故：重庆万州一辆公交车在桥上撞上一辆逆行的小客车，掉入了江中，目前遇难人数不明。我在脑海里模拟这件事故发生的始末</description>
     </item>
     
     <item>
       <title>两首神似的歌</title>
-      <link>/post/2018/10/27/twosimilarsongs/</link>
+      <link>https://www.wzyblog.top/post/2018/10/27/twosimilarsongs/</link>
       <pubDate>Sat, 27 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/27/twosimilarsongs/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/27/twosimilarsongs/</guid>
       <description>今天周六，一个人来到单位刷行测题，今天的主要任务是材料分析题。边刷题边听网易云音乐的日推，其中有这么一首歌。 Tennessee Waltz。 我听怎么感觉这么耳</description>
     </item>
     
     <item>
       <title>看《American Geinus》（未完）</title>
-      <link>/post/2018/10/26/american-genius/</link>
+      <link>https://www.wzyblog.top/post/2018/10/26/american-genius/</link>
       <pubDate>Fri, 26 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/26/american-genius/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/26/american-genius/</guid>
       <description>今晚终于把这部8集的纪录片看完第一遍了。这部纪录片是我看过为数不多觉得很精彩的，能推动我完整看完一遍的。这么喜欢的之前只看过《河西走廊》和《</description>
     </item>
     
     <item>
       <title>blogdown中的公式支持</title>
-      <link>/post/2018/10/25/latex-formula/</link>
+      <link>https://www.wzyblog.top/post/2018/10/25/latex-formula/</link>
       <pubDate>Thu, 25 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/25/latex-formula/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/25/latex-formula/</guid>
       <description>最近在总结行测题时，发现我的xmin主题不支持公式了，加了反双引号也没用。用knit渲染出来是带公式的，但博客里怎么都显示不了公式。所以判断</description>
     </item>
     
     <item>
       <title>行测(3)——材料分析题</title>
-      <link>/post/2018/10/25/xingce-3/</link>
+      <link>https://www.wzyblog.top/post/2018/10/25/xingce-3/</link>
       <pubDate>Thu, 25 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/25/xingce-3/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/25/xingce-3/</guid>
       <description>注意 注意审题，严格对照清楚问的是谁，别计算错了对象； 例题 1. 已知今年水平，问去年（前年）水平 去年=今年/(1+增长率) 2015年蔬菜产量15.</description>
     </item>
     
     <item>
       <title>行测(4)——专业知识</title>
-      <link>/post/2018/10/25/xingce-4/</link>
+      <link>https://www.wzyblog.top/post/2018/10/25/xingce-4/</link>
       <pubDate>Thu, 25 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/25/xingce-4/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/25/xingce-4/</guid>
       <description>1. 金融学 1.1 货币 货币是固定充当一般等价物的特殊商品。 五个职能：价值尺度、流通手段、支付手段（清偿债务）、贮藏手段、世界货币。 充当世界货币的条件</description>
     </item>
     
     <item>
       <title>学习《R for Data Science》(1)——visualization</title>
-      <link>/post/2018/10/24/reading-r-for-data-science/</link>
+      <link>https://www.wzyblog.top/post/2018/10/24/reading-r-for-data-science/</link>
       <pubDate>Wed, 24 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/24/reading-r-for-data-science/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/24/reading-r-for-data-science/</guid>
       <description>3. 数据可视化 可映射的图形属性 分面 图形类型 多个图形 数学变换 位置调整 library(tidyverse) 这本书是哈德利的入门之作。虽然对于我来说有点过于简单，不过这本书是以系统的</description>
     </item>
     
     <item>
       <title>小米手环3</title>
-      <link>/post/2018/10/24/miband3/</link>
+      <link>https://www.wzyblog.top/post/2018/10/24/miband3/</link>
       <pubDate>Wed, 24 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/24/miband3/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/24/miband3/</guid>
       <description>【这篇博客是没有收广告费的“硬文”，只因为非常喜欢，想记录下来】 小米手环3发布已经快半年了，之前看评测说屏幕大了，多了很多功能，也没太在意。</description>
     </item>
     
     <item>
       <title>看《超级工程·港珠澳大桥》</title>
-      <link>/post/2018/10/23/gangzhuao-bridge/</link>
+      <link>https://www.wzyblog.top/post/2018/10/23/gangzhuao-bridge/</link>
       <pubDate>Tue, 23 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/23/gangzhuao-bridge/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/23/gangzhuao-bridge/</guid>
       <description>今天是港珠澳大桥正式通车的日子，但之前对这座桥知之甚少。于是和豪杰看了《超级工程·港珠澳大桥》这部纪录片。 内容 纪录片里主要讲了大桥在规划、设</description>
     </item>
     
     <item>
       <title>行测(1)——数量关系题</title>
-      <link>/post/2018/10/23/xingce-1/</link>
+      <link>https://www.wzyblog.top/post/2018/10/23/xingce-1/</link>
       <pubDate>Tue, 23 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/23/xingce-1/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/23/xingce-1/</guid>
       <description>数字推理题 1. 多级数列 对相邻两项进行四则运算（做差，做商，做和），进行一次或两次运算。 若呈平稳递增趋势，可尝试使用倒三角法寻找规律。 有时做差和</description>
     </item>
     
     <item>
       <title>行测(2)——推理题</title>
-      <link>/post/2018/10/23/xingce-2/</link>
+      <link>https://www.wzyblog.top/post/2018/10/23/xingce-2/</link>
       <pubDate>Tue, 23 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/23/xingce-2/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/23/xingce-2/</guid>
       <description>1. 图形推理题 注意： 九宫格问题一般横着找规律； 有些存在交替规律或递增递减规律； 九宫格问题：第一与第二存在相同规律，第二与第三存在相同规律 规律总</description>
     </item>
     
     <item>
       <title>看《萤火之森》</title>
-      <link>/post/2018/10/21/yinghuozhisen/</link>
+      <link>https://www.wzyblog.top/post/2018/10/21/yinghuozhisen/</link>
       <pubDate>Sun, 21 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/21/yinghuozhisen/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/21/yinghuozhisen/</guid>
       <description>《萤火之森》是一部2011年的日本动漫，导演是大森贵弘。 故事 故事情节非常简单，讲一个小女孩萤在6岁那年暑假在乡下爷爷家玩耍时，误入山上的森林</description>
     </item>
     
     <item>
       <title>听《言叶之庭》片尾曲《Rain》</title>
-      <link>/post/2018/10/19/yanyezhiting/</link>
+      <link>https://www.wzyblog.top/post/2018/10/19/yanyezhiting/</link>
       <pubDate>Fri, 19 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/19/yanyezhiting/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/19/yanyezhiting/</guid>
       <description>《言叶之庭》是好几年前看过的动漫了。昨天在网易云音乐的视频推荐里看到了这首歌的MV，感觉色彩很好看，歌手的声音很温暖温柔，所以收藏到博客里。</description>
     </item>
     
     <item>
       <title>【转载】阿里云的这群疯子</title>
-      <link>/post/2018/10/17/ali-cloud-crazy-people/</link>
+      <link>https://www.wzyblog.top/post/2018/10/17/ali-cloud-crazy-people/</link>
       <pubDate>Wed, 17 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/17/ali-cloud-crazy-people/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/17/ali-cloud-crazy-people/</guid>
       <description>链接《阿里云的这群疯子》 这篇文章很长，不过我是一口气读完的。也许是故事本身很坎坷，也许是作者描写得过于精彩。读完后，我为阿里云创造出这样的奇</description>
     </item>
     
     <item>
       <title>交通流问题文献综述(1)</title>
-      <link>/post/2018/10/17/traffic-flow-literature-review-1/</link>
+      <link>https://www.wzyblog.top/post/2018/10/17/traffic-flow-literature-review-1/</link>
       <pubDate>Wed, 17 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/17/traffic-flow-literature-review-1/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/17/traffic-flow-literature-review-1/</guid>
       <description>本篇文章服务于我的硕士毕业论文以及与之相关的准备投寄的小论文，也许可能也可以为未来在这方面更多的研究做积累。 英文文献 0. Analysis of freeway traffic time-series data by using Box-Jenkins techniques. 开</description>
     </item>
     
     <item>
       <title>log函数在图形映射中的妙用</title>
-      <link>/post/2018/10/16/log-function-to-color-mapping/</link>
+      <link>https://www.wzyblog.top/post/2018/10/16/log-function-to-color-mapping/</link>
       <pubDate>Tue, 16 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/16/log-function-to-color-mapping/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/16/log-function-to-color-mapping/</guid>
       <description>library(leaflet) library(leafletCN) 今天在工作中遇到这样一个问题：将某数值映射到leaflet上点的颜色，比如数值越大红色越深，数值越小红色越浅。 我第一次是这样做的 reg &amp;lt;- leafletCN::leafletGeo(&amp;quot;China&amp;quot;) pal</description>
     </item>
     
     <item>
       <title>28字箴言</title>
-      <link>/post/2018/10/14/28-characters-maxim-from-deng/</link>
+      <link>https://www.wzyblog.top/post/2018/10/14/28-characters-maxim-from-deng/</link>
       <pubDate>Sun, 14 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/14/28-characters-maxim-from-deng/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/14/28-characters-maxim-from-deng/</guid>
       <description>邓公针对1990年前的国际局势提出的对外总方针。 冷静观察， 稳住阵脚， 沉着应付， 韬光养晦， 善于藏拙， 决不当头， 有所作为。 冷静观察：大环境小环境</description>
     </item>
     
     <item>
       <title>交通流问题相关表达总结(1)</title>
-      <link>/post/2018/10/13/traffic-flow-terms-collection/</link>
+      <link>https://www.wzyblog.top/post/2018/10/13/traffic-flow-terms-collection/</link>
       <pubDate>Sat, 13 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/13/traffic-flow-terms-collection/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/13/traffic-flow-terms-collection/</guid>
       <description>1. 套话 结论性 This research provides strong evidence suggesting that 得到良好结果 provides promising results 良好的实用性 it can be easily incorporated with real-time traffic control for proactive freeway traffic management. 最原始的目标 The prime objective of traffic management strategies is to 局限于 has been limited to 随着科技进步</description>
     </item>
     
     <item>
       <title>读《聊斋志异·画皮》</title>
-      <link>/post/2018/10/12/drawing-skin/</link>
+      <link>https://www.wzyblog.top/post/2018/10/12/drawing-skin/</link>
       <pubDate>Fri, 12 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/12/drawing-skin/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/12/drawing-skin/</guid>
       <description>《画皮》是《聊斋》中的经典名篇，鬼画人皮的形象也多次在荧幕上呈现，被大众所熟知。但《画皮》的原版故事我一直没有读过，今天正好读到。 故事原文见</description>
     </item>
     
     <item>
       <title>文件的批量处理</title>
-      <link>/post/2018/10/11/bunch-files-operate/</link>
+      <link>https://www.wzyblog.top/post/2018/10/11/bunch-files-operate/</link>
       <pubDate>Thu, 11 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/11/bunch-files-operate/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/11/bunch-files-operate/</guid>
       <description>今天我要面对之前一直想正面解决的一个问题：文件的批量操作。但之前对列表这种数据结构认识不深刻，不敢用也不会用，所以一直没能真正解决。 通过《A</description>
     </item>
     
     <item>
       <title>合并列表</title>
-      <link>/post/2018/10/10/merge-list/</link>
+      <link>https://www.wzyblog.top/post/2018/10/10/merge-list/</link>
       <pubDate>Wed, 10 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/10/merge-list/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/10/merge-list/</guid>
       <description>今天在工作中遇到一个问题：当我用lapply处理完一个列表后，会得到结果列表。结果列表的某一列都是相同的索引，我需要把列表中每一个元素都根据</description>
     </item>
     
     <item>
       <title>看《影》</title>
-      <link>/post/2018/10/04/movie-shadow/</link>
+      <link>https://www.wzyblog.top/post/2018/10/04/movie-shadow/</link>
       <pubDate>Thu, 04 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/04/movie-shadow/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/04/movie-shadow/</guid>
       <description>今天和豪杰去看了张艺谋导演的电影《影》。看之前就有评价说，这是张艺谋电影的新高度。买的中影电影院（小西天店）的巨幕厅，还是有些小期待的。 故事</description>
     </item>
     
     <item>
       <title>读《心流》</title>
-      <link>/post/2018/10/04/read-flow/</link>
+      <link>https://www.wzyblog.top/post/2018/10/04/read-flow/</link>
       <pubDate>Thu, 04 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/04/read-flow/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/04/read-flow/</guid>
       <description>0.序言 0.1 自造内心秩序之途 幸福源自内心的秩序 负熵与精神熵 自寻目标的时代 机器人驱赶我们去游戏 第1章 心流，快乐的源泉 1.1 人何时最幸福 1.2 人类不满的根</description>
     </item>
     
     <item>
       <title>谢益辉精彩博客（持续更新）</title>
-      <link>/post/2018/10/04/yihui-excellent-post/</link>
+      <link>https://www.wzyblog.top/post/2018/10/04/yihui-excellent-post/</link>
       <pubDate>Thu, 04 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/04/yihui-excellent-post/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/04/yihui-excellent-post/</guid>
       <description>韩愈的《师说》中说：“古之学者必有师。师者，所以传道受业解惑也。”从小学到中学到大学，拥有老师似乎是理所当然的事。但一个人一旦脱离了校园环境</description>
     </item>
     
     <item>
       <title>看《海上钢琴师》</title>
-      <link>/post/2018/10/03/the-legend-of-1900/</link>
+      <link>https://www.wzyblog.top/post/2018/10/03/the-legend-of-1900/</link>
       <pubDate>Wed, 03 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/03/the-legend-of-1900/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/03/the-legend-of-1900/</guid>
       <description>背景 《海上钢琴师》这部电影我很早之前就已经听人推荐，知道是一部豆瓣评分很高（9.1分）的电影。导演是意大利人吉赛贝·托纳多雷，他还导演了《天</description>
     </item>
     
     <item>
       <title>读《吕不韦列传》</title>
-      <link>/post/2018/10/02/lvbuwei-biography/</link>
+      <link>https://www.wzyblog.top/post/2018/10/02/lvbuwei-biography/</link>
       <pubDate>Tue, 02 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/02/lvbuwei-biography/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/02/lvbuwei-biography/</guid>
       <description>往来贩贱卖贵，家累千金。 吕不韦是个低买高卖的渠道商，善于发现处于价值洼地的资产。 “此奇货可居。” 吕不韦知道子楚时，发现了子楚的价值，认为“此</description>
     </item>
     
     <item>
       <title>读《屈原贾生列传》</title>
-      <link>/post/2018/10/01/quyuanjiasheng-biography/</link>
+      <link>https://www.wzyblog.top/post/2018/10/01/quyuanjiasheng-biography/</link>
       <pubDate>Mon, 01 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/10/01/quyuanjiasheng-biography/</guid>
+      <guid>https://www.wzyblog.top/post/2018/10/01/quyuanjiasheng-biography/</guid>
       <description>博闻强识，明于治乱，娴于辞令。 这是描写屈原的个人能力：记忆力好，管理能力强，系统性思维能力强，文笔好、讲话水平高。 王使屈平为令，众莫不知，每</description>
     </item>
     
     <item>
       <title>stringr学习总结</title>
-      <link>/post/2018/09/30/learn-stringr/</link>
+      <link>https://www.wzyblog.top/post/2018/09/30/learn-stringr/</link>
       <pubDate>Sun, 30 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/09/30/learn-stringr/</guid>
+      <guid>https://www.wzyblog.top/post/2018/09/30/learn-stringr/</guid>
       <description>1. stringr包函数一览 1.1 字符串拼接函数 1.2 字符串计算函数 1.3 字符串匹配函数 1.4 字符串变换函数 1.5 参数控制函数，仅用于构造功能的参数，不能独立使用</description>
     </item>
     
     <item>
       <title>leaflet for R(3)——leaflet.extras</title>
-      <link>/post/2018/09/29/leaflet-for-r-3/</link>
+      <link>https://www.wzyblog.top/post/2018/09/29/leaflet-for-r-3/</link>
       <pubDate>Sat, 29 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/09/29/leaflet-for-r-3/</guid>
+      <guid>https://www.wzyblog.top/post/2018/09/29/leaflet-for-r-3/</guid>
       <description>11 leaflet.extras 11.1 addHeatmap library(leaflet) library(leafletCN) library(leaflet.extras) library(magrittr) leaflet(quakes) %&amp;gt;% addProviderTiles(providers$Esri.WorldImagery) %&amp;gt;% setView( 178, -20, 5 ) %&amp;gt;% addHeatmap(lng = ~long, lat = ~lat, intensity = ~mag, blur = 20, max = 0.05, radius = 15) {&#34;x&#34;:{&#34;options&#34;:{&#34;crs&#34;:{&#34;crsClass&#34;:&#34;L.CRS.EPSG3857&#34;,&#34;code&#34;:null,&#34;proj4def&#34;:null,&#34;projectedBounds&#34;:null,&#34;options&#34;:{}}},&#34;calls&#34;:[{&#34;method&#34;:&#34;addProviderTiles&#34;,&#34;args&#34;:[&#34;Esri.WorldImagery&#34;,null,null,{&#34;errorTileUrl&#34;:&#34;&#34;,&#34;noWrap&#34;:false,&#34;detectRetina&#34;:false}]},{&#34;method&#34;:&#34;addHeatmap&#34;,&#34;args&#34;:[[[-20.42,181.62,4.8],[-20.62,181.03,4.2],[-26,184.1,5.4],[-17.97,181.66,4.1],[-20.42,181.96,4],[-19.68,184.31,4],[-11.7,166.1,4.8],[-28.11,181.93,4.4],[-28.74,181.74,4.7],[-17.47,179.59,4.3],[-21.44,180.69,4.4],[-12.26,167,4.6],[-18.54,182.11,4.4],[-21,181.66,4.4],[-20.7,169.92,6.1],[-15.94,184.95,4.3],[-13.64,165.96,6],[-17.83,181.5,4.5],[-23.5,179.78,4.4],[-22.63,180.31,4.4],[-20.84,181.16,4.5],[-10.98,166.32,4.2],[-23.3,180.16,4.4],[-30.2,182,4.7],[-19.66,180.28,5.4],[-17.94,181.49,4],[-14.72,167.51,4.6],[-16.46,180.79,5.2],[-20.97,181.47,4.5],[-19.84,182.37,4.4],[-22.58,179.24,4.6],[-16.32,166.74,4.7],[-15.55,185.05,4.8],[-23.55,180.8,4],[-16.3,186,4.5],[-25.82,179.33,4.3],[-18.73,169.23,4.5],[-17.64,181.28,4.6],[-17.66,181.4,4.1],[-18.82,169.33,4.4],[-37.37,176.78,4.7],[-15.31,186.1,4.6],[-24.97,179.82,4.4],[-15.49,186.04,4.3],[-19.23,169.41,4.6],[-30.1,182.3,4.9],[-26.4,181.7,4.5],[-11.77,166.32,4.4],[-24.12,180.08,4.3],[-18.97,185.25,5.1],[-18.75,182.35,4.2],[-19.26,184.42,4],[-22.75,173.2,4.6],[-21.37,180.67,4.3],[-20.1,182.16,4.2],[-19.85,182.13,4.4],[-22.7,181,4.5],[-22.06,180.6,4],[-17.8,181.35,4.4],[-24.2,179.2,4.3],[-20.69,181.55,4.7],[-21.16,182.4,4.1],[-13.82,172.38,5],[-11.49,166.22,4.6],[-20.68,181.41,4.9],[-17.1,184.93,4.7],[-20.14,181.6,4.1],[-21.96,179.62,5],[-20.42,181.86,4.5],[-15.46,187.81,5.5],[-15.31,185.8,4],[-19.86,184.35,4.5],[-11.55,166.2,4.3],[-23.74,179.99,5.2],[-17.7,181.23,4.4],[-23.54,180.04,4.3],[-19.21,184.7,4.1],[-12.11,167.06,4.5],[-21.81,181.71,4.2],[-28.98,181.11,5.3],[-34.02,180.21,5.2],[-23.84,180.99,4.5],[-19.57,182.38,4.6],[-20.12,183.4,4.3],[-17.7,181.7,4],[-19.66,184.31,4.3],[-21.5,170.5,4.7],[-23.64,179.96,4.5],[-15.43,186.3,4.2],[-15.41,186.44,4.3],[-15.48,167.53,5.1],[-13.36,167.06,4.7],[-20.64,182.02,5.2],[-19.72,169.71,4.2],[-15.44,185.26,4.2],[-19.73,182.4,4],[-27.24,181.11,4.5],[-18.16,183.41,5.2],[-13.66,166.54,5.1],[-24.57,179.92,4.7],[-16.98,185.61,4.1],[-26.2,178.41,4.6],[-21.88,180.39,4.7],[-33,181.6,4.7],[-21.33,180.69,4.6],[-19.44,183.5,4.2],[-34.89,180.6,4.4],[-20.24,169.49,4.6],[-22.55,185.9,5.7],[-36.95,177.81,5],[-15.75,185.23,4.5],[-16.85,182.31,4.2],[-19.06,182.45,4],[-26.11,178.3,4.8],[-26.2,178.35,4.4],[-26.13,178.31,4.2],[-13.66,172.23,5.3],[-13.47,172.29,4.7],[-14.6,167.4,4.8],[-18.96,169.48,4.2],[-14.65,166.97,4.8],[-19.9,178.9,4.3],[-22.05,180.4,4.7],[-19.22,182.43,4.5],[-31.24,180.6,4.4],[-17.93,167.89,5.1],[-19.3,183.84,4.2],[-26.53,178.57,5],[-27.72,181.7,4.8],[-19.19,183.51,4.3],[-17.43,185.43,4.5],[-17.05,181.22,4.2],[-19.52,168.98,4.5],[-23.71,180.3,4.6],[-21.3,180.82,4.3],[-16.24,168.02,4.7],[-16.14,187.32,5.1],[-23.95,182.8,4.6],[-25.2,182.6,4.9],[-18.84,184.16,4.2],[-12.66,169.46,4.6],[-20.65,181.4,4],[-13.23,167.1,5],[-29.91,181.43,4.4],[-14.31,173.5,4.2],[-20.1,184.4,4.2],[-17.8,185.17,4.4],[-21.27,173.49,4.9],[-23.58,180.17,5.3],[-17.9,181.5,4],[-23.34,184.5,5.7],[-15.56,167.62,6.4],[-23.83,182.56,4.3],[-11.8,165.8,4.2],[-15.54,167.68,4.7],[-20.65,181.32,4.7],[-11.75,166.07,4.2],[-24.81,180,4.3],[-20.9,169.84,4.9],[-11.34,166.24,4.6],[-17.98,180.5,4.1],[-24.34,179.52,4.8],[-13.86,167.16,4.6],[-35.56,180.2,4.6],[-35.48,179.9,4.8],[-34.2,179.43,5],[-26,182.12,5.6],[-19.89,183.84,5.3],[-23.43,180,4.7],[-18.89,169.42,4.5],[-17.82,181.83,4.3],[-25.68,180.34,4.6],[-20.2,180.9,4.1],[-15.2,184.68,4.1],[-15.03,182.29,4.1],[-32.22,180.2,5.7],[-22.64,180.64,5],[-17.42,185.16,4.5],[-17.84,181.48,4.1],[-15.02,184.24,4.6],[-18.04,181.75,4.5],[-24.6,183.5,4.3],[-19.88,184.3,4.4],[-20.3,183,4.2],[-20.45,181.85,4.1],[-17.67,187.09,4.9],[-22.3,181.9,4.3],[-19.85,181.85,4.9],[-24.27,179.88,4.6],[-15.85,185.13,4.6],[-20.02,184.09,5.3],[-18.56,169.31,4.7],[-17.87,182,4.6],[-24.08,179.5,4.1],[-32.2,179.61,4.6],[-20.36,181.19,4.2],[-23.85,182.53,4.6],[-24,182.75,4.5],[-20.41,181.74,4.3],[-17.72,180.3,5.2],[-19.67,182.18,4.3],[-17.7,182.2,4],[-16.23,183.59,4.7],[-26.72,183.35,4.5],[-12.95,169.09,4.5],[-21.97,182.32,4.3],[-21.96,180.54,5.2],[-20.32,181.69,4.5],[-30.28,180.62,4.7],[-20.2,182.3,4.2],[-30.66,180.13,4.7],[-16.17,184.1,4.3],[-28.25,181.71,4.1],[-20.47,185.68,5.4],[-23.55,180.27,4.3],[-20.94,181.58,4.3],[-26.67,182.4,4.2],[-18.13,181.52,4.6],[-20.21,183.83,4.4],[-18.31,182.39,4.2],[-16.52,185.7,4.7],[-22.36,171.65,4.6],[-22.43,184.48,4.9],[-20.37,182.1,4.2],[-23.77,180.16,4.5],[-13.65,166.66,4.9],[-21.55,182.9,4.2],[-16.24,185.75,4.5],[-23.73,182.53,5],[-22.34,171.52,5],[-19.4,180.94,4.7],[-24.64,180.81,4.3],[-16,182.82,4.4],[-19.62,185.35,4.9],[-23.84,180.13,4.5],[-23.54,179.93,4],[-28.23,182.68,4.4],[-21.68,180.63,5],[-13.44,166.53,4.7],[-24.96,180.22,4.8],[-20.08,182.74,4.5],[-24.36,182.84,4.1],[-14.7,166,5.3],[-18.2,183.68,4.8],[-16.65,185.51,5],[-18.11,181.67,4.6],[-17.95,181.65,4.3],[-15.5,186.9,4.7],[-23.36,180.01,5.3],[-19.15,169.5,4.2],[-10.97,166.26,4.7],[-14.85,167.24,4.5],[-17.8,181.38,5.1],[-22.5,170.4,4.9],[-29.1,182.1,4.4],[-20.32,180.88,4.2],[-16.09,184.89,4.6],[-19.18,169.33,4.7],[-23.81,179.36,4.2],[-23.79,179.89,4.9],[-19.02,184.23,5.1],[-20.9,181.51,4.7],[-19.06,169.01,4.4],[-17.88,181.47,4.4],[-19.41,183.05,4.2],[-26.17,184.2,4.9],[-14.95,167.24,4.6],[-18.73,168.8,4.4],[-20.21,182.37,4.6],[-21.29,180.85,4.5],[-19.76,181.41,4.4],[-22.09,180.38,4.9],[-23.8,179.9,4.1],[-20.16,181.99,4.2],[-22.13,180.38,5.7],[-17.44,181.4,4.6],[-23.33,180.18,5],[-24.78,179.22,4.3],[-22,180.52,4.5],[-19.13,182.51,5.2],[-30.72,180.1,4.4],[-22.32,180.54,4.2],[-16.45,177.77,4.6],[-17.7,185,4],[-17.95,184.68,4.4],[-24.4,179.85,4.7],[-19.3,180.6,4.2],[-21.13,185.32,4.7],[-18.07,181.57,4.5],[-20.6,182.28,5],[-18.48,181.49,5],[-13.34,166.2,4.8],[-20.92,181.5,4.6],[-25.31,179.69,4.6],[-15.24,186.21,5],[-16.4,185.86,5],[-24.57,178.4,5.6],[-17.94,181.51,4],[-30.64,181.2,4],[-18.64,169.32,4.6],[-13.09,169.28,4.4],[-19.68,184.14,4.8],[-16.44,185.74,4.7],[-21.09,181.38,4.6],[-14.99,171.39,4.3],[-23.3,179.7,4.7],[-17.68,181.36,4.1],[-22,180.53,4.9],[-21.38,181.39,4.6],[-32.62,181.5,4.8],[-13.05,169.58,4.9],[-12.93,169.63,5.1],[-18.6,181.91,5.4],[-21.34,181.41,4.5],[-21.48,183.78,4.9],[-17.4,181.02,4.4],[-17.32,181.03,4.1],[-18.77,169.24,5.3],[-26.16,179.5,4.5],[-12.59,167.1,4.9],[-14.82,167.32,4.8],[-21.79,183.48,5.2],[-19.83,182.04,4.4],[-29.5,182.31,4.4],[-12.49,166.36,4.9],[-26.1,182.3,4.4],[-21.04,181.2,4.2],[-10.78,165.77,4.6],[-20.76,185.77,4.6],[-11.41,166.24,5.3],[-19.1,183.87,5.3],[-23.91,180,4.5],[-27.33,182.6,4.4],[-12.25,166.6,5],[-23.49,179.07,5.1],[-27.18,182.18,4.5],[-25.8,182.1,4.5],[-27.19,182.18,5.4],[-27.27,182.38,4.5],[-27.1,182.18,4.7],[-27.22,182.28,4.2],[-27.38,181.7,4.8],[-27.27,182.5,4.5],[-27.54,182.5,4.3],[-27.2,182.39,4.3],[-27.71,182.47,4.3],[-27.6,182.4,4.6],[-27.38,182.39,4.5],[-21.54,185.48,5],[-27.21,182.43,4.6],[-28.96,182.61,4.6],[-12.01,166.29,4.9],[-17.46,181.32,4.1],[-30.17,182.02,5.5],[-27.27,182.36,4.7],[-17.79,181.32,5],[-22.19,171.4,5.1],[-17.1,182.68,5.5],[-27.18,182.53,4.6],[-11.64,166.47,4.7],[-17.98,181.58,4.2],[-16.9,185.72,4],[-21.98,179.6,5.4],[-32.14,179.9,4.3],[-18.8,169.21,4.4],[-26.78,183.61,4.6],[-20.43,182.37,5.1],[-18.3,183.2,4.5],[-15.83,182.51,4.2],[-23.44,182.93,4.1],[-23.73,179.99,5.1],[-19.89,184.08,5.4],[-17.59,181.09,5.1],[-19.77,181.4,5.1],[-20.31,184.06,4.4],[-15.33,186.75,5.7],[-18.2,181.6,4.4],[-15.36,186.66,5.1],[-15.29,186.42,4.6],[-15.36,186.71,5.5],[-16.24,167.95,5.1],[-13.47,167.14,4.4],[-25.5,182.82,5],[-14.32,167.33,5],[-20.04,182.01,5.1],[-28.83,181.66,5.1],[-17.82,181.49,4.2],[-27.23,180.98,4.5],[-10.72,165.99,4],[-27,183.88,4.9],[-20.36,186.16,4.3],[-27.17,183.68,4.8],[-20.94,181.26,4.4],[-17.46,181.9,4.2],[-21.04,181.2,4.9],[-23.7,179.6,4.2],[-17.72,181.42,5.3],[-15.87,188.13,5],[-17.84,181.3,5.7],[-13.45,170.3,5.3],[-30.8,182.16,4.7],[-11.63,166.14,4.6],[-30.4,181.4,4.3],[-26.18,178.59,5.4],[-15.7,184.5,4.4],[-17.95,181.5,4.3],[-20.51,182.3,4.3],[-15.36,167.51,4.7],[-23.61,180.23,4.4],[-33.2,181.6,4.2],[-17.68,186.8,4.5],[-22.24,184.56,4.8],[-20.07,169.14,4.8],[-25.04,180.1,4.3],[-21.5,185.2,4.4],[-14.28,167.26,5.1],[-14.43,167.26,4.4],[-32.7,181.7,4.4],[-34.1,181.8,4.3],[-19.7,186.2,4.8],[-24.19,180.38,4.3],[-26.6,182.77,4.5],[-17.04,186.8,4.1],[-22.1,179.71,5.1],[-32.6,180.9,4.7],[-33,182.4,4.6],[-20.58,181.24,4.7],[-20.61,182.6,4.6],[-19.47,169.15,4.4],[-17.47,180.96,4.2],[-18.4,183.4,4.1],[-23.33,180.26,4.7],[-18.55,182.23,4],[-26.16,178.47,4.8],[-21.8,183.2,4.4],[-27.63,182.93,4.3],[-18.89,169.48,4.4],[-20.3,182.3,4.5],[-20.56,182.04,4.5],[-16.1,185.32,4.7],[-12.66,166.37,4.3],[-21.05,184.68,4.7],[-17.97,168.52,4.8],[-19.83,182.54,4.6],[-22.55,183.81,5.1],[-22.28,183.52,4.7],[-15.72,185.64,4.3],[-20.85,181.59,5.1],[-21.11,181.5,5.5],[-25.31,180.15,4.5],[-26.46,182.5,4.3],[-24.09,179.68,4.3],[-16.96,167.7,4.7],[-23.19,182.8,4.3],[-20.81,184.7,4.3],[-15.03,167.32,4.6],[-18.06,181.59,4.5],[-19,185.6,4.5],[-23.53,179.99,5.4],[-18.18,180.63,4.6],[-15.66,186.8,4.4],[-18,180.62,5],[-18.08,180.7,5.2],[-18.05,180.86,4.4],[-29.9,181.16,5.1],[-20.9,181.9,4.4],[-15.61,167.5,4.4],[-16.03,185.43,4.8],[-17.68,181.11,4.4],[-31.94,180.57,4.7],[-19.14,184.36,4.7],[-18,185.48,4.4],[-16.95,185.94,4.3],[-10.79,166.06,5],[-20.83,185.9,4.5],[-32.9,181.6,4.6],[-37.93,177.47,5.4],[-29.09,183.2,4.6],[-23.56,180.23,4.5],[-19.6,185.2,4.4],[-21.39,180.68,4.5],[-14.85,184.87,4.1],[-22.7,183.3,4],[-32.42,181.21,4.9],[-17.9,181.3,4.1],[-23.58,183.4,5.2],[-34.4,180.5,4.4],[-17.61,181.2,4.1],[-21.07,181.13,4.9],[-13.84,170.62,4.6],[-30.24,181.63,4.5],[-18.49,169.04,4.8],[-23.45,180.23,4.2],[-16.04,183.54,4.2],[-17.14,185.31,4.1],[-22.54,172.91,5.5],[-15.9,185.3,4.4],[-30.04,181.2,4.8],[-24.03,180.22,4.2],[-18.89,184.46,4.8],[-16.51,187.1,4.9],[-20.1,186.3,4.6],[-21.06,183.81,4.5],[-13.07,166.87,4.4],[-23.46,180.09,4.6],[-19.41,182.3,4.2],[-11.81,165.98,4.7],[-11.76,165.96,4.4],[-12.08,165.76,4.5],[-25.59,180.02,4.9],[-26.54,183.63,4.7],[-20.9,184.28,5.5],[-16.99,187,4.7],[-23.46,180.17,4.6],[-17.81,181.82,4.1],[-15.17,187.2,4.7],[-11.67,166.02,4.6],[-20.75,184.52,4.3],[-19.5,186.9,4.4],[-26.18,179.79,4.7],[-20.66,185.77,4.3],[-19.22,182.54,4.1],[-24.68,183.33,4.7],[-15.43,167.38,4.5],[-32.45,181.15,5.5],[-21.31,180.84,4.5],[-15.44,167.18,4.6],[-13.26,167.01,5.1],[-15.26,183.13,4.4],[-33.57,180.8,4.7],[-15.77,167.01,5.5],[-15.79,166.83,4.6],[-21,183.2,4],[-16.28,166.94,4.6],[-23.28,184.6,4.8],[-16.1,167.25,4.7],[-17.7,181.31,4.7],[-15.96,166.69,4.2],[-15.95,167.34,5.4],[-17.56,181.59,4.6],[-15.9,167.42,5.5],[-15.29,166.9,4.2],[-15.86,166.85,4.5],[-16.2,166.8,4.5],[-15.71,166.91,4.8],[-16.45,167.54,4.6],[-11.54,166.18,5.4],[-19.61,181.91,4.6],[-15.61,187.15,5],[-21.16,181.41,4.3],[-20.65,182.22,4.3],[-20.33,168.71,4.8],[-15.08,166.62,4.7],[-23.28,184.61,4.7],[-23.44,184.6,4.8],[-23.12,184.42,4.2],[-23.65,184.46,4.2],[-22.91,183.95,5.9],[-22.06,180.47,4.6],[-13.56,166.49,4.5],[-17.99,181.57,4.9],[-23.92,184.47,4.7],[-30.69,182.1,4.9],[-21.92,182.8,5.3],[-25.04,180.97,4.2],[-19.92,183.91,4.2],[-27.75,182.26,4.5],[-17.71,181.18,5.2],[-19.6,183.84,4.5],[-34.68,179.82,5.6],[-14.46,167.26,5.2],[-18.85,187.55,4.8],[-17.02,182.41,4.5],[-20.41,186.51,5],[-18.18,182.04,4.4],[-16.49,187.8,4.5],[-17.74,181.31,4.6],[-20.49,181.69,4.5],[-18.51,182.64,5.2],[-27.28,183.4,5.1],[-15.9,167.16,4.8],[-20.57,181.33,4.3],[-11.25,166.36,5.1],[-20.04,181.87,4.7],[-20.89,181.25,4.6],[-16.62,186.74,4.8],[-20.09,168.75,4.6],[-24.96,179.87,4.4],[-20.95,181.42,4.6],[-23.31,179.27,5.1],[-20.95,181.06,4.3],[-21.58,181.9,4.4],[-13.62,167.15,4.7],[-12.72,166.28,4.8],[-21.79,185,4.1],[-20.48,169.76,4.6],[-12.84,166.78,4.9],[-17.02,182.93,4],[-23.89,182.39,4.7],[-23.07,184.03,4.7],[-27.98,181.96,5.2],[-28.1,182.25,4.6],[-21.24,180.81,4.6],[-21.24,180.86,4.9],[-19.89,174.46,5.7],[-32.82,179.8,4.7],[-22,185.5,4.4],[-21.57,185.62,4.9],[-24.5,180.92,4.8],[-33.03,180.2,4.6],[-30.09,182.4,4.4],[-22.75,170.99,4.8],[-17.99,168.98,4.7],[-19.6,181.87,4.2],[-15.65,186.26,5.1],[-17.78,181.53,4.8],[-22.04,184.91,4.9],[-20.06,168.69,5.1],[-18.07,181.54,4.3],[-12.85,165.67,4.4],[-33.29,181.3,4.7],[-34.63,179.1,4.7],[-24.18,179.02,5.3],[-23.78,180.31,5.1],[-22.37,171.5,4.9],[-23.97,179.91,4.5],[-34.12,181.75,4.7],[-25.25,179.86,4.2],[-22.87,172.65,5.1],[-18.48,182.37,4.8],[-21.46,181.02,4.2],[-28.56,183.47,4.8],[-28.56,183.59,4.4],[-21.3,180.92,4.5],[-20.08,183.22,4.3],[-18.82,182.21,5.6],[-19.51,183.97,4],[-12.05,167.39,5],[-17.4,186.54,4.2],[-23.93,180.18,4.6],[-21.23,181.09,4.6],[-16.23,167.91,4.5],[-28.15,183.4,5],[-20.81,185.01,4.7],[-20.72,181.41,4.6],[-23.29,184,4.8],[-38.46,176.03,4.6],[-15.48,186.73,4.4],[-37.03,177.52,5.6],[-20.48,181.38,4.2],[-18.12,181.88,5.4],[-18.17,181.98,4.8],[-11.4,166.07,5.6],[-23.1,180.12,4.4],[-14.28,170.34,4.7],[-22.87,171.72,4.6],[-17.59,180.98,5.1],[-27.6,182.1,4.6],[-17.94,180.6,4.5],[-17.88,180.58,4.2],[-30.01,180.8,4.8],[-19.19,182.3,4.9],[-18.14,180.87,5.5],[-23.46,180.11,5],[-18.44,181.04,4.2],[-18.21,180.87,5.2],[-18.26,180.98,4.8],[-15.85,184.83,4.4],[-23.82,180.09,4.8],[-18.6,184.28,4.4],[-17.8,181.32,4.1],[-10.78,166.1,4.9],[-18.12,181.71,4.6],[-19.34,182.62,4.5],[-15.34,167.1,5.3],[-24.97,182.85,4.8],[-15.97,186.08,4.6],[-23.47,180.24,4.8],[-23.11,179.15,4.7],[-20.54,181.66,4.9],[-18.92,169.37,5.3],[-20.16,184.27,4.4],[-25.48,180.94,4.6],[-18.19,181.74,4.3],[-15.35,186.4,4.4],[-18.69,169.1,4.2],[-18.89,181.24,4.1],[-17.61,183.32,4.2],[-20.93,181.54,5],[-17.6,181.5,4.1],[-17.96,181.4,4.3],[-18.8,182.41,5.2],[-20.61,182.44,4.2],[-20.74,181.53,4.5],[-25.23,179.86,4.4],[-23.9,179.9,4.4],[-18.07,181.58,5],[-15.43,185.19,4],[-14.3,167.32,4.8],[-18.04,181.57,5],[-13.9,167.18,4.2],[-17.64,177.01,5.2],[-17.98,181.51,5.2],[-25,180,4.5],[-19.45,184.48,4.3],[-16.11,187.48,4.5],[-23.73,179.98,4.6],[-17.74,186.78,5.1],[-21.56,183.23,4.4],[-20.97,181.72,4.3],[-15.45,186.73,4.7],[-15.93,167.91,5.6],[-21.47,185.86,4.9],[-21.44,170.45,5.1],[-22.16,180.49,4.6],[-13.36,172.76,4.4],[-21.22,181.51,4.8],[-26.1,182.5,4.2],[-18.35,185.27,4.7],[-17.2,182.9,4.1],[-22.42,171.4,4.7],[-17.91,181.48,4],[-26.53,178.3,4.9],[-26.5,178.29,5],[-16.31,168.08,4.5],[-18.76,169.71,4.4],[-17.1,182.8,4],[-19.28,182.78,4.5],[-23.5,180,4.7],[-21.26,181.69,4.4],[-17.97,181.48,4.7],[-26.02,181.2,4.7],[-30.3,180.8,4],[-24.89,179.67,4.2],[-14.57,167.24,4.5],[-15.4,186.87,4.7],[-22.06,183.95,4.5],[-25.14,178.42,4.1],[-20.3,181.4,4.6],[-25.28,181.17,4.3],[-20.63,181.61,4.6],[-19.02,186.83,5.2],[-22.1,185.3,4.6],[-38.59,175.7,4.7],[-19.3,183,5],[-31.03,181.59,5.2],[-30.51,181.3,4.4],[-22.55,183.34,4.6],[-22.14,180.64,4.5],[-25.6,180.3,4],[-18.04,181.84,4.2],[-21.29,185.77,5.3],[-21.08,180.85,5.9],[-20.64,169.66,4.9],[-24.41,180.03,4.5],[-12.16,167.03,4.4],[-17.1,185.9,5.4],[-21.13,185.6,5.3],[-12.34,167.43,5.1],[-16.43,186.73,4.1],[-20.7,184.3,4.3],[-21.18,180.92,4.5],[-17.78,185.33,4.1],[-21.57,183.86,5.1],[-13.7,166.75,5.3],[-12.27,167.41,4.5],[-19.1,184.52,4.1],[-19.85,184.51,4.4],[-11.37,166.55,4.7],[-20.7,186.3,4],[-20.24,185.1,5.1],[-16.4,182.73,4],[-19.6,184.53,4.3],[-21.63,180.77,4.3],[-21.6,180.5,4],[-21.77,181,4.1],[-21.8,183.6,4.4],[-21.05,180.9,4.3],[-10.8,165.8,4.2],[-17.9,181.5,4],[-22.26,171.44,4.5],[-22.33,171.46,4.7],[-24.04,184.85,5],[-20.4,186.1,4.3],[-15,184.62,5.1],[-27.87,183.4,4.7],[-14.12,166.64,5.3],[-23.61,180.27,5],[-21.56,185.5,4.5],[-21.19,181.58,5],[-18.07,181.65,4.1],[-26,178.43,4.9],[-20.21,181.9,4.1],[-28,182,4],[-20.74,180.7,4.4],[-31.8,180.6,4.5],[-18.91,169.46,4.4],[-20.45,182.1,4.5],[-22.9,183.8,4.3],[-18.11,181.63,4.3],[-23.8,184.7,5],[-23.42,180.21,4.5],[-23.2,184.8,4.5],[-12.93,169.52,4.4],[-21.14,181.06,4.5],[-19.13,184.97,4.1],[-21.08,181.3,4.9],[-20.07,181.75,4.7],[-20.9,182.02,4.3],[-25.04,179.84,4.6],[-21.85,180.89,4.6],[-19.34,186.59,5.2],[-15.83,167.1,4.5],[-23.73,183,4.3],[-18.1,181.72,4.6],[-22.12,180.49,4],[-15.39,185.1,4.5],[-16.21,186.52,4.8],[-21.75,180.67,4.6],[-22.1,180.4,4.1],[-24.97,179.54,4.9],[-19.36,186.36,4.7],[-22.14,179.62,4.1],[-21.48,182.44,4.3],[-18.54,168.93,4.4],[-21.62,182.4,4],[-13.4,166.9,4.8],[-15.5,185.3,4.4],[-15.67,185.23,4.4],[-21.78,183.11,4.6],[-30.63,180.9,4.2],[-15.7,185.1,4.1],[-19.2,184.37,4.2],[-19.7,182.44,4],[-19.4,182.29,4.1],[-15.85,185.9,4.1],[-17.38,168.63,4.7],[-24.33,179.97,4.8],[-20.89,185.26,5.1],[-18.97,169.44,5],[-17.99,181.62,4.8],[-15.8,185.25,4.4],[-25.42,182.65,5],[-21.6,169.9,5.2],[-26.06,180.05,4.2],[-17.56,181.23,4.1],[-25.63,180.26,4.8],[-25.46,179.98,4.5],[-22.23,180.48,5],[-21.55,181.39,5.1],[-15.18,185.93,4.1],[-13.79,166.56,4.7],[-15.18,167.23,5.2],[-18.78,186.72,4.8],[-17.9,181.41,4.5],[-18.5,185.4,4],[-14.82,171.17,4.7],[-15.65,185.17,4.1],[-30.01,181.15,4.3],[-13.16,167.24,4.3],[-21.03,180.78,4],[-21.4,180.78,4.7],[-17.93,181.89,4.1],[-20.87,181.7,4.2],[-12.01,166.66,4.8],[-19.1,169.63,4.8],[-22.85,181.37,4.2],[-17.08,185.96,4.2],[-21.14,174.21,5.7],[-12.23,167.02,6],[-20.91,181.57,4.2],[-11.38,167.05,4.5],[-11.02,167.01,4.9],[-22.09,180.58,4.4],[-17.8,181.2,4],[-18.94,182.43,4.3],[-18.85,182.2,4.2],[-21.91,181.28,4.5],[-22.03,179.77,4.8],[-18.1,181.63,4.4],[-18.4,184.84,4.2],[-21.2,181.4,4.2],[-12,166.2,5],[-11.7,166.3,4.2],[-26.72,182.69,5.2],[-24.39,178.98,4.5],[-19.64,169.5,4.6],[-21.35,170.04,5],[-22.82,184.52,5],[-38.28,177.1,5.4],[-12.57,167.11,4.8],[-22.24,180.28,4.2],[-13.8,166.53,5.5],[-21.07,183.78,4.3],[-17.74,181.25,4.1],[-23.87,180.15,4.4],[-21.29,185.8,4.9],[-22.2,180.58,4.5],[-15.24,185.11,4.9],[-17.82,181.27,4],[-32.14,180,4.5],[-19.3,185.86,5],[-33.09,180.94,4.9],[-20.18,181.62,4.5],[-17.46,181.42,4.2],[-17.44,181.33,4.2],[-24.71,179.85,4.2],[-21.53,170.52,5.2],[-19.17,169.53,4.3],[-28.05,182.39,5.1],[-23.39,179.97,4.6],[-22.33,171.51,4.6],[-15.28,185.98,4.4],[-20.27,181.51,4.4],[-10.96,165.97,4.9],[-21.52,169.75,5.1],[-19.57,184.47,4.2],[-23.08,183.45,4.7],[-25.06,182.8,4],[-17.85,181.44,5.6],[-15.99,167.95,5.3],[-20.56,184.41,5],[-17.98,181.61,4.3],[-18.4,181.77,4.1],[-27.64,182.22,5.1],[-20.99,181.02,4.5],[-14.86,167.32,4.9],[-29.33,182.72,5.4],[-25.81,182.54,4.7],[-14.1,166.01,4.8],[-17.63,185.13,4.5],[-23.47,180.21,4.2],[-23.92,180.21,4.6],[-20.88,185.18,4.6],[-20.25,184.75,5.6],[-19.33,186.16,5.4],[-18.14,181.71,4],[-22.41,183.99,5.2],[-20.77,181.16,4.2],[-17.95,181.73,4.7],[-20.83,181.01,4.3],[-27.84,182.1,4.8],[-19.94,182.39,4.6],[-23.6,183.99,5.4],[-23.7,184.13,4.8],[-30.39,182.4,4.6],[-18.98,182.32,4.2],[-27.89,182.92,5.5],[-23.5,184.9,4.7],[-23.73,184.49,4.7],[-17.93,181.62,4.5],[-35.94,178.52,5.5],[-18.68,184.5,4.5],[-23.47,179.95,4.1],[-23.49,180.06,4],[-23.85,180.26,4.3],[-27.08,183.44,4.7],[-20.88,184.95,4.9],[-20.97,181.2,4.5],[-21.71,183.58,4.7],[-23.9,184.6,4.5],[-15.78,167.44,4.8],[-12.57,166.72,4.3],[-19.69,184.23,4.1],[-22.04,183.95,5.4],[-17.99,181.59,4.1],[-23.5,180.13,4.8],[-21.4,180.74,4.2],[-15.86,166.98,4.8],[-23.95,184.64,5.4],[-25.79,182.38,4.4],[-23.75,184.5,5.2],[-24.1,184.5,4.7],[-18.56,169.05,4.9],[-23.3,184.68,4.9],[-17.03,185.74,4.2],[-20.77,183.71,4.4],[-28.1,183.5,4.4],[-18.83,182.26,4.3],[-23,170.7,4.9],[-20.82,181.67,5],[-22.95,170.56,4.7],[-28.22,183.6,4.9],[-27.99,183.5,4.3],[-15.54,187.15,4.5],[-12.37,166.93,4.2],[-22.33,171.66,5.2],[-22.7,170.3,4.8],[-17.86,181.3,4],[-16,184.53,4.7],[-20.73,181.42,4.3],[-15.45,181.42,4.3],[-20.05,183.86,4.9],[-17.95,181.37,4],[-17.7,188.1,4.2],[-25.93,179.54,4.4],[-12.28,167.06,4.7],[-20.13,184.2,4.5],[-17.4,187.8,4.5],[-21.59,170.56,6]],null,null,{&#34;minOpacity&#34;:0.05,&#34;max&#34;:0.05,&#34;radius&#34;:15,&#34;blur&#34;:20}]}],&#34;setView&#34;:[[-20,178],5,[]],&#34;limits&#34;:{&#34;lat&#34;:[-38.59,-10.72],&#34;lng&#34;:[165.67,188.13]}},&#34;evals&#34;:[],&#34;jsHooks&#34;:[]} library(sp) jsURL &amp;lt;- &amp;#39;https://rawgit.com/Norkart/Leaflet-MiniMap/master/example/local_pubs_restaurant_norway.js&amp;#39; v8 &amp;lt;- V8::v8() v8$source(jsURL) geoJson &amp;lt;- geojsonio::as.json(v8$get(&amp;#39;pubsGeoJSON&amp;#39;)) spdf &amp;lt;- geojsonio::geojson_sp(geoJson) leaflet(spdf) %&amp;gt;% addProviderTiles(providers$Thunderforest.TransportDark) %&amp;gt;% addHeatmap(blur = 20, max = 0.05, radius = 15) leaflet(spdf) %&amp;gt;% addProviderTiles(providers$Thunderforest.Transport) %&amp;gt;% addHeatmap(blur =</description>
     </item>
     
     <item>
       <title>leaflet for R(2)—— learletCN</title>
-      <link>/post/2018/09/28/leaflet-for-r-2/</link>
+      <link>https://www.wzyblog.top/post/2018/09/28/leaflet-for-r-2/</link>
       <pubDate>Fri, 28 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/09/28/leaflet-for-r-2/</guid>
+      <guid>https://www.wzyblog.top/post/2018/09/28/leaflet-for-r-2/</guid>
       <description>library(leaflet) library(leafletCN) 10. LeafletCN 10.1 函数简介 regionNames：找地名函数，极其方便 demomap：有地名就给你输出一个交互、动态的区域图，真方便 geojsonM</description>
     </item>
     
     <item>
-      <title>Rstudio的Git崩溃解决方案</title>
-      <link>/post/2018/09/27/solution-to-rstudio-break-down/</link>
-      <pubDate>Thu, 27 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/09/27/solution-to-rstudio-break-down/</guid>
-      <description>Rsutdio是我最喜爱的软件之一。它已经不仅仅是一个IDE了，而且能够在里面做实验、写报告、开发报告模板、写博客、做幻灯片（目前还不会）。</description>
-    </item>
-    
-    <item>
       <title>leaflet for R(1)</title>
-      <link>/post/2018/09/27/leaflet-for-r-1/</link>
+      <link>https://www.wzyblog.top/post/2018/09/27/leaflet-for-r-1/</link>
       <pubDate>Thu, 27 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/09/27/leaflet-for-r-1/</guid>
+      <guid>https://www.wzyblog.top/post/2018/09/27/leaflet-for-r-1/</guid>
       <description>library(leaflet) library(leafletCN) 1. 简介 1.1 leaflet的功能 交互地图浏览（缩放、平移） 使用多种底图进行任意组合 加载地图瓦片（WMTS） 点要素定位标记 多边形要素标记 线要素</description>
     </item>
     
     <item>
+      <title>Rstudio的Git崩溃解决方案</title>
+      <link>https://www.wzyblog.top/post/2018/09/27/solution-to-rstudio-break-down/</link>
+      <pubDate>Thu, 27 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.wzyblog.top/post/2018/09/27/solution-to-rstudio-break-down/</guid>
+      <description>Rsutdio是我最喜爱的软件之一。它已经不仅仅是一个IDE了，而且能够在里面做实验、写报告、开发报告模板、写博客、做幻灯片（目前还不会）。</description>
+    </item>
+    
+    <item>
       <title>读《人性的弱点》</title>
-      <link>/post/2018/09/26/basic-principle-getting-along-with-people/</link>
+      <link>https://www.wzyblog.top/post/2018/09/26/basic-principle-getting-along-with-people/</link>
       <pubDate>Wed, 26 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/09/26/basic-principle-getting-along-with-people/</guid>
+      <guid>https://www.wzyblog.top/post/2018/09/26/basic-principle-getting-along-with-people/</guid>
       <description>最近闲暇时候在读《人性的弱点》一书，作者卡耐基。 这本书在现在人的观点是“成果学”、“鸡汤学”、“读了很多大道理仍然过不好一生系列”。其实我一</description>
     </item>
     
     <item>
       <title>听《给电影人的情书》</title>
-      <link>/post/2018/09/25/love-letter-to-filmmaker/</link>
+      <link>https://www.wzyblog.top/post/2018/09/25/love-letter-to-filmmaker/</link>
       <pubDate>Tue, 25 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/09/25/love-letter-to-filmmaker/</guid>
+      <guid>https://www.wzyblog.top/post/2018/09/25/love-letter-to-filmmaker/</guid>
       <description>给电影人的情书（网易云音乐） 多少人爱你遗留银幕的风采 多少人爱你遗世独立的姿态 你永远的童真，赤子的期待，孤芳自赏的无奈 谁明白你悉心隐藏的悲哀 谁</description>
     </item>
     
     <item>
       <title>《新京报》40书单</title>
-      <link>/post/2018/09/24/books-40-list/</link>
+      <link>https://www.wzyblog.top/post/2018/09/24/books-40-list/</link>
       <pubDate>Mon, 24 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/09/24/books-40-list/</guid>
+      <guid>https://www.wzyblog.top/post/2018/09/24/books-40-list/</guid>
       <description>《新京报》举办了“大民大国40本书”（1978-2018）影响中国的40本书投票活动，希望以40本书来概括40年的精神潮流，呈现国家与私人生</description>
     </item>
     
     <item>
       <title>分而治之的策略(3)——再思考</title>
-      <link>/post/2018/09/24/split-and-conquer-3/</link>
+      <link>https://www.wzyblog.top/post/2018/09/24/split-and-conquer-3/</link>
       <pubDate>Mon, 24 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/09/24/split-and-conquer-3/</guid>
+      <guid>https://www.wzyblog.top/post/2018/09/24/split-and-conquer-3/</guid>
       <description>在之前的两篇文章中，我首先用手动版的分而治之解决了工作中遇到的问题，之后根据Hadley的论文学习了plyr的应用方法和思想。在本文中，我将</description>
     </item>
     
     <item>
       <title>分而治之的策略(2)——plyr包</title>
-      <link>/post/2018/09/23/split-and-conquer-2/</link>
+      <link>https://www.wzyblog.top/post/2018/09/23/split-and-conquer-2/</link>
       <pubDate>Sun, 23 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/09/23/split-and-conquer-2/</guid>
+      <guid>https://www.wzyblog.top/post/2018/09/23/split-and-conquer-2/</guid>
       <description>plyr包是Hadley Wickham在早期创作的一个R包，创作时间大约是2011年左右。这个包的主题思想是“The Split-Apply-Combine Strategy”，我</description>
     </item>
     
     <item>
       <title>分而治之的策略(1)——手动版</title>
-      <link>/post/2018/09/22/split-and-conquer-1/</link>
+      <link>https://www.wzyblog.top/post/2018/09/22/split-and-conquer-1/</link>
       <pubDate>Sat, 22 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/09/22/split-and-conquer-1/</guid>
+      <guid>https://www.wzyblog.top/post/2018/09/22/split-and-conquer-1/</guid>
       <description>昨天在工作中遇到了这样一个问题：我希望按年月，按省份，按公路等级计算断面交通量，进而计算总行驶量。 PS：以下交通量计算数据均用随机数代替。 使</description>
     </item>
     
     <item>
       <title>矩阵乘向量</title>
-      <link>/post/2018/09/21/matrix-multiply-vector/</link>
+      <link>https://www.wzyblog.top/post/2018/09/21/matrix-multiply-vector/</link>
       <pubDate>Fri, 21 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/09/21/matrix-multiply-vector/</guid>
+      <guid>https://www.wzyblog.top/post/2018/09/21/matrix-multiply-vector/</guid>
       <description>今天在工作中遇到一个问题：有一个矩阵，有一个向量，列数是相同的，需要矩阵的每行乘以向量。 例如： A &amp;lt;- matrix(1:20,nrow=5) A ## [,1] [,2] [,3] [,4] ## [1,] 1 6 11 16 ## [2,] 2 7 12 17 ## [3,]</description>
     </item>
     
     <item>
       <title>因子的顺序</title>
-      <link>/post/2018/09/20/order-of-factor/</link>
+      <link>https://www.wzyblog.top/post/2018/09/20/order-of-factor/</link>
       <pubDate>Thu, 20 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/09/20/order-of-factor/</guid>
+      <guid>https://www.wzyblog.top/post/2018/09/20/order-of-factor/</guid>
       <description>因子的自然排序 今天在工作中，要处理一个之前已经遇到，但一直没有正面解决的问题：当所要分析的时间是（日度）跨月份或（月度）跨年份，该怎样操作。</description>
     </item>
     
     <item>
       <title>关于我</title>
-      <link>/about/</link>
+      <link>https://www.wzyblog.top/about/</link>
       <pubDate>Wed, 19 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/about/</guid>
+      <guid>https://www.wzyblog.top/about/</guid>
       <description>这是王致远的个人主页，既用作技术博客也用作文字博客。用作技术博客主要是记录我学习R语言（或未来学习其他技术）的学习里程、心得和解决方法。文字</description>
     </item>
     
     <item>
       <title>创建R包</title>
-      <link>/post/2018/09/19/creating-r-packages/</link>
+      <link>https://www.wzyblog.top/post/2018/09/19/creating-r-packages/</link>
       <pubDate>Wed, 19 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/09/19/creating-r-packages/</guid>
+      <guid>https://www.wzyblog.top/post/2018/09/19/creating-r-packages/</guid>
       <description>第0章：工具汇总 0.1 devtools工具汇总 0.2 formatR工具 第1章： 简介 1.1 为什么开发R包 1.2 理念 1.3 入门 第2章：包的结构 2.1 包的命名 2.2 创建一个包</description>
     </item>
     
     <item>
       <title>博客！出发！</title>
-      <link>/post/2018/09/18/first-blog/</link>
+      <link>https://www.wzyblog.top/post/2018/09/18/first-blog/</link>
       <pubDate>Tue, 18 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/09/18/first-blog/</guid>
+      <guid>https://www.wzyblog.top/post/2018/09/18/first-blog/</guid>
       <description>今天开始在这里写博客的契机很偶然，是看到微信公众号“R语言中文网”上关于blogdown的一篇简单介绍。中午用10分钟看完后，觉得用blog</description>
     </item>
     
