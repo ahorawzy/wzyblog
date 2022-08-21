@@ -1,0 +1,11 @@
+---
+title: a new post
+author: ZhiYuan Wang
+date: '2022-08-21'
+slug: a-new-post
+categories:
+  - 博客
+tags: []
+---
+
+博客好像可以用了赶紧试一下

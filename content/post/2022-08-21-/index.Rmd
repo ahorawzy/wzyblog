@@ -1,0 +1,10 @@
+---
+title: "博客好像又能用了"
+author: "ZhiYuan Wang"
+date: '2022-08-21'
+slug: ''
+categories: 博客
+tags: []
+---
+
+博客好像又能用了，赶紧试一下
